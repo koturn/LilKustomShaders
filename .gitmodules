@@ -1,0 +1,3 @@
+[submodule "ThirdParty/lilToon"]
+	path = ThirdParty/lilToon
+	url = https://github.com/lilxyzw/lilToon/
