@@ -1,16 +1,19 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+using lilToon;
 
-namespace lilToon
+namespace Koturn.lilToon
 {
-    public class TemplateFullInspector : lilToonInspector
+    public class LilHueShiftInspector : lilToonInspector
     {
         // Custom properties
         //MaterialProperty customVariable;
+        MaterialProperty hsMask;
+        MaterialProperty hsTimeScale;
 
         private static bool isShowCustomProperties;
-        private const string shaderName = "TemplateFull";
+        private const string shaderName = "koturn/LilHueShift";
 
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
         {
@@ -25,6 +28,8 @@ namespace lilToon
 
             //LoadCustomLanguage("");
             //customVariable = FindProperty("_CustomVariable", props);
+            hsMask = FindProperty("_HsMask", props);
+            hsTimeScale = FindProperty("_HsTimeScale", props);
         }
 
         protected override void DrawCustomProperties(Material material)
@@ -45,6 +50,8 @@ namespace lilToon
                 EditorGUILayout.BeginVertical(boxInnerHalf);
 
                 //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+                m_MaterialEditor.ShaderProperty(hsMask, hsMask.displayName);
+                m_MaterialEditor.ShaderProperty(hsTimeScale, hsTimeScale.displayName);
 
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndVertical();

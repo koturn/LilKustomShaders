@@ -4,10 +4,12 @@
 // Custom variables
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
-#define LIL_CUSTOM_PROPERTIES
+#define LIL_CUSTOM_PROPERTIES \
+    float _HsTimeScale;
 
 // Custom textures
-#define LIL_CUSTOM_TEXTURES
+#define LIL_CUSTOM_TEXTURES \
+    TEXTURE2D(_HsMask);
 
 // Add vertex shader input
 //#define LIL_REQUIRE_APP_POSITION
@@ -45,6 +47,14 @@
 // Inserting a process into pixel shader
 //#define BEFORE_xx
 //#define OVERRIDE_xx
+#define BEFORE_SHADOW \
+    const float hsValue = _Time.y * _HsTimeScale * LIL_SAMPLE_2D(_HsMask, sampler_MainTex, fd.uvMain).r; \
+    fd.col.rgb = rgbAddHue(fd.col.rgb, hsValue); \
+    fd.albedo = fd.col.rgb;
+
+#define BEFORE_BLEND_EMISSION \
+    fd.emissionColor = rgbAddHue(fd.emissionColor, hsValue);
+
 
 //----------------------------------------------------------------------------------------------------------------------
 // Information about variables
@@ -152,3 +162,32 @@
 // uint     renderingLayers         light layer of object (for URP / HDRP)
 // uint     featureFlags            feature flags (for HDRP)
 // uint2    tileIndex               tile index (for HDRP)
+
+
+inline float3 rgb2hsv(float3 rgb)
+{
+    static const float4 k = float4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    static const float e = 1.0e-10;
+
+    const float4 p = rgb.g < rgb.b ? float4(rgb.bg, k.wz) : float4(rgb.gb, k.xy);
+    const float4 q = rgb.r < p.x ? float4(p.xyw, rgb.r) : float4(rgb.r, p.yzx);
+    const float d = q.x - min(q.w, q.y);
+
+    return float3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+}
+
+inline float3 hsv2rgb(float3 hsv)
+{
+    static const float4 k = float4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+
+    const float3 p = abs(frac(hsv.xxx + k.xyz) * 6.0 - k.www);
+
+    return hsv.z * lerp(k.xxx, saturate(p - k.xxx), hsv.y);
+}
+
+inline float3 rgbAddHue(float3 rgb, float hue)
+{
+    float3 hsv = rgb2hsv(rgb);
+    hsv.x += hue;
+    return hsv2rgb(hsv);
+}
