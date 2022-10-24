@@ -1,16 +1,23 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+using lilToon;
 
-namespace lilToon
+namespace Koturn.lilToon
 {
-    public class TemplateFullInspector : lilToonInspector
+    public class LilEmissionWaveInspector : lilToonInspector
     {
         // Custom properties
         //MaterialProperty customVariable;
+        MaterialProperty emissionWaveColor;
+        MaterialProperty emissionWaveNoiseAmp;
+        MaterialProperty emissionWaveTimeScale;
+        MaterialProperty emissionWaveParam;
+        MaterialProperty localPosYMin;
+        MaterialProperty localPosYMax;
 
         private static bool isShowCustomProperties;
-        private const string shaderName = "TemplateFull";
+        private const string shaderName = "koturn/LilEmissionWave";
 
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
         {
@@ -25,6 +32,12 @@ namespace lilToon
 
             //LoadCustomLanguage("");
             //customVariable = FindProperty("_CustomVariable", props);
+            emissionWaveColor = FindProperty("_EmissionWaveColor", props);
+            emissionWaveNoiseAmp = FindProperty("_EmissionWaveNoiseAmp", props);
+            emissionWaveTimeScale = FindProperty("_EmissionWaveTimeScale", props);
+            emissionWaveParam = FindProperty("_EmissionWaveParam", props);
+            localPosYMin = FindProperty("_LocalPosYMin", props);
+            localPosYMax = FindProperty("_LocalPosYMax", props);
         }
 
         protected override void DrawCustomProperties(Material material)
@@ -45,6 +58,12 @@ namespace lilToon
                 EditorGUILayout.BeginVertical(boxInnerHalf);
 
                 //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+                m_MaterialEditor.ShaderProperty(emissionWaveColor, emissionWaveColor.displayName);
+                m_MaterialEditor.ShaderProperty(emissionWaveNoiseAmp, emissionWaveNoiseAmp.displayName);
+                m_MaterialEditor.ShaderProperty(emissionWaveTimeScale, emissionWaveTimeScale.displayName);
+                m_MaterialEditor.ShaderProperty(emissionWaveParam, emissionWaveParam.displayName);
+                m_MaterialEditor.ShaderProperty(localPosYMin, localPosYMin.displayName);
+                m_MaterialEditor.ShaderProperty(localPosYMax, localPosYMax.displayName);
 
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndVertical();

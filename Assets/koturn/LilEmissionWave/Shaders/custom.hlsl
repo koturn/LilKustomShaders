@@ -4,7 +4,13 @@
 // Custom variables
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
-#define LIL_CUSTOM_PROPERTIES
+#define LIL_CUSTOM_PROPERTIES \
+    float4 _EmissionWaveColor; \
+    float _EmissionWaveNoiseAmp; \
+    float _EmissionWaveTimeScale; \
+    float2 _EmissionWaveParam; \
+    float _LocalPosYMin; \
+    float _LocalPosYMax;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES
@@ -22,7 +28,7 @@
 //#define LIL_REQUIRE_APP_COLOR
 //#define LIL_REQUIRE_APP_NORMAL
 //#define LIL_REQUIRE_APP_TANGENT
-//#define LIL_REQUIRE_APP_VERTEXID
+#define LIL_REQUIRE_APP_VERTEXID
 
 // Add vertex shader output
 //#define LIL_V2F_FORCE_TEXCOORD0
@@ -33,10 +39,17 @@
 //#define LIL_V2F_FORCE_NORMAL
 //#define LIL_V2F_FORCE_TANGENT
 //#define LIL_V2F_FORCE_BITANGENT
-//#define LIL_CUSTOM_V2F_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7)
+#define LIL_CUSTOM_V2F_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
+    float3 emissionWavePos : TEXCOORD ## id0;
 
 // Add vertex copy
-#define LIL_CUSTOM_VERT_COPY
+#define LIL_CUSTOM_VERT_COPY \
+    LIL_V2F_OUT.emissionWavePos = mul((float3x3)unity_ObjectToWorld, input.positionOS) \
+        / float3( \
+            length(unity_ObjectToWorld._m00_m10_m20), \
+            length(unity_ObjectToWorld._m01_m11_m21), \
+            length(unity_ObjectToWorld._m02_m12_m22)); \
+    LIL_V2F_OUT.emissionWavePos.y += rand(float2((float)input.vertexID, LIL_TIME)) * _EmissionWaveNoiseAmp;
 
 // Inserting a process into the vertex shader
 //#define LIL_CUSTOM_VERTEX_OS
@@ -45,6 +58,15 @@
 // Inserting a process into pixel shader
 //#define BEFORE_xx
 //#define OVERRIDE_xx
+
+#define BEFORE_BLEND_EMISSION \
+    const float uDiff = frac(LIL_TIME * _EmissionWaveTimeScale) - remap01(_LocalPosYMin, _LocalPosYMax, input.emissionWavePos.y); \
+    const float sDiff = 2.0 * uDiff - 1.0; \
+    const float eFact = pow(0.5 * cos(clamp(sDiff * _EmissionWaveParam.x, -1.0, 1.0) * UNITY_PI) + 0.5, _EmissionWaveParam.y); \
+    fd.emissionColor += _EmissionWaveColor * eFact;
+
+
+
 
 //----------------------------------------------------------------------------------------------------------------------
 // Information about variables
@@ -152,3 +174,14 @@
 // uint     renderingLayers         light layer of object (for URP / HDRP)
 // uint     featureFlags            feature flags (for HDRP)
 // uint2    tileIndex               tile index (for HDRP)
+
+
+float remap01(float a, float b, float x)
+{
+    return (x - a) / (b - a);
+}
+
+float rand(float2 co)
+{
+    return frac(sin(dot(co.xy, float2(12.9898, 78.233))) * 43758.5453);
+}
