@@ -2,26 +2,42 @@
 // Macro
 
 // Custom variables
-//#define LIL_CUSTOM_PROPERTIES \
-//    float _CustomVariable;
-#define LIL_CUSTOM_PROPERTIES
+#define LIL_CUSTOM_PROPERTIES \
+    uint _CustomGeometryMode; \
+    float4 _CustomGeometryVector; \
+    float _CustomGeometrySpeed; \
+    float _CustomGeometryRandomize; \
+    float _CustomGeometryMin; \
+    float _CustomGeometryMax; \
+    float4 _CustomGeometryNormalOffset; \
+    float _CustomGeometryNormalMapScale; \
+    float _CustomGeometryNormalMapStrength; \
+    float4 _CustomGeometryLocalOffset; \
+    float4 _CustomGeometryWorldOffset; \
+    float _CustomGeometryShrinkStrength; \
+    float _CustomGeometryShrinkOffset; \
+    uint _CustomGeometryMotionNormal; \
+    uint _CustomGeometryShadingNormal; \
+    uint _CustomGeometryGenerateSide;
 
 // Custom textures
-#define LIL_CUSTOM_TEXTURES
+#define LIL_CUSTOM_TEXTURES \
+    TEXTURE2D(_CustomGeometryMask); \
+    TEXTURE2D(_CustomGeometryNormalMap);
 
 // Add vertex shader input
-//#define LIL_REQUIRE_APP_POSITION
-//#define LIL_REQUIRE_APP_TEXCOORD0
-//#define LIL_REQUIRE_APP_TEXCOORD1
-//#define LIL_REQUIRE_APP_TEXCOORD2
-//#define LIL_REQUIRE_APP_TEXCOORD3
+#define LIL_REQUIRE_APP_POSITION
+#define LIL_REQUIRE_APP_TEXCOORD0
+#define LIL_REQUIRE_APP_TEXCOORD1
+#define LIL_REQUIRE_APP_TEXCOORD2
+#define LIL_REQUIRE_APP_TEXCOORD3
 //#define LIL_REQUIRE_APP_TEXCOORD4
 //#define LIL_REQUIRE_APP_TEXCOORD5
 //#define LIL_REQUIRE_APP_TEXCOORD6
 //#define LIL_REQUIRE_APP_TEXCOORD7
 //#define LIL_REQUIRE_APP_COLOR
-//#define LIL_REQUIRE_APP_NORMAL
-//#define LIL_REQUIRE_APP_TANGENT
+#define LIL_REQUIRE_APP_NORMAL
+#define LIL_REQUIRE_APP_TANGENT
 //#define LIL_REQUIRE_APP_VERTEXID
 
 // Add vertex shader output

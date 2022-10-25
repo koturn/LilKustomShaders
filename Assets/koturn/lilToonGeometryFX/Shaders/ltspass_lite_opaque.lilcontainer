@@ -14,6 +14,7 @@ Shader "Hidden/*LIL_SHADER_NAME*/ltspass_lite_opaque"
     ENDHLSL
 
     lilSubShaderInsert "lilCustomShaderInsert.lilblock"
+    lilSubShaderInsertPost "lilCustomShaderInsertPost.lilblock"
     lilSubShaderBRP "DefaultLite"
     lilSubShaderURP "DefaultLite"
     lilSubShaderHDRP "DefaultLite"

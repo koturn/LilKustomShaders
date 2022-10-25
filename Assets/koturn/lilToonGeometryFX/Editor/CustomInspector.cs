@@ -4,13 +4,31 @@ using UnityEngine;
 
 namespace lilToon
 {
-    public class TemplateFullInspector : lilToonInspector
+    public class GeometryFXInspector : lilToonInspector
     {
         // Custom properties
         //MaterialProperty customVariable;
+        MaterialProperty _CustomGeometryMode;
+        MaterialProperty _CustomGeometryMask;
+        MaterialProperty _CustomGeometryVector;
+        MaterialProperty _CustomGeometrySpeed;
+        MaterialProperty _CustomGeometryRandomize;
+        MaterialProperty _CustomGeometryMin;
+        MaterialProperty _CustomGeometryMax;
+        MaterialProperty _CustomGeometryNormalOffset;
+        MaterialProperty _CustomGeometryNormalMap;
+        MaterialProperty _CustomGeometryNormalMapScale;
+        MaterialProperty _CustomGeometryNormalMapStrength;
+        MaterialProperty _CustomGeometryLocalOffset;
+        MaterialProperty _CustomGeometryWorldOffset;
+        MaterialProperty _CustomGeometryShrinkStrength;
+        MaterialProperty _CustomGeometryShrinkOffset;
+        MaterialProperty _CustomGeometryMotionNormal;
+        MaterialProperty _CustomGeometryShadingNormal;
+        MaterialProperty _CustomGeometryGenerateSide;
 
         private static bool isShowCustomProperties;
-        private const string shaderName = "TemplateFull";
+        private const string shaderName = "lilToonGeometryFX";
 
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
         {
@@ -23,8 +41,25 @@ namespace lilToon
             // If not, set isShowRenderMode to false
             //isShowRenderMode = false;
 
-            //LoadCustomLanguage("");
-            //customVariable = FindProperty("_CustomVariable", props);
+            LoadCustomLanguage("a5875813c34e16a49ae1c8e1a846ea75");
+            _CustomGeometryMode = FindProperty("_CustomGeometryMode", props);
+            _CustomGeometryMask = FindProperty("_CustomGeometryMask", props);
+            _CustomGeometryVector = FindProperty("_CustomGeometryVector", props);
+            _CustomGeometrySpeed = FindProperty("_CustomGeometrySpeed", props);
+            _CustomGeometryRandomize = FindProperty("_CustomGeometryRandomize", props);
+            _CustomGeometryMin = FindProperty("_CustomGeometryMin", props);
+            _CustomGeometryMax = FindProperty("_CustomGeometryMax", props);
+            _CustomGeometryNormalOffset = FindProperty("_CustomGeometryNormalOffset", props);
+            _CustomGeometryNormalMap = FindProperty("_CustomGeometryNormalMap", props);
+            _CustomGeometryNormalMapScale = FindProperty("_CustomGeometryNormalMapScale", props);
+            _CustomGeometryNormalMapStrength = FindProperty("_CustomGeometryNormalMapStrength", props);
+            _CustomGeometryLocalOffset = FindProperty("_CustomGeometryLocalOffset", props);
+            _CustomGeometryWorldOffset = FindProperty("_CustomGeometryWorldOffset", props);
+            _CustomGeometryShrinkStrength = FindProperty("_CustomGeometryShrinkStrength", props);
+            _CustomGeometryShrinkOffset = FindProperty("_CustomGeometryShrinkOffset", props);
+            _CustomGeometryMotionNormal = FindProperty("_CustomGeometryMotionNormal", props);
+            _CustomGeometryShadingNormal = FindProperty("_CustomGeometryShadingNormal", props);
+            _CustomGeometryGenerateSide = FindProperty("_CustomGeometryGenerateSide", props);
         }
 
         protected override void DrawCustomProperties(Material material)
@@ -37,14 +72,45 @@ namespace lilToon
             // customBox        box (similar to unity default box)
             // customToggleFont label for box
 
-            isShowCustomProperties = Foldout("Custom Properties", "Custom Properties", isShowCustomProperties);
+            isShowCustomProperties = Foldout(GetLoc("sCustomGeometryAnimation"), GetLoc("sCustomGeometryAnimation"), isShowCustomProperties);
             if(isShowCustomProperties)
             {
                 EditorGUILayout.BeginVertical(boxOuter);
-                EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
+                EditorGUILayout.LabelField(GetLoc("sCustomGeometryAnimation"), customToggleFont);
                 EditorGUILayout.BeginVertical(boxInnerHalf);
 
-                //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+                EditorGUILayout.LabelField(GetLoc("sCustomBase"), EditorStyles.boldLabel);
+                EditorGUI.indentLevel++;
+                m_MaterialEditor.ShaderProperty(_CustomGeometryMode, "Mode|UV0|UV1|UV2|UV3|Local Position|World Position|Normal|Mask");
+                m_MaterialEditor.TexturePropertySingleLine(new GUIContent("Mask (RGB:Vector A:Strength)"), _CustomGeometryMask);
+                m_MaterialEditor.ShaderProperty(_CustomGeometryVector, BuildParams(GetLoc("sCustomVector"), GetLoc("sCustomDelay")));
+                m_MaterialEditor.ShaderProperty(_CustomGeometrySpeed, GetLoc("sCustomSpeed"));
+                m_MaterialEditor.ShaderProperty(_CustomGeometryRandomize, GetLoc("sCustomRandomize"));
+                m_MaterialEditor.ShaderProperty(_CustomGeometryMin, "Clamp Min");
+                m_MaterialEditor.ShaderProperty(_CustomGeometryMax, "Clamp Max");
+                m_MaterialEditor.ShaderProperty(_CustomGeometryMotionNormal, BuildParams(GetLoc("sCustomMotionNormal"), "Triangle", "Quadrangle"));
+                m_MaterialEditor.ShaderProperty(_CustomGeometryShadingNormal, BuildParams(GetLoc("sCustomShadingNormal"), "Smooth", "Triangle", "Quadrangle"));
+                m_MaterialEditor.ShaderProperty(_CustomGeometryGenerateSide, GetLoc("sCustomGenerateSide"));
+                EditorGUI.indentLevel--;
+
+                EditorGUILayout.LabelField(GetLoc("sCustomNormal"), EditorStyles.boldLabel);
+                EditorGUI.indentLevel++;
+                m_MaterialEditor.ShaderProperty(_CustomGeometryNormalOffset, BuildParams(GetLoc("sCustomVector"), GetLoc("sCustomOffset")));
+                m_MaterialEditor.TexturePropertySingleLine(new GUIContent(GetLoc("sCustomNormalMap")), _CustomGeometryNormalMap, _CustomGeometryNormalMapScale);
+                m_MaterialEditor.ShaderProperty(_CustomGeometryNormalMapStrength, GetLoc("sCustomStrength"), 2);
+                EditorGUI.indentLevel--;
+
+                EditorGUILayout.LabelField(GetLoc("sCustomVector"), EditorStyles.boldLabel);
+                EditorGUI.indentLevel++;
+                m_MaterialEditor.ShaderProperty(_CustomGeometryLocalOffset, BuildParams("[Local] " + GetLoc("sCustomVector"), "[Local] " + GetLoc("sCustomOffset")));
+                m_MaterialEditor.ShaderProperty(_CustomGeometryWorldOffset, BuildParams("[World] " + GetLoc("sCustomVector"), "[World] " + GetLoc("sCustomOffset")));
+                EditorGUI.indentLevel--;
+
+                EditorGUILayout.LabelField(GetLoc("sCustomShrink"), EditorStyles.boldLabel);
+                EditorGUI.indentLevel++;
+                m_MaterialEditor.ShaderProperty(_CustomGeometryShrinkStrength, GetLoc("sCustomStrength"));
+                m_MaterialEditor.ShaderProperty(_CustomGeometryShrinkOffset, GetLoc("sCustomOffset"));
+                EditorGUI.indentLevel--;
 
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndVertical();
@@ -118,11 +184,11 @@ namespace lilToon
 
         // You can create a menu like this
         /*
-        [MenuItem("Assets/TemplateFull/Convert material to custom shader", false, 1100)]
+        [MenuItem("Assets/lilToonGeometryFX/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
             if(Selection.objects.Length == 0) return;
-            TemplateFullInspector inspector = new TemplateFullInspector();
+            GeometryFXInspector inspector = new GeometryFXInspector();
             for(int i = 0; i < Selection.objects.Length; i++)
             {
                 if(Selection.objects[i] is Material)

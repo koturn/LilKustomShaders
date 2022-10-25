@@ -1,0 +1,15 @@
+Language	English	Japanese	Korean	Chinese Simplified	Chinese Traditional
+sCustomGeometryAnimation	Geometry Animation	ジオメトリアニメーション	지오메트리 애니메이션	Geometry Animation	Geometry Animation
+sCustomBase	Base Setting	基本設定	기본 설정	基本设置	基本設置
+sCustomVector	Vector	向き	방향	向量	向量
+sCustomDelay	Delay	ディレイ	딜레이	延迟	延遲
+sCustomSpeed	Speed	速度	속도	速度	速度
+sCustomRandomize	Randomize	ランダム化	임의화	随机化	隨機化
+sCustomNormal	Normal	法線	노멀	法线	法線
+sCustomOffset	Offset	オフセット	Offset	Offset	Offset
+sCustomNormalMap	Normal Map	ノーマルマップ	노멀 맵	法线贴图	法線貼圖
+sCustomStrength	Strength	強度	강도	强度	強度
+sCustomShrink	Shrink	縮小	축소	缩减	縮減
+sCustomMotionNormal	Motion Normal	モーション法線	모션 법선	运动法线	運動法線
+sCustomShadingNormal	Shading Normal	シェーディング法線	셰이딩 법선	着色法线	著色法線
+sCustomGenerateSide	Generate Side	側面を生成	측면 생성	生成侧面	生成側面
