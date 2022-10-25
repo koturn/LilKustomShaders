@@ -1,0 +1,4 @@
+ShaderName "lilToonGeometryFX"
+EditorName "lilToon.GeometryFXInspector"
+Replace "            #pragma vertex vert\r\n            #pragma fragment frag\r\n" "            #pragma vertex vertCustom\r\n            #pragma geometry geomCustom\r\n            #pragma fragment frag\r\n            #pragma require geometry\r\n"
+Replace "            #pragma vertex vertTess\r\n            #pragma fragment frag\r\n            #pragma hull hull\r\n            #pragma domain domain\r\n            #pragma require tesshw tessellation\r\n" "            #pragma vertex vertTess\r\n            #pragma fragment frag\r\n            #pragma hull hull\r\n            #pragma domain domainCustom\r\n            #pragma geometry geomCustom\r\n            #pragma require tesshw tessellation geometry\r\n"

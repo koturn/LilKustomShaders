@@ -1,0 +1,21 @@
+
+        //----------------------------------------------------------------------------------------------------------------------
+        // Custom Properties
+        [lilEnum] _CustomGeometryMode ("Mode|UV0|UV1|UV2|UV3|Local Position|World Position|Normal|Mask", Int) = 0
+        _CustomGeometryMask ("Mask", 2D) = "white" {}
+        [lilVec3Float] _CustomGeometryVector ("Vector|Delay", Vector) = (0,10,0,0)
+        _CustomGeometrySpeed ("Speed", Float) = 4
+        _CustomGeometryRandomize ("Randomize", Range(0,1)) = 0
+        _CustomGeometryMin ("Min", Range(-1,1)) = 0
+        _CustomGeometryMax ("Max", Range(-1,1)) = 1
+        [lilVec3Float] _CustomGeometryNormalOffset ("Normal Vector|Offset", Vector) = (0,0,0.1,0)
+        _CustomGeometryNormalMap ("Normal Map", 2D) = "bump" {}
+        _CustomGeometryNormalMapScale ("Normal Map Scale", Float) = 1
+        _CustomGeometryNormalMapStrength ("Normal Map Strength", Float) = 0
+        [lilVec3Float] _CustomGeometryLocalOffset ("Local Vector|Offset", Vector) = (0,0,0,0)
+        [lilVec3Float] _CustomGeometryWorldOffset ("World Vector|Offset", Vector) = (0,0,0,0)
+        _CustomGeometryShrinkStrength ("Shrink Strength", Float) = 0
+        _CustomGeometryShrinkOffset ("Shrink Offset", Float) = 0
+        [lilEnum] _CustomGeometryMotionNormal ("Motion Normal|Triangle|Quadrangle", Int) = 0
+        [lilEnum] _CustomGeometryShadingNormal ("Shading Normal|Smooth|Triangle|Quadrangle", Int) = 0
+        [lilToggle] _CustomGeometryGenerateSide ("Generate Side", Int) = 0
