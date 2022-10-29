@@ -47,7 +47,7 @@
 // Add vertex copy
 #define LIL_CUSTOM_VERT_COPY \
     LIL_V2F_OUT.emissionWavePos = pickupPosition(getEmissionPos(input.positionOS), _WaveAxisAngles) \
-        + rand(float2((float)input.vertexID, LIL_TIME)) * _EmissionWaveNoiseAmp;
+        + (2.0 * rand(float2((float)input.vertexID, LIL_TIME)) - 1.0) * _EmissionWaveNoiseAmp;
 
 // Inserting a process into the vertex shader
 //#define LIL_CUSTOM_VERTEX_OS
