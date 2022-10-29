@@ -8,3 +8,6 @@
         [lilVec2] _EmissionWaveParam ("X factor of emission wave", Vector) = (1.0, 16.0, 0.0, 0.0)
         _LocalPosYMin ("Minimum local Y-coordinate for emission wave calculation", Float) = 0.0
         _LocalPosYMax ("Maximum local Y-coordinate for emission wave calculation", Float) = 1.0
+
+        [KeywordEnum(X, Y, Z, FREE)]
+        _WaveAxis ("Wave direction", Int) = 1

@@ -15,6 +15,7 @@ namespace Koturn.lilToon
         MaterialProperty emissionWaveParam;
         MaterialProperty localPosYMin;
         MaterialProperty localPosYMax;
+        MaterialProperty waveAxis;
 
         private static bool isShowCustomProperties;
         private const string shaderName = "koturn/LilEmissionWave";
@@ -38,6 +39,7 @@ namespace Koturn.lilToon
             emissionWaveParam = FindProperty("_EmissionWaveParam", props);
             localPosYMin = FindProperty("_LocalPosYMin", props);
             localPosYMax = FindProperty("_LocalPosYMax", props);
+            waveAxis = FindProperty("_WaveAxis", props);
         }
 
         protected override void DrawCustomProperties(Material material)
@@ -64,6 +66,7 @@ namespace Koturn.lilToon
                 m_MaterialEditor.ShaderProperty(emissionWaveParam, emissionWaveParam.displayName);
                 m_MaterialEditor.ShaderProperty(localPosYMin, localPosYMin.displayName);
                 m_MaterialEditor.ShaderProperty(localPosYMax, localPosYMax.displayName);
+                m_MaterialEditor.ShaderProperty(waveAxis, waveAxis.displayName);
 
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndVertical();
