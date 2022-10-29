@@ -10,6 +10,7 @@ Shader "Hidden/*LIL_SHADER_NAME*/ltspass_lite_transparent"
         // 2 : Transparent
         #define LIL_RENDER 2
 
+        #pragma shader_feature_local_vertex _WAVEPOSSPACE_OBJECT _WAVEPOSSPACE_WORLD
         #pragma shader_feature_local_vertex _WAVEAXIS_X _WAVEAXIS_Y _WAVEAXIS_Z _WAVEAXIS_FREE
         #include "custom.hlsl"
     ENDHLSL

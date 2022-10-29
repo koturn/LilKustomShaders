@@ -9,6 +9,9 @@
         _LocalPosYMin ("Minimum local Y-coordinate for emission wave calculation", Float) = 0.0
         _LocalPosYMax ("Maximum local Y-coordinate for emission wave calculation", Float) = 1.0
 
+        [KeywordEnum(Object, World)]
+        _WavePosSpace ("Wave Position Space", Int) = 0
+
         [KeywordEnum(X, Y, Z, FREE)]
         _WaveAxis ("Wave direction axis", Int) = 1
 
