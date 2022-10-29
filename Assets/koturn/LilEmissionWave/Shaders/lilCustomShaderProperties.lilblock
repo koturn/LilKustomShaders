@@ -10,4 +10,7 @@
         _LocalPosYMax ("Maximum local Y-coordinate for emission wave calculation", Float) = 1.0
 
         [KeywordEnum(X, Y, Z, FREE)]
-        _WaveAxis ("Wave direction", Int) = 1
+        _WaveAxis ("Wave direction axis", Int) = 1
+
+        [lilVec3]
+        _WaveAxisAngles ("Wave direction", Vector) = (0.0, 0.0, 0.0, 0.0)

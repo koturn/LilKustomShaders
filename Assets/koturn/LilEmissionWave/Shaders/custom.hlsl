@@ -10,7 +10,8 @@
     float _EmissionWaveTimeScale; \
     float2 _EmissionWaveParam; \
     float _LocalPosYMin; \
-    float _LocalPosYMax;
+    float _LocalPosYMax; \
+    float3 _WaveAxisAngles;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES
@@ -49,7 +50,7 @@
             length(unity_ObjectToWorld._m00_m10_m20), \
             length(unity_ObjectToWorld._m01_m11_m21), \
             length(unity_ObjectToWorld._m02_m12_m22)); \
-    LIL_V2F_OUT.emissionWavePos = pickupPosition(ePos) + rand(float2((float)input.vertexID, LIL_TIME)) * _EmissionWaveNoiseAmp;
+    LIL_V2F_OUT.emissionWavePos = pickupPosition(ePos, _WaveAxisAngles) + rand(float2((float)input.vertexID, LIL_TIME)) * _EmissionWaveNoiseAmp;
 
 // Inserting a process into the vertex shader
 //#define LIL_CUSTOM_VERTEX_OS
@@ -175,7 +176,7 @@
 // uint     featureFlags            feature flags (for HDRP)
 // uint2    tileIndex               tile index (for HDRP)
 
-float pickupPosition(float3 pos)
+float pickupPosition(float3 pos, float3 angles)
 {
 #if defined(_WAVEAXIS_X)
     return pos.x;
@@ -184,7 +185,12 @@ float pickupPosition(float3 pos)
 #elif defined(_WAVEAXIS_Z)
     return pos.z;
 #else
-    return pos.x;
+    float3 s3, c3;
+    sincos(angles, s3, c3);
+    pos.yz = mul(float2x2(c3.x, -s3.x, s3.x, c3.x), pos.yz);
+    pos.zx = mul(float2x2(c3.y, -s3.y, s3.y, c3.y), pos.zx);
+    pos.xy = mul(float2x2(c3.z, -s3.z, s3.z, c3.z), pos.xy);
+    return pos.y;
 #endif
 }
 
