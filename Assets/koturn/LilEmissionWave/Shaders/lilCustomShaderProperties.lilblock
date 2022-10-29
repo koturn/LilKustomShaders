@@ -5,6 +5,7 @@
         [HDR] _EmissionWaveColor ("Color of emission wave", Color) = (0.0, 0.0, 0.0, 0.0)
         _EmissionWaveNoiseAmp ("Emission wave noise amplitude", Float) = 0.02
         _EmissionWaveTimeScale ("Time scale for emission wave", Float) = 1.0
+        _EmissionWaveTimePhase ("Time phase for emission wave", Range(0.0, 1.0)) = 0.0
         [lilVec2] _EmissionWaveParam ("X factor of emission wave", Vector) = (1.0, 16.0, 0.0, 0.0)
         _LocalPosYMin ("Minimum local Y-coordinate for emission wave calculation", Float) = 0.0
         _LocalPosYMax ("Maximum local Y-coordinate for emission wave calculation", Float) = 1.0
