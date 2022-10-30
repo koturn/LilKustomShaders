@@ -1,0 +1,3 @@
+Language	English	Japanese
+sRefProbeMask	Mask for reflection probe	リフレクションプローブの適用範囲マスク
+sRefProbeBlendCoeff	Coefficient of blending reflection probe	リフレクションプローブのブレンド率
