@@ -27,6 +27,8 @@ namespace Koturn.lilToon
             //isShowRenderMode = false;
 
             //LoadCustomLanguage("");
+            LoadCustomLanguage("5b004fec885014b4e9f3e8889f4bc808");
+
             //customVariable = FindProperty("_CustomVariable", props);
             _hsMask = FindProperty("_HsMask", props);
             _hsTimeScale = FindProperty("_HsTimeScale", props);
@@ -50,8 +52,8 @@ namespace Koturn.lilToon
                 EditorGUILayout.BeginVertical(boxInnerHalf);
 
                 //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
-                m_MaterialEditor.ShaderProperty(_hsMask, _hsMask.displayName);
-                m_MaterialEditor.ShaderProperty(_hsTimeScale, _hsTimeScale.displayName);
+                m_MaterialEditor.ShaderProperty(_hsMask, GetLoc("sHsMask"));
+                m_MaterialEditor.ShaderProperty(_hsTimeScale, GetLoc("sHsTimeScale"));
 
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndVertical();
