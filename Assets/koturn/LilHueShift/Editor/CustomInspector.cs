@@ -9,8 +9,8 @@ namespace Koturn.lilToon
     {
         // Custom properties
         //MaterialProperty customVariable;
-        MaterialProperty hsMask;
-        MaterialProperty hsTimeScale;
+        MaterialProperty _hsMask;
+        MaterialProperty _hsTimeScale;
 
         private static bool isShowCustomProperties;
         private const string shaderName = "koturn/LilHueShift";
@@ -28,8 +28,8 @@ namespace Koturn.lilToon
 
             //LoadCustomLanguage("");
             //customVariable = FindProperty("_CustomVariable", props);
-            hsMask = FindProperty("_HsMask", props);
-            hsTimeScale = FindProperty("_HsTimeScale", props);
+            _hsMask = FindProperty("_HsMask", props);
+            _hsTimeScale = FindProperty("_HsTimeScale", props);
         }
 
         protected override void DrawCustomProperties(Material material)
@@ -50,8 +50,8 @@ namespace Koturn.lilToon
                 EditorGUILayout.BeginVertical(boxInnerHalf);
 
                 //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
-                m_MaterialEditor.ShaderProperty(hsMask, hsMask.displayName);
-                m_MaterialEditor.ShaderProperty(hsTimeScale, hsTimeScale.displayName);
+                m_MaterialEditor.ShaderProperty(_hsMask, _hsMask.displayName);
+                m_MaterialEditor.ShaderProperty(_hsTimeScale, _hsTimeScale.displayName);
 
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndVertical();
