@@ -1,0 +1,3 @@
+Language	English	Japanese
+sHsMask	Mask for Shue shift	色相変化適用マスク
+sHsTimeScale	Time multiplier for Hue Shift	色相変化時間スケール
