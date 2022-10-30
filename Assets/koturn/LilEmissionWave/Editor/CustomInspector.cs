@@ -9,16 +9,16 @@ namespace Koturn.lilToon
     {
         // Custom properties
         //MaterialProperty customVariable;
-        MaterialProperty emissionWaveColor;
-        MaterialProperty emissionWaveNoiseAmp;
-        MaterialProperty emissionWaveTimeScale;
-        MaterialProperty emissionWaveTimePhase;
-        MaterialProperty emissionWaveParam;
-        MaterialProperty emissionPosMin;
-        MaterialProperty emissionPosMax;
-        MaterialProperty wavePosSpace;
-        MaterialProperty waveAxis;
-        MaterialProperty waveAxisAngles;
+        MaterialProperty _emissionWaveColor;
+        MaterialProperty _emissionWaveNoiseAmp;
+        MaterialProperty _emissionWaveTimeScale;
+        MaterialProperty _emissionWaveTimePhase;
+        MaterialProperty _emissionWaveParam;
+        MaterialProperty _emissionPosMin;
+        MaterialProperty _emissionPosMax;
+        MaterialProperty _wavePosSpace;
+        MaterialProperty _waveAxis;
+        MaterialProperty _waveAxisAngles;
 
         private static bool isShowCustomProperties;
         private const string shaderName = "koturn/LilEmissionWave";
@@ -38,16 +38,16 @@ namespace Koturn.lilToon
             LoadCustomLanguage("14a288e6eea913a4098bef443f2c7d81");
 
             //customVariable = FindProperty("_CustomVariable", props);
-            emissionWaveColor = FindProperty("_EmissionWaveColor", props);
-            emissionWaveNoiseAmp = FindProperty("_EmissionWaveNoiseAmp", props);
-            emissionWaveTimeScale = FindProperty("_EmissionWaveTimeScale", props);
-            emissionWaveTimePhase = FindProperty("_EmissionWaveTimePhase", props);
-            emissionWaveParam = FindProperty("_EmissionWaveParam", props);
-            emissionPosMin = FindProperty("_EmissionPosMin", props);
-            emissionPosMax = FindProperty("_EmissionPosMax", props);
-            wavePosSpace = FindProperty("_WavePosSpace", props);
-            waveAxis = FindProperty("_WaveAxis", props);
-            waveAxisAngles = FindProperty("_WaveAxisAngles", props);
+            _emissionWaveColor = FindProperty("_EmissionWaveColor", props);
+            _emissionWaveNoiseAmp = FindProperty("_EmissionWaveNoiseAmp", props);
+            _emissionWaveTimeScale = FindProperty("_EmissionWaveTimeScale", props);
+            _emissionWaveTimePhase = FindProperty("_EmissionWaveTimePhase", props);
+            _emissionWaveParam = FindProperty("_EmissionWaveParam", props);
+            _emissionPosMin = FindProperty("_EmissionPosMin", props);
+            _emissionPosMax = FindProperty("_EmissionPosMax", props);
+            _wavePosSpace = FindProperty("_WavePosSpace", props);
+            _waveAxis = FindProperty("_WaveAxis", props);
+            _waveAxisAngles = FindProperty("_WaveAxisAngles", props);
         }
 
         protected override void DrawCustomProperties(Material material)
@@ -68,18 +68,18 @@ namespace Koturn.lilToon
                 EditorGUILayout.BeginVertical(boxInnerHalf);
 
                 //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
-                m_MaterialEditor.ShaderProperty(emissionWaveColor, GetLoc("sEmissionWaveColor"));
-                m_MaterialEditor.ShaderProperty(emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
-                m_MaterialEditor.ShaderProperty(emissionWaveTimeScale, GetLoc("sEmissionWaveTimeScale"));
-                m_MaterialEditor.ShaderProperty(emissionWaveTimePhase, GetLoc("sEmissionWaveTimePhase"));
-                m_MaterialEditor.ShaderProperty(emissionWaveParam, GetLoc("sEmissionWaveParam"));
-                m_MaterialEditor.ShaderProperty(emissionPosMin, GetLoc("sEmissionPosMin"));
-                m_MaterialEditor.ShaderProperty(emissionPosMax, GetLoc("sEmissionPosMax"));
-                m_MaterialEditor.ShaderProperty(wavePosSpace, GetLoc("sWavePosSpace"));
-                m_MaterialEditor.ShaderProperty(waveAxis, GetLoc("sWaveAxis"));
-                using (new EditorGUI.DisabledScope((int)waveAxis.floatValue != 3))
+                m_MaterialEditor.ShaderProperty(_emissionWaveColor, GetLoc("sEmissionWaveColor"));
+                m_MaterialEditor.ShaderProperty(_emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
+                m_MaterialEditor.ShaderProperty(_emissionWaveTimeScale, GetLoc("sEmissionWaveTimeScale"));
+                m_MaterialEditor.ShaderProperty(_emissionWaveTimePhase, GetLoc("sEmissionWaveTimePhase"));
+                m_MaterialEditor.ShaderProperty(_emissionWaveParam, GetLoc("sEmissionWaveParam"));
+                m_MaterialEditor.ShaderProperty(_emissionPosMin, GetLoc("sEmissionPosMin"));
+                m_MaterialEditor.ShaderProperty(_emissionPosMax, GetLoc("sEmissionPosMax"));
+                m_MaterialEditor.ShaderProperty(_wavePosSpace, GetLoc("sWavePosSpace"));
+                m_MaterialEditor.ShaderProperty(_waveAxis, GetLoc("sWaveAxis"));
+                using (new EditorGUI.DisabledScope((int)_waveAxis.floatValue != 3))
                 {
-                    m_MaterialEditor.ShaderProperty(waveAxisAngles, GetLoc("sWaveAxisAngles"));
+                    m_MaterialEditor.ShaderProperty(_waveAxisAngles, GetLoc("sWaveAxisAngles"));
                 }
 
                 EditorGUILayout.EndVertical();
