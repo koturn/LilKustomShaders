@@ -1,0 +1,11 @@
+Language	English	Japanese
+sEmissionWaveColor	Color of emission wave	エミッション波の色
+sEmissionWaveNoiseAmp	Emission wave noise amplitude	エミッション波のノイズ振幅
+sEmissionWaveTimeScale	Time scale for emission wave	エミッション波の時間スケール
+sEmissionWaveTimePhase	Time phase for emission wave	エミッション波の時間位相
+sEmissionWaveParam	Factor of emission wave	エミッション波の係数
+sEmissionPosMin	Minimum emission position	エミッション位置の最小値
+sEmissionPosMax	Maximum emission position	エミッション位置の最大値
+sWavePosSpace	Wave position space	エミッション位置計算空間
+sWaveAxis	Wave direction axis	エミッション波方向軸
+sWaveAxisAngles	Wave direction	エミッション波方向角度
