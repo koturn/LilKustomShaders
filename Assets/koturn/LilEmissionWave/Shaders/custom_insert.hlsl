@@ -40,7 +40,7 @@ float pickupPosition(float3 pos)
 #else
     if (_WaveAxis == 3) {
         float3 s3, c3;
-        sincos(_WaveAxisAngles, s3, c3);
+        sincos(radians(_WaveAxisAngles), s3, c3);
         pos.yz = mul(float2x2(c3.x, -s3.x, s3.x, c3.x), pos.yz);
         pos.zx = mul(float2x2(c3.y, -s3.y, s3.y, c3.y), pos.zx);
         pos.xy = mul(float2x2(c3.z, -s3.z, s3.z, c3.z), pos.xy);
