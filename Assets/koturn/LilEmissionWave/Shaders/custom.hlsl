@@ -10,8 +10,8 @@
     float _EmissionWaveTimeScale; \
     float _EmissionWaveTimePhase; \
     float2 _EmissionWaveParam; \
-    float _LocalPosYMin; \
-    float _LocalPosYMax; \
+    float _EmissionPosMin; \
+    float _EmissionPosMax; \
     float3 _WaveAxisAngles;
 
 // Custom textures
@@ -58,7 +58,7 @@
 //#define OVERRIDE_xx
 
 #define BEFORE_BLEND_EMISSION \
-    const float uDiff = frac(LIL_TIME * _EmissionWaveTimeScale + _EmissionWaveTimePhase) - remap01(_LocalPosYMin, _LocalPosYMax, input.emissionWavePos); \
+    const float uDiff = frac(LIL_TIME * _EmissionWaveTimeScale + _EmissionWaveTimePhase) - remap01(_EmissionPosMin, _EmissionPosMax, input.emissionWavePos); \
     const float sDiff = 2.0 * uDiff - 1.0; \
     const float eFact = pow(0.5 * cos(clamp(sDiff * _EmissionWaveParam.x, -1.0, 1.0) * UNITY_PI) + 0.5, _EmissionWaveParam.y); \
     fd.emissionColor += _EmissionWaveColor * eFact;
