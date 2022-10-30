@@ -77,6 +77,7 @@ namespace Koturn.lilToon
                 m_MaterialEditor.ShaderProperty(_emissionPosMax, GetLoc("sEmissionPosMax"));
                 m_MaterialEditor.ShaderProperty(_wavePosSpace, GetLoc("sWavePosSpace"));
                 m_MaterialEditor.ShaderProperty(_waveAxis, GetLoc("sWaveAxis"));
+                using (new EditorGUI.IndentLevelScope())
                 using (new EditorGUI.DisabledScope((int)_waveAxis.floatValue != 3))
                 {
                     m_MaterialEditor.ShaderProperty(_waveAxisAngles, GetLoc("sWaveAxisAngles"));
