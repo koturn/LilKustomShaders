@@ -46,7 +46,7 @@
 
 // Add vertex copy
 #define LIL_CUSTOM_VERT_COPY \
-    LIL_V2F_OUT.emissionWavePos = pickupPosition(getEmissionPos(input.positionOS), _WaveAxisAngles) \
+    LIL_V2F_OUT.emissionWavePos = pickupPosition(getEmissionPos(input.positionOS)) \
         + (2.0 * rand(float2((float)input.vertexID, LIL_TIME)) - 1.0) * _EmissionWaveNoiseAmp;
 
 // Inserting a process into the vertex shader
@@ -172,24 +172,6 @@
 // uint     renderingLayers         light layer of object (for URP / HDRP)
 // uint     featureFlags            feature flags (for HDRP)
 // uint2    tileIndex               tile index (for HDRP)
-
-float pickupPosition(float3 pos, float3 angles)
-{
-#if defined(_WAVEAXIS_X)
-    return pos.x;
-#elif defined(_WAVEAXIS_Y)
-    return pos.y;
-#elif defined(_WAVEAXIS_Z)
-    return pos.z;
-#else
-    float3 s3, c3;
-    sincos(angles, s3, c3);
-    pos.yz = mul(float2x2(c3.x, -s3.x, s3.x, c3.x), pos.yz);
-    pos.zx = mul(float2x2(c3.y, -s3.y, s3.y, c3.y), pos.zx);
-    pos.xy = mul(float2x2(c3.z, -s3.z, s3.z, c3.z), pos.xy);
-    return pos.y;
-#endif
-}
 
 float remap01(float a, float b, float x)
 {
