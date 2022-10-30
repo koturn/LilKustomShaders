@@ -12,7 +12,9 @@
     float2 _EmissionWaveParam; \
     float _EmissionPosMin; \
     float _EmissionPosMax; \
-    float3 _WaveAxisAngles;
+    float3 _WaveAxisAngles; \
+    int _WavePosSpace; \
+    int _WaveAxis;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES
