@@ -4,10 +4,12 @@
 // Custom variables
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
-#define LIL_CUSTOM_PROPERTIES
+#define LIL_CUSTOM_PROPERTIES \
+    float _RefProbeBlendCoeff;
 
 // Custom textures
-#define LIL_CUSTOM_TEXTURES
+#define LIL_CUSTOM_TEXTURES \
+    TEXTURE2D(_RefProbeMask);
 
 // Add vertex shader input
 //#define LIL_REQUIRE_APP_POSITION
@@ -45,6 +47,11 @@
 // Inserting a process into pixel shader
 //#define BEFORE_xx
 //#define OVERRIDE_xx
+#define BEFORE_SHADOW \
+    const half4 refCol = getRefProbeColor(reflect(-fd.V, normalize(fd.reflectionN)), fd.positionWS); \
+    fd.col.rgb = lerp(fd.col.rgb, refCol.rgb, _RefProbeBlendCoeff * LIL_SAMPLE_2D(_RefProbeMask, sampler_MainTex, fd.uvMain).r); \
+    fd.albedo = fd.col.rgb;
+
 
 //----------------------------------------------------------------------------------------------------------------------
 // Information about variables

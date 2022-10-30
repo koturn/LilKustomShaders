@@ -1,16 +1,22 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+using lilToon;
 
-namespace lilToon
+namespace Koturn.lilToon
 {
-    public class TemplateFullInspector : lilToonInspector
+    public class LilRefProbeInspector : lilToonInspector
     {
         // Custom properties
         //MaterialProperty customVariable;
+        MaterialProperty hsMask;
+        MaterialProperty hsTimeScale;
+
+        MaterialProperty refProbeMask;
+        MaterialProperty refProbeBlendCoeff;
 
         private static bool isShowCustomProperties;
-        private const string shaderName = "TemplateFull";
+        private const string shaderName = "koturn/LilRefProbe";
 
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
         {
@@ -24,7 +30,11 @@ namespace lilToon
             //isShowRenderMode = false;
 
             //LoadCustomLanguage("");
+            LoadCustomLanguage("4413d87c05000644ca2db471a92eac03");
+
             //customVariable = FindProperty("_CustomVariable", props);
+            refProbeMask = FindProperty("_RefProbeMask", props);
+            refProbeBlendCoeff = FindProperty("_RefProbeBlendCoeff", props);
         }
 
         protected override void DrawCustomProperties(Material material)
@@ -45,6 +55,8 @@ namespace lilToon
                 EditorGUILayout.BeginVertical(boxInnerHalf);
 
                 //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+                m_MaterialEditor.ShaderProperty(refProbeMask, GetLoc("sRefProbeMask"));
+                m_MaterialEditor.ShaderProperty(refProbeBlendCoeff, GetLoc("sRefProbeBlendCoeff"));
 
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndVertical();
