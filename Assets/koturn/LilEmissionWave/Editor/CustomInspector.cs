@@ -35,6 +35,8 @@ namespace Koturn.lilToon
             //isShowRenderMode = false;
 
             //LoadCustomLanguage("");
+            LoadCustomLanguage("14a288e6eea913a4098bef443f2c7d81");
+
             //customVariable = FindProperty("_CustomVariable", props);
             emissionWaveColor = FindProperty("_EmissionWaveColor", props);
             emissionWaveNoiseAmp = FindProperty("_EmissionWaveNoiseAmp", props);
@@ -66,18 +68,18 @@ namespace Koturn.lilToon
                 EditorGUILayout.BeginVertical(boxInnerHalf);
 
                 //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
-                m_MaterialEditor.ShaderProperty(emissionWaveColor, emissionWaveColor.displayName);
-                m_MaterialEditor.ShaderProperty(emissionWaveNoiseAmp, emissionWaveNoiseAmp.displayName);
-                m_MaterialEditor.ShaderProperty(emissionWaveTimeScale, emissionWaveTimeScale.displayName);
-                m_MaterialEditor.ShaderProperty(emissionWaveTimePhase, emissionWaveTimePhase.displayName);
-                m_MaterialEditor.ShaderProperty(emissionWaveParam, emissionWaveParam.displayName);
-                m_MaterialEditor.ShaderProperty(emissionPosMin, emissionPosMin.displayName);
-                m_MaterialEditor.ShaderProperty(emissionPosMax, emissionPosMax.displayName);
-                m_MaterialEditor.ShaderProperty(wavePosSpace, wavePosSpace.displayName);
-                m_MaterialEditor.ShaderProperty(waveAxis, waveAxis.displayName);
+                m_MaterialEditor.ShaderProperty(emissionWaveColor, GetLoc("sEmissionWaveColor"));
+                m_MaterialEditor.ShaderProperty(emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
+                m_MaterialEditor.ShaderProperty(emissionWaveTimeScale, GetLoc("sEmissionWaveTimeScale"));
+                m_MaterialEditor.ShaderProperty(emissionWaveTimePhase, GetLoc("sEmissionWaveTimePhase"));
+                m_MaterialEditor.ShaderProperty(emissionWaveParam, GetLoc("sEmissionWaveParam"));
+                m_MaterialEditor.ShaderProperty(emissionPosMin, GetLoc("sEmissionPosMin"));
+                m_MaterialEditor.ShaderProperty(emissionPosMax, GetLoc("sEmissionPosMax"));
+                m_MaterialEditor.ShaderProperty(wavePosSpace, GetLoc("sWavePosSpace"));
+                m_MaterialEditor.ShaderProperty(waveAxis, GetLoc("sWaveAxis"));
                 using (new EditorGUI.DisabledScope((int)waveAxis.floatValue != 3))
                 {
-                    m_MaterialEditor.ShaderProperty(waveAxisAngles, waveAxisAngles.displayName);
+                    m_MaterialEditor.ShaderProperty(waveAxisAngles, GetLoc("sWaveAxisAngles"));
                 }
 
                 EditorGUILayout.EndVertical();
