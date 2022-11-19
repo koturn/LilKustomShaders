@@ -1,0 +1,23 @@
+Language	English	Japanese
+sCustomShaderTitle	Text Overray	テキストオーバーレイ
+sSpriteTex	Sprite Sheet Texture	スプライトシート
+sEnableElapsedTime	Enable elapsed time	経過時間表示
+sElapsedTimeColor	Color of elapsed time	経過時間表示色
+sElapsedTimeOffsetScale	Offsets and Scales of elapsed time	経過時間表示オフセット・スケール
+sElapsedTimeRotAngle	Rotate angle of elapsed time	経過時間表示回転角
+sElapsedTimeDisplayLength	Display length of elapsed time	経過時間表示数字個数
+sElapsedTimeAlign	Align of elapsed time	経過時間のアラインメント
+sEnableFramerate	Enable elapsed time	フレームレート表示
+sFramerateColor	Color of framerate	フレームレート色
+sFramerateOffsetScale	Offsets and Scales of framerate	フレームレート表示オフセット・スケール
+sFramerateRotAngle	Rotate angle of framerate	フレームレート表示回転角
+sFramerateDisplayLength	Display length of framerate	フレームレート数字個数
+sFramerateAlign	Align of framerate	フレームレートのアラインメント
+sEnableWorldPos	Enable world position	ワールド座標表示
+sWorldPosColorX	Color of world position of X	ワールドX座標色
+sWorldPosColorY	Color of world position of Y	ワールドY座標色
+sWorldPosColorZ	Color of world position of Z	ワールドZ座標色
+sWorldPosOffsetScale	Offsets and Scales of world position	ワールド座標表示オフセット・スケール
+sWorldPosRotAngle	Rotate angle of world position	ワールド座標表示回転角
+sWorldPosDisplayLength	Display length of world position	ワールド座標数字個数
+sWorldPosAlign	Align of world position	ワールド座標のアラインメント

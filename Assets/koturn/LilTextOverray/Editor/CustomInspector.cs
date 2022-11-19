@@ -1,16 +1,38 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+using lilToon;
 
-namespace lilToon
+namespace Koturn.lilToon
 {
-    public class TemplateFullInspector : lilToonInspector
+    public class LilTextOverrayInspector : lilToonInspector
     {
         // Custom properties
         //MaterialProperty customVariable;
+        private MaterialProperty _spriteTex;
+        private MaterialProperty _enableElapsedTime;
+        private MaterialProperty _elapsedTimeColor;
+        private MaterialProperty _elapsedTimeOffsetScale;
+        private MaterialProperty _elapsedTimeRotAngle;
+        private MaterialProperty _elapsedTimeDisplayLength;
+        private MaterialProperty _elapsedTimeAlign;
+        private MaterialProperty _enableFramerate;
+        private MaterialProperty _framerateColor;
+        private MaterialProperty _framerateOffsetScale;
+        private MaterialProperty _framerateRotAngle;
+        private MaterialProperty _framerateDisplayLength;
+        private MaterialProperty _framerateAlign;
+        private MaterialProperty _enableWorldPos;
+        private MaterialProperty _worldPosColorX;
+        private MaterialProperty _worldPosColorY;
+        private MaterialProperty _worldPosColorZ;
+        private MaterialProperty _worldPosOffsetScale;
+        private MaterialProperty _worldPosRotAngle;
+        private MaterialProperty _worldPosDisplayLength;
+        private MaterialProperty _worldPosAlign;
 
         private static bool isShowCustomProperties;
-        private const string shaderName = "TemplateFull";
+        private const string shaderName = "LilTextOverray";
 
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
         {
@@ -25,6 +47,28 @@ namespace lilToon
 
             //LoadCustomLanguage("");
             //customVariable = FindProperty("_CustomVariable", props);
+            LoadCustomLanguage("1856a3bb6b48464458ac52d525e02701");
+            _spriteTex = FindProperty("_SpriteTex", props);
+            _enableElapsedTime = FindProperty("_EnableElapsedTime", props);
+            _elapsedTimeColor = FindProperty("_ElapsedTimeColor", props);
+            _elapsedTimeOffsetScale = FindProperty("_ElapsedTimeOffsetScale", props);
+            _elapsedTimeRotAngle = FindProperty("_ElapsedTimeRotAngle", props);
+            _elapsedTimeDisplayLength = FindProperty("_ElapsedTimeDisplayLength", props);
+            _elapsedTimeAlign = FindProperty("_ElapsedTimeAlign", props);
+            _enableFramerate = FindProperty("_EnableFramerate", props);
+            _framerateColor = FindProperty("_FramerateColor", props);
+            _framerateOffsetScale = FindProperty("_FramerateOffsetScale", props);
+            _framerateRotAngle = FindProperty("_FramerateRotAngle", props);
+            _framerateDisplayLength = FindProperty("_FramerateDisplayLength", props);
+            _framerateAlign = FindProperty("_FramerateAlign", props);
+            _enableWorldPos = FindProperty("_EnableWorldPos", props);
+            _worldPosColorX = FindProperty("_WorldPosColorX", props);
+            _worldPosColorY = FindProperty("_WorldPosColorY", props);
+            _worldPosColorZ = FindProperty("_WorldPosColorZ", props);
+            _worldPosOffsetScale = FindProperty("_WorldPosOffsetScale", props);
+            _worldPosRotAngle = FindProperty("_WorldPosRotAngle", props);
+            _worldPosDisplayLength = FindProperty("_WorldPosDisplayLength", props);
+            _worldPosAlign = FindProperty("_WorldPosAlign", props);
         }
 
         protected override void DrawCustomProperties(Material material)
@@ -38,16 +82,57 @@ namespace lilToon
             // customToggleFont label for box
 
             isShowCustomProperties = Foldout("Custom Properties", "Custom Properties", isShowCustomProperties);
-            if(isShowCustomProperties)
+            if (!isShowCustomProperties)
             {
-                EditorGUILayout.BeginVertical(boxOuter);
-                EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
-                EditorGUILayout.BeginVertical(boxInnerHalf);
+                return;
+            }
 
-                //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+            using (new EditorGUILayout.VerticalScope(boxOuter))
+            {
+                EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
+                using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                {
+                    //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+                    m_MaterialEditor.ShaderProperty(_spriteTex, GetLoc("sSpriteTex"));
 
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.EndVertical();
+                    m_MaterialEditor.ShaderProperty(_enableElapsedTime, GetLoc("sEnableElapsedTime"));
+                    using (new EditorGUI.IndentLevelScope())
+                    using (new EditorGUILayout.VerticalScope(customBox))
+                    using (new EditorGUI.DisabledScope(_enableElapsedTime.floatValue < 0.5))
+                    {
+                        m_MaterialEditor.ShaderProperty(_elapsedTimeColor, GetLoc("sElapsedTimeColor"));
+                        m_MaterialEditor.ShaderProperty(_elapsedTimeOffsetScale, GetLoc("sElapsedTimeOffsetScale"));
+                        m_MaterialEditor.ShaderProperty(_elapsedTimeRotAngle, GetLoc("sElapsedTimeRotAngle"));
+                        m_MaterialEditor.ShaderProperty(_elapsedTimeDisplayLength, GetLoc("sElapsedTimeDisplayLength"));
+                        m_MaterialEditor.ShaderProperty(_elapsedTimeAlign, GetLoc("sElapsedTimeAlign"));
+                    }
+
+                    m_MaterialEditor.ShaderProperty(_enableFramerate, GetLoc("sEnableFramerate"));
+                    using (new EditorGUI.IndentLevelScope())
+                    using (new EditorGUILayout.VerticalScope(customBox))
+                    using (new EditorGUI.DisabledScope(_enableFramerate.floatValue < 0.5))
+                    {
+                        m_MaterialEditor.ShaderProperty(_framerateColor, GetLoc("sFramerateColor"));
+                        m_MaterialEditor.ShaderProperty(_framerateOffsetScale, GetLoc("sFramerateOffsetScale"));
+                        m_MaterialEditor.ShaderProperty(_framerateRotAngle, GetLoc("sFramerateRotAngle"));
+                        m_MaterialEditor.ShaderProperty(_framerateDisplayLength, GetLoc("sFramerateDisplayLength"));
+                        m_MaterialEditor.ShaderProperty(_framerateAlign, GetLoc("sFramerateAlign"));
+                    }
+
+                    m_MaterialEditor.ShaderProperty(_enableWorldPos, GetLoc("sEnableWorldPos"));
+                    using (new EditorGUI.IndentLevelScope())
+                    using (new EditorGUILayout.VerticalScope(customBox))
+                    using (new EditorGUI.DisabledScope(_enableWorldPos.floatValue < 0.5))
+                    {
+                        m_MaterialEditor.ShaderProperty(_worldPosColorX, GetLoc("sWorldPosColorX"));
+                        m_MaterialEditor.ShaderProperty(_worldPosColorY, GetLoc("sWorldPosColorY"));
+                        m_MaterialEditor.ShaderProperty(_worldPosColorZ, GetLoc("sWorldPosColorZ"));
+                        m_MaterialEditor.ShaderProperty(_worldPosOffsetScale, GetLoc("sWorldPosOffsetScale"));
+                        m_MaterialEditor.ShaderProperty(_worldPosRotAngle, GetLoc("sWorldPosRotAngle"));
+                        m_MaterialEditor.ShaderProperty(_worldPosDisplayLength, GetLoc("sWorldPosDisplayLength"));
+                        m_MaterialEditor.ShaderProperty(_worldPosAlign, GetLoc("sWorldPosAlign"));
+                    }
+                }
             }
         }
 
