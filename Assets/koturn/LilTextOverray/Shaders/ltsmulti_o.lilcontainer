@@ -1,0 +1,24 @@
+Shader "Hidden/*LIL_SHADER_NAME*/MultiOutline"
+{
+    Properties
+    {
+        lilProperties "Default"
+        lilProperties "DefaultOpaque"
+        lilProperties "lilCustomShaderProperties.lilblock"
+    }
+
+    HLSLINCLUDE
+        #pragma shader_feature_local_fragment _ _ENABLE_ELAPSED_TIME_ON
+        #pragma shader_feature_local_fragment _ _ENABLE_FRAMERATE_ON
+        #pragma shader_feature_local_fragment _ _ENABLE_WORLD_POS_ON
+        #include "custom.hlsl"
+    ENDHLSL
+
+    lilSubShaderTags {"RenderType" = "Opaque" "Queue" = "Transparent-100"}
+    lilSubShaderInsert "lilCustomShaderInsert.lilblock"
+    lilSubShaderBRP "DefaultMultiOutline"
+    lilSubShaderURP "DefaultMultiOutline"
+    lilSubShaderHDRP "DefaultMultiOutline"
+
+    CustomEditor "*LIL_EDITOR_NAME*"
+}

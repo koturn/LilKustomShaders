@@ -1,0 +1,24 @@
+Shader "Hidden/*LIL_SHADER_NAME*/MultiFur"
+{
+    Properties
+    {
+        lilProperties "Default"
+        lilProperties "DefaultFurTransparent"
+        lilProperties "lilCustomShaderProperties.lilblock"
+    }
+
+    HLSLINCLUDE
+        #pragma shader_feature_local_fragment _ _ENABLE_ELAPSED_TIME_ON
+        #pragma shader_feature_local_fragment _ _ENABLE_FRAMERATE_ON
+        #pragma shader_feature_local_fragment _ _ENABLE_WORLD_POS_ON
+        #include "custom.hlsl"
+    ENDHLSL
+
+    lilSubShaderTags {"RenderType" = "Transparent" "Queue" = "Transparent"}
+    lilSubShaderInsert "lilCustomShaderInsert.lilblock"
+    lilSubShaderBRP "DefaultMultiFur"
+    lilSubShaderURP "DefaultMultiFur"
+    lilSubShaderHDRP "DefaultMultiFur"
+
+    CustomEditor "*LIL_EDITOR_NAME*"
+}

@@ -1,0 +1,30 @@
+
+        //----------------------------------------------------------------------------------------------------------------------
+        // Custom Properties
+        //_CustomVariable ("Custom Variable", Float) = 0
+
+        [NoScaleOffset]
+        _SpriteTex ("Sprite Sheet Texture", 2D) = "black" {}
+
+        [Toggle(_ENABLE_ELAPSED_TIME_ON)] _EnableElapsedTime ("Enable elapsed time", Int) = 0
+        [HDR] _ElapsedTimeColor ("Color of elapsed time", Color) = (0.0, 1.0, 1.0, 1.0)
+        _ElapsedTimeOffsetScale ("Offsets and Scales of elapsed time", Vector) = (0.0, 0.0, 1.0, 1.0)
+        _ElapsedTimeRotAngle ("Rotate angle of elapsed time", Float) = 0.0
+        [IntRange] _ElapsedTimeDisplayLength ("Display length of elapsed time", Range(2, 6)) = 6
+        [Enum(Show Zeros, 0, Right, 1, Left, 2)] _ElapsedTimeAlign ("Align of elapsed time", Int) = 0
+
+        [Toggle(_ENABLE_FRAMERATE_ON)] _EnableFramerate ("Enable elapsed time", Int) = 0
+        [HDR] _FramerateColor ("Color of framerate", Color) = (1.0, 1.0, 0.0, 1.0)
+        _FramerateOffsetScale ("Offsets and Scales of framerate", Vector) = (0.0, 0.0, 1.0, 1.0)
+        _FramerateRotAngle ("Rotate angle of framerate", Float) = 0.0
+        [IntRange] _FramerateDisplayLength ("Display length of framerate", Range(2, 3)) = 2
+        [Enum(Show Zeros, 0, Right, 1, Left, 2)] _FramerateAlign ("Align of framerate", Int) = 0
+
+        [Toggle(_ENABLE_WORLD_POS_ON)] _EnableWorldPos ("Enable world position", Int) = 0
+        [HDR] _WorldPosColorX ("Color of world position of X", Color) = (1.0, 0.0, 0.0, 1.0)
+        [HDR] _WorldPosColorY ("Color of world position of Y", Color) = (0.0, 1.0, 0.0, 1.0)
+        [HDR] _WorldPosColorZ ("Color of world position of Z", Color) = (0.0, 0.0, 1.0, 1.0)
+        _WorldPosOffsetScale ("Offsets and Scales of world position", Vector) = (0.0, 0.0, 1.0, 1.0)
+        _WorldPosRotAngle ("Rotate angle of world position", Float) = 0.0
+        [IntRange] _WorldPosDisplayLength ("Display length of world position", Range(3, 6)) = 6
+        [Enum(Show Zeros, 0, Right, 1, Left, 2)] _WorldPosAlign ("Align of world position", Int) = 0
