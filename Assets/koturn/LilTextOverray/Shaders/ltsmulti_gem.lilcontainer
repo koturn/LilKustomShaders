@@ -9,6 +9,7 @@ Shader "Hidden/*LIL_SHADER_NAME*/MultiGem"
 
     HLSLINCLUDE
         #pragma shader_feature_local_fragment _ _ENABLE_ELAPSED_TIME_ON
+        #pragma shader_feature_local_fragment _ _ENABLE_AL_TIME_OF_DAY_ON
         #pragma shader_feature_local_fragment _ _ENABLE_FRAMERATE_ON
         #pragma shader_feature_local_fragment _ _ENABLE_WORLD_POS_ON
         #include "custom.hlsl"

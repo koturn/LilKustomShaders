@@ -11,6 +11,12 @@
     float _ElapsedTimeRotAngle; \
     float _ElapsedTimeDisplayLength; \
     float _ElapsedTimeAlign; \
+    bool _EnableALTimeOfDay; \
+    float4 _ALTimeOfDayColor; \
+    float4 _ALTimeOfDayOffsetScale; \
+    float _ALTimeOfDayRotAngle; \
+    float _ALTimeOfDayDisplayLength; \
+    float _ALTimeOfDayAlign; \
     bool _EnableFramerate; \
     float4 _FramerateColor; \
     float4 _FramerateOffsetScale; \
@@ -76,6 +82,13 @@
                 float3(100.0, 60.0, 60.0)); \
             const float hmsval = dot(floor(hms), float3(10000.0, 100.0, 1.0)); \
             fd.emissionColor += sampleSplite(hmsval, uv2, _ElapsedTimeDisplayLength, _ElapsedTimeAlign) * _ElapsedTimeColor.rgb; \
+        } \
+    } \
+    if (isALTimeOfDayEnabled() && AudioLinkIsAvailable()) { \
+        const float2 uv2 = affineTransform(fd.uvMain, _ALTimeOfDayOffsetScale.zw, _ALTimeOfDayRotAngle, _ALTimeOfDayOffsetScale.xy); \
+        if (hmul(step(0.0, uv2) * step(uv2, 1.0)) != 0.0) { \
+            const float hmsval = dot(AudioLinkGetTimeOfDay(), float3(10000.0, 100.0, 1.0)); \
+            fd.emissionColor += sampleSplite(hmsval, uv2, _ALTimeOfDayDisplayLength, _ALTimeOfDayAlign) * _ALTimeOfDayColor.rgb; \
         } \
     } \
     if (isFramerateEnabled()) { \

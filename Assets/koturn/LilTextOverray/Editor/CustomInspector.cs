@@ -16,6 +16,12 @@ namespace Koturn.lilToon
         private MaterialProperty _elapsedTimeRotAngle;
         private MaterialProperty _elapsedTimeDisplayLength;
         private MaterialProperty _elapsedTimeAlign;
+        private MaterialProperty _enableALTimeOfDay;
+        private MaterialProperty _alTimeOfDayColor;
+        private MaterialProperty _alTimeOfDayOffsetScale;
+        private MaterialProperty _alTimeOfDayRotAngle;
+        private MaterialProperty _alTimeOfDayDisplayLength;
+        private MaterialProperty _alTimeOfDayAlign;
         private MaterialProperty _enableFramerate;
         private MaterialProperty _framerateColor;
         private MaterialProperty _framerateOffsetScale;
@@ -55,6 +61,12 @@ namespace Koturn.lilToon
             _elapsedTimeRotAngle = FindProperty("_ElapsedTimeRotAngle", props);
             _elapsedTimeDisplayLength = FindProperty("_ElapsedTimeDisplayLength", props);
             _elapsedTimeAlign = FindProperty("_ElapsedTimeAlign", props);
+            _enableALTimeOfDay = FindProperty("_EnableALTimeOfDay", props);
+            _alTimeOfDayColor = FindProperty("_ALTimeOfDayColor", props);
+            _alTimeOfDayOffsetScale = FindProperty("_ALTimeOfDayOffsetScale", props);
+            _alTimeOfDayRotAngle = FindProperty("_ALTimeOfDayRotAngle", props);
+            _alTimeOfDayDisplayLength = FindProperty("_ALTimeOfDayDisplayLength", props);
+            _alTimeOfDayAlign = FindProperty("_ALTimeOfDayAlign", props);
             _enableFramerate = FindProperty("_EnableFramerate", props);
             _framerateColor = FindProperty("_FramerateColor", props);
             _framerateOffsetScale = FindProperty("_FramerateOffsetScale", props);
@@ -105,6 +117,18 @@ namespace Koturn.lilToon
                         m_MaterialEditor.ShaderProperty(_elapsedTimeRotAngle, GetLoc("sElapsedTimeRotAngle"));
                         m_MaterialEditor.ShaderProperty(_elapsedTimeDisplayLength, GetLoc("sElapsedTimeDisplayLength"));
                         m_MaterialEditor.ShaderProperty(_elapsedTimeAlign, GetLoc("sElapsedTimeAlign"));
+                    }
+
+                    m_MaterialEditor.ShaderProperty(_enableALTimeOfDay, GetLoc("sEnableALTimeOfDay"));
+                    using (new EditorGUI.IndentLevelScope())
+                    using (new EditorGUILayout.VerticalScope(customBox))
+                    using (new EditorGUI.DisabledScope(_enableALTimeOfDay.floatValue < 0.5))
+                    {
+                        m_MaterialEditor.ShaderProperty(_alTimeOfDayColor, GetLoc("sALTimeOfDayColor"));
+                        m_MaterialEditor.ShaderProperty(_alTimeOfDayOffsetScale, GetLoc("sALTimeOfDayOffsetScale"));
+                        m_MaterialEditor.ShaderProperty(_alTimeOfDayRotAngle, GetLoc("sALTimeOfDayRotAngle"));
+                        m_MaterialEditor.ShaderProperty(_alTimeOfDayDisplayLength, GetLoc("sALTimeOfDayDisplayLength"));
+                        m_MaterialEditor.ShaderProperty(_alTimeOfDayAlign, GetLoc("sALTimeOfDayAlign"));
                     }
 
                     m_MaterialEditor.ShaderProperty(_enableFramerate, GetLoc("sEnableFramerate"));

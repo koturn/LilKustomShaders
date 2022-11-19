@@ -7,6 +7,12 @@ sElapsedTimeOffsetScale	Offsets and Scales of elapsed time	経過時間表示オ
 sElapsedTimeRotAngle	Rotate angle of elapsed time	経過時間表示回転角
 sElapsedTimeDisplayLength	Display length of elapsed time	経過時間表示数字個数
 sElapsedTimeAlign	Align of elapsed time	経過時間のアラインメント
+sEnableALTimeOfDay	Enable times of day of AudioLink	オーディオリンク時刻
+sALTimeOfDayColor	Color of times of day of AudioLink	オーディオリンク時刻表示色
+sALTimeOfDayOffsetScale	Offsets and Scales of times of day of AudioLink	オーディオリンク時刻表示オフセット・スケール
+sALTimeOfDayRotAngle	Rotate angle of times of day of AudioLink	オーディオリンク時刻表示回転角
+sALTimeOfDayDisplayLength	Display length of times of day of AudioLink	オーディオリンク時刻表示数字個数
+sALTimeOfDayAlign	Align of times of day of AudioLink	オーディオリンク時刻のアラインメント
 sEnableFramerate	Enable elapsed time	フレームレート表示
 sFramerateColor	Color of framerate	フレームレート色
 sFramerateOffsetScale	Offsets and Scales of framerate	フレームレート表示オフセット・スケール
