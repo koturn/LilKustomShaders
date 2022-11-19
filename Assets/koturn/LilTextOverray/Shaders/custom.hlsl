@@ -72,9 +72,9 @@
         const float2 uv2 = affineTransform(fd.uvMain, _ElapsedTimeOffsetScale.zw, _ElapsedTimeRotAngle, _ElapsedTimeOffsetScale.xy); \
         if (hmul(step(0.0, uv2) * step(uv2, 1.0)) != 0.0) { \
             const float3 hms = fmodglsl( \
-                float3(_Time.y / 3600.0, _Time.y / 60.0, _Time.y), \
+                LIL_TIME.xxx / float3(3600.0, 60.0, 1.0), \
                 float3(100.0, 60.0, 60.0)); \
-            const float hmsval = dot(hms, float3(10000.0, 100.0, 1.0)); \
+            const float hmsval = dot(floor(hms), float3(10000.0, 100.0, 1.0)); \
             fd.emissionColor += sampleSplite(hmsval, uv2, _ElapsedTimeDisplayLength, _ElapsedTimeAlign) * _ElapsedTimeColor.rgb; \
         } \
     } \
@@ -250,6 +250,18 @@ float hmul(float2 v)
  * @return mod value.
  */
 float fmodglsl(float x, float y)
+{
+    return x - y * floor(x / y);
+}
+
+
+/*!
+ * @brief fmod() implementation in GLSL.
+ * @param [in] x  First value.
+ * @param [in] y  Second value.
+ * @return mod value.
+ */
+float3 fmodglsl(float3 x, float3 y)
 {
     return x - y * floor(x / y);
 }
