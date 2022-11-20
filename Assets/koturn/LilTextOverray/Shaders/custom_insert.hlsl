@@ -174,6 +174,6 @@ float AudioLinkDecodeDataAsSeconds(uint2 indexloc)
  */
 float3 AudioLinkGetTimeOfDay()
 {
-    const float value = AudioLinkDecodeDataAsSeconds(kGeneralvuUnixSeconds);
+    const float value = AudioLinkDecodeDataAsSeconds(kGeneralvuUnixSeconds) + _ALTimeOfDayOffsetSeconds;
     return floor(fmodglsl(value.xxx / float3(3600.0, 60.0, 1.0), float3(24.0, 60.0, 60.0)));
 }

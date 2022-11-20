@@ -15,6 +15,7 @@ sALTimeOfDayScale	Scales of times of day of AudioLink	オーディオリンク�
 sALTimeOfDayRotAngle	Rotate angle of times of day of AudioLink	オーディオリンク時刻表示回転角
 sALTimeOfDayDisplayLength	Display length of times of day of AudioLink	オーディオリンク時刻表示数字個数
 sALTimeOfDayAlign	Align of times of day of AudioLink	オーディオリンク時刻のアラインメント
+sALTimeOfDayOffsetSeconds	Offset seconds of time of day of AudioLink	オーディオリンク時刻のオフセット秒数
 sEnableFramerate	Enable elapsed time	フレームレート表示
 sFramerateColor	Color of framerate	フレームレート色
 sFramerateOffset	Offsets of framerate	フレームレート表示オフセット
