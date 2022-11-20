@@ -11,6 +11,13 @@
     float _ElapsedTimeRotAngle; \
     float _ElapsedTimeDisplayLength; \
     float _ElapsedTimeAlign; \
+    bool _EnableALTimeOfDay; \
+    float4 _ALTimeOfDayColor; \
+    float4 _ALTimeOfDayOffsetScale; \
+    float _ALTimeOfDayRotAngle; \
+    float _ALTimeOfDayDisplayLength; \
+    float _ALTimeOfDayAlign; \
+    float _ALTimeOfDayOffsetSeconds; \
     bool _EnableFramerate; \
     float4 _FramerateColor; \
     float4 _FramerateOffsetScale; \
@@ -69,7 +76,7 @@
 //#define OVERRIDE_xx
 #define BEFORE_BLEND_EMISSION \
     if (isElapsedTimeEnabled()) { \
-        const float2 uv2 = affineTransform(fd.uvMain, _ElapsedTimeOffsetScale.zw, _ElapsedTimeRotAngle, _ElapsedTimeOffsetScale.xy); \
+        const float2 uv2 = invAffineTransform(fd.uvMain, _ElapsedTimeOffsetScale.zw, _ElapsedTimeRotAngle, _ElapsedTimeOffsetScale.xy); \
         if (hmul(step(0.0, uv2) * step(uv2, 1.0)) != 0.0) { \
             const float3 hms = fmodglsl( \
                 LIL_TIME.xxx / float3(3600.0, 60.0, 1.0), \
@@ -78,14 +85,21 @@
             fd.emissionColor += sampleSplite(hmsval, uv2, _ElapsedTimeDisplayLength, _ElapsedTimeAlign) * _ElapsedTimeColor.rgb; \
         } \
     } \
+    if (isALTimeOfDayEnabled() && AudioLinkIsAvailable()) { \
+        const float2 uv2 = invAffineTransform(fd.uvMain, _ALTimeOfDayOffsetScale.zw, _ALTimeOfDayRotAngle, _ALTimeOfDayOffsetScale.xy); \
+        if (hmul(step(0.0, uv2) * step(uv2, 1.0)) != 0.0) { \
+            const float hmsval = dot(AudioLinkGetTimeOfDay(), float3(10000.0, 100.0, 1.0)); \
+            fd.emissionColor += sampleSplite(hmsval, uv2, _ALTimeOfDayDisplayLength, _ALTimeOfDayAlign) * _ALTimeOfDayColor.rgb; \
+        } \
+    } \
     if (isFramerateEnabled()) { \
-        const float2 uv2 = affineTransform(fd.uvMain, _FramerateOffsetScale.zw, _FramerateRotAngle, _FramerateOffsetScale.xy); \
+        const float2 uv2 = invAffineTransform(fd.uvMain, _FramerateOffsetScale.zw, _FramerateRotAngle, _FramerateOffsetScale.xy); \
         if (hmul(step(0.0, uv2) * step(uv2, 1.0)) != 0.0) { \
             fd.emissionColor += sampleSplite(round(unity_DeltaTime.w), uv2, _FramerateDisplayLength, _FramerateAlign) * _FramerateColor.rgb; \
         } \
     } \
     if (isWorldPosEnabled()) { \
-        float2 uv2 = affineTransform(fd.uvMain, _WorldPosOffsetScale.zw, _WorldPosRotAngle, _WorldPosOffsetScale.xy); \
+        float2 uv2 = invAffineTransform(fd.uvMain, _WorldPosOffsetScale.zw, _WorldPosRotAngle, _WorldPosOffsetScale.xy); \
         if (hmul(step(0.0, uv2) * step(uv2, 1.0)) != 0.0) { \
             const float3 worldPos = unity_ObjectToWorld._m03_m13_m23; \
             const float pos = round(uv2.y < (1.0 / 3.0) ? worldPos.x : uv2.y < (2.0 / 3.0) ? worldPos.y : worldPos.z); \
@@ -307,16 +321,17 @@ float2 rotate2D(float2 v, float angle)
 
 
 /*!
- * @brief Affine trasform UV coordinate.
+ * @brief Inverse affine trasform UV coordinate.
  * @param [in] uv  Source UV.
  * @param [in] scale  Scaling factor.
  * @param [in] rotAngle  Rotation angle in degrees.
  * @param [in] translate Translate factor.
  * @return Affine transformed UV coordinate.
  */
-float2 affineTransform(float2 uv, float2 scale, float rotAngle, float2 translate)
+float2 invAffineTransform(float2 uv, float2 scale, float rotAngle, float2 translate)
 {
     static const float2 uvCenter = float2(0.5, 0.5);
 
-    return rotate2D((uv - uvCenter) * rcp(scale) + translate, radians(rotAngle)) + uvCenter;
+    // translate -> rotate -> scale
+    return rotate2D(uv - uvCenter + translate, radians(-rotAngle)) / scale + uvCenter;
 }

@@ -13,6 +13,14 @@
         [IntRange] _ElapsedTimeDisplayLength ("Display length of elapsed time", Range(2, 6)) = 6
         [Enum(Show Zeros, 0, Right, 1, Left, 2)] _ElapsedTimeAlign ("Align of elapsed time", Int) = 0
 
+        [Toggle(_ENABLE_AL_TIME_OF_DAY_ON)] _EnableALTimeOfDay ("Enable times of day of AudioLink", Int) = 0
+        [HDR] _ALTimeOfDayColor ("Color of times of day of AudioLink", Color) = (1.0, 0.0, 1.0, 1.0)
+        _ALTimeOfDayOffsetScale ("Offsets and Scales of times of day of AudioLink", Vector) = (0.0, 0.0, 1.0, 1.0)
+        _ALTimeOfDayRotAngle ("Rotate angle of times of day of AudioLink", Float) = 0.0
+        [IntRange] _ALTimeOfDayDisplayLength ("Display length of times of day of AudioLink", Range(2, 6)) = 6
+        [Enum(Show Zeros, 0, Right, 1, Left, 2)] _ALTimeOfDayAlign ("Align of times of day of AudioLink", Int) = 0
+        _ALTimeOfDayOffsetSeconds ("Offset seconds of time of day of AudioLink", Float) = 0.0
+
         [Toggle(_ENABLE_FRAMERATE_ON)] _EnableFramerate ("Enable elapsed time", Int) = 0
         [HDR] _FramerateColor ("Color of framerate", Color) = (1.0, 1.0, 0.0, 1.0)
         _FramerateOffsetScale ("Offsets and Scales of framerate", Vector) = (0.0, 0.0, 1.0, 1.0)
