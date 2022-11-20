@@ -61,31 +61,33 @@ namespace Koturn.lilToon
             // customToggleFont label for box
 
             isShowCustomProperties = Foldout("Custom Properties", "Custom Properties", isShowCustomProperties);
-            if(isShowCustomProperties)
+            if (!isShowCustomProperties)
             {
-                EditorGUILayout.BeginVertical(boxOuter);
-                EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
-                EditorGUILayout.BeginVertical(boxInnerHalf);
-
-                //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
-                m_MaterialEditor.ShaderProperty(_emissionWaveColor, GetLoc("sEmissionWaveColor"));
-                m_MaterialEditor.ShaderProperty(_emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
-                m_MaterialEditor.ShaderProperty(_emissionWaveTimeScale, GetLoc("sEmissionWaveTimeScale"));
-                m_MaterialEditor.ShaderProperty(_emissionWaveTimePhase, GetLoc("sEmissionWaveTimePhase"));
-                m_MaterialEditor.ShaderProperty(_emissionWaveParam, GetLoc("sEmissionWaveParam"));
-                m_MaterialEditor.ShaderProperty(_emissionPosMin, GetLoc("sEmissionPosMin"));
-                m_MaterialEditor.ShaderProperty(_emissionPosMax, GetLoc("sEmissionPosMax"));
-                m_MaterialEditor.ShaderProperty(_wavePosSpace, GetLoc("sWavePosSpace"));
-                m_MaterialEditor.ShaderProperty(_waveAxis, GetLoc("sWaveAxis"));
-                using (new EditorGUI.IndentLevelScope())
-                using (new EditorGUI.DisabledScope((int)_waveAxis.floatValue != 3))
-                {
-                    m_MaterialEditor.ShaderProperty(_waveAxisAngles, GetLoc("sWaveAxisAngles"));
-                }
-
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.EndVertical();
+                return;
             }
+
+            EditorGUILayout.BeginVertical(boxOuter);
+            EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
+            EditorGUILayout.BeginVertical(boxInnerHalf);
+
+            //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+            m_MaterialEditor.ShaderProperty(_emissionWaveColor, GetLoc("sEmissionWaveColor"));
+            m_MaterialEditor.ShaderProperty(_emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
+            m_MaterialEditor.ShaderProperty(_emissionWaveTimeScale, GetLoc("sEmissionWaveTimeScale"));
+            m_MaterialEditor.ShaderProperty(_emissionWaveTimePhase, GetLoc("sEmissionWaveTimePhase"));
+            m_MaterialEditor.ShaderProperty(_emissionWaveParam, GetLoc("sEmissionWaveParam"));
+            m_MaterialEditor.ShaderProperty(_emissionPosMin, GetLoc("sEmissionPosMin"));
+            m_MaterialEditor.ShaderProperty(_emissionPosMax, GetLoc("sEmissionPosMax"));
+            m_MaterialEditor.ShaderProperty(_wavePosSpace, GetLoc("sWavePosSpace"));
+            m_MaterialEditor.ShaderProperty(_waveAxis, GetLoc("sWaveAxis"));
+            using (new EditorGUI.IndentLevelScope())
+            using (new EditorGUI.DisabledScope((int)_waveAxis.floatValue != 3))
+            {
+                m_MaterialEditor.ShaderProperty(_waveAxisAngles, GetLoc("sWaveAxisAngles"));
+            }
+
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.EndVertical();
         }
 
         protected override void ReplaceToCustomShaders()

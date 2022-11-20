@@ -45,19 +45,21 @@ namespace Koturn.lilToon
             // customToggleFont label for box
 
             isShowCustomProperties = Foldout("Custom Properties", "Custom Properties", isShowCustomProperties);
-            if(isShowCustomProperties)
+            if (!isShowCustomProperties)
             {
-                EditorGUILayout.BeginVertical(boxOuter);
-                EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
-                EditorGUILayout.BeginVertical(boxInnerHalf);
-
-                //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
-                m_MaterialEditor.ShaderProperty(_hsMask, GetLoc("sHsMask"));
-                m_MaterialEditor.ShaderProperty(_hsTimeScale, GetLoc("sHsTimeScale"));
-
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.EndVertical();
+                return;
             }
+
+            EditorGUILayout.BeginVertical(boxOuter);
+            EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
+            EditorGUILayout.BeginVertical(boxInnerHalf);
+
+            //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+            m_MaterialEditor.ShaderProperty(_hsMask, GetLoc("sHsMask"));
+            m_MaterialEditor.ShaderProperty(_hsTimeScale, GetLoc("sHsTimeScale"));
+
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.EndVertical();
         }
 
         protected override void ReplaceToCustomShaders()
