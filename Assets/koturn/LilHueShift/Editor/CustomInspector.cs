@@ -50,16 +50,16 @@ namespace Koturn.lilToon
                 return;
             }
 
-            EditorGUILayout.BeginVertical(boxOuter);
-            EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
-            EditorGUILayout.BeginVertical(boxInnerHalf);
-
-            //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
-            m_MaterialEditor.ShaderProperty(_hsMask, GetLoc("sHsMask"));
-            m_MaterialEditor.ShaderProperty(_hsTimeScale, GetLoc("sHsTimeScale"));
-
-            EditorGUILayout.EndVertical();
-            EditorGUILayout.EndVertical();
+            using (new EditorGUILayout.VerticalScope(boxOuter))
+            {
+                EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
+                using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                {
+                    //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+                    m_MaterialEditor.ShaderProperty(_hsMask, GetLoc("sHsMask"));
+                    m_MaterialEditor.ShaderProperty(_hsTimeScale, GetLoc("sHsTimeScale"));
+                }
+            }
         }
 
         protected override void ReplaceToCustomShaders()
