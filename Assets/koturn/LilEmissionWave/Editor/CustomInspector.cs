@@ -9,16 +9,16 @@ namespace Koturn.lilToon
     {
         // Custom properties
         //MaterialProperty customVariable;
-        MaterialProperty _emissionWaveColor;
-        MaterialProperty _emissionWaveNoiseAmp;
-        MaterialProperty _emissionWaveTimeScale;
-        MaterialProperty _emissionWaveTimePhase;
-        MaterialProperty _emissionWaveParam;
-        MaterialProperty _emissionPosMin;
-        MaterialProperty _emissionPosMax;
-        MaterialProperty _wavePosSpace;
-        MaterialProperty _waveAxis;
-        MaterialProperty _waveAxisAngles;
+        private MaterialProperty _emissionWaveColor;
+        private MaterialProperty _emissionWaveNoiseAmp;
+        private MaterialProperty _emissionWaveTimeScale;
+        private MaterialProperty _emissionWaveTimePhase;
+        private MaterialProperty _emissionWaveParam;
+        private MaterialProperty _emissionPosMin;
+        private MaterialProperty _emissionPosMax;
+        private MaterialProperty _wavePosSpace;
+        private MaterialProperty _waveAxis;
+        private MaterialProperty _waveAxisAngles;
 
         private static bool isShowCustomProperties;
         private const string shaderName = "koturn/LilEmissionWave";

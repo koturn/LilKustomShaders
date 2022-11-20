@@ -9,11 +9,8 @@ namespace Koturn.lilToon
     {
         // Custom properties
         //MaterialProperty customVariable;
-        MaterialProperty hsMask;
-        MaterialProperty hsTimeScale;
-
-        MaterialProperty refProbeMask;
-        MaterialProperty refProbeBlendCoeff;
+        private MaterialProperty refProbeMask;
+        private MaterialProperty refProbeBlendCoeff;
 
         private static bool isShowCustomProperties;
         private const string shaderName = "koturn/LilRefProbe";

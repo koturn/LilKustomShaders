@@ -9,8 +9,8 @@ namespace Koturn.lilToon
     {
         // Custom properties
         //MaterialProperty customVariable;
-        MaterialProperty _hsMask;
-        MaterialProperty _hsTimeScale;
+        private MaterialProperty _hsMask;
+        private MaterialProperty _hsTimeScale;
 
         private static bool isShowCustomProperties;
         private const string shaderName = "koturn/LilHueShift";
