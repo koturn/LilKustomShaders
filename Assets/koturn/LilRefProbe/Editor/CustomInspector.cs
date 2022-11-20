@@ -9,8 +9,8 @@ namespace Koturn.lilToon
     {
         // Custom properties
         //MaterialProperty customVariable;
-        private MaterialProperty refProbeMask;
-        private MaterialProperty refProbeBlendCoeff;
+        private MaterialProperty _refProbeMask;
+        private MaterialProperty _refProbeBlendCoeff;
 
         private static bool isShowCustomProperties;
         private const string shaderName = "koturn/LilRefProbe";
@@ -30,8 +30,8 @@ namespace Koturn.lilToon
             LoadCustomLanguage("4413d87c05000644ca2db471a92eac03");
 
             //customVariable = FindProperty("_CustomVariable", props);
-            refProbeMask = FindProperty("_RefProbeMask", props);
-            refProbeBlendCoeff = FindProperty("_RefProbeBlendCoeff", props);
+            _refProbeMask = FindProperty("_RefProbeMask", props);
+            _refProbeBlendCoeff = FindProperty("_RefProbeBlendCoeff", props);
         }
 
         protected override void DrawCustomProperties(Material material)
@@ -52,8 +52,8 @@ namespace Koturn.lilToon
                 EditorGUILayout.BeginVertical(boxInnerHalf);
 
                 //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
-                m_MaterialEditor.ShaderProperty(refProbeMask, GetLoc("sRefProbeMask"));
-                m_MaterialEditor.ShaderProperty(refProbeBlendCoeff, GetLoc("sRefProbeBlendCoeff"));
+                m_MaterialEditor.ShaderProperty(_refProbeMask, GetLoc("sRefProbeMask"));
+                m_MaterialEditor.ShaderProperty(_refProbeBlendCoeff, GetLoc("sRefProbeBlendCoeff"));
 
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndVertical();
