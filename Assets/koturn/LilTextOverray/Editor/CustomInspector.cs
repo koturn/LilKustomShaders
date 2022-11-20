@@ -113,7 +113,7 @@ namespace Koturn.lilToon
                     using (new EditorGUI.DisabledScope(_enableElapsedTime.floatValue < 0.5))
                     {
                         m_MaterialEditor.ShaderProperty(_elapsedTimeColor, GetLoc("sElapsedTimeColor"));
-                        m_MaterialEditor.ShaderProperty(_elapsedTimeOffsetScale, GetLoc("sElapsedTimeOffsetScale"));
+                        DrawVector4AsOffsetScale2x2(_elapsedTimeOffsetScale, GetLoc("sElapsedTimeOffset"), GetLoc("sElapsedTimeScale"));
                         m_MaterialEditor.ShaderProperty(_elapsedTimeRotAngle, GetLoc("sElapsedTimeRotAngle"));
                         m_MaterialEditor.ShaderProperty(_elapsedTimeDisplayLength, GetLoc("sElapsedTimeDisplayLength"));
                         m_MaterialEditor.ShaderProperty(_elapsedTimeAlign, GetLoc("sElapsedTimeAlign"));
@@ -125,7 +125,7 @@ namespace Koturn.lilToon
                     using (new EditorGUI.DisabledScope(_enableALTimeOfDay.floatValue < 0.5))
                     {
                         m_MaterialEditor.ShaderProperty(_alTimeOfDayColor, GetLoc("sALTimeOfDayColor"));
-                        m_MaterialEditor.ShaderProperty(_alTimeOfDayOffsetScale, GetLoc("sALTimeOfDayOffsetScale"));
+                        DrawVector4AsOffsetScale2x2(_alTimeOfDayOffsetScale, GetLoc("sALTimeOfDayOffset"), GetLoc("sALTimeOfDayScale"));
                         m_MaterialEditor.ShaderProperty(_alTimeOfDayRotAngle, GetLoc("sALTimeOfDayRotAngle"));
                         m_MaterialEditor.ShaderProperty(_alTimeOfDayDisplayLength, GetLoc("sALTimeOfDayDisplayLength"));
                         m_MaterialEditor.ShaderProperty(_alTimeOfDayAlign, GetLoc("sALTimeOfDayAlign"));
@@ -137,7 +137,7 @@ namespace Koturn.lilToon
                     using (new EditorGUI.DisabledScope(_enableFramerate.floatValue < 0.5))
                     {
                         m_MaterialEditor.ShaderProperty(_framerateColor, GetLoc("sFramerateColor"));
-                        m_MaterialEditor.ShaderProperty(_framerateOffsetScale, GetLoc("sFramerateOffsetScale"));
+                        DrawVector4AsOffsetScale2x2(_framerateOffsetScale, GetLoc("sFramerateOffset"), GetLoc("sFramerateScale"));
                         m_MaterialEditor.ShaderProperty(_framerateRotAngle, GetLoc("sFramerateRotAngle"));
                         m_MaterialEditor.ShaderProperty(_framerateDisplayLength, GetLoc("sFramerateDisplayLength"));
                         m_MaterialEditor.ShaderProperty(_framerateAlign, GetLoc("sFramerateAlign"));
@@ -151,7 +151,7 @@ namespace Koturn.lilToon
                         m_MaterialEditor.ShaderProperty(_worldPosColorX, GetLoc("sWorldPosColorX"));
                         m_MaterialEditor.ShaderProperty(_worldPosColorY, GetLoc("sWorldPosColorY"));
                         m_MaterialEditor.ShaderProperty(_worldPosColorZ, GetLoc("sWorldPosColorZ"));
-                        m_MaterialEditor.ShaderProperty(_worldPosOffsetScale, GetLoc("sWorldPosOffsetScale"));
+                        DrawVector4AsOffsetScale2x2(_worldPosOffsetScale, GetLoc("sWorldPosOffset"), GetLoc("sWorldPosScale"));
                         m_MaterialEditor.ShaderProperty(_worldPosRotAngle, GetLoc("sWorldPosRotAngle"));
                         m_MaterialEditor.ShaderProperty(_worldPosDisplayLength, GetLoc("sWorldPosDisplayLength"));
                         m_MaterialEditor.ShaderProperty(_worldPosAlign, GetLoc("sWorldPosAlign"));
@@ -223,6 +223,36 @@ namespace Koturn.lilToon
             ltsmref     = Shader.Find("Hidden/" + shaderName + "/MultiRefraction");
             ltsmfur     = Shader.Find("Hidden/" + shaderName + "/MultiFur");
             ltsmgem     = Shader.Find("Hidden/" + shaderName + "/MultiGem");
+        }
+
+        private static void DrawVector4AsOffsetScale2x2(MaterialProperty prop, string offsetLabel, string scaleLabel)
+        {
+            using (var ccScope = new EditorGUI.ChangeCheckScope())
+            {
+                var position = EditorGUILayout.GetControlRect(
+                    true,
+                    MaterialEditor.GetDefaultPropertyHeight(prop) / 2.0f,
+                    EditorStyles.layerMaskField);
+                EditorGUI.showMixedValue = prop.hasMixedValue;
+                var vec = EditorGUI.Vector2Field(position, offsetLabel, prop.vectorValue);
+                if (ccScope.changed)
+                {
+                    prop.vectorValue = new Vector4(vec.x, vec.y, prop.vectorValue.z, prop.vectorValue.w);
+                }
+            }
+            using (var ccScope = new EditorGUI.ChangeCheckScope())
+            {
+                var position = EditorGUILayout.GetControlRect(
+                    true,
+                    MaterialEditor.GetDefaultPropertyHeight(prop) / 2.0f,
+                    EditorStyles.layerMaskField);
+                EditorGUI.showMixedValue = prop.hasMixedValue;
+                var vec = EditorGUI.Vector2Field(position, scaleLabel, new Vector2(prop.vectorValue.z, prop.vectorValue.w));
+                if (ccScope.changed)
+                {
+                    prop.vectorValue = new Vector4(prop.vectorValue.x, prop.vectorValue.y, vec.x, vec.y);
+                }
+            }
         }
 
         // You can create a menu like this
