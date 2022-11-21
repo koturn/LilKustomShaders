@@ -75,6 +75,7 @@
 //#define BEFORE_xx
 //#define OVERRIDE_xx
 #define BEFORE_BLEND_EMISSION \
+    UNITY_BRANCH \
     if (isElapsedTimeEnabled()) { \
         const float2 uv2 = invAffineTransform(fd.uvMain, _ElapsedTimeOffsetScale.zw, _ElapsedTimeRotAngle, _ElapsedTimeOffsetScale.xy); \
         if (hmul(step(0.0, uv2) * step(uv2, 1.0)) != 0.0) { \
@@ -85,19 +86,24 @@
             fd.emissionColor += sampleSplite(hmsval, uv2, _ElapsedTimeDisplayLength, _ElapsedTimeAlign) * _ElapsedTimeColor.rgb; \
         } \
     } \
-    if (isALTimeOfDayEnabled() && AudioLinkIsAvailable()) { \
-        const float2 uv2 = invAffineTransform(fd.uvMain, _ALTimeOfDayOffsetScale.zw, _ALTimeOfDayRotAngle, _ALTimeOfDayOffsetScale.xy); \
-        if (hmul(step(0.0, uv2) * step(uv2, 1.0)) != 0.0) { \
-            const float hmsval = dot(AudioLinkGetTimeOfDay(), float3(10000.0, 100.0, 1.0)); \
-            fd.emissionColor += sampleSplite(hmsval, uv2, _ALTimeOfDayDisplayLength, _ALTimeOfDayAlign) * _ALTimeOfDayColor.rgb; \
+    UNITY_BRANCH \
+    if (isALTimeOfDayEnabled()) { \
+        if (AudioLinkIsAvailable()) { \
+            const float2 uv2 = invAffineTransform(fd.uvMain, _ALTimeOfDayOffsetScale.zw, _ALTimeOfDayRotAngle, _ALTimeOfDayOffsetScale.xy); \
+            if (hmul(step(0.0, uv2) * step(uv2, 1.0)) != 0.0) { \
+                const float hmsval = dot(AudioLinkGetTimeOfDay(), float3(10000.0, 100.0, 1.0)); \
+                fd.emissionColor += sampleSplite(hmsval, uv2, _ALTimeOfDayDisplayLength, _ALTimeOfDayAlign) * _ALTimeOfDayColor.rgb; \
+            } \
         } \
     } \
+    UNITY_BRANCH \
     if (isFramerateEnabled()) { \
         const float2 uv2 = invAffineTransform(fd.uvMain, _FramerateOffsetScale.zw, _FramerateRotAngle, _FramerateOffsetScale.xy); \
         if (hmul(step(0.0, uv2) * step(uv2, 1.0)) != 0.0) { \
             fd.emissionColor += sampleSplite(round(unity_DeltaTime.w), uv2, _FramerateDisplayLength, _FramerateAlign) * _FramerateColor.rgb; \
         } \
     } \
+    UNITY_BRANCH \
     if (isWorldPosEnabled()) { \
         float2 uv2 = invAffineTransform(fd.uvMain, _WorldPosOffsetScale.zw, _WorldPosRotAngle, _WorldPosOffsetScale.xy); \
         if (hmul(step(0.0, uv2) * step(uv2, 1.0)) != 0.0) { \
