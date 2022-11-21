@@ -11,22 +11,25 @@
 #    define _EnableWorldPos true
 #endif  // _ENABLE_WORLD_POS_ON
 
-#ifdef SHADER_TARGET_SURFACE_ANALYSIS
-#    define AUDIOLINK_STANDARD_INDEXING
-#endif  // SHADER_TARGET_SURFACE_ANALYSIS
-
 // Mechanism to index into texture.
-#ifdef AUDIOLINK_STANDARD_INDEXING
+#ifdef LIL_LWTEX
 #    define AudioLinkData(xycoord) tex2Dlod(_AudioTexture, float4(uint2(xycoord) * _AudioTexture_TexelSize.xy, 0, 0))
 #else
 #    define AudioLinkData(xycoord) _AudioTexture[uint2(xycoord)]
-#endif  // AUDIOLINK_STANDARD_INDEXING
+#endif  // LIL_LWTEX
 
 
 //! Number of digits in splite sheet texture.
 static const float kColumns = 10.0;
 //! Uv index of Unix seconds in audio texture.
 static const uint2 kGeneralvuUnixSeconds = uint2(6, 23);
+
+
+// _AudioTexture is declared in lil_common_input.hlsl.
+#ifndef LIL_FEATURE_AUDIOLINK
+TEXTURE2D_FLOAT(_AudioTexture);
+float4 _AudioTexture_TexelSize;
+#endif  // LIL_FEATURE_AUDIOLINK
 
 
 /*!
@@ -129,13 +132,13 @@ float3 sampleSpliteSigned(float val, float2 uv, float displayLength, float align
  */
 bool AudioLinkIsAvailable()
 {
-#ifdef AUDIOLINK_STANDARD_INDEXING
+#ifdef LIL_LWTEX
     return _AudioTexture_TexelSize.z > 16;
 #else
     int width, height;
     _AudioTexture.GetDimensions(/* out */ width, /* out */ height);
     return width > 16;
-#endif  // AUDIOLINK_STANDARD_INDEXING
+#endif  // LIL_LWTEX
 }
 
 
