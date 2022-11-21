@@ -1,15 +1,25 @@
-#ifdef _ENABLE_ELAPSED_TIME_ON
-#    define _EnableElapsedTime true
-#endif  // _ENABLE_ELAPSED_TIME_ON
-#ifdef _ENABLE_AL_TIME_OF_DAY_ON
-#    define _EnableALTimeOfDay true
-#endif  // _ENABLE_ELAPSED_TIME_ON
-#ifdef _ENABLE_FRAMERATE_ON
-#    define _EnableFramerate true
-#endif  // _ENABLE_FRAMERATE_ON
-#ifdef _ENABLE_WORLD_POS_ON
-#    define _EnableWorldPos true
-#endif  // _ENABLE_WORLD_POS_ON
+#ifdef LIL_MULTI
+#    ifdef _ENABLE_ELAPSED_TIME_ON
+#        define _EnableElapsedTime true
+#    else
+#        define _EnableElapsedTime false
+#    endif  // _ENABLE_ELAPSED_TIME_ON
+#    ifdef _ENABLE_AL_TIME_OF_DAY_ON
+#        define _EnableALTimeOfDay true
+#    else
+#        define _EnableALTimeOfDay false
+#    endif  // _ENABLE_ELAPSED_TIME_ON
+#    ifdef _ENABLE_FRAMERATE_ON
+#        define _EnableFramerate true
+#    else
+#        define _EnableFramerate false
+#    endif  // _ENABLE_FRAMERATE_ON
+#    ifdef _ENABLE_WORLD_POS_ON
+#        define _EnableWorldPos true
+#    else
+#        define _EnableWorldPos false
+#    endif  // _ENABLE_WORLD_POS_ON
+#endif  // LIL_MULTI
 
 // Mechanism to index into texture.
 #ifdef LIL_LWTEX
