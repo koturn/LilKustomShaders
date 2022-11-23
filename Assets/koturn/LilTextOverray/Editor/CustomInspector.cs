@@ -106,58 +106,133 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
+                    var shaderNameParts = material.shader.name.Split('/');
+                    var isMultiShader = shaderNameParts[shaderNameParts.Length - 1].Contains("Multi");
+
                     //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
                     m_MaterialEditor.ShaderProperty(_spriteTex, GetLoc("sSpriteTex"));
 
-                    m_MaterialEditor.ShaderProperty(_enableElapsedTime, GetLoc("sEnableElapsedTime"));
-                    using (new EditorGUI.IndentLevelScope())
-                    using (new EditorGUILayout.VerticalScope(customBox))
-                    using (new EditorGUI.DisabledScope(_enableElapsedTime.floatValue < 0.5))
+                    using (new EditorGUILayout.VerticalScope(boxOuter))
+                    using (var ccScope = new EditorGUI.ChangeCheckScope())
                     {
-                        m_MaterialEditor.ShaderProperty(_elapsedTimeColor, GetLoc("sElapsedTimeColor"));
-                        DrawVector4AsOffsetScale2x2(_elapsedTimeOffsetScale, GetLoc("sElapsedTimeOffset"), GetLoc("sElapsedTimeScale"));
-                        m_MaterialEditor.ShaderProperty(_elapsedTimeRotAngle, GetLoc("sElapsedTimeRotAngle"));
-                        m_MaterialEditor.ShaderProperty(_elapsedTimeDisplayLength, GetLoc("sElapsedTimeDisplayLength"));
-                        m_MaterialEditor.ShaderProperty(_elapsedTimeAlign, GetLoc("sElapsedTimeAlign"));
+                        var isChecked = EditorGUI.ToggleLeft(
+                            EditorGUILayout.GetControlRect(),
+                            GetLoc("sEnableElapsedTime"),
+                            ToBool(_enableElapsedTime.floatValue),
+                            customToggleFont);
+                        if (ccScope.changed)
+                        {
+                            m_MaterialEditor.RegisterPropertyChangeUndo(_enableElapsedTime.name);
+                            _enableElapsedTime.floatValue = ToFloat(isChecked);
+                            if (isMultiShader)
+                            {
+                                SetToggleKeywordByName(_enableElapsedTime);
+                            }
+                        }
+                        if (isChecked)
+                        {
+                            using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                            {
+                                m_MaterialEditor.ShaderProperty(_elapsedTimeColor, GetLoc("sElapsedTimeColor"));
+                                DrawVector4AsOffsetScale2x2(_elapsedTimeOffsetScale, GetLoc("sElapsedTimeOffset"), GetLoc("sElapsedTimeScale"));
+                                m_MaterialEditor.ShaderProperty(_elapsedTimeRotAngle, GetLoc("sElapsedTimeRotAngle"));
+                                m_MaterialEditor.ShaderProperty(_elapsedTimeDisplayLength, GetLoc("sElapsedTimeDisplayLength"));
+                                m_MaterialEditor.ShaderProperty(_elapsedTimeAlign, GetLoc("sElapsedTimeAlign"));
+                            }
+                        }
                     }
 
-                    m_MaterialEditor.ShaderProperty(_enableALTimeOfDay, GetLoc("sEnableALTimeOfDay"));
-                    using (new EditorGUI.IndentLevelScope())
-                    using (new EditorGUILayout.VerticalScope(customBox))
-                    using (new EditorGUI.DisabledScope(_enableALTimeOfDay.floatValue < 0.5))
+                    using (new EditorGUILayout.VerticalScope(boxOuter))
+                    using (var ccScope = new EditorGUI.ChangeCheckScope())
                     {
-                        m_MaterialEditor.ShaderProperty(_alTimeOfDayColor, GetLoc("sALTimeOfDayColor"));
-                        DrawVector4AsOffsetScale2x2(_alTimeOfDayOffsetScale, GetLoc("sALTimeOfDayOffset"), GetLoc("sALTimeOfDayScale"));
-                        m_MaterialEditor.ShaderProperty(_alTimeOfDayRotAngle, GetLoc("sALTimeOfDayRotAngle"));
-                        m_MaterialEditor.ShaderProperty(_alTimeOfDayDisplayLength, GetLoc("sALTimeOfDayDisplayLength"));
-                        m_MaterialEditor.ShaderProperty(_alTimeOfDayAlign, GetLoc("sALTimeOfDayAlign"));
-                        m_MaterialEditor.ShaderProperty(_alTimeOfDayOffsetSeconds, GetLoc("sALTimeOfDayOffsetSeconds"));
+                        var isChecked = EditorGUI.ToggleLeft(
+                            EditorGUILayout.GetControlRect(),
+                            GetLoc("sEnableALTimeOfDay"),
+                            ToBool(_enableALTimeOfDay.floatValue),
+                            customToggleFont);
+                        if (ccScope.changed)
+                        {
+                            m_MaterialEditor.RegisterPropertyChangeUndo(_enableALTimeOfDay.name);
+                            _enableALTimeOfDay.floatValue = ToFloat(isChecked);
+                            if (isMultiShader)
+                            {
+                                SetToggleKeywordByName(_enableALTimeOfDay);
+                            }
+                        }
+                        if (isChecked)
+                        {
+                            using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                            {
+                                m_MaterialEditor.ShaderProperty(_alTimeOfDayColor, GetLoc("sALTimeOfDayColor"));
+                                DrawVector4AsOffsetScale2x2(_alTimeOfDayOffsetScale, GetLoc("sALTimeOfDayOffset"), GetLoc("sALTimeOfDayScale"));
+                                m_MaterialEditor.ShaderProperty(_alTimeOfDayRotAngle, GetLoc("sALTimeOfDayRotAngle"));
+                                m_MaterialEditor.ShaderProperty(_alTimeOfDayDisplayLength, GetLoc("sALTimeOfDayDisplayLength"));
+                                m_MaterialEditor.ShaderProperty(_alTimeOfDayAlign, GetLoc("sALTimeOfDayAlign"));
+                                m_MaterialEditor.ShaderProperty(_alTimeOfDayOffsetSeconds, GetLoc("sALTimeOfDayOffsetSeconds"));
+                            }
+                        }
                     }
 
-                    m_MaterialEditor.ShaderProperty(_enableFramerate, GetLoc("sEnableFramerate"));
-                    using (new EditorGUI.IndentLevelScope())
-                    using (new EditorGUILayout.VerticalScope(customBox))
-                    using (new EditorGUI.DisabledScope(_enableFramerate.floatValue < 0.5))
+                    using (new EditorGUILayout.VerticalScope(boxOuter))
+                    using (var ccScope = new EditorGUI.ChangeCheckScope())
                     {
-                        m_MaterialEditor.ShaderProperty(_framerateColor, GetLoc("sFramerateColor"));
-                        DrawVector4AsOffsetScale2x2(_framerateOffsetScale, GetLoc("sFramerateOffset"), GetLoc("sFramerateScale"));
-                        m_MaterialEditor.ShaderProperty(_framerateRotAngle, GetLoc("sFramerateRotAngle"));
-                        m_MaterialEditor.ShaderProperty(_framerateDisplayLength, GetLoc("sFramerateDisplayLength"));
-                        m_MaterialEditor.ShaderProperty(_framerateAlign, GetLoc("sFramerateAlign"));
+                        var isChecked = EditorGUI.ToggleLeft(
+                            EditorGUILayout.GetControlRect(),
+                            GetLoc("sEnableFramerate"),
+                            ToBool(_enableFramerate.floatValue),
+                            customToggleFont);
+                        if (ccScope.changed)
+                        {
+                            m_MaterialEditor.RegisterPropertyChangeUndo(_enableFramerate.name);
+                            _enableFramerate.floatValue = ToFloat(isChecked);
+                            if (isMultiShader)
+                            {
+                                SetToggleKeywordByName(_enableFramerate);
+                            }
+                        }
+                        if (isChecked)
+                        {
+                            using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                            {
+                                m_MaterialEditor.ShaderProperty(_framerateColor, GetLoc("sFramerateColor"));
+                                DrawVector4AsOffsetScale2x2(_framerateOffsetScale, GetLoc("sFramerateOffset"), GetLoc("sFramerateScale"));
+                                m_MaterialEditor.ShaderProperty(_framerateRotAngle, GetLoc("sFramerateRotAngle"));
+                                m_MaterialEditor.ShaderProperty(_framerateDisplayLength, GetLoc("sFramerateDisplayLength"));
+                                m_MaterialEditor.ShaderProperty(_framerateAlign, GetLoc("sFramerateAlign"));
+                            }
+                        }
                     }
 
-                    m_MaterialEditor.ShaderProperty(_enableWorldPos, GetLoc("sEnableWorldPos"));
-                    using (new EditorGUI.IndentLevelScope())
-                    using (new EditorGUILayout.VerticalScope(customBox))
-                    using (new EditorGUI.DisabledScope(_enableWorldPos.floatValue < 0.5))
+                    using (new EditorGUILayout.VerticalScope(boxOuter))
+                    using (var ccScope = new EditorGUI.ChangeCheckScope())
                     {
-                        m_MaterialEditor.ShaderProperty(_worldPosColorX, GetLoc("sWorldPosColorX"));
-                        m_MaterialEditor.ShaderProperty(_worldPosColorY, GetLoc("sWorldPosColorY"));
-                        m_MaterialEditor.ShaderProperty(_worldPosColorZ, GetLoc("sWorldPosColorZ"));
-                        DrawVector4AsOffsetScale2x2(_worldPosOffsetScale, GetLoc("sWorldPosOffset"), GetLoc("sWorldPosScale"));
-                        m_MaterialEditor.ShaderProperty(_worldPosRotAngle, GetLoc("sWorldPosRotAngle"));
-                        m_MaterialEditor.ShaderProperty(_worldPosDisplayLength, GetLoc("sWorldPosDisplayLength"));
-                        m_MaterialEditor.ShaderProperty(_worldPosAlign, GetLoc("sWorldPosAlign"));
+                        var isChecked = EditorGUI.ToggleLeft(
+                            EditorGUILayout.GetControlRect(),
+                            GetLoc("sEnableWorldPos"),
+                            ToBool(_enableWorldPos.floatValue),
+                            customToggleFont);
+                        if (ccScope.changed)
+                        {
+                            m_MaterialEditor.RegisterPropertyChangeUndo(_enableWorldPos.name);
+                            _enableWorldPos.floatValue = ToFloat(isChecked);
+                            if (isMultiShader)
+                            {
+                                SetToggleKeywordByName(_enableWorldPos);
+                            }
+                        }
+                        if (isChecked)
+                        {
+                            using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                            {
+                                m_MaterialEditor.ShaderProperty(_worldPosColorX, GetLoc("sWorldPosColorX"));
+                                m_MaterialEditor.ShaderProperty(_worldPosColorY, GetLoc("sWorldPosColorY"));
+                                m_MaterialEditor.ShaderProperty(_worldPosColorZ, GetLoc("sWorldPosColorZ"));
+                                DrawVector4AsOffsetScale2x2(_worldPosOffsetScale, GetLoc("sWorldPosOffset"), GetLoc("sWorldPosScale"));
+                                m_MaterialEditor.ShaderProperty(_worldPosRotAngle, GetLoc("sWorldPosRotAngle"));
+                                m_MaterialEditor.ShaderProperty(_worldPosDisplayLength, GetLoc("sWorldPosDisplayLength"));
+                                m_MaterialEditor.ShaderProperty(_worldPosAlign, GetLoc("sWorldPosAlign"));
+                            }
+                        }
                     }
                 }
             }
@@ -238,6 +313,7 @@ namespace Koturn.lilToon
                     EditorStyles.layerMaskField);
                 EditorGUI.showMixedValue = prop.hasMixedValue;
                 var vec = EditorGUI.Vector2Field(position, offsetLabel, prop.vectorValue);
+                EditorGUI.showMixedValue = false;
                 if (ccScope.changed)
                 {
                     prop.vectorValue = new Vector4(vec.x, vec.y, prop.vectorValue.z, prop.vectorValue.w);
@@ -251,11 +327,43 @@ namespace Koturn.lilToon
                     EditorStyles.layerMaskField);
                 EditorGUI.showMixedValue = prop.hasMixedValue;
                 var vec = EditorGUI.Vector2Field(position, scaleLabel, new Vector2(prop.vectorValue.z, prop.vectorValue.w));
+                EditorGUI.showMixedValue = false;
                 if (ccScope.changed)
                 {
                     prop.vectorValue = new Vector4(prop.vectorValue.x, prop.vectorValue.y, vec.x, vec.y);
                 }
             }
+        }
+
+        private static void SetToggleKeywordByName(MaterialProperty prop)
+        {
+            SetToggleKeywordByName(prop, prop.floatValue >= 0.5f);
+        }
+
+        private static void SetToggleKeywordByName(MaterialProperty prop, bool isEnabled)
+        {
+            string keyword = prop.name.ToUpperInvariant() + "_ON";
+            foreach (Material material in prop.targets)
+            {
+                if (isEnabled)
+                {
+                    material.EnableKeyword(keyword);
+                }
+                else
+                {
+                    material.DisableKeyword(keyword);
+                }
+            }
+        }
+
+        private static bool ToBool(float floatValue)
+        {
+            return floatValue >= 0.5;
+        }
+
+        private static float ToFloat(bool boolValue)
+        {
+            return boolValue ? 1.0f : 0.0f;
         }
 
         // You can create a menu like this

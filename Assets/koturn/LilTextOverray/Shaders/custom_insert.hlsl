@@ -1,24 +1,24 @@
 #ifdef LIL_MULTI
-#    ifdef _ENABLE_ELAPSED_TIME_ON
+#    ifdef _ENABLEELAPSEDTIME_ON
 #        define _EnableElapsedTime true
 #    else
 #        define _EnableElapsedTime false
-#    endif  // _ENABLE_ELAPSED_TIME_ON
-#    ifdef _ENABLE_AL_TIME_OF_DAY_ON
+#    endif  // _ENABLEELAPSEDTIME_ON
+#    ifdef _ENABLEALTIMEOFDAY_ON
 #        define _EnableALTimeOfDay true
 #    else
 #        define _EnableALTimeOfDay false
-#    endif  // _ENABLE_ELAPSED_TIME_ON
-#    ifdef _ENABLE_FRAMERATE_ON
+#    endif  // _ENABLEALTIMEOFDAY_ON
+#    ifdef _ENABLEFRAMERATE_ON
 #        define _EnableFramerate true
 #    else
 #        define _EnableFramerate false
-#    endif  // _ENABLE_FRAMERATE_ON
-#    ifdef _ENABLE_WORLD_POS_ON
+#    endif  // _ENABLEFRAMERATE_ON
+#    ifdef _ENABLEWORLDPOS_ON
 #        define _EnableWorldPos true
 #    else
 #        define _EnableWorldPos false
-#    endif  // _ENABLE_WORLD_POS_ON
+#    endif  // _ENABLEWORLDPOS_ON
 #endif  // LIL_MULTI
 
 // Mechanism to index into texture.
