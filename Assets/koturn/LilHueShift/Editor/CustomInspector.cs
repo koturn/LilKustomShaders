@@ -52,7 +52,7 @@ namespace Koturn.lilToon
 
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
-                EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
+                EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
