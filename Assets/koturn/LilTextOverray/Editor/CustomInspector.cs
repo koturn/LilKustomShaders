@@ -39,7 +39,7 @@ namespace Koturn.lilToon
         private MaterialProperty _worldPosAlign;
 
         private static bool isShowCustomProperties;
-        private const string shaderName = "LilTextOverray";
+        private const string shaderName = "koturn/LilTextOverray";
 
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
         {
