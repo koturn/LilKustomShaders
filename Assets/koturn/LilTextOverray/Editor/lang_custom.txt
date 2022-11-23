@@ -1,34 +1,34 @@
 Language	English	Japanese
 sCustomShaderTitle	Text Overray	テキストオーバーレイ
 sSpriteTex	Sprite Sheet Texture	スプライトシート
-sEnableElapsedTime	Enable elapsed time	経過時間表示
-sElapsedTimeColor	Color of elapsed time	経過時間表示色
-sElapsedTimeOffset	Offsets elapsed time	経過時間表示オフセット
-sElapsedTimeScale	Scales of elapsed time	経過時間表示スケール
-sElapsedTimeRotAngle	Rotate angle of elapsed time	経過時間表示回転角
-sElapsedTimeDisplayLength	Display length of elapsed time	経過時間表示数字個数
-sElapsedTimeAlign	Align of elapsed time	経過時間のアラインメント
-sEnableALTimeOfDay	Enable times of day of AudioLink	オーディオリンク時刻
-sALTimeOfDayColor	Color of times of day of AudioLink	オーディオリンク時刻表示色
-sALTimeOfDayOffset	Offsets of times of day of AudioLink	オーディオリンク時刻表示オフセット
-sALTimeOfDayScale	Scales of times of day of AudioLink	オーディオリンク時刻表示スケール
-sALTimeOfDayRotAngle	Rotate angle of times of day of AudioLink	オーディオリンク時刻表示回転角
-sALTimeOfDayDisplayLength	Display length of times of day of AudioLink	オーディオリンク時刻表示数字個数
-sALTimeOfDayAlign	Align of times of day of AudioLink	オーディオリンク時刻のアラインメント
-sALTimeOfDayOffsetSeconds	Offset seconds of time of day of AudioLink	オーディオリンク時刻のオフセット秒数
-sEnableFramerate	Enable elapsed time	フレームレート表示
-sFramerateColor	Color of framerate	フレームレート色
-sFramerateOffset	Offsets of framerate	フレームレート表示オフセット
-sFramerateScale	Scales of framerate	フレームレート表示スケール
-sFramerateRotAngle	Rotate angle of framerate	フレームレート表示回転角
-sFramerateDisplayLength	Display length of framerate	フレームレート数字個数
-sFramerateAlign	Align of framerate	フレームレートのアラインメント
-sEnableWorldPos	Enable world position	ワールド座標表示
-sWorldPosColorX	Color of world position of X	ワールドX座標色
-sWorldPosColorY	Color of world position of Y	ワールドY座標色
-sWorldPosColorZ	Color of world position of Z	ワールドZ座標色
-sWorldPosOffset	Offsets of world position	ワールド座標表示オフセット
-sWorldPosScale	Scales of world position	ワールド座標表示スケール
-sWorldPosRotAngle	Rotate angle of world position	ワールド座標表示回転角
-sWorldPosDisplayLength	Display length of world position	ワールド座標数字個数
-sWorldPosAlign	Align of world position	ワールド座標のアラインメント
+sEnableElapsedTime	Elapsed time	経過時間
+sElapsedTimeColor	Color	色
+sElapsedTimeOffset	Offsets	オフセット
+sElapsedTimeScale	Scales	スケール
+sElapsedTimeRotAngle	Rotate angle	回転角
+sElapsedTimeDisplayLength	Display length	数字個数
+sElapsedTimeAlign	Align	アラインメント
+sEnableALTimeOfDay	Times of day of AudioLink	オーディオリンク時刻
+sALTimeOfDayColor	Color	色
+sALTimeOfDayOffset	Offsets	オフセット
+sALTimeOfDayScale	Scales	スケール
+sALTimeOfDayRotAngle	Rotate angle	回転角
+sALTimeOfDayDisplayLength	Display length	数字個数
+sALTimeOfDayAlign	Align	アラインメント
+sALTimeOfDayOffsetSeconds	Offset seconds	オフセット秒数
+sEnableFramerate	Framerate	フレームレート
+sFramerateColor	Color	色
+sFramerateOffset	Offsets	表示オフセット
+sFramerateScale	Scales	表示スケール
+sFramerateRotAngle	Rotate angle	表示回転角
+sFramerateDisplayLength	Display length	数字個数
+sFramerateAlign	Align	アラインメント
+sEnableWorldPos	World position	ワールド座標
+sWorldPosColorX	Color of X	X座標色
+sWorldPosColorY	Color of Y	Y座標色
+sWorldPosColorZ	Color of Z	Z座標色
+sWorldPosOffset	Offsets	オフセット
+sWorldPosScale	Scales	スケール
+sWorldPosRotAngle	Rotate angle	回転角
+sWorldPosDisplayLength	Display length	数字個数
+sWorldPosAlign	Align	アラインメント
