@@ -208,8 +208,8 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    var shaderNameParts = material.shader.name.Split('/');
-                    var isMultiShader = shaderNameParts[shaderNameParts.Length - 1].Contains("Multi");
+                    var shaderName = material.shader.name;
+                    var isMultiShader = shaderName.IndexOf("Multi", shaderName.LastIndexOf('/')) != -1;
 
                     //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
                     m_MaterialEditor.ShaderProperty(_spriteTex, GetLoc("sSpriteTex"));
