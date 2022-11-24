@@ -248,7 +248,7 @@ float remap01(float a, float b, float x)
  */
 float remap(float a, float b, float s, float t, float x)
 {
-    return (t - s) * ((x - a) / (b - a)) + s;
+    return lerp(s, t, remap01(a, b, x));
 }
 
 
