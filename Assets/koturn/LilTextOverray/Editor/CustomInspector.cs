@@ -5,42 +5,140 @@ using lilToon;
 
 namespace Koturn.lilToon
 {
+    /// <summary>
+    /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilTextOverray".
+    /// </summary>
     public class LilTextOverrayInspector : lilToonInspector
     {
         // Custom properties
         //MaterialProperty customVariable;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_SpriteTex".
+        /// </summary>
         private MaterialProperty _spriteTex;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EnableElapsedTime".
+        /// </summary>
         private MaterialProperty _enableElapsedTime;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_ElapsedTimeColor".
+        /// </summary>
         private MaterialProperty _elapsedTimeColor;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_ElapsedTimeOffsetScale".
+        /// </summary>
         private MaterialProperty _elapsedTimeOffsetScale;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_ElapsedTimeRotAngle".
+        /// </summary>
         private MaterialProperty _elapsedTimeRotAngle;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_ElapsedTimeDisplayLength".
+        /// </summary>
         private MaterialProperty _elapsedTimeDisplayLength;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_ElapsedTimeAlign".
+        /// </summary>
         private MaterialProperty _elapsedTimeAlign;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EnableALTimeOfDay".
+        /// </summary>
         private MaterialProperty _enableALTimeOfDay;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayColor".
+        /// </summary>
         private MaterialProperty _alTimeOfDayColor;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayOffsetScale".
+        /// </summary>
         private MaterialProperty _alTimeOfDayOffsetScale;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayRotAngle".
+        /// </summary>
         private MaterialProperty _alTimeOfDayRotAngle;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayDisplayLength".
+        /// </summary>
         private MaterialProperty _alTimeOfDayDisplayLength;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayAlign".
+        /// </summary>
         private MaterialProperty _alTimeOfDayAlign;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayOffsetSeconds".
+        /// </summary>
         private MaterialProperty _alTimeOfDayOffsetSeconds;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EnableFramerate".
+        /// </summary>
         private MaterialProperty _enableFramerate;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_FramerateColor".
+        /// </summary>
         private MaterialProperty _framerateColor;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_FramerateOffsetScale".
+        /// </summary>
         private MaterialProperty _framerateOffsetScale;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_FramerateRotAngle".
+        /// </summary>
         private MaterialProperty _framerateRotAngle;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_FramerateDisplayLength".
+        /// </summary>
         private MaterialProperty _framerateDisplayLength;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_FramerateAlign".
+        /// </summary>
         private MaterialProperty _framerateAlign;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EnableWorldPos".
+        /// </summary>
         private MaterialProperty _enableWorldPos;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WorldPosColorX".
+        /// </summary>
         private MaterialProperty _worldPosColorX;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WorldPosColorY".
+        /// </summary>
         private MaterialProperty _worldPosColorY;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WorldPosColorZ".
+        /// </summary>
         private MaterialProperty _worldPosColorZ;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WorldPosOffsetScale".
+        /// </summary>
         private MaterialProperty _worldPosOffsetScale;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WorldPosRotAngle".
+        /// </summary>
         private MaterialProperty _worldPosRotAngle;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WorldPosDisplayLength".
+        /// </summary>
         private MaterialProperty _worldPosDisplayLength;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WorldPosAlign".
+        /// </summary>
         private MaterialProperty _worldPosAlign;
 
+        /// <summary>
+        /// A flag whether to fold custom properties or not.
+        /// </summary>
         private static bool isShowCustomProperties;
+        /// <summary>
+        /// Name of this custom shader.
+        /// </summary>
         private const string shaderName = "koturn/LilTextOverray";
 
+        /// <summary>
+        /// Load custom language file and make cache of shader properties.
+        /// </summary>
+        /// <param name="props">Properties of the material.</param>
+        /// <param name="material">Target material.</param>
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
         {
             isCustomShader = true;
@@ -85,6 +183,10 @@ namespace Koturn.lilToon
             _worldPosAlign = FindProperty("_WorldPosAlign", props);
         }
 
+        /// <summary>
+        /// Draw custom properties.
+        /// </summary>
+        /// <param name="material">Target material.</param>
         protected override void DrawCustomProperties(Material material)
         {
             // GUIStyles Name   Description
@@ -238,6 +340,9 @@ namespace Koturn.lilToon
             }
         }
 
+        /// <summary>
+        /// Replace shaders to custom shaders.
+        /// </summary>
         protected override void ReplaceToCustomShaders()
         {
             lts         = Shader.Find(shaderName + "/lilToon");
@@ -303,6 +408,13 @@ namespace Koturn.lilToon
             ltsmgem     = Shader.Find("Hidden/" + shaderName + "/MultiGem");
         }
 
+        /// <summary>
+        /// <para>Draw "Vector" properties separately for offset and scale.</para>
+        /// <para>X and Y are offsets, Z and W are scales.</para>
+        /// </summary>
+        /// <param name="prop"><see cref="MaterialProperty"/> of vector.</param>
+        /// <param name="offsetLabel">String for offset vector.</param>
+        /// <param name="scaleLabel">String for scale vector.</param>
         private static void DrawVector4AsOffsetScale2x2(MaterialProperty prop, string offsetLabel, string scaleLabel)
         {
             using (var ccScope = new EditorGUI.ChangeCheckScope())
@@ -335,11 +447,20 @@ namespace Koturn.lilToon
             }
         }
 
+        /// <summary>
+        /// Enable or disable keyword by name of <see cref="MaterialProperty"/>.
+        /// </summary>
+        /// <param name="prop">Source <see cref="MaterialProperty"/>.</param>
         private static void SetToggleKeywordByName(MaterialProperty prop)
         {
             SetToggleKeywordByName(prop, prop.floatValue >= 0.5f);
         }
 
+        /// <summary>
+        /// Enable or disable keyword by name of <see cref="MaterialProperty"/>.
+        /// </summary>
+        /// <param name="prop">Source <see cref="MaterialProperty"/>.</param>
+        /// <param name="isEnabled">Set keyword if this variable is true, Otherwise unset keyword.</param>
         private static void SetToggleKeywordByName(MaterialProperty prop, bool isEnabled)
         {
             string keyword = prop.name.ToUpperInvariant() + "_ON";
@@ -356,11 +477,21 @@ namespace Koturn.lilToon
             }
         }
 
+        /// <summary>
+        /// Convert a <see cref="float"/> value to <see cref="bool"/> value.
+        /// </summary>
+        /// <param name="floatValue">Source <see cref="float"/> value.</param>
+        /// <returns>True if <paramref name="floatValue"/> is greater than 0.5, otherwise false.</returns>
         private static bool ToBool(float floatValue)
         {
             return floatValue >= 0.5;
         }
 
+        /// <summary>
+        /// Convert a <see cref="bool"/> value to <see cref="float"/> value.
+        /// </summary>
+        /// <param name="boolValue">Source <see cref="bool"/> value.</param>
+        /// <returns>1.0 if <paramref name="boolValue"/> is true, otherwise 0.0.</returns>
         private static float ToFloat(bool boolValue)
         {
             return boolValue ? 1.0f : 0.0f;

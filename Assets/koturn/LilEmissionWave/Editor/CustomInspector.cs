@@ -5,24 +5,68 @@ using lilToon;
 
 namespace Koturn.lilToon
 {
+    /// <summary>
+    /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilEmissionWave".
+    /// </summary>
     public class LilEmissionWaveInspector : lilToonInspector
     {
         // Custom properties
         //MaterialProperty customVariable;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EmissionWaveColor".
+        /// </summary>
         private MaterialProperty _emissionWaveColor;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EmissionWaveNoiseAmp".
+        /// </summary>
         private MaterialProperty _emissionWaveNoiseAmp;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EmissionWaveTimeScale".
+        /// </summary>
         private MaterialProperty _emissionWaveTimeScale;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EmissionWaveTimePhase".
+        /// </summary>
         private MaterialProperty _emissionWaveTimePhase;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EmissionWaveParam".
+        /// </summary>
         private MaterialProperty _emissionWaveParam;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EmissionPosMin".
+        /// </summary>
         private MaterialProperty _emissionPosMin;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EmissionPosMax".
+        /// </summary>
         private MaterialProperty _emissionPosMax;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WavePosSpace".
+        /// </summary>
         private MaterialProperty _wavePosSpace;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WaveAxis".
+        /// </summary>
         private MaterialProperty _waveAxis;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WaveAxisAngles".
+        /// </summary>
         private MaterialProperty _waveAxisAngles;
 
+        /// <summary>
+        /// A flag whether to fold custom properties or not.
+        /// </summary>
         private static bool isShowCustomProperties;
+        /// <summary>
+        /// Name of this custom shader.
+        /// </summary>
         private const string shaderName = "koturn/LilEmissionWave";
 
+        /// <summary>
+        /// Load custom language file and make cache of shader properties.
+        /// </summary>
+        /// <param name="props">Properties of the material.</param>
+        /// <param name="material">Target material.</param>
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
         {
             isCustomShader = true;
@@ -50,6 +94,10 @@ namespace Koturn.lilToon
             _waveAxisAngles = FindProperty("_WaveAxisAngles", props);
         }
 
+        /// <summary>
+        /// Draw custom properties.
+        /// </summary>
+        /// <param name="material">Target material.</param>
         protected override void DrawCustomProperties(Material material)
         {
             // GUIStyles Name   Description
@@ -90,6 +138,9 @@ namespace Koturn.lilToon
             }
         }
 
+        /// <summary>
+        /// Replace shaders to custom shaders.
+        /// </summary>
         protected override void ReplaceToCustomShaders()
         {
             lts         = Shader.Find(shaderName + "/lilToon");

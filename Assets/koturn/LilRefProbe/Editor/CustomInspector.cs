@@ -5,16 +5,36 @@ using lilToon;
 
 namespace Koturn.lilToon
 {
+    /// <summary>
+    /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilRefProbe".
+    /// </summary>
     public class LilRefProbeInspector : lilToonInspector
     {
         // Custom properties
         //MaterialProperty customVariable;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_RefProbeMask".
+        /// </summary>
         private MaterialProperty _refProbeMask;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_RefProbeBlendCoeff".
+        /// </summary>
         private MaterialProperty _refProbeBlendCoeff;
 
+        /// <summary>
+        /// A flag whether to fold custom properties or not.
+        /// </summary>
         private static bool isShowCustomProperties;
+        /// <summary>
+        /// Name of this custom shader.
+        /// </summary>
         private const string shaderName = "koturn/LilRefProbe";
 
+        /// <summary>
+        /// Load custom language file and make cache of shader properties.
+        /// </summary>
+        /// <param name="props">Properties of the material.</param>
+        /// <param name="material">Target material.</param>
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
         {
             isCustomShader = true;
@@ -34,6 +54,10 @@ namespace Koturn.lilToon
             _refProbeBlendCoeff = FindProperty("_RefProbeBlendCoeff", props);
         }
 
+        /// <summary>
+        /// Draw custom properties.
+        /// </summary>
+        /// <param name="material">Target material.</param>
         protected override void DrawCustomProperties(Material material)
         {
             // GUIStyles Name   Description
@@ -62,6 +86,9 @@ namespace Koturn.lilToon
             }
         }
 
+        /// <summary>
+        /// Replace shaders to custom shaders.
+        /// </summary>
         protected override void ReplaceToCustomShaders()
         {
             lts         = Shader.Find(shaderName + "/lilToon");
