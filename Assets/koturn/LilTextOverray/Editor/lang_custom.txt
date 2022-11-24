@@ -5,14 +5,14 @@ sEnableElapsedTime	Elapsed time	経過時間
 sElapsedTimeColor	Color	色
 sElapsedTimeOffset	Offsets	オフセット
 sElapsedTimeScale	Scales	スケール
-sElapsedTimeRotAngle	Rotate angle	回転角
+sElapsedTimeRotAngle	Rotate angle (Degrees)	回転角（度）
 sElapsedTimeDisplayLength	Display length	数字個数
 sElapsedTimeAlign	Align	アラインメント
 sEnableALTimeOfDay	Times of day of AudioLink	オーディオリンク時刻
 sALTimeOfDayColor	Color	色
 sALTimeOfDayOffset	Offsets	オフセット
 sALTimeOfDayScale	Scales	スケール
-sALTimeOfDayRotAngle	Rotate angle	回転角
+sALTimeOfDayRotAngle	Rotate angle (Degrees)	回転角（度）
 sALTimeOfDayDisplayLength	Display length	数字個数
 sALTimeOfDayAlign	Align	アラインメント
 sALTimeOfDayOffsetSeconds	Offset seconds	オフセット秒数
@@ -20,7 +20,7 @@ sEnableFramerate	Framerate	フレームレート
 sFramerateColor	Color	色
 sFramerateOffset	Offsets	表示オフセット
 sFramerateScale	Scales	表示スケール
-sFramerateRotAngle	Rotate angle	表示回転角
+sFramerateRotAngle	Rotate angle (Degrees)	表示回転角（度）
 sFramerateDisplayLength	Display length	数字個数
 sFramerateAlign	Align	アラインメント
 sEnableWorldPos	World position	ワールド座標
@@ -29,6 +29,6 @@ sWorldPosColorY	Color of Y	Y座標色
 sWorldPosColorZ	Color of Z	Z座標色
 sWorldPosOffset	Offsets	オフセット
 sWorldPosScale	Scales	スケール
-sWorldPosRotAngle	Rotate angle	回転角
+sWorldPosRotAngle	Rotate angle (Degrees)	回転角（度）
 sWorldPosDisplayLength	Display length	数字個数
 sWorldPosAlign	Align	アラインメント

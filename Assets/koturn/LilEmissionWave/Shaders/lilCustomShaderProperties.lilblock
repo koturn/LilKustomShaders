@@ -17,4 +17,4 @@
         _WaveAxis ("Wave direction axis", Int) = 1
 
         [lilVec3]
-        _WaveAxisAngles ("Wave direction", Vector) = (0.0, 0.0, 0.0, 0.0)
+        _WaveAxisAngles ("Wave direction (Radians)", Vector) = (0.0, 0.0, 0.0, 0.0)

@@ -328,5 +328,5 @@ float2 invAffineTransform(float2 uv, float2 scale, float rotAngle, float2 transl
     static const float2 uvCenter = float2(0.5, 0.5);
 
     // translate -> rotate -> scale
-    return rotate2D(uv - uvCenter + translate, radians(-rotAngle)) / scale + uvCenter;
+    return rotate2D(uv - uvCenter + translate, -rotAngle) / scale + uvCenter;
 }

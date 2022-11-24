@@ -9,4 +9,4 @@ sEmissionPosMin	Minimum position	位置の最小値
 sEmissionPosMax	Maximum position	位置の最大値
 sWavePosSpace	Position space	位置計算空間
 sWaveAxis	Wave direction axis	波方向軸
-sWaveAxisAngles	Wave direction angle	波方向角度
+sWaveAxisAngles	Wave direction angle (Degrees)	波方向角度（度）

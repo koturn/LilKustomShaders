@@ -132,7 +132,7 @@ namespace Koturn.lilToon
                     using (new EditorGUI.IndentLevelScope())
                     using (new EditorGUI.DisabledScope((int)_waveAxis.floatValue != 3))
                     {
-                        m_MaterialEditor.ShaderProperty(_waveAxisAngles, GetLoc("sWaveAxisAngles"));
+                        DrawAngleVec3(_waveAxisAngles, GetLoc("sWaveAxisAngles"));
                     }
                 }
             }
@@ -204,6 +204,40 @@ namespace Koturn.lilToon
             ltsmref     = Shader.Find("Hidden/" + shaderName + "/MultiRefraction");
             ltsmfur     = Shader.Find("Hidden/" + shaderName + "/MultiFur");
             ltsmgem     = Shader.Find("Hidden/" + shaderName + "/MultiGem");
+        }
+
+        /// <summary>
+        /// Draw Vector3 Field of angles.
+        /// </summary>
+        /// <param name="prop"><see cref="MaterialProperty"/> of vector.</param>
+        /// <param name="label">Label string for this <see cref="MaterialProperty"/>.</param>
+        private static void DrawAngleVec3(MaterialProperty prop, string label)
+        {
+            var position = EditorGUILayout.GetControlRect(
+                true,
+                MaterialEditor.GetDefaultPropertyHeight(prop) / 2.0f,
+                EditorStyles.layerMaskField);
+
+            var propVec = prop.vectorValue;
+            propVec.x = lilEditorGUI.Radian2Degree(propVec.x);
+            propVec.y = lilEditorGUI.Radian2Degree(propVec.y);
+            propVec.z = lilEditorGUI.Radian2Degree(propVec.z);
+
+            EditorGUIUtility.wideMode = true;
+            EditorGUI.showMixedValue = prop.hasMixedValue;
+            using (var ccScope = new EditorGUI.ChangeCheckScope())
+            {
+                var vec = EditorGUI.Vector3Field(position, label, propVec);
+                if (ccScope.changed)
+                {
+                    prop.vectorValue = new Vector4(
+                        lilEditorGUI.Degree2Radian(vec.x),
+                        lilEditorGUI.Degree2Radian(vec.y),
+                        lilEditorGUI.Degree2Radian(vec.z),
+                        propVec.w);
+                }
+            }
+            EditorGUI.showMixedValue = false;
         }
 
         // You can create a menu like this
