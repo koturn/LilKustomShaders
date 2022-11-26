@@ -237,23 +237,9 @@ namespace Koturn.lilToon
                     m_MaterialEditor.ShaderProperty(_spriteTex, GetLoc("sSpriteTex"));
 
                     using (new EditorGUILayout.VerticalScope(boxOuter))
-                    using (var ccScope = new EditorGUI.ChangeCheckScope())
                     {
-                        var isChecked = EditorGUI.ToggleLeft(
-                            EditorGUILayout.GetControlRect(),
-                            GetLoc("sEnableElapsedTime"),
-                            ToBool(_enableElapsedTime.floatValue),
-                            customToggleFont);
-                        if (ccScope.changed)
-                        {
-                            // m_MaterialEditor.RegisterPropertyChangeUndo(_enableElapsedTime.name);
-                            _enableElapsedTime.floatValue = ToFloat(isChecked);
-                            if (isMultiShader)
-                            {
-                                SetToggleKeyword(material, _enableElapsedTime);
-                            }
-                        }
-                        if (isChecked)
+                        DrawToggleLeft(material, _enableElapsedTime, GetLoc("sEnableElapsedTime"), isMultiShader);
+                        if (ToBool(_enableElapsedTime.floatValue))
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                             {
@@ -267,23 +253,9 @@ namespace Koturn.lilToon
                     }
 
                     using (new EditorGUILayout.VerticalScope(boxOuter))
-                    using (var ccScope = new EditorGUI.ChangeCheckScope())
                     {
-                        var isChecked = EditorGUI.ToggleLeft(
-                            EditorGUILayout.GetControlRect(),
-                            GetLoc("sEnableALTimeOfDay"),
-                            ToBool(_enableALTimeOfDay.floatValue),
-                            customToggleFont);
-                        if (ccScope.changed)
-                        {
-                            m_MaterialEditor.RegisterPropertyChangeUndo(_enableALTimeOfDay.name);
-                            _enableALTimeOfDay.floatValue = ToFloat(isChecked);
-                            if (isMultiShader)
-                            {
-                                SetToggleKeyword(material, _enableALTimeOfDay);
-                            }
-                        }
-                        if (isChecked)
+                        DrawToggleLeft(material, _enableALTimeOfDay, GetLoc("sEnableALTimeOfDay"), isMultiShader);
+                        if (ToBool(_enableALTimeOfDay.floatValue))
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                             {
@@ -298,23 +270,9 @@ namespace Koturn.lilToon
                     }
 
                     using (new EditorGUILayout.VerticalScope(boxOuter))
-                    using (var ccScope = new EditorGUI.ChangeCheckScope())
                     {
-                        var isChecked = EditorGUI.ToggleLeft(
-                            EditorGUILayout.GetControlRect(),
-                            GetLoc("sEnableFramerate"),
-                            ToBool(_enableFramerate.floatValue),
-                            customToggleFont);
-                        if (ccScope.changed)
-                        {
-                            m_MaterialEditor.RegisterPropertyChangeUndo(_enableFramerate.name);
-                            _enableFramerate.floatValue = ToFloat(isChecked);
-                            if (isMultiShader)
-                            {
-                                SetToggleKeyword(material, _enableFramerate);
-                            }
-                        }
-                        if (isChecked)
+                        DrawToggleLeft(material, _enableFramerate, GetLoc("sEnableFramerate"), isMultiShader);
+                        if (ToBool(_enableFramerate.floatValue))
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                             {
@@ -328,23 +286,9 @@ namespace Koturn.lilToon
                     }
 
                     using (new EditorGUILayout.VerticalScope(boxOuter))
-                    using (var ccScope = new EditorGUI.ChangeCheckScope())
                     {
-                        var isChecked = EditorGUI.ToggleLeft(
-                            EditorGUILayout.GetControlRect(),
-                            GetLoc("sEnableWorldPos"),
-                            ToBool(_enableWorldPos.floatValue),
-                            customToggleFont);
-                        if (ccScope.changed)
-                        {
-                            m_MaterialEditor.RegisterPropertyChangeUndo(_enableWorldPos.name);
-                            _enableWorldPos.floatValue = ToFloat(isChecked);
-                            if (isMultiShader)
-                            {
-                                SetToggleKeyword(material, _enableWorldPos);
-                            }
-                        }
-                        if (isChecked)
+                        DrawToggleLeft(material, _enableWorldPos, GetLoc("sEnableWorldPos"), isMultiShader);
+                        if (ToBool(_enableWorldPos.floatValue))
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                             {
@@ -470,6 +414,44 @@ namespace Koturn.lilToon
         }
 
         /// <summary>
+        /// Draw ToggleLeft property.
+        /// </summary>
+        /// <param name="material">Target <see cref="Material"/>.</param>
+        /// <param name="prop">Target <see cref="MaterialProperty"/>.</param>
+        /// <param name="label">Label for this toggle button.</param>
+        /// <param name="isMultiShader">Flag whether multi shader or not.</param>
+        private static void DrawToggleLeft(Material material, MaterialProperty prop, string label, bool isMultiShader)
+        {
+            try
+            {
+                using (var ccScope = new EditorGUI.ChangeCheckScope())
+                {
+                    EditorGUI.showMixedValue = prop.hasMixedValue;
+                    var isChecked = EditorGUI.ToggleLeft(
+                        EditorGUILayout.GetControlRect(),
+                        label,
+                        ToBool(prop.floatValue),
+                        customToggleFont);
+                    EditorGUI.showMixedValue = false;
+                    if (ccScope.changed)
+                    {
+                        prop.floatValue = ToFloat(isChecked);
+                        if (isMultiShader)
+                        {
+                            SetToggleKeyword(material, prop);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(ex.Message);
+                Debug.LogError(ex.StackTrace);
+                m_MaterialEditor.ShaderProperty(prop, label);
+            }
+        }
+
+        /// <summary>
         /// Enable or disable keyword of <see cref="MaterialProperty"/> which has MaterialToggleDrawer.
         /// </summary>
         /// <param name="material">Target <see cref="Material"/>.</param>
@@ -570,13 +552,11 @@ namespace Koturn.lilToon
             // Get type of UnityEditor.MaterialPropertyHandler which is the internal class.
             var type = GetAsmUnityEditor().GetType("UnityEditor.MaterialPropertyHandler")
                 ?? throw new InvalidOperationException("Type not found: UnityEditor.MaterialPropertyHandler");
-            _miGetHandler = type.GetMethod(
+            return _miGetHandler = type.GetMethod(
                 "GetHandler",
                 BindingFlags.NonPublic
                     | BindingFlags.Static)
                 ?? throw new InvalidOperationException("MethodInfo not found: UnityEditor.MaterialPropertyHandler.GetHandler");
-
-            return _miGetHandler;
         }
 
         /// <summary>
