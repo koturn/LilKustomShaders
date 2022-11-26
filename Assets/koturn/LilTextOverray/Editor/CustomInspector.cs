@@ -1,4 +1,6 @@
 #if UNITY_EDITOR
+using System;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using lilToon;
@@ -224,11 +226,11 @@ namespace Koturn.lilToon
                             customToggleFont);
                         if (ccScope.changed)
                         {
-                            m_MaterialEditor.RegisterPropertyChangeUndo(_enableElapsedTime.name);
+                            // m_MaterialEditor.RegisterPropertyChangeUndo(_enableElapsedTime.name);
                             _enableElapsedTime.floatValue = ToFloat(isChecked);
                             if (isMultiShader)
                             {
-                                SetToggleKeywordByName(_enableElapsedTime);
+                                SetToggleKeyword(material, _enableElapsedTime);
                             }
                         }
                         if (isChecked)
@@ -258,7 +260,7 @@ namespace Koturn.lilToon
                             _enableALTimeOfDay.floatValue = ToFloat(isChecked);
                             if (isMultiShader)
                             {
-                                SetToggleKeywordByName(_enableALTimeOfDay);
+                                SetToggleKeyword(material, _enableALTimeOfDay);
                             }
                         }
                         if (isChecked)
@@ -289,7 +291,7 @@ namespace Koturn.lilToon
                             _enableFramerate.floatValue = ToFloat(isChecked);
                             if (isMultiShader)
                             {
-                                SetToggleKeywordByName(_enableFramerate);
+                                SetToggleKeyword(material, _enableFramerate);
                             }
                         }
                         if (isChecked)
@@ -319,7 +321,7 @@ namespace Koturn.lilToon
                             _enableWorldPos.floatValue = ToFloat(isChecked);
                             if (isMultiShader)
                             {
-                                SetToggleKeywordByName(_enableWorldPos);
+                                SetToggleKeyword(material, _enableWorldPos);
                             }
                         }
                         if (isChecked)
@@ -448,33 +450,58 @@ namespace Koturn.lilToon
         }
 
         /// <summary>
-        /// Enable or disable keyword by name of <see cref="MaterialProperty"/>.
+        /// Enable or disable keyword of <see cref="MaterialProperty"/> which has MaterialToggleDrawer.
         /// </summary>
-        /// <param name="prop">Source <see cref="MaterialProperty"/>.</param>
-        private static void SetToggleKeywordByName(MaterialProperty prop)
+        /// <param name="material">Target <see cref="Material"/>.</param>
+        /// <param name="prop">Target <see cref="MaterialProperty"/>.</param>
+        private static void SetToggleKeyword(Material material, MaterialProperty prop)
         {
-            SetToggleKeywordByName(prop, prop.floatValue >= 0.5f);
-        }
+            // Get assembly from public class.
+            var asm = Assembly.GetAssembly(typeof(UnityEditor.MaterialPropertyDrawer));
 
-        /// <summary>
-        /// Enable or disable keyword by name of <see cref="MaterialProperty"/>.
-        /// </summary>
-        /// <param name="prop">Source <see cref="MaterialProperty"/>.</param>
-        /// <param name="isEnabled">Set keyword if this variable is true, Otherwise unset keyword.</param>
-        private static void SetToggleKeywordByName(MaterialProperty prop, bool isEnabled)
-        {
-            string keyword = prop.name.ToUpperInvariant() + "_ON";
-            foreach (Material material in prop.targets)
+            // Get type of UnityEditor.MaterialPropertyHandler which is the internal class.
+            var typeMph = asm.GetType("UnityEditor.MaterialPropertyHandler")
+                ?? throw new InvalidOperationException("Type not found: UnityEditor.MaterialPropertyHandler");
+            var miGetHandler = typeMph.GetMethod(
+                "GetHandler",
+                BindingFlags.NonPublic
+                    | BindingFlags.Static)
+                ?? throw new InvalidOperationException("MethodInfo not found: UnityEditor.MaterialPropertyHandler.GetHandler");
+
+            // Instance of UnityEditor.MaterialPropertyHandler.
+            var handler = miGetHandler.Invoke(null, new object[]
             {
-                if (isEnabled)
-                {
-                    material.EnableKeyword(keyword);
-                }
-                else
-                {
-                    material.DisableKeyword(keyword);
-                }
+                material.shader,
+                prop.name
+            });
+
+            // Get UnityEditor.MaterialPropertyDrawer.
+            var fi = typeMph.GetField("m_PropertyDrawer",
+                BindingFlags.GetField
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance)
+                ?? throw new InvalidOperationException("FieldInfo not found: UnityEditor.MaterialPropertyHandler.m_PropertyDrawer");
+            var drawer = fi.GetValue(handler)
+                ?? throw new InvalidOperationException("Field not found: UnityEditor.MaterialPropertyHandler.m_PropertyDrawer");
+
+            // Check if drawer is instance of UnityEditor.MaterialToggleDrawer or not.
+            var typeMtd = asm.GetType("UnityEditor.MaterialToggleDrawer")
+                ?? throw new InvalidOperationException("Type not found: UnityEditor.MaterialToggleDrawer");
+            if (drawer.GetType() != typeMtd)
+            {
+                throw new ArgumentException($"{nameof(prop)} is not instance of UnityEditor.MaterialToggleDrawer.");
             }
+
+            var miSetKeyword = typeMtd.GetMethod(
+                "SetKeyword",
+                BindingFlags.NonPublic
+                    | BindingFlags.Instance)
+                ?? throw new InvalidOperationException("MethodInfo not found: UnityEditor.MaterialToggleDrawer.SetKeyword");
+            miSetKeyword.Invoke(drawer, new object[]
+            {
+                prop,
+                ToBool(prop.floatValue)
+            });
         }
 
         /// <summary>
