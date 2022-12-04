@@ -470,7 +470,9 @@ namespace Koturn.lilToon
                 ?? throw new InvalidOperationException("Field not found: UnityEditor.MaterialPropertyHandler.m_PropertyDrawer");
 
             // Check if drawer is instance of UnityEditor.MaterialToggleDrawer or not.
-            if (drawer.GetType() != GetTypeOfMaterialToggleDrawer())
+            var typeDrawer = drawer.GetType();
+            var typeMaterialToggleDrawer = GetTypeOfMaterialToggleDrawer();
+            if (typeDrawer != typeMaterialToggleDrawer && !typeDrawer.IsSubclassOf(typeMaterialToggleDrawer))
             {
                 throw new ArgumentException($"{nameof(prop)} is not instance of UnityEditor.MaterialToggleDrawer.");
             }
