@@ -226,15 +226,12 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    var shaderName = material.shader.name;
-                    var isMultiShader = shaderName.IndexOf("Multi", shaderName.LastIndexOf('/')) != -1;
-
                     //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
                     m_MaterialEditor.ShaderProperty(_spriteTex, GetLoc("sSpriteTex"));
 
                     using (new EditorGUILayout.VerticalScope(boxOuter))
                     {
-                        DrawToggleLeft(material, _enableElapsedTime, GetLoc("sEnableElapsedTime"), isMultiShader);
+                        DrawToggleLeft(material, _enableElapsedTime, GetLoc("sEnableElapsedTime"));
                         if (ToBool(_enableElapsedTime.floatValue))
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
@@ -250,7 +247,7 @@ namespace Koturn.lilToon
 
                     using (new EditorGUILayout.VerticalScope(boxOuter))
                     {
-                        DrawToggleLeft(material, _enableALTimeOfDay, GetLoc("sEnableALTimeOfDay"), isMultiShader);
+                        DrawToggleLeft(material, _enableALTimeOfDay, GetLoc("sEnableALTimeOfDay"));
                         if (ToBool(_enableALTimeOfDay.floatValue))
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
@@ -267,7 +264,7 @@ namespace Koturn.lilToon
 
                     using (new EditorGUILayout.VerticalScope(boxOuter))
                     {
-                        DrawToggleLeft(material, _enableFramerate, GetLoc("sEnableFramerate"), isMultiShader);
+                        DrawToggleLeft(material, _enableFramerate, GetLoc("sEnableFramerate"));
                         if (ToBool(_enableFramerate.floatValue))
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
@@ -283,7 +280,7 @@ namespace Koturn.lilToon
 
                     using (new EditorGUILayout.VerticalScope(boxOuter))
                     {
-                        DrawToggleLeft(material, _enableWorldPos, GetLoc("sEnableWorldPos"), isMultiShader);
+                        DrawToggleLeft(material, _enableWorldPos, GetLoc("sEnableWorldPos"));
                         if (ToBool(_enableWorldPos.floatValue))
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
@@ -415,8 +412,7 @@ namespace Koturn.lilToon
         /// <param name="material">Target <see cref="Material"/>.</param>
         /// <param name="prop">Target <see cref="MaterialProperty"/>.</param>
         /// <param name="label">Label for this toggle button.</param>
-        /// <param name="isMultiShader">Flag whether multi shader or not.</param>
-        private static void DrawToggleLeft(Material material, MaterialProperty prop, string label, bool isMultiShader)
+        private static void DrawToggleLeft(Material material, MaterialProperty prop, string label)
         {
             try
             {
@@ -432,7 +428,7 @@ namespace Koturn.lilToon
                     if (ccScope.changed)
                     {
                         prop.floatValue = ToFloat(isChecked);
-                        if (isMultiShader)
+                        if (isMulti)
                         {
                             SetToggleKeyword(material, prop);
                         }
