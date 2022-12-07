@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System;
+using System.Linq.Expressions;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -132,25 +133,20 @@ namespace Koturn.lilToon
         /// </summary>
         private static bool isShowCustomProperties;
         /// <summary>
-        /// Cache of the <see cref="Assembly"/> of UnityEditor.
+        /// <para>Cache of reflection result of following lambda.</para>
+        /// <para><c>(Shader shader, string name) => UnityEditor.MaterialPropertyHandler.GetHandler(shader, name) as object;</c>
         /// </summary>
-        private static Assembly _asmUnityEditor;
+        private static Func<Shader, string, object> _getHandler;
         /// <summary>
-        /// Cache of the <see cref="Type"/> of UnityEditpr.MaterialToggleDrawer.</para>
+        /// <para>Cache of reflection result of following lambda.</para>
+        /// <para><c>(object handler) => (handler as UnityEditor.MaterialPropertyHandler).m_PropertyDrawer as object;</c>
         /// </summary>
-        private static Type _typeMaterialToggleDrawer;
+        private static Func<object, object> _getPropertyDrawer;
         /// <summary>
-        /// Cache of the <see cref="FieldInfo"/> of UnityEditor.MaterialPropertyHandler.m_PropertyDrawer.</para>
+        /// <para>Cache of reflection result of following lambda.</para>
+        /// <para><c>(object drawer, MaterialProperty prop, bool isOn) => (drawer as MaterialToggleDrawer).SetKeyword(prop, isOn);</c>
         /// </summary>
-        private static FieldInfo _fiPropertyDrawer;
-        /// <summary>
-        /// Cache of the <see cref="MethodInfo"/> of UnityEditor.MaterialPropertyHandler.GetHandler().</para>
-        /// </summary>
-        private static MethodInfo _miGetHandler;
-        /// <summary>
-        /// Cache of the <see cref="MethodInfo"/> of UnityEditor.MaterialToggleDrawer.SetKeyword().</para>
-        /// </summary>
-        private static MethodInfo _miToggleKeyword;
+        private static Action<object, MaterialProperty, bool> _setKeyword;
         /// <summary>
         /// Name of this custom shader.
         /// </summary>
@@ -447,137 +443,7 @@ namespace Koturn.lilToon
             {
                 Debug.LogError(ex.Message);
                 Debug.LogError(ex.StackTrace);
-                m_MaterialEditor.ShaderProperty(prop, label);
             }
-        }
-
-        /// <summary>
-        /// Enable or disable keyword of <see cref="MaterialProperty"/> which has MaterialToggleDrawer.
-        /// </summary>
-        /// <param name="material">Target <see cref="Material"/>.</param>
-        /// <param name="prop">Target <see cref="MaterialProperty"/>.</param>
-        private static void SetToggleKeyword(Material material, MaterialProperty prop)
-        {
-            // Instance of UnityEditor.MaterialPropertyHandler.
-            var handler = GetMethodInfoOfGetHandler().Invoke(null, new object[]
-            {
-                material.shader,
-                prop.name
-            });
-
-            // Get UnityEditor.MaterialPropertyDrawer.
-            var drawer = GetFieldInfoOfPropertyDrawer().GetValue(handler)
-                ?? throw new InvalidOperationException("Field not found: UnityEditor.MaterialPropertyHandler.m_PropertyDrawer");
-
-            // Check if drawer is instance of UnityEditor.MaterialToggleDrawer or not.
-            var typeDrawer = drawer.GetType();
-            var typeMaterialToggleDrawer = GetTypeOfMaterialToggleDrawer();
-            if (typeDrawer != typeMaterialToggleDrawer && !typeDrawer.IsSubclassOf(typeMaterialToggleDrawer))
-            {
-                throw new ArgumentException($"{nameof(prop)} is not instance of UnityEditor.MaterialToggleDrawer.");
-            }
-
-            GetMethodInfoOfSetKeyword().Invoke(drawer, new object[]
-            {
-                prop,
-                ToBool(prop.floatValue)
-            });
-        }
-
-        /// <summary>
-        /// <para>Get <see cref="Assembly"/> of UnityEditor.</para>
-        /// <para>On the first call, a cache is created, and on the second and subsequent calls, the cache is returned.</para>
-        /// </summary>
-        /// <remarks><seealso cref="_asmUnityEditor"/></remarks>
-        private static Assembly GetAsmUnityEditor()
-        {
-            if (_asmUnityEditor != null)
-            {
-                return _asmUnityEditor;
-            }
-
-            // Get assembly from public class.
-            return _asmUnityEditor = Assembly.GetAssembly(typeof(UnityEditor.MaterialPropertyDrawer));
-        }
-
-        /// <summary>
-        /// <para>Get <see cref="Type"/> of UnityEditpr.MaterialToggleDrawer.</para>
-        /// <para>On the first call, a cache is created, and on the second and subsequent calls, the cache is returned.</para>
-        /// </summary>
-        /// <remarks><seealso cref="_typeMaterialToggleDrawer"/></remarks>
-        private static Type GetTypeOfMaterialToggleDrawer()
-        {
-            if (_typeMaterialToggleDrawer != null)
-            {
-                return _typeMaterialToggleDrawer;
-            }
-
-            return _typeMaterialToggleDrawer = GetAsmUnityEditor().GetType("UnityEditor.MaterialToggleDrawer")
-                ?? throw new InvalidOperationException("Type not found: UnityEditor.MaterialToggleDrawer");
-        }
-
-        /// <summary>
-        /// <para>Get <see cref="FieldInfo"/> of UnityEditor.MaterialPropertyHandler.m_PropertyDrawer.</para>
-        /// <para>On the first call, a cache is created, and on the second and subsequent calls, the cache is returned.</para>
-        /// </summary>
-        /// <remarks><seealso cref="_fiPropertyDrawer"/></remarks>
-        private static FieldInfo GetFieldInfoOfPropertyDrawer()
-        {
-            if (_fiPropertyDrawer != null)
-            {
-                return _fiPropertyDrawer;
-            }
-
-            // Get UnityEditor.MaterialPropertyHandler.m_PropertyDrawer.
-            var type = GetAsmUnityEditor().GetType("UnityEditor.MaterialPropertyHandler")
-                ?? throw new InvalidOperationException("Type not found: UnityEditor.MaterialPropertyHandler");
-            return _fiPropertyDrawer = type.GetField(
-                "m_PropertyDrawer",
-                BindingFlags.GetField
-                    | BindingFlags.NonPublic
-                    | BindingFlags.Instance)
-                ?? throw new InvalidOperationException("FieldInfo not found: UnityEditor.MaterialPropertyHandler.m_PropertyDrawer");
-        }
-
-        /// <summary>
-        /// <para>Get <see cref="MethodInfo"/> of UnityEditor.MaterialPropertyHandler.GetHandler().</para>
-        /// <para>On the first call, a cache is created, and on the second and subsequent calls, the cache is returned.</para>
-        /// </summary>
-        /// <remarks><seealso cref="_miGetHandler"/></remarks>
-        private static MethodInfo GetMethodInfoOfGetHandler()
-        {
-            if (_miGetHandler != null)
-            {
-                return _miGetHandler;
-            }
-
-            // Get type of UnityEditor.MaterialPropertyHandler which is the internal class.
-            var type = GetAsmUnityEditor().GetType("UnityEditor.MaterialPropertyHandler")
-                ?? throw new InvalidOperationException("Type not found: UnityEditor.MaterialPropertyHandler");
-            return _miGetHandler = type.GetMethod(
-                "GetHandler",
-                BindingFlags.NonPublic
-                    | BindingFlags.Static)
-                ?? throw new InvalidOperationException("MethodInfo not found: UnityEditor.MaterialPropertyHandler.GetHandler");
-        }
-
-        /// <summary>
-        /// <para>Get <see cref="MethodInfo"/> of UnityEditor.MaterialToggleDrawer.SetKeyword().</para>
-        /// <para>On the first call, a cache is created, and on the second and subsequent calls, the cache is returned.</para>
-        /// </summary>
-        /// <remarks><seealso cref="_miToggleKeyword"/></remarks>
-        private static MethodInfo GetMethodInfoOfSetKeyword()
-        {
-            if (_miToggleKeyword != null)
-            {
-                return _miToggleKeyword;
-            }
-
-            return _miToggleKeyword = GetTypeOfMaterialToggleDrawer().GetMethod(
-                "SetKeyword",
-                BindingFlags.NonPublic
-                    | BindingFlags.Instance)
-                ?? throw new InvalidOperationException("MethodInfo not found: UnityEditor.MaterialToggleDrawer.SetKeyword");
         }
 
         /// <summary>
@@ -599,6 +465,100 @@ namespace Koturn.lilToon
         {
             return boolValue ? 1.0f : 0.0f;
         }
+
+
+        /// <summary>
+        /// Enable or disable keyword of <see cref="MaterialProperty"/> which has MaterialToggleUIDrawer.
+        /// </summary>
+        /// <param name="material">Target <see cref="Material"/>.</param>
+        /// <param name="prop">Target <see cref="MaterialProperty"/>.</param>
+        private static void SetToggleKeyword(Material material, MaterialProperty prop)
+        {
+            if (_setKeyword == null)
+            {
+                CreateSetKeywordDelegate();
+            }
+
+            // Get instance of UnityEditor.MaterialPropertyHandler.
+            var handler = _getHandler(material.shader, prop.name);
+            // Get instance of UnityEditor.MaterialPropertyDrawer.
+            var drawer = _getPropertyDrawer(handler)
+                ?? throw new InvalidOperationException("Field not found: UnityEditor.MaterialPropertyHandler.m_PropertyDrawer");
+            // Call UnityEditor.MaterialToggleUIDrawer.SetKeyword().
+            _setKeyword(drawer, prop, ToBool(prop.floatValue));
+        }
+
+        /// <summary>
+        /// Create delegate of reflection results about UnityEditor.MaterialToggleUIDrawer.
+        /// </summary>
+        /// <remarks><seealso cref="_getHandler"/></remarks>
+        /// <remarks><seealso cref="_getPropertyDrawer"/></remarks>
+        /// <remarks><seealso cref="_setKeyword"/></remarks>
+        private static void CreateSetKeywordDelegate()
+        {
+            // Get assembly from public class.
+            var asm = Assembly.GetAssembly(typeof(UnityEditor.MaterialPropertyDrawer));
+
+            // Get type of UnityEditor.MaterialPropertyHandler which is the internal class.
+            var typeMph = asm.GetType("UnityEditor.MaterialPropertyHandler")
+                ?? throw new InvalidOperationException("Type not found: UnityEditor.MaterialPropertyHandler");
+            var miGetHandler = typeMph.GetMethod(
+                "GetHandler",
+                BindingFlags.NonPublic
+                    | BindingFlags.Static)
+                ?? throw new InvalidOperationException("MethodInfo not found: UnityEditor.MaterialPropertyHandler.GetHandler");
+
+            // (Shader shader, string name) => UnityEditor.MaterialPropertyHandler.GetHandler(shader, name) as object;
+            var pShader = Expression.Parameter(typeof(Shader));
+            var pString = Expression.Parameter(typeof(string));
+            _getHandler = Expression.Lambda<Func<Shader, string, object>>(
+                Expression.Call(
+                    miGetHandler,
+                    pShader,
+                    pString),
+                pShader,
+                pString).Compile();
+
+            // Get UnityEditor.MaterialPropertyDrawer.
+            var fi = typeMph.GetField(
+                "m_PropertyDrawer",
+                BindingFlags.GetField
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance)
+                ?? throw new InvalidOperationException("FieldInfo not found: UnityEditor.MaterialPropertyHandler.m_PropertyDrawer");
+
+            // (object handler) => (handler as UnityEditor.MaterialPropertyHandler).m_PropertyDrawer as object;
+            var pObject = Expression.Parameter(typeof(object));
+            _getPropertyDrawer = Expression.Lambda<Func<object, object>>(
+                Expression.Field(
+                    Expression.TypeAs(pObject, typeMph),
+                    fi),
+                pObject).Compile();
+
+            // Check if drawer is instance of UnityEditor.MaterialToggleUIDrawer or not.
+            var typeMtud = asm.GetType("UnityEditor.MaterialToggleUIDrawer")
+                ?? throw new InvalidOperationException("Type not found: UnityEditor.MaterialToggleUIDrawer");
+
+            var miSetKeyword = typeMtud.GetMethod(
+                "SetKeyword",
+                BindingFlags.NonPublic
+                    | BindingFlags.Instance)
+                ?? throw new InvalidOperationException("MethodInfo not found: UnityEditor.MaterialToggleUIDrawer.SetKeyword");
+
+            // (object drawer, MaterialProperty prop, bool isOn) => (drawer as MaterialToggleUIDrawer).SetKeyword(prop, isOn);
+            var pMaterialProperty = Expression.Parameter(typeof(MaterialProperty));
+            var pBool = Expression.Parameter(typeof(bool));
+            _setKeyword = Expression.Lambda<Action<object, MaterialProperty, bool>>(
+                Expression.Call(
+                    Expression.TypeAs(pObject, typeMtud),
+                    miSetKeyword,
+                    pMaterialProperty,
+                    pBool),
+                pObject,
+                pMaterialProperty,
+                pBool).Compile();
+        }
+
 
         // You can create a menu like this
         /*
