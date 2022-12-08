@@ -139,7 +139,7 @@ namespace Koturn.lilToon
         private static Func<Shader, string, object> _getHandler;
         /// <summary>
         /// <para>Cache of reflection result of following lambda.</para>
-        /// <para><c>(object handler) => (handler as UnityEditor.MaterialPropertyHandler).m_PropertyDrawer as object;</c>
+        /// <para><c>(object handler) => (handler as UnityEditor.MaterialPropertyHandler).propertyDrawer as object;</c>
         /// </summary>
         private static Func<object, object> _getPropertyDrawer;
         /// <summary>
@@ -479,7 +479,7 @@ namespace Koturn.lilToon
             var handler = _getHandler(material.shader, prop.name);
             // Get instance of UnityEditor.MaterialPropertyDrawer.
             var drawer = _getPropertyDrawer(handler)
-                ?? throw new InvalidOperationException("Field not found: UnityEditor.MaterialPropertyHandler.m_PropertyDrawer");
+                ?? throw new InvalidOperationException("Field not found: UnityEditor.MaterialPropertyHandler.propertyDrawer");
             // Call UnityEditor.MaterialToggleUIDrawer.SetKeyword().
             _setKeyword(drawer, prop, ToBool(prop.floatValue));
         }
@@ -516,19 +516,19 @@ namespace Koturn.lilToon
                 pString).Compile();
 
             // Get UnityEditor.MaterialPropertyDrawer.
-            var fi = typeMph.GetField(
-                "m_PropertyDrawer",
-                BindingFlags.GetField
-                    | BindingFlags.NonPublic
+            var pi = typeMph.GetProperty(
+                "propertyDrawer",
+                BindingFlags.GetProperty
+                    | BindingFlags.Public
                     | BindingFlags.Instance)
-                ?? throw new InvalidOperationException("FieldInfo not found: UnityEditor.MaterialPropertyHandler.m_PropertyDrawer");
+                ?? throw new InvalidOperationException("PropertyInfo not found: UnityEditor.MaterialPropertyHandler.propertyDrawer");
 
-            // (object handler) => (handler as UnityEditor.MaterialPropertyHandler).m_PropertyDrawer as object;
+            // (object handler) => (handler as UnityEditor.MaterialPropertyHandler).propertyDrawer as object;
             var pObject = Expression.Parameter(typeof(object));
             _getPropertyDrawer = Expression.Lambda<Func<object, object>>(
-                Expression.Field(
+                Expression.Property(
                     Expression.TypeAs(pObject, typeMph),
-                    fi),
+                    pi),
                 pObject).Compile();
 
             // Check if drawer is instance of UnityEditor.MaterialToggleUIDrawer or not.
