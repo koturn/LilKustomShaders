@@ -52,11 +52,11 @@ namespace Koturn.lilToon
         /// <see cref="MaterialProperty"/> of "_WaveAxisAngles".
         /// </summary>
         private MaterialProperty _waveAxisAngles;
-
         /// <summary>
         /// A flag whether to fold custom properties or not.
         /// </summary>
-        private static bool isShowCustomProperties;
+        private bool isShowCustomProperties;
+
         /// <summary>
         /// Name of this custom shader.
         /// </summary>

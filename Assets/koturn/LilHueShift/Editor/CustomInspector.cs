@@ -20,11 +20,11 @@ namespace Koturn.lilToon
         /// <see cref="MaterialProperty"/> of "_HsTimeScale".
         /// </summary>
         private MaterialProperty _hsTimeScale;
-
         /// <summary>
         /// A flag whether to fold custom properties or not.
         /// </summary>
-        private static bool isShowCustomProperties;
+        private bool isShowCustomProperties;
+
         /// <summary>
         /// Name of this custom shader.
         /// </summary>

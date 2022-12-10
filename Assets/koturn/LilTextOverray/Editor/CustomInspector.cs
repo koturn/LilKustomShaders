@@ -127,11 +127,11 @@ namespace Koturn.lilToon
         /// <see cref="MaterialProperty"/> of "_WorldPosAlign".
         /// </summary>
         private MaterialProperty _worldPosAlign;
-
         /// <summary>
         /// A flag whether to fold custom properties or not.
         /// </summary>
-        private static bool isShowCustomProperties;
+        private bool isShowCustomProperties;
+
         /// <summary>
         /// Cache of reflection result of following lambda.
         /// </summary>
