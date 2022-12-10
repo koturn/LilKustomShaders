@@ -9,7 +9,8 @@ namespace lilToon
         // Custom properties
         //MaterialProperty customVariable;
 
-        private static bool isShowCustomProperties;
+        private bool isShowCustomProperties;
+
         private const string shaderName = "TemplateFull";
 
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
