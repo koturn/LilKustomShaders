@@ -440,7 +440,7 @@ namespace Koturn.lilToon
         /// <returns>True if <paramref name="floatValue"/> is greater than 0.5, otherwise false.</returns>
         private static bool ToBool(float floatValue)
         {
-            return floatValue >= 0.5;
+            return floatValue >= 0.5f;
         }
 
         /// <summary>
