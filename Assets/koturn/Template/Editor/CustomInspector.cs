@@ -10,7 +10,7 @@ namespace lilToon
     public class TemplateFullInspector : lilToonInspector
     {
         // Custom properties
-        //MaterialProperty customVariable;
+        //private MaterialProperty customVariable;
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
