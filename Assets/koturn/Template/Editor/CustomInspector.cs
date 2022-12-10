@@ -4,15 +4,29 @@ using UnityEngine;
 
 namespace lilToon
 {
+    /// <summary>
+    /// <see cref="ShaderGUI"/> for the custom shader variations of lilToon.
+    /// </summary>
     public class TemplateFullInspector : lilToonInspector
     {
         // Custom properties
         //MaterialProperty customVariable;
 
+        /// <summary>
+        /// A flag whether to fold custom properties or not.
+        /// </summary>
         private bool isShowCustomProperties;
 
+        /// <summary>
+        /// Name of this custom shader.
+        /// </summary>
         private const string shaderName = "TemplateFull";
 
+        /// <summary>
+        /// Load custom language file and make cache of shader properties.
+        /// </summary>
+        /// <param name="props">Properties of the material.</param>
+        /// <param name="material">Target material.</param>
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
         {
             isCustomShader = true;
@@ -28,6 +42,10 @@ namespace lilToon
             //customVariable = FindProperty("_CustomVariable", props);
         }
 
+        /// <summary>
+        /// Draw custom properties.
+        /// </summary>
+        /// <param name="material">Target material.</param>
         protected override void DrawCustomProperties(Material material)
         {
             // GUIStyles Name   Description
@@ -54,6 +72,9 @@ namespace lilToon
             }
         }
 
+        /// <summary>
+        /// Replace shaders to custom shaders.
+        /// </summary>
         protected override void ReplaceToCustomShaders()
         {
             lts         = Shader.Find(shaderName + "/lilToon");
