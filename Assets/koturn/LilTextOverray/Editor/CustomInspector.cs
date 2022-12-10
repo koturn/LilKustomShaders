@@ -474,7 +474,15 @@ namespace Koturn.lilToon
         /// (Shader shader, MaterialProperty prop) =>
         /// {
         ///     MaterialPropertyHandler mph = UnityEditor.MaterialPropertyHandler.GetHandler(shader, name);
+        ///     if (mph is null)
+        ///     {
+        ///         throw new ArgumentException("Specified MaterialProperty does not have UnityEditor.MaterialPropertyHandler");
+        ///     }
         ///     MaterialToggleUIDrawer mpud = mph.propertyDrawer as MaterialToggleUIDrawer;
+        ///     if (mpud is null)
+        ///     {
+        ///         throw new ArgumentException("Specified MaterialProperty does not have UnityEditor.MaterialToggleUIDrawer");
+        ///     }
         ///     mpud.SetKeyword(prop, prop.floatValue >= 0.5f);
         /// }
         /// </code>
@@ -495,12 +503,8 @@ namespace Koturn.lilToon
             var pMaterialToggleUIDrawer = Expression.Parameter(typeMtud);
             var pMaterialProperty = Expression.Parameter(typeof(MaterialProperty));
 
-            // (Shader shader, MaterialProperty prop) =>
-            // {
-            //     MaterialPropertyHandler mph = UnityEditor.MaterialPropertyHandler.GetHandler(shader, name);
-            //     MaterialToggleUIDrawer mpud = mph.propertyDrawer as MaterialToggleUIDrawer;
-            //     mpud.SetKeyword(prop, prop.floatValue >= 0.5f);
-            // }
+            var cNull = Expression.Constant(null);
+
             return Expression.Lambda<Action<Shader, MaterialProperty>>(
                 Expression.Block(
                     new[]
@@ -524,6 +528,12 @@ namespace Koturn.lilToon
                                     BindingFlags.GetProperty
                                         | BindingFlags.Public
                                         | BindingFlags.Instance)))),
+                    Expression.IfThen(
+                        Expression.Equal(
+                            pMaterialPropertyHandler,
+                            cNull),
+                        Expression.Throw(
+                            Expression.Constant(new ArgumentException("Specified MaterialProperty does not have UnityEditor.MaterialPropertyHandler")))),
                     Expression.Assign(
                         pMaterialToggleUIDrawer,
                         Expression.TypeAs(
@@ -536,6 +546,12 @@ namespace Koturn.lilToon
                                         | BindingFlags.Instance)
                                     ?? throw new InvalidOperationException("PropertyInfo not found: UnityEditor.MaterialPropertyHandler.propertyDrawer")),
                             typeMtud)),
+                    Expression.IfThen(
+                        Expression.Equal(
+                            pMaterialToggleUIDrawer,
+                            cNull),
+                        Expression.Throw(
+                            Expression.Constant(new ArgumentException("Specified MaterialProperty does not have UnityEditor.MaterialToggleUIDrawer")))),
                     Expression.Call(
                         pMaterialToggleUIDrawer,
                         typeMtud.GetMethod(
