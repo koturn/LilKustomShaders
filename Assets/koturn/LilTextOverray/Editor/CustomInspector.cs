@@ -455,11 +455,8 @@ namespace Koturn.lilToon
         {
             try
             {
-                if (_toggleKeyword is null)
-                {
-                    _toggleKeyword = CreateToggleKeywordDelegate();
-                }
-                _toggleKeyword(shader, prop);
+                // (_toggleKeyword ??= CreateToggleKeywordDelegate())(shader, prop);
+                (_toggleKeyword ?? (_toggleKeyword = CreateToggleKeywordDelegate()))(shader, prop);
             }
             catch (Exception ex)
             {
