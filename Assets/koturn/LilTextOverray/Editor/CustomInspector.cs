@@ -405,31 +405,23 @@ namespace Koturn.lilToon
         /// <param name="label">Label for this toggle button.</param>
         private static void DrawToggleLeft(Material material, MaterialProperty prop, string label)
         {
-            try
+            using (var ccScope = new EditorGUI.ChangeCheckScope())
             {
-                using (var ccScope = new EditorGUI.ChangeCheckScope())
+                EditorGUI.showMixedValue = prop.hasMixedValue;
+                var isChecked = EditorGUI.ToggleLeft(
+                    EditorGUILayout.GetControlRect(),
+                    label,
+                    ToBool(prop.floatValue),
+                    customToggleFont);
+                EditorGUI.showMixedValue = false;
+                if (ccScope.changed)
                 {
-                    EditorGUI.showMixedValue = prop.hasMixedValue;
-                    var isChecked = EditorGUI.ToggleLeft(
-                        EditorGUILayout.GetControlRect(),
-                        label,
-                        ToBool(prop.floatValue),
-                        customToggleFont);
-                    EditorGUI.showMixedValue = false;
-                    if (ccScope.changed)
+                    prop.floatValue = ToFloat(isChecked);
+                    if (isMulti)
                     {
-                        prop.floatValue = ToFloat(isChecked);
-                        if (isMulti)
-                        {
-                            SetToggleKeyword(material.shader, prop);
-                        }
+                        SetToggleKeyword(material.shader, prop);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError(ex.Message);
-                Debug.LogError(ex.StackTrace);
             }
         }
 
@@ -461,11 +453,18 @@ namespace Koturn.lilToon
         /// <param name="prop">Target <see cref="MaterialProperty"/>.</param>
         private static void SetToggleKeyword(Shader shader, MaterialProperty prop)
         {
-            if (_toggleKeyword is null)
+            try
             {
-                _toggleKeyword = CreateToggleKeywordDelegate();
+                if (_toggleKeyword is null)
+                {
+                    _toggleKeyword = CreateToggleKeywordDelegate();
+                }
+                _toggleKeyword(shader, prop);
             }
-            _toggleKeyword(shader, prop);
+            catch (Exception ex)
+            {
+                Debug.LogError(ex.ToString());
+            }
         }
 
         /// <summary>
