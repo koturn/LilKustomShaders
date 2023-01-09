@@ -20,10 +20,11 @@ namespace Koturn.lilToon
         /// <see cref="MaterialProperty"/> of "_RefProbeBlendCoeff".
         /// </summary>
         private MaterialProperty _refProbeBlendCoeff;
+
         /// <summary>
         /// A flag whether to fold custom properties or not.
         /// </summary>
-        private bool isShowCustomProperties;
+        private static bool isShowCustomProperties;
 
         /// <summary>
         /// Name of this custom shader.
