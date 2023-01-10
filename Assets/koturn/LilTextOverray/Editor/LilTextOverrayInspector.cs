@@ -495,6 +495,8 @@ namespace Koturn.lilToon
             var typeMtud = asm.GetType("UnityEditor.MaterialToggleUIDrawer")
                 ?? throw new InvalidOperationException("Type not found: UnityEditor.MaterialToggleUIDrawer");
 
+            var ciArgumentException = typeof(ArgumentException).GetConstructor(new[] {typeof(string)});
+
             var pShader = Expression.Parameter(typeof(Shader));
             var pMaterialPropertyHandler = Expression.Parameter(typeMph);
             var pMaterialToggleUIDrawer = Expression.Parameter(typeMtud);
@@ -530,7 +532,9 @@ namespace Koturn.lilToon
                             pMaterialPropertyHandler,
                             cNull),
                         Expression.Throw(
-                            Expression.Constant(new ArgumentException("Specified MaterialProperty does not have UnityEditor.MaterialPropertyHandler")))),
+                            Expression.New(
+                                ciArgumentException,
+                                Expression.Constant("Specified MaterialProperty does not have UnityEditor.MaterialPropertyHandler")))),
                     Expression.Assign(
                         pMaterialToggleUIDrawer,
                         Expression.TypeAs(
@@ -548,7 +552,9 @@ namespace Koturn.lilToon
                             pMaterialToggleUIDrawer,
                             cNull),
                         Expression.Throw(
-                            Expression.Constant(new ArgumentException("Specified MaterialProperty does not have UnityEditor.MaterialToggleUIDrawer")))),
+                            Expression.New(
+                                ciArgumentException,
+                                Expression.Constant("Specified MaterialProperty does not have UnityEditor.MaterialToggleUIDrawer")))),
                     Expression.Call(
                         pMaterialToggleUIDrawer,
                         typeMtud.GetMethod(
