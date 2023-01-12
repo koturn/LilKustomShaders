@@ -68,6 +68,10 @@ namespace Koturn.lilToon
         /// </summary>
         private MaterialProperty _alTimeOfDayAlign;
         /// <summary>
+        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayKind".
+        /// </summary>
+        private MaterialProperty _alTimeOfDayKind;
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_AlTimeOfDayOffsetSeconds".
         /// </summary>
         private MaterialProperty _alTimeOfDayOffsetSeconds;
@@ -176,6 +180,7 @@ namespace Koturn.lilToon
             _alTimeOfDayRotAngle = FindProperty("_ALTimeOfDayRotAngle", props);
             _alTimeOfDayDisplayLength = FindProperty("_ALTimeOfDayDisplayLength", props);
             _alTimeOfDayAlign = FindProperty("_ALTimeOfDayAlign", props);
+            _alTimeOfDayKind = FindProperty("_ALTimeOfDayKind", props);
             _alTimeOfDayOffsetSeconds = FindProperty("_ALTimeOfDayOffsetSeconds", props);
             _enableFramerate = FindProperty("_EnableFramerate", props);
             _framerateColor = FindProperty("_FramerateColor", props);
@@ -249,6 +254,7 @@ namespace Koturn.lilToon
                                 m_MaterialEditor.ShaderProperty(_alTimeOfDayRotAngle, GetLoc("sALTimeOfDayRotAngle"));
                                 m_MaterialEditor.ShaderProperty(_alTimeOfDayDisplayLength, GetLoc("sALTimeOfDayDisplayLength"));
                                 m_MaterialEditor.ShaderProperty(_alTimeOfDayAlign, GetLoc("sALTimeOfDayAlign"));
+                                m_MaterialEditor.ShaderProperty(_alTimeOfDayKind, GetLoc("sALTimeOfDayKind"));
                                 m_MaterialEditor.ShaderProperty(_alTimeOfDayOffsetSeconds, GetLoc("sALTimeOfDayOffsetSeconds"));
                             }
                         }

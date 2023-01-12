@@ -24,8 +24,14 @@
 
 //! Number of digits in splite sheet texture.
 static const float kColumns = 10.0;
+//! Uv index of local time in audio texture.
+static const uint2 kGeneralvuLocalTime = uint2(3, 22);
 //! Uv index of Unix seconds in audio texture.
 static const uint2 kGeneralvuUnixSeconds = uint2(6, 23);
+//! Constant for _ALTimeOfDayKind, which means show local time.
+static const int kALTimeOfDayKindLocal = 0;
+//! Constant for _ALTimeOfDayKind, which means show UTC time.
+static const int kALTimeOfDayKindUtc = 1;
 
 
 // _AudioTexture is declared in lil_common_input.hlsl.
@@ -199,6 +205,7 @@ float AudioLinkDecodeDataAsSeconds(uint2 indexloc)
  */
 float3 AudioLinkGetTimeOfDay()
 {
-    const float value = AudioLinkDecodeDataAsSeconds(kGeneralvuUnixSeconds) + _ALTimeOfDayOffsetSeconds;
+    float value = AudioLinkDecodeDataAsSeconds(_ALTimeOfDayKind == kALTimeOfDayKindLocal ? kGeneralvuLocalTime : kGeneralvuUnixSeconds);
+    value += _ALTimeOfDayOffsetSeconds;
     return floor(fmodglsl(value.xxx / float3(3600.0, 60.0, 1.0), float3(24.0, 60.0, 60.0)));
 }

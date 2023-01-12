@@ -15,6 +15,7 @@ sALTimeOfDayScale	Scales	スケール
 sALTimeOfDayRotAngle	Rotate angle (Degrees)	回転角（度）
 sALTimeOfDayDisplayLength	Display length	数字個数
 sALTimeOfDayAlign	Align	アラインメント
+sALTimeOfDayKind	Kind of time of day	時間種別
 sALTimeOfDayOffsetSeconds	Offset seconds	オフセット秒数
 sEnableFramerate	Framerate	フレームレート
 sFramerateColor	Color	色

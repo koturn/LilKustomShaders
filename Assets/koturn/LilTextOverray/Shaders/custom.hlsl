@@ -17,6 +17,7 @@
     float _ALTimeOfDayRotAngle; \
     float _ALTimeOfDayDisplayLength; \
     float _ALTimeOfDayAlign; \
+    int _ALTimeOfDayKind; \
     float _ALTimeOfDayOffsetSeconds; \
     bool _EnableFramerate; \
     float4 _FramerateColor; \
