@@ -24,9 +24,11 @@
 
 //! Number of digits in splite sheet texture.
 static const float kColumns = 10.0;
+//! Uv index of version info in audio texture.
+static const uint2 kGeneralvu = uint2(0, 22);
 //! Uv index of local time in audio texture.
 static const uint2 kGeneralvuLocalTime = uint2(3, 22);
-//! Uv index of Unix seconds in audio texture.
+//! Uv index of Unix seconds in audio texture (Supported since 0.2.8).
 static const uint2 kGeneralvuUnixSeconds = uint2(6, 23);
 //! Constant for _ALTimeOfDayKind, which means show local time.
 static const int kALTimeOfDayKindLocal = 0;
@@ -171,6 +173,26 @@ float4 AudioLinkData(uint2 xycoord)
 
 
 /*!
+ * @brief Get version of audiolink present in the world., 0 if no audiolink is present
+ * @return Version of audiolink present in the world. 0.0 means that no audiolink is present.
+ */
+float AudioLinkGetVersion()
+{
+    int2 dims;
+
+#ifdef LIL_LWTEX
+    dims = _AudioTexture_TexelSize.zw;
+#else
+    _AudioTexture.GetDimensions(dims.x, dims.y);
+#endif  // LIL_LWTEX
+
+    return dims.x >= 128 ? AudioLinkData(kGeneralvu).x
+        : dims.x > 16 ? 1.0
+        : 0.0;
+}
+
+
+/*!
  * @brief Extra utility functions for time.
  * @param [in] indexloc  Location index vector
  * @return Decoded data.
@@ -205,7 +227,17 @@ float AudioLinkDecodeDataAsSeconds(uint2 indexloc)
  */
 float3 AudioLinkGetTimeOfDay()
 {
-    float value = AudioLinkDecodeDataAsSeconds(_ALTimeOfDayKind == kALTimeOfDayKindLocal ? kGeneralvuLocalTime : kGeneralvuUnixSeconds);
-    value += _ALTimeOfDayOffsetSeconds;
-    return floor(fmodglsl(value.xxx / float3(3600.0, 60.0, 1.0), float3(24.0, 60.0, 60.0)));
+    uint2 indexloc;
+    float offsetSeconds;
+    if (_ALTimeOfDayKind == kALTimeOfDayKindLocal
+        || (_EnableALTimeOfDayUtcFallback && AudioLinkGetVersion() < 2.08)) {
+        indexloc = kGeneralvuLocalTime;
+        offsetSeconds = _ALTimeOfDayLocalTimeOffsetSeconds;
+    } else {
+        indexloc = kGeneralvuUnixSeconds;
+        offsetSeconds = _ALTimeOfDayUtcOffsetSeconds;
+    }
+
+    const float seconds = AudioLinkDecodeDataAsSeconds(indexloc) + offsetSeconds;
+    return floor(fmodglsl(seconds.xxx / float3(3600.0, 60.0, 1.0), float3(24.0, 60.0, 60.0)));
 }

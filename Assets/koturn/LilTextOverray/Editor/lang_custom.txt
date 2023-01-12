@@ -16,7 +16,9 @@ sALTimeOfDayRotAngle	Rotate angle (Degrees)	回転角（度）
 sALTimeOfDayDisplayLength	Display length	数字個数
 sALTimeOfDayAlign	Align	アラインメント
 sALTimeOfDayKind	Kind of time of day	時間種別
-sALTimeOfDayOffsetSeconds	Offset seconds	オフセット秒数
+sEnableALTimeOfDayUtcFallback	Fallback to local time when UTC time is not supported	UTC非対応時のローカル時間へのフォールバック
+sALTimeOfDayLocalTimeOffsetSeconds	Offset seconds of local time	ローカル時間オフセット秒数
+sALTimeOfDayUtcOffsetSeconds	Offset seconds of UTC	UTCオフセット秒数
 sEnableFramerate	Framerate	フレームレート
 sFramerateColor	Color	色
 sFramerateOffset	Offsets	表示オフセット

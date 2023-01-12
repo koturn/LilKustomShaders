@@ -18,7 +18,9 @@
     float _ALTimeOfDayDisplayLength; \
     float _ALTimeOfDayAlign; \
     int _ALTimeOfDayKind; \
-    float _ALTimeOfDayOffsetSeconds; \
+    bool _EnableALTimeOfDayUtcFallback; \
+    float _ALTimeOfDayLocalTimeOffsetSeconds; \
+    float _ALTimeOfDayUtcOffsetSeconds; \
     bool _EnableFramerate; \
     float4 _FramerateColor; \
     float4 _FramerateOffsetScale; \

@@ -72,9 +72,17 @@ namespace Koturn.lilToon
         /// </summary>
         private MaterialProperty _alTimeOfDayKind;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayOffsetSeconds".
+        /// <see cref="MaterialProperty"/> of "_EnableALTimeOfDayUtcFallback".
         /// </summary>
-        private MaterialProperty _alTimeOfDayOffsetSeconds;
+        private MaterialProperty _enableALTimeOfDayUtcFallback;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayLocalTimeOffsetSeconds".
+        /// </summary>
+        private MaterialProperty _alTimeOfDayLocalTimeOffsetSeconds;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayUtcOffsetSeconds".
+        /// </summary>
+        private MaterialProperty _alTimeOfDayUtcOffsetSeconds;
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_EnableFramerate".
         /// </summary>
@@ -181,7 +189,9 @@ namespace Koturn.lilToon
             _alTimeOfDayDisplayLength = FindProperty("_ALTimeOfDayDisplayLength", props);
             _alTimeOfDayAlign = FindProperty("_ALTimeOfDayAlign", props);
             _alTimeOfDayKind = FindProperty("_ALTimeOfDayKind", props);
-            _alTimeOfDayOffsetSeconds = FindProperty("_ALTimeOfDayOffsetSeconds", props);
+            _enableALTimeOfDayUtcFallback = FindProperty("_EnableALTimeOfDayUtcFallback", props);
+            _alTimeOfDayLocalTimeOffsetSeconds = FindProperty("_ALTimeOfDayLocalTimeOffsetSeconds", props);
+            _alTimeOfDayUtcOffsetSeconds = FindProperty("_ALTimeOfDayUtcOffsetSeconds", props);
             _enableFramerate = FindProperty("_EnableFramerate", props);
             _framerateColor = FindProperty("_FramerateColor", props);
             _framerateOffsetScale = FindProperty("_FramerateOffsetScale", props);
@@ -255,7 +265,19 @@ namespace Koturn.lilToon
                                 m_MaterialEditor.ShaderProperty(_alTimeOfDayDisplayLength, GetLoc("sALTimeOfDayDisplayLength"));
                                 m_MaterialEditor.ShaderProperty(_alTimeOfDayAlign, GetLoc("sALTimeOfDayAlign"));
                                 m_MaterialEditor.ShaderProperty(_alTimeOfDayKind, GetLoc("sALTimeOfDayKind"));
-                                m_MaterialEditor.ShaderProperty(_alTimeOfDayOffsetSeconds, GetLoc("sALTimeOfDayOffsetSeconds"));
+                                var showFallback = false;
+                                if ((int)_alTimeOfDayKind.floatValue == 1) {
+                                    m_MaterialEditor.ShaderProperty(_enableALTimeOfDayUtcFallback, GetLoc("sEnableALTimeOfDayUtcFallback"));
+                                    if (ToBool(_enableALTimeOfDayUtcFallback.floatValue)) {
+                                        showFallback = true;
+                                    }
+                                }
+                                if ((int)_alTimeOfDayKind.floatValue == 0 || showFallback) {
+                                    m_MaterialEditor.ShaderProperty(_alTimeOfDayLocalTimeOffsetSeconds, GetLoc("sALTimeOfDayLocalTimeOffsetSeconds"));
+                                }
+                                if ((int)_alTimeOfDayKind.floatValue == 1) {
+                                    m_MaterialEditor.ShaderProperty(_alTimeOfDayUtcOffsetSeconds, GetLoc("sALTimeOfDayUtcOffsetSeconds"));
+                                }
                             }
                         }
                     }
