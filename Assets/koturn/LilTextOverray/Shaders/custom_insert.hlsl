@@ -153,7 +153,11 @@ bool AudioLinkIsAvailable()
 float4 AudioLinkData(uint2 xycoord)
 {
 #ifdef LIL_LWTEX
-    return tex2Dlod(_AudioTexture, float4(xycoord * _AudioTexture_TexelSize.xy, 0, 0));
+    // Assume that this function is only used in fragment shader.
+    return LIL_SAMPLE_2D(_AudioTexture, sampler_linear_clamp, xycoord * _AudioTexture_TexelSize.xy);
+
+    // If this function also used in vertex shader, use following code.
+    // return LIL_SAMPLE_2D_LOD(_AudioTexture, sampler_linear_clamp, xycoord * _AudioTexture_TexelSize.xy, 0);
 #else
     return _AudioTexture[xycoord];
 #endif  // LIL_LWTEX
