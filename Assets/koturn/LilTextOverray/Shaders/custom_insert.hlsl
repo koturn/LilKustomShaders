@@ -21,13 +21,6 @@
 #    endif  // _ENABLEWORLDPOS_ON
 #endif  // LIL_MULTI
 
-// Mechanism to index into texture.
-#ifdef LIL_LWTEX
-#    define AudioLinkData(xycoord) tex2Dlod(_AudioTexture, float4(uint2(xycoord) * _AudioTexture_TexelSize.xy, 0, 0))
-#else
-#    define AudioLinkData(xycoord) _AudioTexture[uint2(xycoord)]
-#endif  // LIL_LWTEX
-
 
 //! Number of digits in splite sheet texture.
 static const float kColumns = 10.0;
@@ -148,6 +141,21 @@ bool AudioLinkIsAvailable()
     int width, height;
     _AudioTexture.GetDimensions(/* out */ width, /* out */ height);
     return width > 16;
+#endif  // LIL_LWTEX
+}
+
+
+/*!
+ * @brief Get AudioLink data.
+ * @param [in] xycoord  XY coordinate in _AudioTexture.
+ * @return AudioLink data.
+ */
+float4 AudioLinkData(uint2 xycoord)
+{
+#ifdef LIL_LWTEX
+    return tex2Dlod(_AudioTexture, float4(xycoord * _AudioTexture_TexelSize.xy, 0, 0));
+#else
+    return _AudioTexture[xycoord];
 #endif  // LIL_LWTEX
 }
 
