@@ -80,7 +80,7 @@
 #define BEFORE_BLEND_EMISSION \
     UNITY_BRANCH \
     if (isElapsedTimeEnabled()) { \
-        const float2 uv2 = invAffineTransform(fd.uvMain, _ElapsedTimeOffsetScale.zw, _ElapsedTimeRotAngle, _ElapsedTimeOffsetScale.xy); \
+        const float2 uv2 = invAffineTransform(fd.uvMain, _ElapsedTimeOffsetScale.xy, _ElapsedTimeRotAngle, _ElapsedTimeOffsetScale.zw); \
         if (all(saturate(uv2) == uv2)) { \
             const float3 hms = fmodglsl( \
                 LIL_TIME.xxx / float3(3600.0, 60.0, 1.0), \
@@ -92,7 +92,7 @@
     UNITY_BRANCH \
     if (isALTimeOfDayEnabled()) { \
         if (AudioLinkIsAvailable()) { \
-            const float2 uv2 = invAffineTransform(fd.uvMain, _ALTimeOfDayOffsetScale.zw, _ALTimeOfDayRotAngle, _ALTimeOfDayOffsetScale.xy); \
+            const float2 uv2 = invAffineTransform(fd.uvMain, _ALTimeOfDayOffsetScale.xy, _ALTimeOfDayRotAngle, _ALTimeOfDayOffsetScale.zw); \
             if (all(saturate(uv2) == uv2)) { \
                 const float hmsval = dot(AudioLinkGetTimeOfDay(), float3(10000.0, 100.0, 1.0)); \
                 fd.emissionColor += sampleSplite(hmsval, uv2, _ALTimeOfDayDisplayLength, _ALTimeOfDayAlign) * _ALTimeOfDayColor.rgb; \
@@ -101,14 +101,14 @@
     } \
     UNITY_BRANCH \
     if (isFramerateEnabled()) { \
-        const float2 uv2 = invAffineTransform(fd.uvMain, _FramerateOffsetScale.zw, _FramerateRotAngle, _FramerateOffsetScale.xy); \
+        const float2 uv2 = invAffineTransform(fd.uvMain, _FramerateOffsetScale.xy, _FramerateRotAngle, _FramerateOffsetScale.zw); \
         if (all(saturate(uv2) == uv2)) { \
             fd.emissionColor += sampleSplite(round(unity_DeltaTime.w), uv2, _FramerateDisplayLength, _FramerateAlign) * _FramerateColor.rgb; \
         } \
     } \
     UNITY_BRANCH \
     if (isWorldPosEnabled()) { \
-        float2 uv2 = invAffineTransform(fd.uvMain, _WorldPosOffsetScale.zw, _WorldPosRotAngle, _WorldPosOffsetScale.xy); \
+        float2 uv2 = invAffineTransform(fd.uvMain, _WorldPosOffsetScale.xy, _WorldPosRotAngle, _WorldPosOffsetScale.zw); \
         if (all(saturate(uv2) == uv2)) { \
             const float3 worldPos = unity_ObjectToWorld._m03_m13_m23; \
             const float pos = round(uv2.y < (1.0 / 3.0) ? worldPos.x : uv2.y < (2.0 / 3.0) ? worldPos.y : worldPos.z); \
@@ -321,12 +321,12 @@ float2 rotate2D(float2 v, float angle)
 /*!
  * @brief Inverse affine trasform UV coordinate.
  * @param [in] uv  Source UV.
- * @param [in] scale  Scaling factor.
- * @param [in] rotAngle  Rotation angle in degrees.
  * @param [in] translate Translate factor.
+ * @param [in] rotAngle  Rotation angle in degrees.
+ * @param [in] scale  Scaling factor.
  * @return Affine transformed UV coordinate.
  */
-float2 invAffineTransform(float2 uv, float2 scale, float rotAngle, float2 translate)
+float2 invAffineTransform(float2 uv, float2 translate, float rotAngle, float2 scale)
 {
     static const float2 uvCenter = float2(0.5, 0.5);
 
