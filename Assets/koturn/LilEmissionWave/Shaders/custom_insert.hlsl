@@ -32,6 +32,7 @@ static const int kWaveAxisFree = 3;
 
 float3 getEmissionPos(float3 positionOS)
 {
+    UNITY_BRANCH
     if (_WavePosSpace == kWavePosSpaceObject) {
         return positionOS;
     } else {
@@ -46,6 +47,7 @@ float3 getEmissionPos(float3 positionOS)
 
 float pickupPosition(float3 pos)
 {
+    UNITY_BRANCH
     if (_WaveAxis == kWaveAxisFree) {
         float3 s3, c3;
         sincos(_WaveAxisAngles, s3, c3);
