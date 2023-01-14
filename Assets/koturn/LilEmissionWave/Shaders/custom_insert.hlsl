@@ -1,7 +1,7 @@
-#ifdef LIL_MOULTI
+#ifdef LIL_MULTI
 #    if defined(_WAVEPOSSPACE_OBJECT)
 #        define _WavePosSpace 0
-#    elif defined(_WAVEPOSSPACE_OBJECT)
+#    elif defined(_WAVEPOSSPACE_WORLD)
 #        define _WavePosSpace 1
 #    endif  // defined(_WAVEPOSSPACE_OBJECT)
 #    if defined(_WAVEAXIS_X)
@@ -13,7 +13,7 @@
 #    elif defined(_WAVEAXIS_FREE)
 #        define _WaveAxis 3
 #    endif
-#endif  // LIL_MOULTI
+#endif  // LIL_MULTI
 
 
 float3 getEmissionPos(float3 positionOS)
