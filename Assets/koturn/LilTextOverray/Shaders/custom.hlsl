@@ -292,20 +292,6 @@ float calcDigit(float val, float digitNum)
 
 
 /*!
- * @brief Get 2D-rotation matrix.
- *
- * @param [in] angle  Angle of rotation.
- * @return 2D-rotation matrix.
- */
-float2x2 rotate2DMat(float angle)
-{
-    float s, c;
-    sincos(angle, s, c);
-    return float2x2(c, -s, s, c);
-}
-
-
-/*!
  * @brief Rotate on 2D plane
  *
  * @param [in] v  Target vector
@@ -314,7 +300,11 @@ float2x2 rotate2DMat(float angle)
  */
 float2 rotate2D(float2 v, float angle)
 {
-    return mul(rotate2DMat(angle), v);
+    float s, c;
+    sincos(angle, /* out */ s, /* out */ c);
+    return float2(
+        v.x * c - v.y * s,
+        v.x * s + v.y * c);
 }
 
 

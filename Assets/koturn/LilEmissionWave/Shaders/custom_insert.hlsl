@@ -51,9 +51,16 @@ float pickupPosition(float3 pos)
     if (_WaveAxis == kWaveAxisFree) {
         float3 s3, c3;
         sincos(_WaveAxisAngles, s3, c3);
-        pos.yz = mul(float2x2(c3.x, -s3.x, s3.x, c3.x), pos.yz);
-        pos.zx = mul(float2x2(c3.y, -s3.y, s3.y, c3.y), pos.zx);
-        pos.xy = mul(float2x2(c3.z, -s3.z, s3.z, c3.z), pos.xy);
+        pos.yz = float2(
+            pos.y * c3.x - pos.z * s3.x,
+            pos.y * s3.x + pos.z * c3.x);
+        pos.zx = float2(
+            pos.z * c3.y - pos.x * s3.y,
+            pos.z * s3.y + pos.x * c3.y);
+        pos.xy = float2(
+            pos.x * c3.z - pos.y * s3.z,
+            pos.x * s3.z + pos.y * c3.z);
+
         return pos.y;
     } else {
         return _WaveAxis == kWaveAxisX ? pos.x
