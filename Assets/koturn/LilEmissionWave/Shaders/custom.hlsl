@@ -63,7 +63,7 @@
     const float uDiff = frac(LIL_TIME * _EmissionWaveTimeScale + _EmissionWaveTimePhase) - remap01(_EmissionPosMin, _EmissionPosMax, input.emissionWavePos); \
     const float sDiff = 2.0 * uDiff - 1.0; \
     const float eFact = pow(0.5 * cos(clamp(sDiff * _EmissionWaveParam.x, -1.0, 1.0) * UNITY_PI) + 0.5, _EmissionWaveParam.y); \
-    fd.emissionColor += _EmissionWaveColor * eFact;
+    fd.col.rgb += calcEmissionColor(_EmissionWaveColor * eFact, fd.col.a);
 
 
 

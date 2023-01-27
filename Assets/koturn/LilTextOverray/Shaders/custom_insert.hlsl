@@ -138,6 +138,22 @@ float3 sampleSpliteSigned(float val, float2 uv, float displayLength, float align
 
 
 /*!
+ * @brief Calculate emission color.
+ * @param [in] emissionColor  Base emission color.
+ * @param [in] alpha  Alpha value.
+ * @return Calculated emission color.
+ */
+float3 calcEmissionColor(float3 emissionColor, float alpha)
+{
+#if LIL_RENDER == 2 && !defined(LIL_REFRACTION)
+    return emissionColor * fd.col.a;
+#else
+    return emissionColor;
+#endif  // LIL_RENDER == 2 && !defined(LIL_REFRACTION)
+}
+
+
+/*!
  * @brief Tests to see if Audio Link texture is available.
  * @return True if Audio Link texture is available, otherwise false.
  */

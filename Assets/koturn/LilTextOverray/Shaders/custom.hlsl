@@ -86,7 +86,7 @@
                 LIL_TIME.xxx / float3(3600.0, 60.0, 1.0), \
                 float3(100.0, 60.0, 60.0)); \
             const float hmsval = dot(floor(hms), float3(10000.0, 100.0, 1.0)); \
-            fd.emissionColor += sampleSplite(hmsval, uv2, _ElapsedTimeDisplayLength, _ElapsedTimeAlign) * _ElapsedTimeColor.rgb; \
+            fd.col.rgb += calcEmissionColor(sampleSplite(hmsval, uv2, _ElapsedTimeDisplayLength, _ElapsedTimeAlign) * _ElapsedTimeColor.rgb, fd.col.a); \
         } \
     } \
     UNITY_BRANCH \
@@ -95,7 +95,7 @@
             const float2 uv2 = invAffineTransform(fd.uvMain, _ALTimeOfDayOffsetScale.xy, _ALTimeOfDayRotAngle, _ALTimeOfDayOffsetScale.zw); \
             if (all(saturate(uv2) == uv2)) { \
                 const float hmsval = dot(AudioLinkGetTimeOfDay(), float3(10000.0, 100.0, 1.0)); \
-                fd.emissionColor += sampleSplite(hmsval, uv2, _ALTimeOfDayDisplayLength, _ALTimeOfDayAlign) * _ALTimeOfDayColor.rgb; \
+                fd.col.rgb += calcEmissionColor(sampleSplite(hmsval, uv2, _ALTimeOfDayDisplayLength, _ALTimeOfDayAlign) * _ALTimeOfDayColor.rgb, fd.col.a); \
             } \
         } \
     } \
@@ -103,7 +103,7 @@
     if (isFramerateEnabled()) { \
         const float2 uv2 = invAffineTransform(fd.uvMain, _FramerateOffsetScale.xy, _FramerateRotAngle, _FramerateOffsetScale.zw); \
         if (all(saturate(uv2) == uv2)) { \
-            fd.emissionColor += sampleSplite(round(unity_DeltaTime.w), uv2, _FramerateDisplayLength, _FramerateAlign) * _FramerateColor.rgb; \
+            fd.col.rgb += calcEmissionColor(sampleSplite(round(unity_DeltaTime.w), uv2, _FramerateDisplayLength, _FramerateAlign) * _FramerateColor.rgb, fd.col.a); \
         } \
     } \
     UNITY_BRANCH \
@@ -114,7 +114,7 @@
             const float pos = round(uv2.y < (1.0 / 3.0) ? worldPos.x : uv2.y < (2.0 / 3.0) ? worldPos.y : worldPos.z); \
             const float3 posCol = uv2.y < (1.0 / 3.0) ? _WorldPosColorX : uv2.y < (2.0 / 3.0) ? _WorldPosColorY : _WorldPosColorZ; \
             uv2.y *= 3.0; \
-            fd.emissionColor += sampleSpliteSigned(pos, uv2, _WorldPosDisplayLength, _WorldPosAlign) * posCol; \
+            fd.col.rgb += calcEmissionColor(sampleSpliteSigned(pos, uv2, _WorldPosDisplayLength, _WorldPosAlign) * posCol, fd.col.a); \
         } \
     }
 

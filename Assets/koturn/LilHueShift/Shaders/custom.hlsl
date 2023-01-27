@@ -52,9 +52,6 @@
     fd.col.rgb = rgbAddHue(fd.col.rgb, hsValue); \
     fd.albedo = fd.col.rgb;
 
-#define BEFORE_BLEND_EMISSION \
-    fd.emissionColor = rgbAddHue(fd.emissionColor, hsValue);
-
 
 //----------------------------------------------------------------------------------------------------------------------
 // Information about variables
