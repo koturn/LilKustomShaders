@@ -79,7 +79,7 @@ float pickupPosition(float3 pos)
 float3 calcEmissionColor(float3 emissionColor, float alpha)
 {
 #if LIL_RENDER == 2 && !defined(LIL_REFRACTION)
-    return emissionColor * fd.col.a;
+    return emissionColor * alpha;
 #else
     return emissionColor;
 #endif  // LIL_RENDER == 2 && !defined(LIL_REFRACTION)
