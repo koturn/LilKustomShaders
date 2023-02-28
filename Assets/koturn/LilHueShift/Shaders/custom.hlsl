@@ -166,11 +166,25 @@ inline float3 rgb2hsv(float3 rgb)
     static const float4 k = float4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
     static const float e = 1.0e-10;
 
+#if 1
+    const bool b1 = rgb.g < rgb.b;
+    float4 p = float4(b1 ? rgb.gb : rgb.bg, b1 ? k.wz : k.xy);
+
+    const bool b2 = rgb.r < p.x;
+    p.xyz = b2 ? p.xyw : p.yzx;
+    const float4 q = b2 ? float4(p.xyz, rgb.r) : float4(rgb.r, p.xyz);
+
+    const float d = q.x - min(q.w, q.y);
+    const float2 hs = float2(q.w - q.y, d) / float2(6.0 * d + e, q.x + e);
+
+    return float3(abs(q.z + hs.x), hs.y, q.x);
+#else
     const float4 p = rgb.g < rgb.b ? float4(rgb.bg, k.wz) : float4(rgb.gb, k.xy);
     const float4 q = rgb.r < p.x ? float4(p.xyw, rgb.r) : float4(rgb.r, p.yzx);
     const float d = q.x - min(q.w, q.y);
 
     return float3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+#endif
 }
 
 inline float3 hsv2rgb(float3 hsv)
