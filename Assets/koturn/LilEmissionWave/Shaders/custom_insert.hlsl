@@ -84,3 +84,6 @@ float3 calcEmissionColor(float3 emissionColor, float alpha)
     return emissionColor;
 #endif  // LIL_RENDER == 2 && !defined(LIL_REFRACTION)
 }
+
+
+#include "../../LilKommon/Shaders/OptLilCommonFunctions.hlsl"

@@ -108,3 +108,6 @@ half4 getRefProbeColor(float3 refDir, float3 worldPos)
         getRefProbeColor0(refDir, worldPos),
         unity_SpecCube0_BoxMin.w);
 }
+
+
+#include "../../LilKommon/Shaders/OptLilCommonFunctions.hlsl"

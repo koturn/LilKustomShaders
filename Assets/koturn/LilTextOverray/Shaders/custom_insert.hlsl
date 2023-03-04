@@ -257,3 +257,6 @@ float3 AudioLinkGetTimeOfDay()
     const float seconds = AudioLinkDecodeDataAsSeconds(indexloc) + offsetSeconds;
     return floor(fmodglsl(seconds.xxx / float3(3600.0, 60.0, 1.0), float3(24.0, 60.0, 60.0)));
 }
+
+
+#include "../../LilKommon/Shaders/OptLilCommonFunctions.hlsl"
