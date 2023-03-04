@@ -6,7 +6,13 @@ float3 lilDecodeHDROpt(float4 data, float4 hdr);
 float3 lilCustomReflectionOpt(TEXTURECUBE(tex), float4 hdr, float3 viewDirection, float3 normalDirection, float perceptualRoughness);
 float3 lilToneCorrectionOpt(float3 c, float4 hsvg);
 void lilPOMOpt(inout float2 uvMain, inout float2 uv, lilBool useParallax, float4 uv_st, float3 parallaxViewDirection, TEXTURE2D(parallaxMap), float parallaxScale, float parallaxOffsetParam);
+float3 lilCalcGlitterOpt(float2 uv, float3 normalDirection, float3 viewDirection, float3 cameraDirection, float3 lightDirection, float4 glitterParams1, float4 glitterParams2, float glitterPostContrast, float glitterSensitivity, float glitterScaleRandomize, uint glitterAngleRandomize, bool glitterApplyShape, TEXTURE2D(glitterShapeTex), float4 glitterShapeTex_ST, float4 glitterAtras);
+
+#ifdef LIL_BRP
+void lilGetAdditionalLightsOpt(float3 positionWS, float4 positionCS, float strength, inout float3 lightColor, inout float3 lightDirection);;
+float3 lilGetAdditionalLightsOpt(float3 positionWS, float4 positionCS, float strength);
 float3 lilGetEnvReflectionOpt(float3 viewDirection, float3 normalDirection, float perceptualRoughness, float3 positionWS);
+#endif  // LIL_BRP
 
 half3 DecodeHDROpt(half4 data, half4 hdr);
 float3 BoxProjectedCubemapDirectionOpt(float3 worldRefDir, float3 worldPos, float4 probePos, float4 boxMin, float4 boxMax);
@@ -18,7 +24,12 @@ half3 UnityGI_IndirectSpecularOpt(UnityGIInput data, half occlusion, Unity_Gloss
 #define lilCustomReflection lilCustomReflectionOpt
 #define lilToneCorrection lilToneCorrectionOpt
 #define lilPOM lilPOMOpt
-#define lilGetEnvReflection lilGetEnvReflectionOpt
+#define lilCalcGlitter lilCalcGlitterOpt
+
+#ifdef LIL_BRP
+#    define lilGetAdditionalLights lilGetAdditionalLightsOpt
+#    define lilGetEnvReflection lilGetEnvReflectionOpt
+#endif  // LIL_BRP
 
 #define DecodeHDR DecodeHDROpt
 #define BoxProjectedCubemapDirection BoxProjectedCubemapDirectionOpt
@@ -41,7 +52,7 @@ float3 lilDecodeHDROpt(float4 data, float4 hdr)
 #else
     const float alpha = hdr.w * (data.a - 1.0) + 1.0;
     return (hdr.x * pow(abs(alpha), hdr.y)) * data.rgb;
-#endif
+#endif  // defined(LIL_COLORSPACE_GAMMA)
 }
 
 
@@ -149,6 +160,136 @@ void lilPOMOpt(inout float2 uvMain, inout float2 uv, lilBool useParallax, float4
 
 
 /*!
+ * @brief Calculate glitter.
+ * @param [in] uv  UV coordinate.
+ * @param [in] normalDirection  Normal direction.
+ * @param [in] viewDirection  View direction.
+ * @param [in] cameraDirection  Camera direction.
+ * @param [in] lightDirection  Light direction.
+ * @param [in] glitterParams1  Glitter parameter vector (x: Scale, y: Scale, z: Size, w: Contrast)
+ * @param [in] glitterParams2  Glitter parameter vector (x: Speed, y: Angle, z: Light Direction, w:)
+ * @param [in] glitterPostContrast  Post contrast.
+ * @param [in] glitterSensitivity  Sensitivity
+ * @param [in] glitterScaleRandomize  Coefficient of randomize glitter scale.
+ * @param [in] glitterAngleRandomize  Coefficient of randomize glitter angle.
+ * @param [in] glitterApplyShape  Switch flag whether apply shape texture or not.
+ * @param [in] TEXTURE2D(glitterShapeTex)  Shape texture of glitter.
+ * @param [in] glitterShapeTex_ST  Tiling and Offset of glitterShapeTex.
+ * @param [in] glitterAtras  Glitter atlas.
+ * @return Glitter color.
+ */
+float3 lilCalcGlitterOpt(float2 uv, float3 normalDirection, float3 viewDirection, float3 cameraDirection, float3 lightDirection, float4 glitterParams1, float4 glitterParams2, float glitterPostContrast, float glitterSensitivity, float glitterScaleRandomize, uint glitterAngleRandomize, bool glitterApplyShape, TEXTURE2D(glitterShapeTex), float4 glitterShapeTex_ST, float4 glitterAtras)
+{
+    // glitterParams1
+    // x: Scale, y: Scale, z: Size, w: Contrast
+    // glitterParams2
+    // x: Speed, y: Angle, z: Light Direction, w:
+
+    float2 pos = uv * glitterParams1.xy;
+    const float2 dd = fwidth(pos);
+    const float factor = frac(sin(dot(floor(pos / floor(dd + 3.0)), float2(12.9898, 78.233))) * 46203.4357) + 0.5;
+    const float2 factor2 = floor(dd + factor * 0.5);
+    pos = pos / max(1.0, factor2) + glitterParams1.xy * factor2;
+
+    float2 nearoffset;
+    const float4 near = lilVoronoi(pos, /* out */ nearoffset, glitterScaleRandomize);
+
+    // Glitter
+    float3 glitterNormal = abs(frac(near.xyz * 14.274 + _Time.x * glitterParams2.x) * 2.0 - 1.0);
+    glitterNormal = normalize(glitterNormal * 2.0 - 1.0);
+    float glitter = dot(glitterNormal, cameraDirection);
+    glitter = abs(frac(glitter * glitterSensitivity + glitterSensitivity) - 0.5) * 4.0 - 1.0;
+    glitter = saturate(1.0 - (glitter * glitterParams1.w + glitterParams1.w));
+    glitter = pow(glitter, glitterPostContrast);
+    // Circle
+    glitter *= saturate((glitterParams1.z-near.w) / fwidth(near.w));
+    // Angle
+    const float3 halfDirection = normalize(viewDirection + lightDirection * glitterParams2.z);
+    const float nh = saturate(dot(normalDirection, halfDirection));
+    glitter = saturate(glitter * saturate(nh * glitterParams2.y + 1.0 - glitterParams2.y));
+    // Random Color
+    float3 glitterColor = glitter - glitter * frac(near.xyz * 278.436) * glitterParams2.w;
+    // Shape
+#ifdef LIL_FEATURE_GlitterShapeTex
+    if (glitterApplyShape) {
+        float2 maskUV = pos - floor(pos) - nearoffset + 0.5 - near.xy;
+        maskUV = maskUV / glitterParams1.z * glitterShapeTex_ST.xy + glitterShapeTex_ST.zw;
+        if (glitterAngleRandomize) {
+            float si, co;
+            sincos(near.z * 785.238, si, co);
+            maskUV = float2(
+                maskUV.x * co - maskUV.y * si,
+                maskUV.x * si + maskUV.y * co);
+        }
+        const float randomScale = lerp(1.0, rsqrt(max(near.z, 0.001)), glitterScaleRandomize);
+        maskUV = maskUV * randomScale + 0.5;
+        const bool clamp = all(maskUV.xy == saturate(maskUV.xy));
+        maskUV = (maskUV + floor(near.xy * glitterAtras.xy)) / glitterAtras.xy;
+        const float2 mipfactor = 0.125 / glitterParams1.z * glitterAtras.xy * glitterShapeTex_ST.xy * randomScale;
+        float4 shapeTex = LIL_SAMPLE_2D_GRAD(glitterShapeTex, lil_sampler_linear_clamp, maskUV, abs(ddx(pos)) * mipfactor.x, abs(ddy(pos)) * mipfactor.y);
+        shapeTex.a = clamp ? shapeTex.a : 0;
+        glitterColor *= shapeTex.rgb * shapeTex.a;
+    }
+#endif  // LIL_FEATURE_GlitterShapeTex
+
+    return glitterColor;
+}
+
+
+#ifdef LIL_BRP
+/*!
+ * @brief Get additional lights.
+ * @param [in] positionWS  World space position.
+ * @param [in] positionCS  Clip space position.
+ * @param [in] strength  Light strength.
+ * @param [in,out] lightColor  Light color.
+ * @param [in,out] lightDirection  Light direction.
+ * @return Additional light color.
+ */
+void lilGetAdditionalLightsOpt(float3 positionWS, float4 positionCS, float strength, inout float3 lightColor, inout float3 lightDirection)
+{
+#if defined(LIGHTPROBE_SH) && defined(VERTEXLIGHT_ON)
+    const float4 toLightX = unity_4LightPosX0 - positionWS.x;
+    const float4 toLightY = unity_4LightPosY0 - positionWS.y;
+    const float4 toLightZ = unity_4LightPosZ0 - positionWS.z;
+
+    float4 lengthSq = toLightX * toLightX + 0.000001;
+    lengthSq += toLightY * toLightY;
+    lengthSq += toLightZ * toLightZ;
+
+    // float4 atten = 1.0 / (1.0 + lengthSq * unity_4LightAtten0);
+    const float4 atten = saturate(saturate((25.0 - lengthSq * unity_4LightAtten0) * 0.111375) / (0.987725 + lengthSq * unity_4LightAtten0)) * strength;
+    lightColor += unity_LightColor[0].rgb * atten.x;
+    lightColor += unity_LightColor[1].rgb * atten.y;
+    lightColor += unity_LightColor[2].rgb * atten.z;
+    lightColor += unity_LightColor[3].rgb * atten.w;
+
+    const float4 attenLengthRcp = atten * rsqrt(lengthSq);
+    lightDirection += lilLuminance(unity_LightColor[0].rgb) * attenLengthRcp.x * float3(toLightX.x, toLightY.x, toLightZ.x);
+    lightDirection += lilLuminance(unity_LightColor[1].rgb) * attenLengthRcp.y * float3(toLightX.y, toLightY.y, toLightZ.y);
+    lightDirection += lilLuminance(unity_LightColor[2].rgb) * attenLengthRcp.z * float3(toLightX.z, toLightY.z, toLightZ.z);
+    lightDirection += lilLuminance(unity_LightColor[3].rgb) * attenLengthRcp.w * float3(toLightX.w, toLightY.w, toLightZ.w);
+#endif  // defined(LIGHTPROBE_SH) && defined(VERTEXLIGHT_ON)
+}
+
+
+/*!
+ * @brief Get additional lights.
+ * @param [in] positionWS  World space position.
+ * @param [in] positionCS  Clip space position.
+ * @param [in] strength  Light strength.
+ * @return Additional light color.
+ */
+float3 lilGetAdditionalLightsOpt(float3 positionWS, float4 positionCS, float strength)
+{
+    float3 lightColor = 0.0;
+    float3 lightDirection = 0.0;
+    lilGetAdditionalLights(positionWS, positionCS, strength, /* inout */ lightColor, /* inout */ lightDirection);
+    return saturate(lightColor);
+}
+
+
+/*!
  * @brief Calculate color of environment reflection.
  * @param [in] viewDirection  View direction.
  * @param [in] normalDirection  Normal direction.
@@ -162,6 +303,7 @@ float3 lilGetEnvReflectionOpt(float3 viewDirection, float3 normalDirection, floa
     const Unity_GlossyEnvironmentData glossIn = lilSetupGlossyEnvironmentData(viewDirection, normalDirection, perceptualRoughness);
     return UnityGI_IndirectSpecularOpt(data, 1.0, glossIn);
 }
+#endif  // LIL_BRP
 
 
 /*!
@@ -180,7 +322,7 @@ half3 DecodeHDROpt(half4 data, half4 hdr)
 #else
     const half alpha = hdr.w * (data.a - 1.0) + 1.0;
     return (hdr.x * pow(alpha, hdr.y)) * data.rgb;
-#endif
+#endif  // defined(UNITY_COLORSPACE_GAMMA)
 }
 
 
@@ -267,7 +409,7 @@ half3 UnityGI_IndirectSpecularOpt(UnityGIInput data, half occlusion, Unity_Gloss
     // so keep original to pass into BoxProjectedCubemapDirection
     const half3 originalReflUVW = glossIn.reflUVW;
     glossIn.reflUVW = BoxProjectedCubemapDirection(originalReflUVW, data.worldPos, data.probePosition[0], data.boxMin[0], data.boxMax[0]);
-#endif
+#endif  // UNITY_SPECCUBE_BOX_PROJECTION
 
 #ifdef _GLOSSYREFLECTIONS_OFF
     specular = unity_IndirectSpecColor.rgb;
@@ -288,7 +430,7 @@ half3 UnityGI_IndirectSpecularOpt(UnityGIInput data, half occlusion, Unity_Gloss
         }
 #    else
         specular = env0;
-#    endif
+#    endif  // UNITY_SPECCUBE_BLENDING
 #endif  // _GLOSSYREFLECTIONS_OFF
 
     return specular * occlusion;
