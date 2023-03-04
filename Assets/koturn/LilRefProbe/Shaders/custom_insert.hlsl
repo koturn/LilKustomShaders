@@ -1,3 +1,7 @@
+#include "../../LilOptimized/Shaders/LilOptCommonFunctions.hlsl"
+#include "../../LilOptimized/Shaders/LilOverride.hlsl"
+
+
 /*!
  * @brief Obtain reflection direction considering box projection.
  *
@@ -108,6 +112,3 @@ half4 getRefProbeColor(float3 refDir, float3 worldPos)
         getRefProbeColor0(refDir, worldPos),
         unity_SpecCube0_BoxMin.w);
 }
-
-
-#include "../../LilKommon/Shaders/OptLilCommonFunctions.hlsl"

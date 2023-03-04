@@ -1,5 +1,5 @@
-#ifndef OPT_LIL_COMMON_FUNCTIONS
-#define OPT_LIL_COMMON_FUNCTIONS
+#ifndef LIL_OPT_COMMON_FUNCTIONS
+#define LIL_OPT_COMMON_FUNCTIONS
 
 
 float3 lilDecodeHDROpt(float4 data, float4 hdr);
@@ -437,4 +437,4 @@ half3 UnityGI_IndirectSpecularOpt(UnityGIInput data, half occlusion, Unity_Gloss
 }
 
 
-#endif  // OPT_LIL_COMMON_FUNCTIONS
+#endif  // LIL_OPT_COMMON_FUNCTIONS
