@@ -161,14 +161,19 @@
 // uint2    tileIndex               tile index (for HDRP)
 
 
-inline float3 rgb2hsv(float3 rgb)
+/*!
+ * @brief Convert from RGB to HSV.
+ * @param [in] rgb  Vector of RGB components.
+ * @return Vector of HSV components.
+ */
+float3 rgb2hsv(float3 rgb)
 {
     static const float4 k = float4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
     static const float e = 1.0e-10;
-
 #if 1
+    // Optimized version.
     const bool b1 = rgb.g < rgb.b;
-    float4 p = float4(b1 ? rgb.gb : rgb.bg, b1 ? k.wz : k.xy);
+    float4 p = float4(b1 ? rgb.bg : rgb.gb, b1 ? k.wz : k.xy);
 
     const bool b2 = rgb.r < p.x;
     p.xyz = b2 ? p.xyw : p.yzx;
@@ -179,6 +184,7 @@ inline float3 rgb2hsv(float3 rgb)
 
     return float3(abs(q.z + hs.x), hs.y, q.x);
 #else
+    // Original version
     const float4 p = rgb.g < rgb.b ? float4(rgb.bg, k.wz) : float4(rgb.gb, k.xy);
     const float4 q = rgb.r < p.x ? float4(p.xyw, rgb.r) : float4(rgb.r, p.yzx);
     const float d = q.x - min(q.w, q.y);
@@ -187,7 +193,13 @@ inline float3 rgb2hsv(float3 rgb)
 #endif
 }
 
-inline float3 hsv2rgb(float3 hsv)
+
+/*!
+ * @brief Convert from HSV to RGB.
+ * @param [in] hsv  Vector of HSV components.
+ * @return Vector of RGB components.
+ */
+float3 hsv2rgb(float3 hsv)
 {
     static const float4 k = float4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
 
@@ -196,7 +208,14 @@ inline float3 hsv2rgb(float3 hsv)
     return hsv.z * lerp(k.xxx, saturate(p - k.xxx), hsv.y);
 }
 
-inline float3 rgbAddHue(float3 rgb, float hue)
+
+/*!
+ * @brief Add hue to RGB color.
+ * @param [in] rgb  Vector of RGB components.
+ * @param [in] hue  Offset of Hue.
+ * @return Vector of RGB components.
+ */
+float3 rgbAddHue(float3 rgb, float hue)
 {
     float3 hsv = rgb2hsv(rgb);
     hsv.x += hue;

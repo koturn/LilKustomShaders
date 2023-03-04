@@ -83,7 +83,7 @@ float3 lilToneCorrectionOpt(float3 c, float4 hsvg)
     // rgb -> hsv
     //
     const bool b1 = c.g < c.b;
-    float4 p1 = float4(b1 ? c.gb : c.bg, b1 ? k1.wz : k1.xy);
+    float4 p1 = float4(b1 ? c.bg : c.gb, b1 ? k1.wz : k1.xy);
 
     const bool b2 = c.r < p1.x;
     p1.xyz = b2 ? p1.xyw : p1.yzx;
