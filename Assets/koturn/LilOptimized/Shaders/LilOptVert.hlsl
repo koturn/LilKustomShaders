@@ -278,13 +278,14 @@ void geomOpt(triangle v2g input[3], inout TriangleStream<v2f> outStream)
             furVectors[2] *= LIL_SAMPLE_2D_LOD(_FurLengthMask, lil_sampler_linear_repeat, input[2].uv0 * _MainTex_ST.xy + _MainTex_ST.zw, 0).r;
         #endif
 
+#if 0
         if(_FurLayerNum == 1)
         {
             AppendFur(outStream, output, input, furVectors, float3(1.0, 0.0, 0.0) / 1.0);
             AppendFur(outStream, output, input, furVectors, float3(0.0, 1.0, 0.0) / 1.0);
             AppendFur(outStream, output, input, furVectors, float3(0.0, 0.0, 1.0) / 1.0);
         }
-        else if(_FurLayerNum == 2)
+        else if(_FurLayerNum >= 2)
         {
             AppendFur(outStream, output, input, furVectors, float3(1.0, 0.0, 0.0) / 1.0);
             AppendFur(outStream, output, input, furVectors, float3(0.0, 1.0, 1.0) / 2.0);
@@ -302,6 +303,47 @@ void geomOpt(triangle v2g input[3], inout TriangleStream<v2f> outStream)
             AppendFur(outStream, output, input, furVectors, float3(4.0, 1.0, 1.0) / 6.0);
             AppendFur(outStream, output, input, furVectors, float3(1.0, 1.0, 0.0) / 2.0);
         }
+#elif 0
+        AppendFur(outStream, output, input, furVectors, float3(1.0, 0.0, 0.0) / 1.0);
+        AppendFur(outStream, output, input, furVectors, float3(0.0, 1.0, 0.0) / 1.0);
+        AppendFur(outStream, output, input, furVectors, float3(0.0, 0.0, 1.0) / 1.0);
+        if(_FurLayerNum >= 2)
+        {
+            AppendFur(outStream, output, input, furVectors, float3(0.0, 1.0, 1.0) / 2.0);
+            AppendFur(outStream, output, input, furVectors, float3(1.0, 0.0, 1.0) / 2.0);
+            AppendFur(outStream, output, input, furVectors, float3(1.0, 1.0, 0.0) / 2.0);
+        }
+        if(_FurLayerNum >= 3)
+        {
+            AppendFur(outStream, output, input, furVectors, float3(1.0, 4.0, 1.0) / 6.0);
+            AppendFur(outStream, output, input, furVectors, float3(0.0, 1.0, 1.0) / 2.0);
+            AppendFur(outStream, output, input, furVectors, float3(1.0, 1.0, 4.0) / 6.0);
+            AppendFur(outStream, output, input, furVectors, float3(1.0, 0.0, 1.0) / 2.0);
+            AppendFur(outStream, output, input, furVectors, float3(4.0, 1.0, 1.0) / 6.0);
+            AppendFur(outStream, output, input, furVectors, float3(1.0, 1.0, 0.0) / 2.0);
+        }
+#else
+        static const float3 factors[12] = {
+            float3(1.0, 0.0, 0.0) / 1.0,
+            float3(0.0, 1.0, 0.0) / 1.0,
+            float3(0.0, 0.0, 1.0) / 1.0,
+            float3(0.0, 1.0, 1.0) / 2.0,
+            float3(1.0, 0.0, 1.0) / 2.0,
+            float3(1.0, 1.0, 0.0) / 2.0,
+            float3(1.0, 4.0, 1.0) / 6.0,
+            float3(0.0, 1.0, 1.0) / 2.0,
+            float3(1.0, 1.0, 4.0) / 6.0,
+            float3(1.0, 0.0, 1.0) / 2.0,
+            float3(4.0, 1.0, 1.0) / 6.0,
+            float3(1.0, 1.0, 0.0) / 2.0
+        };
+
+        int loopEnd = _FurLayerNum >= 3 ? 12 : _FurLayerNum >= 2 ? 6 : 3;
+        UNITY_LOOP
+        for (int i = 0; i < loopEnd; i++) {
+            AppendFur(outStream, output, input, furVectors, factors[i]);
+        }
+#endif
         AppendFur(outStream, output, input, furVectors, float3(1.0, 0.0, 0.0) / 1.0);
         outStream.RestartStrip();
     }
@@ -693,7 +735,6 @@ lilTessellationFactors hullConstOpt(InputPatch<appdata, 3> input)
                        abs(dot(vertexNormalInput_2.normalWS, lilViewDirection(lilToAbsolutePositionWS(vertexInput_2.positionWS)))));
     nv = saturate(1.0 - float3(nv.y + nv.z, nv.z + nv.x, nv.x + nv.y) * 0.5);
     tessFactor.xyz = max(tessFactor.xyz * nv * nv, 1.0);
-    // tessFactor.w = (tessFactor.x+tessFactor.y+tessFactor.z) / 3.0;
     tessFactor.w = dot(tessFactor.xyz, 1.0 / 3.0);
 
     // Cull out of screen
