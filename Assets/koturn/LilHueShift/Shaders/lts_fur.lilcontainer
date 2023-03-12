@@ -22,6 +22,7 @@ Shader "Hidden/*LIL_SHADER_NAME*/Fur"
 
     lilSubShaderTags {"RenderType" = "TransparentCutout" "Queue" = "Transparent"}
     lilSubShaderInsert "lilCustomShaderInsert.lilblock"
+    lilSubShaderInsertPost "lilCustomShaderInsertPost.lilblock"
     lilSubShaderBRP "DefaultFur"
     lilSubShaderURP "DefaultFur"
     lilSubShaderHDRP "DefaultFur"

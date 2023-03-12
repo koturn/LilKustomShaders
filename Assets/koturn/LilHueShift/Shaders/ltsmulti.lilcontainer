@@ -13,6 +13,7 @@ Shader "*LIL_SHADER_NAME*/lilToonMulti"
 
     lilSubShaderTags {"RenderType" = "Opaque" "Queue" = "Geometry"}
     lilSubShaderInsert "lilCustomShaderInsert.lilblock"
+    lilSubShaderInsertPost "lilCustomShaderInsertPost.lilblock"
     lilSubShaderBRP "DefaultMulti"
     lilSubShaderURP "DefaultMulti"
     lilSubShaderHDRP "DefaultMulti"

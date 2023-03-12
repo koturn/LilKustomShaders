@@ -22,6 +22,7 @@ Shader "Hidden/*LIL_SHADER_NAME*/Refraction"
 
     lilSubShaderTags {"RenderType" = "Opaque" "Queue" = "Transparent-100"}
     lilSubShaderInsert "lilCustomShaderInsert.lilblock"
+    lilSubShaderInsertPost "lilCustomShaderInsertPost.lilblock"
     lilSubShaderBRP "DefaultRefraction"
     lilSubShaderURP "DefaultRefraction"
     lilSubShaderHDRP "DefaultRefraction"

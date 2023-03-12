@@ -14,6 +14,7 @@ Shader "Hidden/*LIL_SHADER_NAME*/ltspass_cutout"
     ENDHLSL
 
     lilSubShaderInsert "lilCustomShaderInsert.lilblock"
+    lilSubShaderInsertPost "lilCustomShaderInsertPost.lilblock"
     lilSubShaderBRP "Default"
     lilSubShaderURP "Default"
     lilSubShaderHDRP "Default"
