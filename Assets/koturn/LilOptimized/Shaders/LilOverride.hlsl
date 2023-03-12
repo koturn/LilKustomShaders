@@ -215,7 +215,7 @@ void lilGetShadingOverride(inout lilFragData fd LIL_SAMP_IN_FUNC(samp))
 #    else
         // lns.x *= lerp(1.0, calculatedShadow, _ShadowReceive);
         // lns.y *= lerp(1.0, calculatedShadow, _Shadow2ndReceive);
-        lns.xy *= lerp(1.0, calculatedShadow, float3(_ShadowReceive, _Shadow2ndReceive));
+        lns.xy *= lerp(1.0, calculatedShadow, float2(_ShadowReceive, _Shadow2ndReceive));
 #    endif  // LIL_FEATURE_SHADOW_3RD
 #endif  // (defined(LIL_USE_SHADOW) || defined(LIL_LIGHTMODE_SHADOWMASK)) && defined(LIL_FEATURE_RECEIVE_SHADOW)
 
@@ -223,7 +223,7 @@ void lilGetShadingOverride(inout lilFragData fd LIL_SAMP_IN_FUNC(samp))
 #ifdef LIL_FEATURE_SHADOW_3RD
         float3 shadowBlurs = float3(_ShadowBlur, _Shadow2ndBlur, _Shadow3rdBlur);
 #else
-        float2 shadowBlurs = float3(_ShadowBlur, _Shadow2ndBlur);
+        float2 shadowBlurs = float2(_ShadowBlur, _Shadow2ndBlur);
 #endif
 
 #ifdef LIL_FEATURE_ShadowBlurMask
