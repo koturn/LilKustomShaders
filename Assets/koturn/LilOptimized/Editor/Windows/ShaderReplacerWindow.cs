@@ -46,17 +46,20 @@ namespace Koturn.lilToon.Windows
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
                 var material = AssetDatabase.LoadAssetAtPath<Material>(path);
-
-                if (material != null)
+                if (material == null)
                 {
-                    var beforeName = material.shader.name;
-                    if (LilOptimizedShaderManager.ReplaceShaderToOptimizedOneIfPossible(material))
-                    {
-                        var afterName = material.shader.name;
-                        Debug.Log(string.Format("Replace shader: {0}: \"{1}\" -> \"{2}\"", path, beforeName, afterName));
-                        shouldSave = true;
-                    }
+                    continue;
                 }
+
+                var beforeName = material.shader.name;
+                if (!LilOptimizedShaderManager.ReplaceShaderToOptimizedOneIfPossible(material))
+                {
+                    continue;
+                }
+
+                var afterName = material.shader.name;
+                Debug.Log(string.Format("Replace shader: {0}: \"{1}\" -> \"{2}\"", path, beforeName, afterName));
+                shouldSave = true;
             }
 
             if (shouldSave)
@@ -76,17 +79,20 @@ namespace Koturn.lilToon.Windows
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
                 var material = AssetDatabase.LoadAssetAtPath<Material>(path);
-
-                if (material != null)
+                if (material == null)
                 {
-                    var beforeName = material.shader.name;
-                    if (LilOptimizedShaderManager.ReplaceShaderToOriginalOneIfPossible(material))
-                    {
-                        var afterName = material.shader.name;
-                        Debug.Log(string.Format("Replace shader: {0}: \"{1}\" -> \"{2}\"", path, beforeName, afterName));
-                        shouldSave = true;
-                    }
+                    continue;
                 }
+
+                var beforeName = material.shader.name;
+                if (!LilOptimizedShaderManager.ReplaceShaderToOriginalOneIfPossible(material))
+                {
+                    continue;
+                }
+
+                var afterName = material.shader.name;
+                Debug.Log(string.Format("Replace shader: {0}: \"{1}\" -> \"{2}\"", path, beforeName, afterName));
+                shouldSave = true;
             }
 
             if (shouldSave)
