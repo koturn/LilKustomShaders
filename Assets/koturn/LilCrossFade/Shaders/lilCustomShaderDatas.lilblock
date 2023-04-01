@@ -1,0 +1,6 @@
+ShaderName "koturn/LilCrossFade"
+EditorName "Koturn.lilToon.LilCrossFadeInspector"
+Replace "#pragma vertex vert\r\n" "#pragma vertex vertOpt\r\n"
+Replace "#pragma geometry geom\r\n" "#pragma geometry geomOpt\r\n"
+Replace "#pragma hull hull\r\n" "#pragma hull hullOpt\r\n"
+Replace "#pragma domain domain\r\n" "#pragma domain domainOpt\r\n"
