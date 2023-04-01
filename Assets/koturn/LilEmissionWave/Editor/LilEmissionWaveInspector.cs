@@ -10,8 +10,6 @@ namespace Koturn.lilToon
     /// </summary>
     public class LilEmissionWaveInspector : lilToonInspector
     {
-        // Custom properties
-        //MaterialProperty customVariable;
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_EmissionWaveColor".
         /// </summary>
@@ -76,13 +74,8 @@ namespace Koturn.lilToon
             ReplaceToCustomShaders();
             isShowRenderMode = !material.shader.name.Contains("Optional");
 
-            // If not, set isShowRenderMode to false
-            //isShowRenderMode = false;
-
-            //LoadCustomLanguage("");
             LoadCustomLanguage("14a288e6eea913a4098bef443f2c7d81");
 
-            //customVariable = FindProperty("_CustomVariable", props);
             _emissionWaveColor = FindProperty("_EmissionWaveColor", props);
             _emissionWaveNoiseAmp = FindProperty("_EmissionWaveNoiseAmp", props);
             _emissionWaveTimeScale = FindProperty("_EmissionWaveTimeScale", props);
@@ -120,7 +113,6 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
                     m_MaterialEditor.ShaderProperty(_emissionWaveColor, GetLoc("sEmissionWaveColor"));
                     m_MaterialEditor.ShaderProperty(_emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
                     m_MaterialEditor.ShaderProperty(_emissionWaveTimeScale, GetLoc("sEmissionWaveTimeScale"));
@@ -243,14 +235,17 @@ namespace Koturn.lilToon
 
         // You can create a menu like this
         /*
-        [MenuItem("Assets/TemplateFull/Convert material to custom shader", false, 1100)]
+        [MenuItem("Assets/LilEmissionWave/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
-            if(Selection.objects.Length == 0) return;
-            TemplateFullInspector inspector = new TemplateFullInspector();
-            for(int i = 0; i < Selection.objects.Length; i++)
+            if (Selection.objects.Length == 0)
             {
-                if(Selection.objects[i] is Material)
+                return;
+            }
+            var inspector = new LilEmissionWaveInspector();
+            for (int i = 0; i < Selection.objects.Length; i++)
+            {
+                if (Selection.objects[i] is Material)
                 {
                     inspector.ConvertMaterialToCustomShader((Material)Selection.objects[i]);
                 }

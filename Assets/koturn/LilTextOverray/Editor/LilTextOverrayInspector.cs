@@ -13,8 +13,6 @@ namespace Koturn.lilToon
     /// </summary>
     public class LilTextOverrayInspector : lilToonInspector
     {
-        // Custom properties
-        //MaterialProperty customVariable;
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_SpriteTex".
         /// </summary>
@@ -169,11 +167,6 @@ namespace Koturn.lilToon
             ReplaceToCustomShaders();
             isShowRenderMode = !material.shader.name.Contains("Optional");
 
-            // If not, set isShowRenderMode to false
-            //isShowRenderMode = false;
-
-            //LoadCustomLanguage("");
-            //customVariable = FindProperty("_CustomVariable", props);
             LoadCustomLanguage("1856a3bb6b48464458ac52d525e02701");
             _spriteTex = FindProperty("_SpriteTex", props);
             _enableElapsedTime = FindProperty("_EnableElapsedTime", props);
@@ -233,7 +226,6 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
                     m_MaterialEditor.ShaderProperty(_spriteTex, GetLoc("sSpriteTex"));
 
                     using (new EditorGUILayout.VerticalScope(boxOuter))
@@ -608,14 +600,17 @@ namespace Koturn.lilToon
 
         // You can create a menu like this
         /*
-        [MenuItem("Assets/TemplateFull/Convert material to custom shader", false, 1100)]
+        [MenuItem("Assets/LilTextOverray/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
-            if(Selection.objects.Length == 0) return;
-            TemplateFullInspector inspector = new TemplateFullInspector();
-            for(int i = 0; i < Selection.objects.Length; i++)
+            if (Selection.objects.Length == 0)
             {
-                if(Selection.objects[i] is Material)
+                return;
+            }
+            var inspector = new LilTextOverrayInspector();
+            for (int i = 0; i < Selection.objects.Length; i++)
+            {
+                if (Selection.objects[i] is Material)
                 {
                     inspector.ConvertMaterialToCustomShader((Material)Selection.objects[i]);
                 }

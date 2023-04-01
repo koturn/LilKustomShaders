@@ -10,8 +10,6 @@ namespace Koturn.lilToon
     /// </summary>
     public class LilRefProbeInspector : lilToonInspector
     {
-        // Custom properties
-        //MaterialProperty customVariable;
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_RefProbeMask".
         /// </summary>
@@ -44,13 +42,8 @@ namespace Koturn.lilToon
             ReplaceToCustomShaders();
             isShowRenderMode = !material.shader.name.Contains("Optional");
 
-            // If not, set isShowRenderMode to false
-            //isShowRenderMode = false;
-
-            //LoadCustomLanguage("");
             LoadCustomLanguage("4413d87c05000644ca2db471a92eac03");
 
-            //customVariable = FindProperty("_CustomVariable", props);
             _refProbeMask = FindProperty("_RefProbeMask", props);
             _refProbeBlendCoeff = FindProperty("_RefProbeBlendCoeff", props);
         }
@@ -80,7 +73,6 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
                     m_MaterialEditor.ShaderProperty(_refProbeMask, GetLoc("sRefProbeMask"));
                     m_MaterialEditor.ShaderProperty(_refProbeBlendCoeff, GetLoc("sRefProbeBlendCoeff"));
                 }
@@ -157,14 +149,17 @@ namespace Koturn.lilToon
 
         // You can create a menu like this
         /*
-        [MenuItem("Assets/TemplateFull/Convert material to custom shader", false, 1100)]
+        [MenuItem("Assets/LilRefProbe/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
-            if(Selection.objects.Length == 0) return;
-            TemplateFullInspector inspector = new TemplateFullInspector();
-            for(int i = 0; i < Selection.objects.Length; i++)
+            if (Selection.objects.Length == 0)
             {
-                if(Selection.objects[i] is Material)
+                return;
+            }
+            var inspector = new LilRefProbeInspector();
+            for (int i = 0; i < Selection.objects.Length; i++)
+            {
+                if (Selection.objects[i] is Material)
                 {
                     inspector.ConvertMaterialToCustomShader((Material)Selection.objects[i]);
                 }

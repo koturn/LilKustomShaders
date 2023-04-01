@@ -11,8 +11,6 @@ namespace Koturn.lilToon
     /// </summary>
     public class LilCrossFadeInspector : lilToonInspector
     {
-        // Custom properties
-        //MaterialProperty customVariable;
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_MainTexArray".
         /// </summary>
@@ -53,13 +51,8 @@ namespace Koturn.lilToon
             ReplaceToCustomShaders();
             isShowRenderMode = !material.shader.name.Contains("Optional");
 
-            // If not, set isShowRenderMode to false
-            //isShowRenderMode = false;
-
-            //LoadCustomLanguage("");
             LoadCustomLanguage("658b7435b2a4e214bae054d6092df565");
 
-            //customVariable = FindProperty("_CustomVariable", props);
             _mainTexArray = FindProperty("_MainTexArray", props);
             _displayCycleTime = FindProperty("_DisplayTime", props);
             _crossFadeTime = FindProperty("_CrossFadeTime", props);
@@ -93,7 +86,6 @@ namespace Koturn.lilToon
                 {
                     var depth = (float)((Texture2DArray)_mainTexArray.textureValue).depth;
 
-                    //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
                     m_MaterialEditor.ShaderProperty(_mainTexArray, GetLoc("sMainTexArray"));
                     m_MaterialEditor.ShaderProperty(_displayCycleTime, GetLoc("sDisplayTime"));
                     m_MaterialEditor.ShaderProperty(_crossFadeTime, GetLoc("sCrossFadeTime"));
@@ -181,14 +173,17 @@ namespace Koturn.lilToon
 
         // You can create a menu like this
         /*
-        [MenuItem("Assets/TemplateFull/Convert material to custom shader", false, 1100)]
+        [MenuItem("Assets/LilCrossFade/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
-            if(Selection.objects.Length == 0) return;
-            TemplateFullInspector inspector = new TemplateFullInspector();
-            for(int i = 0; i < Selection.objects.Length; i++)
+            if (Selection.objects.Length == 0)
             {
-                if(Selection.objects[i] is Material)
+                return;
+            }
+            var inspector = new LilCrossFadeInspector();
+            for (int i = 0; i < Selection.objects.Length; i++)
+            {
+                if (Selection.objects[i] is Material)
                 {
                     inspector.ConvertMaterialToCustomShader((Material)Selection.objects[i]);
                 }

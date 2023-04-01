@@ -10,8 +10,6 @@ namespace Koturn.lilToon
     /// </summary>
     public class LilHueShiftInspector : lilToonInspector
     {
-        // Custom properties
-        //MaterialProperty customVariable;
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_HsMask".
         /// </summary>
@@ -44,13 +42,8 @@ namespace Koturn.lilToon
             ReplaceToCustomShaders();
             isShowRenderMode = !material.shader.name.Contains("Optional");
 
-            // If not, set isShowRenderMode to false
-            //isShowRenderMode = false;
-
-            //LoadCustomLanguage("");
             LoadCustomLanguage("5b004fec885014b4e9f3e8889f4bc808");
 
-            //customVariable = FindProperty("_CustomVariable", props);
             _hsMask = FindProperty("_HsMask", props);
             _hsTimeScale = FindProperty("_HsTimeScale", props);
         }
@@ -80,7 +73,6 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
                     m_MaterialEditor.ShaderProperty(_hsMask, GetLoc("sHsMask"));
                     m_MaterialEditor.ShaderProperty(_hsTimeScale, GetLoc("sHsTimeScale"));
                 }
@@ -157,14 +149,17 @@ namespace Koturn.lilToon
 
         // You can create a menu like this
         /*
-        [MenuItem("Assets/TemplateFull/Convert material to custom shader", false, 1100)]
+        [MenuItem("Assets/LilHueShift/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
-            if(Selection.objects.Length == 0) return;
-            TemplateFullInspector inspector = new TemplateFullInspector();
-            for(int i = 0; i < Selection.objects.Length; i++)
+            if (Selection.objects.Length == 0)
             {
-                if(Selection.objects[i] is Material)
+                return;
+            }
+            var inspector = new LilHueShiftInspector();
+            for (int i = 0; i < Selection.objects.Length; i++)
+            {
+                if (Selection.objects[i] is Material)
                 {
                     inspector.ConvertMaterialToCustomShader((Material)Selection.objects[i]);
                 }

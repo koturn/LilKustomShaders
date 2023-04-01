@@ -11,7 +11,7 @@ namespace Koturn.lilToon
     public class LilOptimizedInspector : lilToonInspector
     {
         // Custom properties
-        //private MaterialProperty customVariable;
+        // private MaterialProperty customVariable;
 
         // <summary>
         // A flag whether to fold custom properties or not.
@@ -31,11 +31,8 @@ namespace Koturn.lilToon
             ReplaceToCustomShaders();
             isShowRenderMode = !material.shader.name.Contains("Optional");
 
-            // If not, set isShowRenderMode to false
-            //isShowRenderMode = false;
-
-            //LoadCustomLanguage("");
-            //customVariable = FindProperty("_CustomVariable", props);
+            // LoadCustomLanguage("");
+            // customVariable = FindProperty("_CustomVariable", props);
         }
 
         /// <summary>
@@ -141,11 +138,14 @@ namespace Koturn.lilToon
         [MenuItem("Assets/LilOptimized/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
-            if(Selection.objects.Length == 0) return;
-            LilOptimizedInspector inspector = new LilOptimizedInspector();
-            for(int i = 0; i < Selection.objects.Length; i++)
+            if (Selection.objects.Length == 0)
             {
-                if(Selection.objects[i] is Material)
+                return;
+            }
+            var inspector = new LilOptimizedInspector();
+            for (int i = 0; i < Selection.objects.Length; i++)
+            {
+                if (Selection.objects[i] is Material)
                 {
                     inspector.ConvertMaterialToCustomShader((Material)Selection.objects[i]);
                 }
