@@ -17,228 +17,228 @@ namespace Koturn.lilToon
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/lilToon".
         ///</summary>
-        private static readonly Shader lts;
+        public static Shader lts { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Cutout".
         ///</summary>
-        private static readonly Shader ltsc;
+        public static Shader ltsc { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Transparent".
         ///</summary>
-        private static readonly Shader ltst;
+        public static Shader ltst { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/OnePassTransparent".
         ///</summary>
-        private static readonly Shader ltsot;
+        public static Shader ltsot { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/TwoPassTransparent".
         ///</summary>
-        private static readonly Shader ltstt;
+        public static Shader ltstt { get; }
 
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/OpaqueOutline".
         ///</summary>
-        private static readonly Shader ltso;
+        public static Shader ltso { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/CutoutOutline".
         ///</summary>
-        private static readonly Shader ltsco;
+        public static Shader ltsco { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/TransparentOutline".
         ///</summary>
-        private static readonly Shader ltsto;
+        public static Shader ltsto { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/OnePassTransparentOutline".
         ///</summary>
-        private static readonly Shader ltsoto;
+        public static Shader ltsoto { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/TwoPassTransparentOutline".
         ///</summary>
-        private static readonly Shader ltstto;
+        public static Shader ltstto { get; }
 
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/[Optional] OutlineOnly/Opaque".
         ///</summary>
-        private static readonly Shader ltsoo;
+        public static Shader ltsoo { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/[Optional] OutlineOnly/Cutout".
         ///</summary>
-        private static readonly Shader ltscoo;
+        public static Shader ltscoo { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/[Optional] OutlineOnly/Transparent".
         ///</summary>
-        private static readonly Shader ltstoo;
+        public static Shader ltstoo { get; }
 
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Tessellation/Opaque".
         ///</summary>
-        private static readonly Shader ltstess;
+        public static Shader ltstess { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Tessellation/Cutout".
         ///</summary>
-        private static readonly Shader ltstessc;
+        public static Shader ltstessc { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Tessellation/Transparent".
         ///</summary>
-        private static readonly Shader ltstesst;
+        public static Shader ltstesst { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Tessellation/OnePassTransparent".
         ///</summary>
-        private static readonly Shader ltstessot;
+        public static Shader ltstessot { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Tessellation/TwoPassTransparent".
         ///</summary>
-        private static readonly Shader ltstesstt;
+        public static Shader ltstesstt { get; }
 
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Tessellation/OpaqueOutline".
         ///</summary>
-        private static readonly Shader ltstesso;
+        public static Shader ltstesso { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Tessellation/CutoutOutline".
         ///</summary>
-        private static readonly Shader ltstessco;
+        public static Shader ltstessco { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Tessellation/TransparentOutline".
         ///</summary>
-        private static readonly Shader ltstessto;
+        public static Shader ltstessto { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Tessellation/OnePassTransparentOutline".
         ///</summary>
-        private static readonly Shader ltstessoto;
+        public static Shader ltstessoto { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Tessellation/TwoPassTransparentOutline".
         ///</summary>
-        private static readonly Shader ltstesstto;
+        public static Shader ltstesstto { get; }
 
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/lilToonLite".
         ///</summary>
-        private static readonly Shader ltsl;
+        public static Shader ltsl { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Lite/Cutout".
         ///</summary>
-        private static readonly Shader ltslc;
+        public static Shader ltslc { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Lite/Transparent".
         ///</summary>
-        private static readonly Shader ltslt;
+        public static Shader ltslt { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Lite/OnePassTransparent".
         ///</summary>
-        private static readonly Shader ltslot;
+        public static Shader ltslot { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Lite/TwoPassTransparent".
         ///</summary>
-        private static readonly Shader ltsltt;
+        public static Shader ltsltt { get; }
 
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Lite/OpaqueOutline".
         ///</summary>
-        private static readonly Shader ltslo;
+        public static Shader ltslo { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Lite/CutoutOutline".
         ///</summary>
-        private static readonly Shader ltslco;
+        public static Shader ltslco { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Lite/TransparentOutline".
         ///</summary>
-        private static readonly Shader ltslto;
+        public static Shader ltslto { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Lite/OnePassTransparentOutline".
         ///</summary>
-        private static readonly Shader ltsloto;
+        public static Shader ltsloto { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Lite/TwoPassTransparentOutline".
         ///</summary>
-        private static readonly Shader ltsltto;
+        public static Shader ltsltto { get; }
 
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Refraction".
         ///</summary>
-        private static readonly Shader ltsref;
+        public static Shader ltsref { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/RefractionBlur".
         ///</summary>
-        private static readonly Shader ltsrefb;
+        public static Shader ltsrefb { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Fur".
         ///</summary>
-        private static readonly Shader ltsfur;
+        public static Shader ltsfur { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/FurCutout".
         ///</summary>
-        private static readonly Shader ltsfurc;
+        public static Shader ltsfurc { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/FurTwoPass".
         ///</summary>
-        private static readonly Shader ltsfurtwo;
+        public static Shader ltsfurtwo { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/[Optional] FurOnly/Transparent".
         ///</summary>
-        private static readonly Shader ltsfuro;
+        public static Shader ltsfuro { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/[Optional] FurOnly/Cutout".
         ///</summary>
-        private static readonly Shader ltsfuroc;
+        public static Shader ltsfuroc { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/[Optional] FurOnly/TwoPass".
         ///</summary>
-        private static readonly Shader ltsfurotwo;
+        public static Shader ltsfurotwo { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/Gem".
         ///</summary>
-        private static readonly Shader ltsgem;
+        public static Shader ltsgem { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/[Optional] FakeShadow".
         ///</summary>
-        private static readonly Shader ltsfs;
+        public static Shader ltsfs { get; }
 
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/[Optional] Overlay".
         ///</summary>
-        private static readonly Shader ltsover;
+        public static Shader ltsover { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/[Optional] OverlayOnePass".
         ///</summary>
-        private static readonly Shader ltsoover;
+        public static Shader ltsoover { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/[Optional] LiteOverlay".
         ///</summary>
-        private static readonly Shader ltslover;
+        public static Shader ltslover { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/[Optional] LiteOverlayOnePass".
         ///</summary>
-        private static readonly Shader ltsloover;
+        public static Shader ltsloover { get; }
 
-        // private static readonly Shader ltsbaker;
-        // private static readonly Shader ltspo;
-        // private static readonly Shader ltspc;
-        // private static readonly Shader ltspt;
-        // private static readonly Shader ltsptesso;
-        // private static readonly Shader ltsptessc;
-        // private static readonly Shader ltsptesst;
+        // public static Shader ltsbaker { get; }
+        // public static Shader ltspo { get; }
+        // public static Shader ltspc { get; }
+        // public static Shader ltspt { get; }
+        // public static Shader ltsptesso { get; }
+        // public static Shader ltsptessc { get; }
+        // public static Shader ltsptesst { get; }
 
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/lilToonMulti".
         ///</summary>
-        private static readonly Shader ltsm;
+        public static Shader ltsm { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/MultiOutline".
         ///</summary>
-        private static readonly Shader ltsmo;
+        public static Shader ltsmo { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/MultiRefraction".
         ///</summary>
-        private static readonly Shader ltsmref;
+        public static Shader ltsmref { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/MultiFur".
         ///</summary>
-        private static readonly Shader ltsmfur;
+        public static Shader ltsmfur { get; }
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/MultiGem".
         ///</summary>
-        private static readonly Shader ltsmgem;
+        public static Shader ltsmgem { get; }
 
 
         /// <summary>

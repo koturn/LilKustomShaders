@@ -19,11 +19,6 @@ namespace Koturn.lilToon
         // private static bool isShowCustomProperties;
 
         /// <summary>
-        /// Name of this custom shader.
-        /// </summary>
-        private const string shaderName = "koturn/LilOptimized";
-
-        /// <summary>
         /// Load custom language file and make cache of shader properties.
         /// </summary>
         /// <param name="props">Properties of the material.</param>
@@ -78,67 +73,67 @@ namespace Koturn.lilToon
         /// </summary>
         protected override void ReplaceToCustomShaders()
         {
-            lts         = Shader.Find(shaderName + "/lilToon");
-            ltsc        = Shader.Find("Hidden/" + shaderName + "/Cutout");
-            ltst        = Shader.Find("Hidden/" + shaderName + "/Transparent");
-            ltsot       = Shader.Find("Hidden/" + shaderName + "/OnePassTransparent");
-            ltstt       = Shader.Find("Hidden/" + shaderName + "/TwoPassTransparent");
+            lts         = LilOptimizedShaderManager.lts;
+            ltsc        = LilOptimizedShaderManager.ltsc;
+            ltst        = LilOptimizedShaderManager.ltst;
+            ltsot       = LilOptimizedShaderManager.ltsot;
+            ltstt       = LilOptimizedShaderManager.ltstt;
 
-            ltso        = Shader.Find("Hidden/" + shaderName + "/OpaqueOutline");
-            ltsco       = Shader.Find("Hidden/" + shaderName + "/CutoutOutline");
-            ltsto       = Shader.Find("Hidden/" + shaderName + "/TransparentOutline");
-            ltsoto      = Shader.Find("Hidden/" + shaderName + "/OnePassTransparentOutline");
-            ltstto      = Shader.Find("Hidden/" + shaderName + "/TwoPassTransparentOutline");
+            ltso        = LilOptimizedShaderManager.ltso;
+            ltsco       = LilOptimizedShaderManager.ltsco;
+            ltsto       = LilOptimizedShaderManager.ltsto;
+            ltsoto      = LilOptimizedShaderManager.ltsoto;
+            ltstto      = LilOptimizedShaderManager.ltstto;
 
-            ltsoo       = Shader.Find(shaderName + "/[Optional] OutlineOnly/Opaque");
-            ltscoo      = Shader.Find(shaderName + "/[Optional] OutlineOnly/Cutout");
-            ltstoo      = Shader.Find(shaderName + "/[Optional] OutlineOnly/Transparent");
+            ltsoo       = LilOptimizedShaderManager.ltsoo;
+            ltscoo      = LilOptimizedShaderManager.ltscoo;
+            ltstoo      = LilOptimizedShaderManager.ltstoo;
 
-            ltstess     = Shader.Find("Hidden/" + shaderName + "/Tessellation/Opaque");
-            ltstessc    = Shader.Find("Hidden/" + shaderName + "/Tessellation/Cutout");
-            ltstesst    = Shader.Find("Hidden/" + shaderName + "/Tessellation/Transparent");
-            ltstessot   = Shader.Find("Hidden/" + shaderName + "/Tessellation/OnePassTransparent");
-            ltstesstt   = Shader.Find("Hidden/" + shaderName + "/Tessellation/TwoPassTransparent");
+            ltstess     = LilOptimizedShaderManager.ltstess;
+            ltstessc    = LilOptimizedShaderManager.ltstessc;
+            ltstesst    = LilOptimizedShaderManager.ltstesst;
+            ltstessot   = LilOptimizedShaderManager.ltstessot;
+            ltstesstt   = LilOptimizedShaderManager.ltstesstt;
 
-            ltstesso    = Shader.Find("Hidden/" + shaderName + "/Tessellation/OpaqueOutline");
-            ltstessco   = Shader.Find("Hidden/" + shaderName + "/Tessellation/CutoutOutline");
-            ltstessto   = Shader.Find("Hidden/" + shaderName + "/Tessellation/TransparentOutline");
-            ltstessoto  = Shader.Find("Hidden/" + shaderName + "/Tessellation/OnePassTransparentOutline");
-            ltstesstto  = Shader.Find("Hidden/" + shaderName + "/Tessellation/TwoPassTransparentOutline");
+            ltstesso    = LilOptimizedShaderManager.ltstesso;
+            ltstessco   = LilOptimizedShaderManager.ltstessco;
+            ltstessto   = LilOptimizedShaderManager.ltstessto;
+            ltstessoto  = LilOptimizedShaderManager.ltstessoto;
+            ltstesstto  = LilOptimizedShaderManager.ltstesstto;
 
-            ltsl        = Shader.Find(shaderName + "/lilToonLite");
-            ltslc       = Shader.Find("Hidden/" + shaderName + "/Lite/Cutout");
-            ltslt       = Shader.Find("Hidden/" + shaderName + "/Lite/Transparent");
-            ltslot      = Shader.Find("Hidden/" + shaderName + "/Lite/OnePassTransparent");
-            ltsltt      = Shader.Find("Hidden/" + shaderName + "/Lite/TwoPassTransparent");
+            ltsl        = LilOptimizedShaderManager.ltsl;
+            ltslc       = LilOptimizedShaderManager.ltslc;
+            ltslt       = LilOptimizedShaderManager.ltslt;
+            ltslot      = LilOptimizedShaderManager.ltslot;
+            ltsltt      = LilOptimizedShaderManager.ltsltt;
 
-            ltslo       = Shader.Find("Hidden/" + shaderName + "/Lite/OpaqueOutline");
-            ltslco      = Shader.Find("Hidden/" + shaderName + "/Lite/CutoutOutline");
-            ltslto      = Shader.Find("Hidden/" + shaderName + "/Lite/TransparentOutline");
-            ltsloto     = Shader.Find("Hidden/" + shaderName + "/Lite/OnePassTransparentOutline");
-            ltsltto     = Shader.Find("Hidden/" + shaderName + "/Lite/TwoPassTransparentOutline");
+            ltslo       = LilOptimizedShaderManager.ltslo;
+            ltslco      = LilOptimizedShaderManager.ltslco;
+            ltslto      = LilOptimizedShaderManager.ltslto;
+            ltsloto     = LilOptimizedShaderManager.ltsloto;
+            ltsltto     = LilOptimizedShaderManager.ltsltto;
 
-            ltsref      = Shader.Find("Hidden/" + shaderName + "/Refraction");
-            ltsrefb     = Shader.Find("Hidden/" + shaderName + "/RefractionBlur");
-            ltsfur      = Shader.Find("Hidden/" + shaderName + "/Fur");
-            ltsfurc     = Shader.Find("Hidden/" + shaderName + "/FurCutout");
-            ltsfurtwo   = Shader.Find("Hidden/" + shaderName + "/FurTwoPass");
-            ltsfuro     = Shader.Find(shaderName + "/[Optional] FurOnly/Transparent");
-            ltsfuroc    = Shader.Find(shaderName + "/[Optional] FurOnly/Cutout");
-            ltsfurotwo  = Shader.Find(shaderName + "/[Optional] FurOnly/TwoPass");
-            ltsgem      = Shader.Find("Hidden/" + shaderName + "/Gem");
-            ltsfs       = Shader.Find(shaderName + "/[Optional] FakeShadow");
+            ltsref      = LilOptimizedShaderManager.ltsref;
+            ltsrefb     = LilOptimizedShaderManager.ltsrefb;
+            ltsfur      = LilOptimizedShaderManager.ltsfur;
+            ltsfurc     = LilOptimizedShaderManager.ltsfurc;
+            ltsfurtwo   = LilOptimizedShaderManager.ltsfurtwo;
+            ltsfuro     = LilOptimizedShaderManager.ltsfuro;
+            ltsfuroc    = LilOptimizedShaderManager.ltsfuroc;
+            ltsfurotwo  = LilOptimizedShaderManager.ltsfurotwo;
+            ltsgem      = LilOptimizedShaderManager.ltsgem;
+            ltsfs       = LilOptimizedShaderManager.ltsfs;
 
-            ltsover     = Shader.Find(shaderName + "/[Optional] Overlay");
-            ltsoover    = Shader.Find(shaderName + "/[Optional] OverlayOnePass");
-            ltslover    = Shader.Find(shaderName + "/[Optional] LiteOverlay");
-            ltsloover   = Shader.Find(shaderName + "/[Optional] LiteOverlayOnePass");
+            ltsover     = LilOptimizedShaderManager.ltsover;
+            ltsoover    = LilOptimizedShaderManager.ltsoover;
+            ltslover    = LilOptimizedShaderManager.ltslover;
+            ltsloover   = LilOptimizedShaderManager.ltsloover;
 
-            ltsm        = Shader.Find(shaderName + "/lilToonMulti");
-            ltsmo       = Shader.Find("Hidden/" + shaderName + "/MultiOutline");
-            ltsmref     = Shader.Find("Hidden/" + shaderName + "/MultiRefraction");
-            ltsmfur     = Shader.Find("Hidden/" + shaderName + "/MultiFur");
-            ltsmgem     = Shader.Find("Hidden/" + shaderName + "/MultiGem");
+            ltsm        = LilOptimizedShaderManager.ltsm;
+            ltsmo       = LilOptimizedShaderManager.ltsmo;
+            ltsmref     = LilOptimizedShaderManager.ltsmref;
+            ltsmfur     = LilOptimizedShaderManager.ltsmfur;
+            ltsmgem     = LilOptimizedShaderManager.ltsmgem;
         }
 
         // You can create a menu like this
