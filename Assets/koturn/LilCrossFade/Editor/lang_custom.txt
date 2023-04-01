@@ -1,0 +1,6 @@
+Language	English	Japanese
+sCustomShaderTitle	Cross Fade	クロスフェード
+sMainTexArray	Main texture array	メインテクスチャ配列
+sDisplayTime	Display time for one texture (seconds)	1テクスチャの周期時間（秒）
+sCrossFadeTime	Time to cross fade (seconds)	クロスフェード時間（秒）
+sNumTextures	Number of textures	テクスチャ数

@@ -2,3 +2,7 @@
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
         //_CustomVariable ("Custom Variable", Float) = 0
+        _MainTexArray ("Main texture array", 2DArray) = "white" {}
+        _DisplayTime ("Display time for one texture (seconds)", Float) = 5.0
+        _CrossFadeTime ("Time to cross fade (seconds)", Float) = 1.0
+        _NumTextures ("Number of textures", Int) = 2

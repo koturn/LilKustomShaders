@@ -4,10 +4,14 @@
 // Custom variables
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
-#define LIL_CUSTOM_PROPERTIES
+#define LIL_CUSTOM_PROPERTIES \
+    float _DisplayTime; \
+    float _CrossFadeTime; \
+    float _NumTextures;
 
 // Custom textures
-#define LIL_CUSTOM_TEXTURES
+#define LIL_CUSTOM_TEXTURES \
+    TEXTURE2D_ARRAY(_MainTexArray);
 
 // Add vertex shader input
 //#define LIL_REQUIRE_APP_POSITION
@@ -45,6 +49,14 @@
 // Inserting a process into pixel shader
 //#define BEFORE_xx
 //#define OVERRIDE_xx
+#define OVERRIDE_MAIN \
+    fd.col = crossFadeSample(fd); \
+    LIL_APPLY_MAIN_TONECORRECTION \
+    fd.col *= _Color;
+
+#ifndef LIL_OUTLINE
+#    define sampler_MainTex sampler_MainTexArray
+#endif  // LIL_OUTLINE
 
 //----------------------------------------------------------------------------------------------------------------------
 // Information about variables
@@ -152,3 +164,15 @@
 // uint     renderingLayers         light layer of object (for URP / HDRP)
 // uint     featureFlags            feature flags (for HDRP)
 // uint2    tileIndex               tile index (for HDRP)
+
+
+/*!
+ * @brief Returns the remainder of x divided by y with the same sign as y.
+ * @param [in] x  Vector or scalar numerator.
+ * @param [in] y  Vector or scalar denominator.
+ * @return Remainder of x / y with the same sign as y.
+ */
+float fmodglsl(float x, float y)
+{
+    return x - y * floor(x / y);
+}

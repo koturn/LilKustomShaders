@@ -1,16 +1,33 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+using lilToon;
 
-namespace lilToon
+namespace Koturn.lilToon
 {
     /// <summary>
-    /// <see cref="ShaderGUI"/> for the custom shader variations of lilToon.
+    /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilCrossFade".
     /// </summary>
-    public class TemplateFullInspector : lilToonInspector
+    public class LilCrossFadeInspector : lilToonInspector
     {
         // Custom properties
-        //private MaterialProperty customVariable;
+        //MaterialProperty customVariable;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_MainTexArray".
+        /// </summary>
+        private MaterialProperty _mainTexArray;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_DisplayTime".
+        /// </summary>
+        private MaterialProperty _displayCycleTime;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_CrossFadeTime".
+        /// </summary>
+        private MaterialProperty _crossFadeTime;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_NumTextures".
+        /// </summary>
+        private MaterialProperty _numTextures;
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
@@ -20,7 +37,7 @@ namespace lilToon
         /// <summary>
         /// Name of this custom shader.
         /// </summary>
-        private const string shaderName = "TemplateFull";
+        private const string shaderName = "koturn/LilCrossFade";
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.
@@ -39,7 +56,13 @@ namespace lilToon
             //isShowRenderMode = false;
 
             //LoadCustomLanguage("");
+            LoadCustomLanguage("658b7435b2a4e214bae054d6092df565");
+
             //customVariable = FindProperty("_CustomVariable", props);
+            _mainTexArray = FindProperty("_MainTexArray", props);
+            _displayCycleTime = FindProperty("_DisplayTime", props);
+            _crossFadeTime = FindProperty("_CrossFadeTime", props);
+            _numTextures = FindProperty("_NumTextures", props);
         }
 
         /// <summary>
@@ -64,10 +87,25 @@ namespace lilToon
 
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
-                EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
+                EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
+                    var depth = (float)((Texture2DArray)_mainTexArray.textureValue).depth;
+
                     //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+                    m_MaterialEditor.ShaderProperty(_mainTexArray, GetLoc("sMainTexArray"));
+                    m_MaterialEditor.ShaderProperty(_displayCycleTime, GetLoc("sDisplayTime"));
+                    m_MaterialEditor.ShaderProperty(_crossFadeTime, GetLoc("sCrossFadeTime"));
+                    m_MaterialEditor.ShaderProperty(_numTextures, GetLoc("sNumTextures"));
+
+                    if (GUILayout.Button("Set to texture count"))
+                    {
+                        _numTextures.floatValue = depth;
+                    }
+                    else
+                    {
+                        _numTextures.floatValue = Math.Max(1.0f, Math.Min(depth, (float)Math.Floor(_numTextures.floatValue)));
+                    }
                 }
             }
         }
