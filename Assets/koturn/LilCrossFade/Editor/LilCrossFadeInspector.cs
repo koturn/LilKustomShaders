@@ -171,25 +171,27 @@ namespace Koturn.lilToon
             ltsmgem     = Shader.Find("Hidden/" + shaderName + "/MultiGem");
         }
 
-        // You can create a menu like this
-        /*
-        [MenuItem("Assets/LilCrossFade/Convert material to custom shader", false, 1100)]
+        /// <summary>
+        /// Call back method for menu item.
+        /// </summary>
+        [MenuItem("Assets/koturn/LilCrossFade/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
-            if (Selection.objects.Length == 0)
+            var objects = Selection.objects;
+            if (objects.Length == 0)
             {
                 return;
             }
             var inspector = new LilCrossFadeInspector();
-            for (int i = 0; i < Selection.objects.Length; i++)
+            for (int i = 0; i < objects.Length; i++)
             {
-                if (Selection.objects[i] is Material)
+                var material = objects[i] as Material;
+                if (material != null)
                 {
-                    inspector.ConvertMaterialToCustomShader((Material)Selection.objects[i]);
+                    inspector.ConvertMaterialToCustomShader(material);
                 }
             }
         }
-        */
     }
 }
 #endif

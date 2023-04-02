@@ -13,7 +13,7 @@ namespace Koturn.lilToon.Windows
         /// <summary>
         /// Create and open this window.
         /// </summary>
-        [MenuItem("Assets/LilOptimized/Sharder Replacer", false, 2000)]
+        [MenuItem("Assets/koturn/LilOptimized/Sharder Replacer", false, 1200)]
         private static void Open()
         {
             GetWindow<ShaderReplacerWindow>("LilOptimized Shader Replacer");

@@ -142,16 +142,24 @@ namespace lilToon
 
         // You can create a menu like this
         /*
+        // <summary>
+        // Call back method for menu item.
+        // </summary>
         [MenuItem("Assets/TemplateFull/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
-            if(Selection.objects.Length == 0) return;
-            TemplateFullInspector inspector = new TemplateFullInspector();
-            for(int i = 0; i < Selection.objects.Length; i++)
+            var objects = Selection.objects;
+            if (objects.Length == 0)
             {
-                if(Selection.objects[i] is Material)
+                return;
+            }
+            var inspector = new TemplateFullInspector();
+            for (int i = 0; i < objects.Length; i++)
+            {
+                var material = objects[i] as Material;
+                if (material != null)
                 {
-                    inspector.ConvertMaterialToCustomShader((Material)Selection.objects[i]);
+                    inspector.ConvertMaterialToCustomShader(material);
                 }
             }
         }

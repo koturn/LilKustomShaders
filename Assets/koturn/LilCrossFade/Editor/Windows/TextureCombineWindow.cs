@@ -163,7 +163,7 @@ namespace Koturn.lilToon.Windows
         /// <summary>
         /// Open window.
         /// </summary>
-        [MenuItem("Assets/LilCrossFade/Texture Combine Tool", false, 2001)]
+        [MenuItem("Assets/koturn/LilCrossFade/Texture Combine Tool", false, 1200)]
         public static void Open()
         {
             EditorWindow.GetWindow<TextureCombineWindow>("Texture Combine Tool");
