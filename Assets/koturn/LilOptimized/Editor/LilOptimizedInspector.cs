@@ -25,7 +25,7 @@ namespace Koturn.lilToon
         /// <param name="material">Target material.</param>
         protected override void LoadCustomProperties(MaterialProperty[] props, Material material)
         {
-            isCustomShader = true;
+            isCustomShader = false;
 
             // If you want to change rendering modes in the editor, specify the shader here
             ReplaceToCustomShaders();
