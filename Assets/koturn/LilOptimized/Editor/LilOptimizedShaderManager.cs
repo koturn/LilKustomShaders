@@ -317,216 +317,59 @@ namespace Koturn.lilToon
         public static bool ReplaceShaderToOptimizedOneIfPossible(Material material)
         {
             var oldShader = material.shader;
-            Shader newShader = null;
-
-            if (oldShader == lilShaderManager.lts)
-            {
-                newShader = lts;
-            }
-            else if (oldShader == lilShaderManager.ltsc)
-            {
-                newShader = ltsc;
-            }
-            else if (oldShader == lilShaderManager.ltst)
-            {
-                newShader = ltst;
-            }
-            else if (oldShader == lilShaderManager.ltsot)
-            {
-                newShader = ltsot;
-            }
-            else if (oldShader == lilShaderManager.ltstt)
-            {
-                newShader = ltstt;
-            }
-            else if (oldShader == lilShaderManager.ltso)
-            {
-                newShader = ltso;
-            }
-            else if (oldShader == lilShaderManager.ltsco)
-            {
-                newShader = ltsco;
-            }
-            else if (oldShader == lilShaderManager.ltsto)
-            {
-                newShader = ltsto;
-            }
-            else if (oldShader == lilShaderManager.ltsoto)
-            {
-                newShader = ltsoto;
-            }
-            else if (oldShader == lilShaderManager.ltstto)
-            {
-                newShader = ltstto;
-            }
-            else if (oldShader == lilShaderManager.ltsoo)
-            {
-                newShader = ltsoo;
-            }
-            else if (oldShader == lilShaderManager.ltscoo)
-            {
-                newShader = ltscoo;
-            }
-            else if (oldShader == lilShaderManager.ltstoo)
-            {
-                newShader = ltstoo;
-            }
-            else if (oldShader == lilShaderManager.ltstess)
-            {
-                newShader = ltstess;
-            }
-            else if (oldShader == lilShaderManager.ltstessc)
-            {
-                newShader = ltstessc;
-            }
-            else if (oldShader == lilShaderManager.ltstesst)
-            {
-                newShader = ltstesst;
-            }
-            else if (oldShader == lilShaderManager.ltstessot)
-            {
-                newShader = ltstessot;
-            }
-            else if (oldShader == lilShaderManager.ltstesstt)
-            {
-                newShader = ltstesstt;
-            }
-            else if (oldShader == lilShaderManager.ltstesso)
-            {
-                newShader = ltstesso;
-            }
-            else if (oldShader == lilShaderManager.ltstessco)
-            {
-                newShader = ltstessco;
-            }
-            else if (oldShader == lilShaderManager.ltstessto)
-            {
-                newShader = ltstessto;
-            }
-            else if (oldShader == lilShaderManager.ltstessoto)
-            {
-                newShader = ltstessoto;
-            }
-            else if (oldShader == lilShaderManager.ltstesstto)
-            {
-                newShader = ltstesstto;
-            }
-            else if (oldShader == lilShaderManager.ltsl)
-            {
-                newShader = ltsl;
-            }
-            else if (oldShader == lilShaderManager.ltslc)
-            {
-                newShader = ltslc;
-            }
-            else if (oldShader == lilShaderManager.ltslt)
-            {
-                newShader = ltslt;
-            }
-            else if (oldShader == lilShaderManager.ltslot)
-            {
-                newShader = ltslot;
-            }
-            else if (oldShader == lilShaderManager.ltsltt)
-            {
-                newShader = ltsltt;
-            }
-            else if (oldShader == lilShaderManager.ltslo)
-            {
-                newShader = ltslo;
-            }
-            else if (oldShader == lilShaderManager.ltslco)
-            {
-                newShader = ltslco;
-            }
-            else if (oldShader == lilShaderManager.ltslto)
-            {
-                newShader = ltslto;
-            }
-            else if (oldShader == lilShaderManager.ltsloto)
-            {
-                newShader = ltsloto;
-            }
-            else if (oldShader == lilShaderManager.ltsltto)
-            {
-                newShader = ltsltto;
-            }
-            else if (oldShader == lilShaderManager.ltsref)
-            {
-                newShader = ltsref;
-            }
-            else if (oldShader == lilShaderManager.ltsrefb)
-            {
-                newShader = ltsrefb;
-            }
-            else if (oldShader == lilShaderManager.ltsfur)
-            {
-                newShader = ltsfur;
-            }
-            else if (oldShader == lilShaderManager.ltsfurc)
-            {
-                newShader = ltsfurc;
-            }
-            else if (oldShader == lilShaderManager.ltsfurtwo)
-            {
-                newShader = ltsfurtwo;
-            }
-            else if (oldShader == lilShaderManager.ltsfuro)
-            {
-                newShader = ltsfuro;
-            }
-            else if (oldShader == lilShaderManager.ltsfuroc)
-            {
-                newShader = ltsfuroc;
-            }
-            else if (oldShader == lilShaderManager.ltsfurotwo)
-            {
-                newShader = ltsfurotwo;
-            }
-            else if (oldShader == lilShaderManager.ltsgem)
-            {
-                newShader = ltsgem;
-            }
-            else if (oldShader == lilShaderManager.ltsfs)
-            {
-                newShader = ltsfs;
-            }
-            else if (oldShader == lilShaderManager.ltsover)
-            {
-                newShader = ltsover;
-            }
-            else if (oldShader == lilShaderManager.ltsoover)
-            {
-                newShader = ltsoover;
-            }
-            else if (oldShader == lilShaderManager.ltslover)
-            {
-                newShader = ltslover;
-            }
-            else if (oldShader == lilShaderManager.ltsloover)
-            {
-                newShader = ltsloover;
-            }
-            else if (oldShader == lilShaderManager.ltsm)
-            {
-                newShader = ltsm;
-            }
-            else if (oldShader == lilShaderManager.ltsmo)
-            {
-                newShader = ltsmo;
-            }
-            else if (oldShader == lilShaderManager.ltsmref)
-            {
-                newShader = ltsmref;
-            }
-            else if (oldShader == lilShaderManager.ltsmfur)
-            {
-                newShader = ltsmfur;
-            }
-            else if (oldShader == lilShaderManager.ltsmgem)
-            {
-                newShader = ltsmgem;
-            }
+            var newShader = oldShader == lilShaderManager.lts ? lts
+                : oldShader == lilShaderManager.ltsc ? ltsc
+                : oldShader == lilShaderManager.ltst ? ltst
+                : oldShader == lilShaderManager.ltsot ? ltsot
+                : oldShader == lilShaderManager.ltstt ? ltstt
+                : oldShader == lilShaderManager.ltso ? ltso
+                : oldShader == lilShaderManager.ltsco ? ltsco
+                : oldShader == lilShaderManager.ltsto ? ltsto
+                : oldShader == lilShaderManager.ltsoto ? ltsoto
+                : oldShader == lilShaderManager.ltstto ? ltstto
+                : oldShader == lilShaderManager.ltsoo ? ltsoo
+                : oldShader == lilShaderManager.ltscoo ? ltscoo
+                : oldShader == lilShaderManager.ltstoo ? ltstoo
+                : oldShader == lilShaderManager.ltstess ? ltstess
+                : oldShader == lilShaderManager.ltstessc ? ltstessc
+                : oldShader == lilShaderManager.ltstesst ? ltstesst
+                : oldShader == lilShaderManager.ltstessot ? ltstessot
+                : oldShader == lilShaderManager.ltstesstt ? ltstesstt
+                : oldShader == lilShaderManager.ltstesso ? ltstesso
+                : oldShader == lilShaderManager.ltstessco ? ltstessco
+                : oldShader == lilShaderManager.ltstessto ? ltstessto
+                : oldShader == lilShaderManager.ltstessoto ? ltstessoto
+                : oldShader == lilShaderManager.ltstesstto ? ltstesstto
+                : oldShader == lilShaderManager.ltsl ? ltsl
+                : oldShader == lilShaderManager.ltslc ? ltslc
+                : oldShader == lilShaderManager.ltslt ? ltslt
+                : oldShader == lilShaderManager.ltslot ? ltslot
+                : oldShader == lilShaderManager.ltsltt ? ltsltt
+                : oldShader == lilShaderManager.ltslo ? ltslo
+                : oldShader == lilShaderManager.ltslco ? ltslco
+                : oldShader == lilShaderManager.ltslto ? ltslto
+                : oldShader == lilShaderManager.ltsloto ? ltsloto
+                : oldShader == lilShaderManager.ltsltto ? ltsltto
+                : oldShader == lilShaderManager.ltsref ? ltsref
+                : oldShader == lilShaderManager.ltsrefb ? ltsrefb
+                : oldShader == lilShaderManager.ltsfur ? ltsfur
+                : oldShader == lilShaderManager.ltsfurc ? ltsfurc
+                : oldShader == lilShaderManager.ltsfurtwo ? ltsfurtwo
+                : oldShader == lilShaderManager.ltsfuro ? ltsfuro
+                : oldShader == lilShaderManager.ltsfuroc ? ltsfuroc
+                : oldShader == lilShaderManager.ltsfurotwo ? ltsfurotwo
+                : oldShader == lilShaderManager.ltsgem ? ltsgem
+                : oldShader == lilShaderManager.ltsfs ? ltsfs
+                : oldShader == lilShaderManager.ltsover ? ltsover
+                : oldShader == lilShaderManager.ltsoover ? ltsoover
+                : oldShader == lilShaderManager.ltslover ? ltslover
+                : oldShader == lilShaderManager.ltsloover ? ltsloover
+                : oldShader == lilShaderManager.ltsm ? ltsm
+                : oldShader == lilShaderManager.ltsmo ? ltsmo
+                : oldShader == lilShaderManager.ltsmref ? ltsmref
+                : oldShader == lilShaderManager.ltsmfur ? ltsmfur
+                : oldShader == lilShaderManager.ltsmgem ? ltsmgem
+                : null;
 
             if (newShader == null)
             {
@@ -545,216 +388,59 @@ namespace Koturn.lilToon
         public static bool ReplaceShaderToOriginalOneIfPossible(Material material)
         {
             var oldShader = material.shader;
-            Shader newShader = null;
-
-            if (oldShader == lts)
-            {
-                newShader = lilShaderManager.lts;
-            }
-            else if (oldShader == ltsc)
-            {
-                newShader = lilShaderManager.ltsc;
-            }
-            else if (oldShader == ltst)
-            {
-                newShader = lilShaderManager.ltst;
-            }
-            else if (oldShader == ltsot)
-            {
-                newShader = lilShaderManager.ltsot;
-            }
-            else if (oldShader == ltstt)
-            {
-                newShader = lilShaderManager.ltstt;
-            }
-            else if (oldShader == ltso)
-            {
-                newShader = lilShaderManager.ltso;
-            }
-            else if (oldShader == ltsco)
-            {
-                newShader = lilShaderManager.ltsco;
-            }
-            else if (oldShader == ltsto)
-            {
-                newShader = lilShaderManager.ltsto;
-            }
-            else if (oldShader == ltsoto)
-            {
-                newShader = lilShaderManager.ltsoto;
-            }
-            else if (oldShader == ltstto)
-            {
-                newShader = lilShaderManager.ltstto;
-            }
-            else if (oldShader == ltsoo)
-            {
-                newShader = lilShaderManager.ltsoo;
-            }
-            else if (oldShader == ltscoo)
-            {
-                newShader = lilShaderManager.ltscoo;
-            }
-            else if (oldShader == ltstoo)
-            {
-                newShader = lilShaderManager.ltstoo;
-            }
-            else if (oldShader == ltstess)
-            {
-                newShader = lilShaderManager.ltstess;
-            }
-            else if (oldShader == ltstessc)
-            {
-                newShader = lilShaderManager.ltstessc;
-            }
-            else if (oldShader == ltstesst)
-            {
-                newShader = lilShaderManager.ltstesst;
-            }
-            else if (oldShader == ltstessot)
-            {
-                newShader = lilShaderManager.ltstessot;
-            }
-            else if (oldShader == ltstesstt)
-            {
-                newShader = lilShaderManager.ltstesstt;
-            }
-            else if (oldShader == ltstesso)
-            {
-                newShader = lilShaderManager.ltstesso;
-            }
-            else if (oldShader == ltstessco)
-            {
-                newShader = lilShaderManager.ltstessco;
-            }
-            else if (oldShader == ltstessto)
-            {
-                newShader = lilShaderManager.ltstessto;
-            }
-            else if (oldShader == ltstessoto)
-            {
-                newShader = lilShaderManager.ltstessoto;
-            }
-            else if (oldShader == ltstesstto)
-            {
-                newShader = lilShaderManager.ltstesstto;
-            }
-            else if (oldShader == ltsl)
-            {
-                newShader = lilShaderManager.ltsl;
-            }
-            else if (oldShader == ltslc)
-            {
-                newShader = lilShaderManager.ltslc;
-            }
-            else if (oldShader == ltslt)
-            {
-                newShader = lilShaderManager.ltslt;
-            }
-            else if (oldShader == ltslot)
-            {
-                newShader = lilShaderManager.ltslot;
-            }
-            else if (oldShader == ltsltt)
-            {
-                newShader = lilShaderManager.ltsltt;
-            }
-            else if (oldShader == ltslo)
-            {
-                newShader = lilShaderManager.ltslo;
-            }
-            else if (oldShader == ltslco)
-            {
-                newShader = lilShaderManager.ltslco;
-            }
-            else if (oldShader == ltslto)
-            {
-                newShader = lilShaderManager.ltslto;
-            }
-            else if (oldShader == ltsloto)
-            {
-                newShader = lilShaderManager.ltsloto;
-            }
-            else if (oldShader == ltsltto)
-            {
-                newShader = lilShaderManager.ltsltto;
-            }
-            else if (oldShader == ltsref)
-            {
-                newShader = lilShaderManager.ltsref;
-            }
-            else if (oldShader == ltsrefb)
-            {
-                newShader = lilShaderManager.ltsrefb;
-            }
-            else if (oldShader == ltsfur)
-            {
-                newShader = lilShaderManager.ltsfur;
-            }
-            else if (oldShader == ltsfurc)
-            {
-                newShader = lilShaderManager.ltsfurc;
-            }
-            else if (oldShader == ltsfurtwo)
-            {
-                newShader = lilShaderManager.ltsfurtwo;
-            }
-            else if (oldShader == ltsfuro)
-            {
-                newShader = lilShaderManager.ltsfuro;
-            }
-            else if (oldShader == ltsfuroc)
-            {
-                newShader = lilShaderManager.ltsfuroc;
-            }
-            else if (oldShader == ltsfurotwo)
-            {
-                newShader = lilShaderManager.ltsfurotwo;
-            }
-            else if (oldShader == ltsgem)
-            {
-                newShader = lilShaderManager.ltsgem;
-            }
-            else if (oldShader == ltsfs)
-            {
-                newShader = lilShaderManager.ltsfs;
-            }
-            else if (oldShader == ltsover)
-            {
-                newShader = lilShaderManager.ltsover;
-            }
-            else if (oldShader == ltsoover)
-            {
-                newShader = lilShaderManager.ltsoover;
-            }
-            else if (oldShader == ltslover)
-            {
-                newShader = lilShaderManager.ltslover;
-            }
-            else if (oldShader == ltsloover)
-            {
-                newShader = lilShaderManager.ltsloover;
-            }
-            else if (oldShader == ltsm)
-            {
-                newShader = lilShaderManager.ltsm;
-            }
-            else if (oldShader == ltsmo)
-            {
-                newShader = lilShaderManager.ltsmo;
-            }
-            else if (oldShader == ltsmref)
-            {
-                newShader = lilShaderManager.ltsmref;
-            }
-            else if (oldShader == ltsmfur)
-            {
-                newShader = lilShaderManager.ltsmfur;
-            }
-            else if (oldShader == ltsmgem)
-            {
-                newShader = lilShaderManager.ltsmgem;
-            }
+            var newShader = oldShader == lts ? lilShaderManager.lts
+                : oldShader == ltsc ? lilShaderManager.ltsc
+                : oldShader == ltst ? lilShaderManager.ltst
+                : oldShader == ltsot ? lilShaderManager.ltsot
+                : oldShader == ltstt ? lilShaderManager.ltstt
+                : oldShader == ltso ? lilShaderManager.ltso
+                : oldShader == ltsco ? lilShaderManager.ltsco
+                : oldShader == ltsto ? lilShaderManager.ltsto
+                : oldShader == ltsoto ? lilShaderManager.ltsoto
+                : oldShader == ltstto ? lilShaderManager.ltstto
+                : oldShader == ltsoo ? lilShaderManager.ltsoo
+                : oldShader == ltscoo ? lilShaderManager.ltscoo
+                : oldShader == ltstoo ? lilShaderManager.ltstoo
+                : oldShader == ltstess ? lilShaderManager.ltstess
+                : oldShader == ltstessc ? lilShaderManager.ltstessc
+                : oldShader == ltstesst ? lilShaderManager.ltstesst
+                : oldShader == ltstessot ? lilShaderManager.ltstessot
+                : oldShader == ltstesstt ? lilShaderManager.ltstesstt
+                : oldShader == ltstesso ? lilShaderManager.ltstesso
+                : oldShader == ltstessco ? lilShaderManager.ltstessco
+                : oldShader == ltstessto ? lilShaderManager.ltstessto
+                : oldShader == ltstessoto ? lilShaderManager.ltstessoto
+                : oldShader == ltstesstto ? lilShaderManager.ltstesstto
+                : oldShader == ltsl ? lilShaderManager.ltsl
+                : oldShader == ltslc ? lilShaderManager.ltslc
+                : oldShader == ltslt ? lilShaderManager.ltslt
+                : oldShader == ltslot ? lilShaderManager.ltslot
+                : oldShader == ltsltt ? lilShaderManager.ltsltt
+                : oldShader == ltslo ? lilShaderManager.ltslo
+                : oldShader == ltslco ? lilShaderManager.ltslco
+                : oldShader == ltslto ? lilShaderManager.ltslto
+                : oldShader == ltsloto ? lilShaderManager.ltsloto
+                : oldShader == ltsltto ? lilShaderManager.ltsltto
+                : oldShader == ltsref ? lilShaderManager.ltsref
+                : oldShader == ltsrefb ? lilShaderManager.ltsrefb
+                : oldShader == ltsfur ? lilShaderManager.ltsfur
+                : oldShader == ltsfurc ? lilShaderManager.ltsfurc
+                : oldShader == ltsfurtwo ? lilShaderManager.ltsfurtwo
+                : oldShader == ltsfuro ? lilShaderManager.ltsfuro
+                : oldShader == ltsfuroc ? lilShaderManager.ltsfuroc
+                : oldShader == ltsfurotwo ? lilShaderManager.ltsfurotwo
+                : oldShader == ltsgem ? lilShaderManager.ltsgem
+                : oldShader == ltsfs ? lilShaderManager.ltsfs
+                : oldShader == ltsover ? lilShaderManager.ltsover
+                : oldShader == ltsoover ? lilShaderManager.ltsoover
+                : oldShader == ltslover ? lilShaderManager.ltslover
+                : oldShader == ltsloover ? lilShaderManager.ltsloover
+                : oldShader == ltsm ? lilShaderManager.ltsm
+                : oldShader == ltsmo ? lilShaderManager.ltsmo
+                : oldShader == ltsmref ? lilShaderManager.ltsmref
+                : oldShader == ltsmfur ? lilShaderManager.ltsmfur
+                : oldShader == ltsmgem ? lilShaderManager.ltsmgem
+                : null;
 
             if (newShader == null)
             {
