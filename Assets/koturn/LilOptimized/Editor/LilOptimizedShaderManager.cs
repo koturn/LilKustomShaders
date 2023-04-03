@@ -316,6 +316,8 @@ namespace Koturn.lilToon
         /// <returns>True if the <see cref="Shader"/> of <paramref name="material"/> is replaced, otherwise false.</returns>
         public static bool ReplaceShaderToOptimizedOneIfPossible(Material material)
         {
+            lilShaderManager.InitializeShaders();
+
             var oldShader = material.shader;
             var newShader = oldShader == lilShaderManager.lts ? lts
                 : oldShader == lilShaderManager.ltsc ? ltsc
@@ -376,7 +378,10 @@ namespace Koturn.lilToon
                 return false;
             }
 
+            var renderQueue = lilMaterialUtils.GetTrueRenderQueue(material);
             material.shader = newShader;
+            material.renderQueue = renderQueue;
+
             return true;
         }
 
@@ -387,6 +392,8 @@ namespace Koturn.lilToon
         /// <returns>True if the <see cref="Shader"/> of <paramref name="material"/> is replaced, otherwise false.</returns>
         public static bool ReplaceShaderToOriginalOneIfPossible(Material material)
         {
+            lilShaderManager.InitializeShaders();
+
             var oldShader = material.shader;
             var newShader = oldShader == lts ? lilShaderManager.lts
                 : oldShader == ltsc ? lilShaderManager.ltsc
@@ -447,7 +454,10 @@ namespace Koturn.lilToon
                 return false;
             }
 
+            var renderQueue = lilMaterialUtils.GetTrueRenderQueue(material);
             material.shader = newShader;
+            material.renderQueue = renderQueue;
+
             return true;
         }
     }
