@@ -148,25 +148,21 @@ namespace Koturn.lilToon
         }
 
         /// <summary>
-        /// Call back method for menu item.
+        /// Callback method for menu item which converts shader of material to custom lilToon shader.
         /// </summary>
         [MenuItem("Assets/koturn/LilHueShift/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
-            var objects = Selection.objects;
-            if (objects.Length == 0)
-            {
-                return;
-            }
-            var inspector = new LilHueShiftInspector();
-            for (int i = 0; i < objects.Length; i++)
-            {
-                var material = objects[i] as Material;
-                if (material != null)
-                {
-                    inspector.ConvertMaterialToCustomShader(material);
-                }
-            }
+            LilKustomUtils.ConvertMaterialToCustomShader(shaderName);
+        }
+
+        /// <summary>
+        /// Callback method for menu item which converts shader of material to original lilToon shader.
+        /// </summary>
+        [MenuItem("Assets/koturn/LilHueShift/Convert material to original shader", false, 1101)]
+        private static void ConvertMaterialToOriginalShaderMenu()
+        {
+            LilKustomUtils.ConvertMaterialToOriginalShader(shaderName);
         }
     }
 }
