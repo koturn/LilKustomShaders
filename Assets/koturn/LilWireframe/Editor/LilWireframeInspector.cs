@@ -1,16 +1,23 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+using lilToon;
 
-namespace lilToon
+namespace Koturn.lilToon
 {
     /// <summary>
-    /// <see cref="ShaderGUI"/> for the custom shader variations of lilToon.
+    /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilWireframe".
     /// </summary>
-    public class TemplateFullInspector : lilToonInspector
+    public class LilWireframeInspector : lilToonInspector
     {
-        // Custom properties
-        //private MaterialProperty customVariable;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WireframeWidth".
+        /// </summary>
+        private MaterialProperty _wireframeWidth;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WireframeColor".
+        /// </summary>
+        private MaterialProperty _wireframeColor;
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
@@ -20,7 +27,7 @@ namespace lilToon
         /// <summary>
         /// Name of this custom shader.
         /// </summary>
-        private const string shaderName = "TemplateFull";
+        private const string shaderName = "koturn/LilWireframe";
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.
@@ -35,11 +42,10 @@ namespace lilToon
             ReplaceToCustomShaders();
             isShowRenderMode = !material.shader.name.Contains("Optional");
 
-            // If not, set isShowRenderMode to false
-            //isShowRenderMode = false;
+            LoadCustomLanguage("76f6256e035945f48b15dea9b3524f69");
 
-            //LoadCustomLanguage("");
-            //customVariable = FindProperty("_CustomVariable", props);
+            _wireframeWidth = FindProperty("_WireframeWidth", props);
+            _wireframeColor = FindProperty("_WireframeColor", props);
         }
 
         /// <summary>
@@ -64,10 +70,11 @@ namespace lilToon
 
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
-                EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
+                EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+                    m_MaterialEditor.ShaderProperty(_wireframeWidth, GetLoc("sWireframeWidth"));
+                    m_MaterialEditor.ShaderProperty(_wireframeColor, GetLoc("sWireframeColor"));
                 }
             }
         }
@@ -140,30 +147,23 @@ namespace lilToon
             ltsmgem     = Shader.Find("Hidden/" + shaderName + "/MultiGem");
         }
 
-        // You can create a menu like this
-        /*
-        // <summary>
-        // Call back method for menu item.
-        // </summary>
-        [MenuItem("Assets/TemplateFull/Convert material to custom shader", false, 1100)]
+        /// <summary>
+        /// Callback method for menu item which converts shader of material to custom lilToon shader.
+        /// </summary>
+        [MenuItem("Assets/koturn/LilWireframe/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
-            var objects = Selection.objects;
-            if (objects.Length == 0)
-            {
-                return;
-            }
-            var inspector = new TemplateFullInspector();
-            for (int i = 0; i < objects.Length; i++)
-            {
-                var material = objects[i] as Material;
-                if (material != null)
-                {
-                    inspector.ConvertMaterialToCustomShader(material);
-                }
-            }
+            LilKustomUtils.ConvertMaterialToCustomShader(shaderName);
         }
-        */
+
+        /// <summary>
+        /// Callback method for menu item which converts shader of material to original lilToon shader.
+        /// </summary>
+        [MenuItem("Assets/koturn/LilWireframe/Convert material to original shader", false, 1101)]
+        private static void ConvertMaterialToOriginalShaderMenu()
+        {
+            LilKustomUtils.ConvertMaterialToOriginalShader(shaderName);
+        }
     }
 }
 #endif

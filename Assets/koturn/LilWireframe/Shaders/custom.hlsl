@@ -4,7 +4,9 @@
 // Custom variables
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
-#define LIL_CUSTOM_PROPERTIES
+#define LIL_CUSTOM_PROPERTIES \
+    float _WireframeWidth; \
+    float4 _WireframeColor;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES
@@ -33,7 +35,8 @@
 //#define LIL_V2F_FORCE_NORMAL
 //#define LIL_V2F_FORCE_TANGENT
 //#define LIL_V2F_FORCE_BITANGENT
-//#define LIL_CUSTOM_V2F_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7)
+#define LIL_CUSTOM_V2F_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
+    float3 baryCoord : TEXCOORD ## id0;
 
 // Add vertex copy
 #define LIL_CUSTOM_VERT_COPY
@@ -45,6 +48,8 @@
 // Inserting a process into pixel shader
 //#define BEFORE_xx
 //#define OVERRIDE_xx
+#define BEFORE_BLEND_EMISSION \
+    fd.col.rgb += calcEmissionColor(any(input.baryCoord < _WireframeWidth) ? _WireframeColor : (0.0).xxx, fd.col.a);
 
 //----------------------------------------------------------------------------------------------------------------------
 // Information about variables

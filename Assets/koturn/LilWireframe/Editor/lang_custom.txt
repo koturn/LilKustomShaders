@@ -1,0 +1,4 @@
+Language	English	Japanese
+sCustomShaderTitle	Wireframe	ワイヤフレーム
+sWireframeWidth	Width	幅
+sWireframeColor	Color	色
