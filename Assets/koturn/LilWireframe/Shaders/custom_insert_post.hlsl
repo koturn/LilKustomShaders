@@ -87,7 +87,7 @@ void geomCustom(triangle v2g input[3], inout TriangleStream<v2f> outStream)
     #endif
 
     if (_FurMeshType) {
-        #include "lil_common_vert_fur_thirdparty.hlsl"
+        #include "../../LilOptimized/Shaders/lil_common_vert_fur_thirdparty.hlsl"
     } else {
         float3 furVectors[3];
         furVectors[0] = input[0].furVector;
