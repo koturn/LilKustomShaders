@@ -31,6 +31,9 @@ void geomCustom(triangle v2g input[3], inout TriangleStream<v2f> outStream)
         LIL_INITIALIZE_STRUCT(v2f, outputBase[1]);
         LIL_INITIALIZE_STRUCT(v2f, outputBase[2]);
 
+        const float3 vertexIndices = float3(input[0].baryCoord.x, input[1].baryCoord.x, input[2].baryCoord.x);
+        const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
+
         for (uint i = 0; i < 3; i++) {
             LIL_TRANSFER_INSTANCE_ID(input[i], outputBase[i]);
             LIL_TRANSFER_VERTEX_OUTPUT_STEREO(input[i], outputBase[i]);
@@ -50,6 +53,7 @@ void geomCustom(triangle v2g input[3], inout TriangleStream<v2f> outStream)
                 outputBase[i].furLayer = -2;
             #endif
             output[i].baryCoord = baryCoords[i];
+            input[i].emissionWeights = emissionWeights;
         }
 
         // Front
@@ -158,12 +162,16 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     LIL_SETUP_INSTANCE_ID(input[0].base);
     LIL_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input[0].base);
 
+    const float3 vertexIndices = float3(input[0].baryCoord.x, input[1].baryCoord.x, input[2].baryCoord.x);
+    const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
+
     //------------------------------------------------------------------------------------------------------------------------------
     // Copy
     UNITY_UNROLL
     for (uint i = 0; i < 3; i++) {
         output[i] = input[i].base;
         output[i].baryCoord = baryCoords[i];
+        input[i].emissionWeights = emissionWeights;
     }
 
     // Front
@@ -232,11 +240,15 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     // LIL_SETUP_INSTANCE_ID(input[0]);
     // LIL_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input[0]);
 
+    const float3 vertexIndices = float3(input[0].baryCoord.x, input[1].baryCoord.x, input[2].baryCoord.x);
+    const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
+
     //------------------------------------------------------------------------------------------------------------------------------
     // Copy
     UNITY_UNROLL
     for (uint i = 0; i < 3; i++) {
         input[i].baryCoord = baryCoords[i];
+        input[i].emissionWeights = emissionWeights;
         outStream.Append(input[i]);
     }
 

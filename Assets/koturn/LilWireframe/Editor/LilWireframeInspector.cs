@@ -18,6 +18,14 @@ namespace Koturn.lilToon
         /// <see cref="MaterialProperty"/> of "_WireframeColor".
         /// </summary>
         private MaterialProperty _wireframeColor;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WireframeCycleTime".
+        /// </summary>
+        private MaterialProperty _wireframeCycleTime;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WireframeDecayTime".
+        /// </summary>
+        private MaterialProperty _wireframeDecayTime;
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
@@ -46,6 +54,8 @@ namespace Koturn.lilToon
 
             _wireframeWidth = FindProperty("_WireframeWidth", props);
             _wireframeColor = FindProperty("_WireframeColor", props);
+            _wireframeCycleTime = FindProperty("_WireframeCycleTime", props);
+            _wireframeDecayTime = FindProperty("_WireframeDecayTime", props);
         }
 
         /// <summary>
@@ -75,6 +85,8 @@ namespace Koturn.lilToon
                 {
                     m_MaterialEditor.ShaderProperty(_wireframeWidth, GetLoc("sWireframeWidth"));
                     m_MaterialEditor.ShaderProperty(_wireframeColor, GetLoc("sWireframeColor"));
+                    m_MaterialEditor.ShaderProperty(_wireframeCycleTime, GetLoc("sWireframeCycleTime"));
+                    m_MaterialEditor.ShaderProperty(_wireframeDecayTime, GetLoc("sWireframeDecayTime"));
                 }
             }
         }

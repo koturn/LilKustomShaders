@@ -4,3 +4,5 @@
         //_CustomVariable ("Custom Variable", Float) = 0
         _WireframeWidth ("Wireframe width", Range(0.0, 1.0)) = 0.025
         [HDR] _WireframeColor ("Wireframe color", Color) = (0.0, 1.0, 0.0, 1.0)
+        _WireframeCycleTime ("Wireframe animation cycle (seconds)", Float) = 16.0
+        _WireframeDecayTime ("Wireframe emission decay time (seconds)", Float) = 1.0

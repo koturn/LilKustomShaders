@@ -6,7 +6,9 @@
 //    float _CustomVariable;
 #define LIL_CUSTOM_PROPERTIES \
     float _WireframeWidth; \
-    float4 _WireframeColor;
+    float4 _WireframeColor; \
+    float _WireframeCycleTime; \
+    float _WireframeDecayTime;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES
@@ -24,7 +26,7 @@
 //#define LIL_REQUIRE_APP_COLOR
 //#define LIL_REQUIRE_APP_NORMAL
 //#define LIL_REQUIRE_APP_TANGENT
-//#define LIL_REQUIRE_APP_VERTEXID
+#define LIL_REQUIRE_APP_VERTEXID
 
 // Add vertex shader output
 //#define LIL_V2F_FORCE_TEXCOORD0
@@ -36,10 +38,12 @@
 //#define LIL_V2F_FORCE_TANGENT
 //#define LIL_V2F_FORCE_BITANGENT
 #define LIL_CUSTOM_V2F_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
-    float3 baryCoord : TEXCOORD ## id0;
+    float3 baryCoord : TEXCOORD ## id0; \
+    nointerpolation float3 emissionWeights : TEXCOORD ## id1;
 
 // Add vertex copy
-#define LIL_CUSTOM_VERT_COPY
+#define LIL_CUSTOM_VERT_COPY \
+    LIL_V2F_OUT.baryCoord.x = (float)input.vertexID;
 
 // Inserting a process into the vertex shader
 //#define LIL_CUSTOM_VERTEX_OS
@@ -49,7 +53,9 @@
 //#define BEFORE_xx
 //#define OVERRIDE_xx
 #define BEFORE_BLEND_EMISSION \
-    fd.col.rgb += calcEmissionColor(any(input.baryCoord < _WireframeWidth) ? _WireframeColor : (0.0).xxx, fd.col.a);
+    const float3 emissionWeights = (input.baryCoord < _WireframeWidth) ? input.emissionWeights : (0.0).xxx; \
+    const float emissionWeight = max(emissionWeights.x, max(emissionWeights.y, emissionWeights.z)); \
+    fd.col.rgb += calcEmissionColor(_WireframeColor * emissionWeight, fd.col.a);
 
 //----------------------------------------------------------------------------------------------------------------------
 // Information about variables
@@ -157,3 +163,15 @@
 // uint     renderingLayers         light layer of object (for URP / HDRP)
 // uint     featureFlags            feature flags (for HDRP)
 // uint2    tileIndex               tile index (for HDRP)
+
+
+/*!
+ * @brief Returns a random value between 0.0 and 1.0.
+ * @param [in] x  First seed value vector used for generation.
+ * @param [in] y  Second seed value vector used for generation.
+ * @return Pseudo-random number value between 0.0 and 1.0.
+ */
+float3 rand(float3 x, float3 y)
+{
+    return frac(sin(x * 12.9898 + y * 78.233) * 43758.5453);
+}
