@@ -19,6 +19,10 @@ namespace Koturn.lilToon
         /// </summary>
         private MaterialProperty _wireframeColor;
         /// <summary>
+        /// <see cref="MaterialProperty"/> of "_WireframeMask".
+        /// </summary>
+        private MaterialProperty _wireframeMask;
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_WireframeRandomizeColor".
         /// </summary>
         private MaterialProperty _wireframeRandomizeColor;
@@ -57,6 +61,7 @@ namespace Koturn.lilToon
             LoadCustomLanguage("76f6256e035945f48b15dea9b3524f69");
 
             _wireframeWidth = FindProperty("_WireframeWidth", props);
+            _wireframeMask = FindProperty("_WireframeMask", props);
             _wireframeColor = FindProperty("_WireframeColor", props);
             _wireframeRandomizeColor = FindProperty("_WireframeRandomizeColor", props);
             _wireframeCycleTime = FindProperty("_WireframeCycleTime", props);
@@ -89,8 +94,12 @@ namespace Koturn.lilToon
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     m_MaterialEditor.ShaderProperty(_wireframeWidth, GetLoc("sWireframeWidth"));
-                    m_MaterialEditor.ShaderProperty(_wireframeColor, GetLoc("sWireframeColor"));
+                    m_MaterialEditor.TexturePropertySingleLine(
+                        new GUIContent(GetLoc("sWireframeMaskAndColor")),
+                        _wireframeMask,
+                        _wireframeColor);
                     m_MaterialEditor.ShaderProperty(_wireframeRandomizeColor, GetLoc("sWireframeRandomizeColor"));
+
                     m_MaterialEditor.ShaderProperty(_wireframeCycleTime, GetLoc("sWireframeCycleTime"));
                     m_MaterialEditor.ShaderProperty(_wireframeDecayTime, GetLoc("sWireframeDecayTime"));
                 }

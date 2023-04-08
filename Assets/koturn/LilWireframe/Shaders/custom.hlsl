@@ -12,7 +12,8 @@
     float _WireframeDecayTime;
 
 // Custom textures
-#define LIL_CUSTOM_TEXTURES
+#define LIL_CUSTOM_TEXTURES \
+    TEXTURE2D(_WireframeMask);
 
 // Add vertex shader input
 //#define LIL_REQUIRE_APP_POSITION
@@ -62,7 +63,7 @@
     const float3 emissionColor = emissionWeight == emissionWeights.x ? input.color0 \
         : emissionWeight == emissionWeights.y ? input.color1 \
         : input.color2; \
-    fd.col.rgb += calcEmissionColor(emissionColor * emissionWeight, fd.col.a);
+    fd.col.rgb += calcEmissionColor(LIL_SAMPLE_2D(_WireframeMask, sampler_MainTex, fd.uvMain) * emissionColor * emissionWeight, fd.col.a);
 
 //----------------------------------------------------------------------------------------------------------------------
 // Information about variables
