@@ -1,3 +1,12 @@
+#ifdef LIL_MULTI
+#    if defined(_WIREFRAME_RANDOMIZE_COLOR_ON)
+#        define _WireframeRandomizeColor true
+#    else
+#        define _WireframeRandomizeColor false
+#    endif  // defined(_WIREFRAME_RANDOMIZE_COLOR_ON)
+#endif  // defind(LIL_MULTI)
+
+
 #if defined(LIL_PASS_FORWARD_FUR_INCLUDED)
 #if defined(LIL_ONEPASS_FUR)
 [maxvertexcount(46)]
@@ -34,6 +43,19 @@ void geomCustom(triangle v2g input[3], inout TriangleStream<v2f> outStream)
         const float3 vertexIndices = float3(input[0].baryCoord.x, input[1].baryCoord.x, input[2].baryCoord.x);
         const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
+        float3 color0, color1, color2;
+        UNITY_BRANCH
+        if (_WireframeRandomizeColor) {
+            const float3 hueOffsets = rand(vertexIndices.zxy, vertexIndices.yzx);
+            color0 = rgbAddHue(_WireframeColor, hueOffsets.x);
+            color1 = rgbAddHue(_WireframeColor, hueOffsets.y);
+            color2 = rgbAddHue(_WireframeColor, hueOffsets.z);
+        } else {
+            color0 = _WireframeColor;
+            color1 = _WireframeColor;
+            color2 = _WireframeColor;
+        }
+
         for (uint i = 0; i < 3; i++) {
             LIL_TRANSFER_INSTANCE_ID(input[i], outputBase[i]);
             LIL_TRANSFER_VERTEX_OUTPUT_STEREO(input[i], outputBase[i]);
@@ -52,8 +74,11 @@ void geomCustom(triangle v2g input[3], inout TriangleStream<v2f> outStream)
             #if defined(LIL_V2F_FURLAYER)
                 outputBase[i].furLayer = -2;
             #endif
-            output[i].baryCoord = baryCoords[i];
-            input[i].emissionWeights = emissionWeights;
+            outputBase[i].baryCoord = baryCoords[i];
+            outputBase[i].emissionWeights = emissionWeights;
+            outputBase[i].color0 = color0;
+            outputBase[i].color1 = color1;
+            outputBase[i].color2 = color2;
         }
 
         // Front
@@ -165,13 +190,29 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     const float3 vertexIndices = float3(input[0].baryCoord.x, input[1].baryCoord.x, input[2].baryCoord.x);
     const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
+    float3 color0, color1, color2;
+    UNITY_BRANCH
+    if (_WireframeRandomizeColor) {
+        const float3 hueOffsets = rand(vertexIndices.zxy, vertexIndices.yzx);
+        color0 = rgbAddHue(_WireframeColor, hueOffsets.x);
+        color1 = rgbAddHue(_WireframeColor, hueOffsets.y);
+        color2 = rgbAddHue(_WireframeColor, hueOffsets.z);
+    } else {
+        color0 = _WireframeColor;
+        color1 = _WireframeColor;
+        color2 = _WireframeColor;
+    }
+
     //------------------------------------------------------------------------------------------------------------------------------
     // Copy
     UNITY_UNROLL
     for (uint i = 0; i < 3; i++) {
         output[i] = input[i].base;
         output[i].baryCoord = baryCoords[i];
-        input[i].emissionWeights = emissionWeights;
+        output[i].emissionWeights = emissionWeights;
+        output[i].color0 = color0;
+        output[i].color1 = color1;
+        output[i].color2 = color2;
     }
 
     // Front
@@ -243,12 +284,28 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     const float3 vertexIndices = float3(input[0].baryCoord.x, input[1].baryCoord.x, input[2].baryCoord.x);
     const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
+    float3 color0, color1, color2;
+    UNITY_BRANCH
+    if (_WireframeRandomizeColor) {
+        const float3 hueOffsets = rand(vertexIndices.zxy, vertexIndices.yzx);
+        color0 = rgbAddHue(_WireframeColor, hueOffsets.x);
+        color1 = rgbAddHue(_WireframeColor, hueOffsets.y);
+        color2 = rgbAddHue(_WireframeColor, hueOffsets.z);
+    } else {
+        color0 = _WireframeColor;
+        color1 = _WireframeColor;
+        color2 = _WireframeColor;
+    }
+
     //------------------------------------------------------------------------------------------------------------------------------
     // Copy
     UNITY_UNROLL
     for (uint i = 0; i < 3; i++) {
         input[i].baryCoord = baryCoords[i];
         input[i].emissionWeights = emissionWeights;
+        input[i].color0 = color0;
+        input[i].color1 = color1;
+        input[i].color2 = color2;
         outStream.Append(input[i]);
     }
 

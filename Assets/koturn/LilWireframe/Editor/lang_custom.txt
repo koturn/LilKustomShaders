@@ -2,5 +2,6 @@ Language	English	Japanese
 sCustomShaderTitle	Wireframe	ワイヤフレーム
 sWireframeWidth	Width	幅
 sWireframeColor	Color	色
+sWireframeRandomizeColor	Randomize hue of color	色の色相のランダム化
 sWireframeCycleTime	Animation cycle (seconds)	アニメーション周期（秒）
 sWireframeDecayTime	Emission decay time (seconds)	発光減衰時間（秒）

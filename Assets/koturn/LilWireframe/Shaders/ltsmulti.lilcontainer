@@ -8,6 +8,7 @@ Shader "*LIL_SHADER_NAME*/lilToonMulti"
     }
 
     HLSLINCLUDE
+        #pragma multi_compile_local_geometry _ _WIREFRAME_RANDOMIZE_COLOR_ON
         #include "custom.hlsl"
     ENDHLSL
 

@@ -8,6 +8,7 @@ Shader "Hidden/*LIL_SHADER_NAME*/MultiRefraction"
     }
 
     HLSLINCLUDE
+        #pragma multi_compile_local_geometry _ _WIREFRAME_RANDOMIZE_COLOR_ON
         #include "custom.hlsl"
     ENDHLSL
 

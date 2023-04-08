@@ -7,6 +7,7 @@
 #define LIL_CUSTOM_PROPERTIES \
     float _WireframeWidth; \
     float4 _WireframeColor; \
+    bool _WireframeRandomizeColor; \
     float _WireframeCycleTime; \
     float _WireframeDecayTime;
 
@@ -39,7 +40,10 @@
 //#define LIL_V2F_FORCE_BITANGENT
 #define LIL_CUSTOM_V2F_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
     float3 baryCoord : TEXCOORD ## id0; \
-    nointerpolation float3 emissionWeights : TEXCOORD ## id1;
+    nointerpolation float3 color0 : TEXCOORD ## id1; \
+    nointerpolation float3 color1 : TEXCOORD ## id2; \
+    nointerpolation float3 color2 : TEXCOORD ## id3; \
+    nointerpolation float3 emissionWeights : TEXCOORD ## id4;
 
 // Add vertex copy
 #define LIL_CUSTOM_VERT_COPY \
@@ -55,7 +59,10 @@
 #define BEFORE_BLEND_EMISSION \
     const float3 emissionWeights = (input.baryCoord < _WireframeWidth) ? input.emissionWeights : (0.0).xxx; \
     const float emissionWeight = max(emissionWeights.x, max(emissionWeights.y, emissionWeights.z)); \
-    fd.col.rgb += calcEmissionColor(_WireframeColor * emissionWeight, fd.col.a);
+    const float3 emissionColor = emissionWeight == emissionWeights.x ? input.color0 \
+        : emissionWeight == emissionWeights.y ? input.color1 \
+        : input.color2; \
+    fd.col.rgb += calcEmissionColor(emissionColor * emissionWeight, fd.col.a);
 
 //----------------------------------------------------------------------------------------------------------------------
 // Information about variables
@@ -174,4 +181,65 @@
 float3 rand(float3 x, float3 y)
 {
     return frac(sin(x * 12.9898 + y * 78.233) * 43758.5453);
+}
+
+
+/*!
+ * @brief Convert from RGB to HSV.
+ * @param [in] rgb  Vector of RGB components.
+ * @return Vector of HSV components.
+ */
+float3 rgb2hsv(float3 rgb)
+{
+    static const float4 k = float4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    static const float e = 1.0e-10;
+#if 1
+    // Optimized version.
+    const bool b1 = rgb.g < rgb.b;
+    float4 p = float4(b1 ? rgb.bg : rgb.gb, b1 ? k.wz : k.xy);
+
+    const bool b2 = rgb.r < p.x;
+    p.xyz = b2 ? p.xyw : p.yzx;
+    const float4 q = b2 ? float4(p.xyz, rgb.r) : float4(rgb.r, p.xyz);
+
+    const float d = q.x - min(q.w, q.y);
+    const float2 hs = float2(q.w - q.y, d) / float2(6.0 * d + e, q.x + e);
+
+    return float3(abs(q.z + hs.x), hs.y, q.x);
+#else
+    // Original version
+    const float4 p = rgb.g < rgb.b ? float4(rgb.bg, k.wz) : float4(rgb.gb, k.xy);
+    const float4 q = rgb.r < p.x ? float4(p.xyw, rgb.r) : float4(rgb.r, p.yzx);
+    const float d = q.x - min(q.w, q.y);
+
+    return float3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+#endif
+}
+
+
+/*!
+ * @brief Convert from HSV to RGB.
+ * @param [in] hsv  Vector of HSV components.
+ * @return Vector of RGB components.
+ */
+float3 hsv2rgb(float3 hsv)
+{
+    static const float4 k = float4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+
+    const float3 p = abs(frac(hsv.xxx + k.xyz) * 6.0 - k.www);
+    return hsv.z * lerp(k.xxx, saturate(p - k.xxx), hsv.y);
+}
+
+
+/*!
+ * @brief Add hue to RGB color.
+ * @param [in] rgb  Vector of RGB components.
+ * @param [in] hue  Offset of Hue.
+ * @return Vector of RGB components.
+ */
+float3 rgbAddHue(float3 rgb, float hue)
+{
+    float3 hsv = rgb2hsv(rgb);
+    hsv.x += hue;
+    return hsv2rgb(hsv);
 }
