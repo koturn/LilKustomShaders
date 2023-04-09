@@ -43,12 +43,14 @@
 //#define LIL_V2F_FORCE_NORMAL
 //#define LIL_V2F_FORCE_TANGENT
 //#define LIL_V2F_FORCE_BITANGENT
+#define LIL_CUSTOM_V2G_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
+    float emissionWavePos : TEXCOORD ## id0;
 #define LIL_CUSTOM_V2F_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
     float emissionWavePos : TEXCOORD ## id0;
 
 // Add vertex copy
 #define LIL_CUSTOM_VERT_COPY \
-    LIL_V2F_OUT.emissionWavePos = pickupPosition(getEmissionPos(input.positionOS)) \
+    output.emissionWavePos = pickupPosition(getEmissionPos(input.positionOS)) \
         + (2.0 * rand(float2((float)input.vertexID, LIL_TIME)) - 1.0) * _EmissionWaveNoiseAmp;
 
 // Inserting a process into the vertex shader
