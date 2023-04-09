@@ -147,7 +147,7 @@ namespace Koturn.lilToon
         /// Cache of reflection result of following lambda.
         /// </summary>
         /// <remarks><seealso cref="CreateToggleKeywordDelegate"/></remarks>
-        private static Action<Shader, MaterialProperty> _toggleKeyword;
+        private static Action<Shader, MaterialProperty, bool> _toggleKeyword;
 
         /// <summary>
         /// Name of this custom shader.
@@ -466,7 +466,6 @@ namespace Koturn.lilToon
             return boolValue ? 1.0f : 0.0f;
         }
 
-
         /// <summary>
         /// Enable or disable keyword of <see cref="MaterialProperty"/> which has MaterialToggleUIDrawer.
         /// </summary>
@@ -474,10 +473,21 @@ namespace Koturn.lilToon
         /// <param name="prop">Target <see cref="MaterialProperty"/>.</param>
         private static void SetToggleKeyword(Shader shader, MaterialProperty prop)
         {
+            SetToggleKeyword(shader, prop, ToBool(prop.floatValue));
+        }
+
+        /// <summary>
+        /// Enable or disable keyword of <see cref="MaterialProperty"/> which has MaterialToggleUIDrawer.
+        /// </summary>
+        /// <param name="shader">Target <see cref="Shader"/>.</param>
+        /// <param name="prop">Target <see cref="MaterialProperty"/>.</param>
+        /// <param name="isOn">True to enable keyword, false to disable keyword.</param>
+        private static void SetToggleKeyword(Shader shader, MaterialProperty prop, bool isOn)
+        {
             try
             {
                 // (_toggleKeyword ??= CreateToggleKeywordDelegate())(shader, prop);
-                (_toggleKeyword ?? (_toggleKeyword = CreateToggleKeywordDelegate()))(shader, prop);
+                (_toggleKeyword ?? (_toggleKeyword = CreateToggleKeywordDelegate()))(shader, prop, isOn);
             }
             catch (Exception ex)
             {
@@ -488,7 +498,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// <para>Create delegate of reflection results about UnityEditor.MaterialToggleUIDrawer.</para>
         /// <code>
-        /// (Shader shader, MaterialProperty prop) =>
+        /// (Shader shader, MaterialProperty prop, bool isOn) =>
         /// {
         ///     MaterialPropertyHandler mph = UnityEditor.MaterialPropertyHandler.GetHandler(shader, name);
         ///     if (mph is null)
@@ -500,11 +510,11 @@ namespace Koturn.lilToon
         ///     {
         ///         throw new ArgumentException("Specified MaterialProperty does not have UnityEditor.MaterialToggleUIDrawer");
         ///     }
-        ///     mpud.SetKeyword(prop, prop.floatValue >= 0.5f);
+        ///     mpud.SetKeyword(prop, isOn);
         /// }
         /// </code>
         /// </summary>
-        private static Action<Shader, MaterialProperty> CreateToggleKeywordDelegate()
+        private static Action<Shader, MaterialProperty, bool> CreateToggleKeywordDelegate()
         {
             // Get assembly from public class.
             var asm = Assembly.GetAssembly(typeof(UnityEditor.MaterialPropertyDrawer));
@@ -521,10 +531,11 @@ namespace Koturn.lilToon
             var pMaterialPropertyHandler = Expression.Parameter(typeMph);
             var pMaterialToggleUIDrawer = Expression.Parameter(typeMtud);
             var pMaterialProperty = Expression.Parameter(typeof(MaterialProperty));
+            var pBool = Expression.Parameter(typeof(bool));
 
             var cNull = Expression.Constant(null);
 
-            return Expression.Lambda<Action<Shader, MaterialProperty>>(
+            return Expression.Lambda<Action<Shader, MaterialProperty, bool>>(
                 Expression.Block(
                     new[]
                     {
@@ -583,18 +594,10 @@ namespace Koturn.lilToon
                                 | BindingFlags.Instance)
                             ?? throw new InvalidOperationException("MethodInfo not found: UnityEditor.MaterialToggleUIDrawer.SetKeyword"),
                         pMaterialProperty,
-                        Expression.GreaterThanOrEqual(
-                            Expression.Property(
-                                pMaterialProperty,
-                                typeof(MaterialProperty).GetProperty(
-                                    "floatValue",
-                                    BindingFlags.GetProperty
-                                        | BindingFlags.Public
-                                        | BindingFlags.Instance)
-                                    ?? throw new InvalidOperationException("PropertyInfo not found: UnityEditor.MaterialProperty.floatValue")),
-                            Expression.Constant(0.5f)))),
+                        pBool)),
                 pShader,
-                pMaterialProperty).Compile();
+                pMaterialProperty,
+                pBool).Compile();
         }
 
         /// <summary>
