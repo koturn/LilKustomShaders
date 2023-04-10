@@ -3,5 +3,5 @@
         // Custom Properties
         //_CustomVariable ("Custom Variable", Float) = 0
 
-        _HsMask ("Mask for Shue shift", 2D) = "black" {}
+        _HsMask ("Mask for Hue Shift", 2D) = "white" {}
         _HsTimeScale ("Time multiplier for Hue Shift", Float) = 0.1
