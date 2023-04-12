@@ -15,9 +15,9 @@ namespace Koturn.lilToon
         /// </summary>
         private MaterialProperty _hsMask;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_HsTimeScale".
+        /// <see cref="MaterialProperty"/> of "_HsSpeed".
         /// </summary>
-        private MaterialProperty _hsTimeScale;
+        private MaterialProperty _hsSpeed;
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
@@ -45,7 +45,7 @@ namespace Koturn.lilToon
             LoadCustomLanguage("5b004fec885014b4e9f3e8889f4bc808");
 
             _hsMask = FindProperty("_HsMask", props);
-            _hsTimeScale = FindProperty("_HsTimeScale", props);
+            _hsSpeed = FindProperty("_HsSpeed", props);
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Koturn.lilToon
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     m_MaterialEditor.ShaderProperty(_hsMask, GetLoc("sHsMask"));
-                    m_MaterialEditor.ShaderProperty(_hsTimeScale, GetLoc("sHsTimeScale"));
+                    m_MaterialEditor.ShaderProperty(_hsSpeed, GetLoc("sHsSpeed"));
                 }
             }
         }

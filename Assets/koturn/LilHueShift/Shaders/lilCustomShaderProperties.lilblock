@@ -1,5 +1,5 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
-        _HsTimeScale ("Time multiplier for Hue Shift", Float) = 0.1
         [NoScaleOffset] _HsMask ("Mask for Hue Shift", 2D) = "white" {}
+        _HsSpeed ("Hue Shift speed", Float) = 0.1

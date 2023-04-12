@@ -7,8 +7,8 @@
 #define LIL_CUSTOM_PROPERTIES \
     float4 _EmissionWaveColor; \
     float _EmissionWaveNoiseAmp; \
-    float _EmissionWaveTimeScale; \
-    float _EmissionWaveTimePhase; \
+    float _EmissionWaveSpeed; \
+    float _EmissionWaveInitPhase; \
     float2 _EmissionWaveParam; \
     float _EmissionPosMin; \
     float _EmissionPosMax; \
@@ -62,7 +62,7 @@
 //#define OVERRIDE_xx
 
 #define BEFORE_BLEND_EMISSION \
-    const float uDiff = frac(LIL_TIME * _EmissionWaveTimeScale + _EmissionWaveTimePhase) - remap01(_EmissionPosMin, _EmissionPosMax, input.emissionWavePos); \
+    const float uDiff = frac(LIL_TIME * _EmissionWaveSpeed + _EmissionWaveInitPhase) - remap01(_EmissionPosMin, _EmissionPosMax, input.emissionWavePos); \
     const float sDiff = 2.0 * uDiff - 1.0; \
     const float eFact = pow(0.5 * cos(clamp(sDiff * _EmissionWaveParam.x, -1.0, 1.0) * UNITY_PI) + 0.5, _EmissionWaveParam.y); \
     fd.col.rgb += calcEmissionColor(_EmissionWaveColor * eFact, fd.col.a);

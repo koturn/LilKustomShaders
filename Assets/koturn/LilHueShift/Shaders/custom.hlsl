@@ -5,7 +5,7 @@
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
 #define LIL_CUSTOM_PROPERTIES \
-    float _HsTimeScale;
+    float _HsSpeed;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES \
@@ -48,7 +48,7 @@
 //#define BEFORE_xx
 //#define OVERRIDE_xx
 #define BEFORE_SHADOW \
-    const float hsValue = _Time.y * _HsTimeScale * LIL_SAMPLE_2D(_HsMask, sampler_MainTex, fd.uvMain).r; \
+    const float hsValue = _Time.y * _HsSpeed * LIL_SAMPLE_2D(_HsMask, sampler_MainTex, fd.uvMain).r; \
     fd.col.rgb = rgbAddHue(fd.col.rgb, hsValue); \
     fd.albedo = fd.col.rgb;
 

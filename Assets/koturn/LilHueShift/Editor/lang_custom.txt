@@ -1,4 +1,4 @@
 Language	English	Japanese
 sCustomShaderTitle	Hue Shift	色相シフト
 sHsMask	Mask	マスク
-sHsTimeScale	Time multiplier	時間スケール
+sHsSpeed	Hue shift speed	色相変化速度

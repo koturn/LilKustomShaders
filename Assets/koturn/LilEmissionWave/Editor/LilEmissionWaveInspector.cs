@@ -19,13 +19,13 @@ namespace Koturn.lilToon
         /// </summary>
         private MaterialProperty _emissionWaveNoiseAmp;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_EmissionWaveTimeScale".
+        /// <see cref="MaterialProperty"/> of "_EmissionWaveSpeed".
         /// </summary>
-        private MaterialProperty _emissionWaveTimeScale;
+        private MaterialProperty _emissionWaveSpeed;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_EmissionWaveTimePhase".
+        /// <see cref="MaterialProperty"/> of "_EmissionWaveInitPhase".
         /// </summary>
-        private MaterialProperty _emissionWaveTimePhase;
+        private MaterialProperty _emissionWaveInitPhase;
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_EmissionWaveParam".
         /// </summary>
@@ -78,8 +78,8 @@ namespace Koturn.lilToon
 
             _emissionWaveColor = FindProperty("_EmissionWaveColor", props);
             _emissionWaveNoiseAmp = FindProperty("_EmissionWaveNoiseAmp", props);
-            _emissionWaveTimeScale = FindProperty("_EmissionWaveTimeScale", props);
-            _emissionWaveTimePhase = FindProperty("_EmissionWaveTimePhase", props);
+            _emissionWaveSpeed = FindProperty("_EmissionWaveSpeed", props);
+            _emissionWaveInitPhase = FindProperty("_EmissionWaveInitPhase", props);
             _emissionWaveParam = FindProperty("_EmissionWaveParam", props);
             _emissionPosMin = FindProperty("_EmissionPosMin", props);
             _emissionPosMax = FindProperty("_EmissionPosMax", props);
@@ -115,8 +115,8 @@ namespace Koturn.lilToon
                 {
                     m_MaterialEditor.ShaderProperty(_emissionWaveColor, GetLoc("sEmissionWaveColor"));
                     m_MaterialEditor.ShaderProperty(_emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
-                    m_MaterialEditor.ShaderProperty(_emissionWaveTimeScale, GetLoc("sEmissionWaveTimeScale"));
-                    m_MaterialEditor.ShaderProperty(_emissionWaveTimePhase, GetLoc("sEmissionWaveTimePhase"));
+                    m_MaterialEditor.ShaderProperty(_emissionWaveSpeed, GetLoc("sEmissionWaveSpeed"));
+                    m_MaterialEditor.ShaderProperty(_emissionWaveInitPhase, GetLoc("sEmissionWaveInitPhase"));
                     m_MaterialEditor.ShaderProperty(_emissionWaveParam, GetLoc("sEmissionWaveParam"));
                     m_MaterialEditor.ShaderProperty(_emissionPosMin, GetLoc("sEmissionPosMin"));
                     m_MaterialEditor.ShaderProperty(_emissionPosMax, GetLoc("sEmissionPosMax"));
