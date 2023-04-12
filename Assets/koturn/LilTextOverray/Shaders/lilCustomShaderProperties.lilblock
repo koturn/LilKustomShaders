@@ -1,8 +1,6 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
-        //_CustomVariable ("Custom Variable", Float) = 0
-
         [NoScaleOffset]
         _SpriteTex ("Sprite Sheet Texture", 2D) = "black" {}
 

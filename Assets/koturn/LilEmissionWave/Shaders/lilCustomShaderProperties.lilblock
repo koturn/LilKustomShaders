@@ -1,7 +1,6 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
-        //_CustomVariable ("Custom Variable", Float) = 0
         [HDR] _EmissionWaveColor ("Color of emission wave", Color) = (0.0, 0.0, 0.0, 0.0)
         _EmissionWaveNoiseAmp ("Emission wave noise amplitude", Float) = 0.02
         _EmissionWaveTimeScale ("Time scale for emission wave", Float) = 1.0

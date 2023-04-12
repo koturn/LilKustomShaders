@@ -1,7 +1,6 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
-        //_CustomVariable ("Custom Variable", Float) = 0
         _WireframeWidth ("Wireframe width", Range(0.0, 1.0)) = 0.025
         [NoScaleOffset] _WireframeMask ("Wireframe mask texture", 2D) = "white" {}
         [HDR] _WireframeColor ("Wireframe color", Color) = (0.0, 1.0, 0.0, 1.0)
