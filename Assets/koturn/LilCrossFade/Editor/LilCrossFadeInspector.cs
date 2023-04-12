@@ -87,10 +87,7 @@ namespace Koturn.lilToon
                     var depth = (float)((Texture2DArray)_mainTexArray.textureValue).depth;
 
                     m_MaterialEditor.ShaderProperty(_mainTexArray, GetLoc("sMainTexArray"));
-                    m_MaterialEditor.ShaderProperty(_displayCycleTime, GetLoc("sDisplayTime"));
-                    m_MaterialEditor.ShaderProperty(_crossFadeTime, GetLoc("sCrossFadeTime"));
                     m_MaterialEditor.ShaderProperty(_numTextures, GetLoc("sNumTextures"));
-
                     if (GUILayout.Button("Set to texture count"))
                     {
                         _numTextures.floatValue = depth;
@@ -99,6 +96,9 @@ namespace Koturn.lilToon
                     {
                         _numTextures.floatValue = Math.Max(1.0f, Math.Min(depth, (float)Math.Floor(_numTextures.floatValue)));
                     }
+
+                    m_MaterialEditor.ShaderProperty(_displayCycleTime, GetLoc("sDisplayTime"));
+                    m_MaterialEditor.ShaderProperty(_crossFadeTime, GetLoc("sCrossFadeTime"));
                 }
             }
         }
