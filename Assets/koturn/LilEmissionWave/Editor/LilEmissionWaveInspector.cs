@@ -11,6 +11,10 @@ namespace Koturn.lilToon
     public class LilEmissionWaveInspector : lilToonInspector
     {
         /// <summary>
+        /// <see cref="MaterialProperty"/> of "_EmissionWaveMask".
+        /// </summary>
+        private MaterialProperty _emissionWaveMask;
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_EmissionWaveColor".
         /// </summary>
         private MaterialProperty _emissionWaveColor;
@@ -76,6 +80,7 @@ namespace Koturn.lilToon
 
             LoadCustomLanguage("14a288e6eea913a4098bef443f2c7d81");
 
+            _emissionWaveMask = FindProperty("_EmissionWaveMask", props);
             _emissionWaveColor = FindProperty("_EmissionWaveColor", props);
             _emissionWaveNoiseAmp = FindProperty("_EmissionWaveNoiseAmp", props);
             _emissionWaveSpeed = FindProperty("_EmissionWaveSpeed", props);
@@ -113,7 +118,10 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    m_MaterialEditor.ShaderProperty(_emissionWaveColor, GetLoc("sEmissionWaveColor"));
+                    m_MaterialEditor.TexturePropertySingleLine(
+                        new GUIContent(GetLoc("sEmissionWaveMaskAndColor")),
+                        _emissionWaveMask,
+                        _emissionWaveColor);
                     m_MaterialEditor.ShaderProperty(_emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
                     m_MaterialEditor.ShaderProperty(_emissionWaveSpeed, GetLoc("sEmissionWaveSpeed"));
                     m_MaterialEditor.ShaderProperty(_emissionWaveInitPhase, GetLoc("sEmissionWaveInitPhase"));

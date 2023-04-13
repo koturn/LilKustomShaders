@@ -1,6 +1,7 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
+        [NoScaleOffset] _EmissionWaveMask ("Mask of emission wave", 2D) = "white" {}
         [HDR] _EmissionWaveColor ("Color of emission wave", Color) = (0.3015505, 0.3015505, 1.599893, 1.0)
         _EmissionWaveNoiseAmp ("Emission wave noise amplitude", Float) = 0.02
         _EmissionWaveSpeed ("Emission wave speed", Float) = 1.0

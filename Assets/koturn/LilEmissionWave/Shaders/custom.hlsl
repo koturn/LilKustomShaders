@@ -17,7 +17,8 @@
     int _WaveAxis;
 
 // Custom textures
-#define LIL_CUSTOM_TEXTURES
+#define LIL_CUSTOM_TEXTURES \
+    TEXTURE2D(_EmissionWaveMask);
 
 // Add vertex shader input
 //#define LIL_REQUIRE_APP_POSITION
@@ -65,7 +66,7 @@
     const float uDiff = frac(LIL_TIME * _EmissionWaveSpeed + _EmissionWaveInitPhase) - remap01(_EmissionPosMin, _EmissionPosMax, input.emissionWavePos); \
     const float sDiff = 2.0 * uDiff - 1.0; \
     const float eFact = pow(0.5 * cos(clamp(sDiff * _EmissionWaveParam.x, -1.0, 1.0) * UNITY_PI) + 0.5, _EmissionWaveParam.y); \
-    fd.col.rgb += calcEmissionColor(_EmissionWaveColor * eFact, fd.col.a);
+    fd.col.rgb += calcEmissionColor(_EmissionWaveColor * LIL_SAMPLE_2D(_EmissionWaveMask, sampler_MainTex, fd.uvMain) * eFact, fd.col.a);
 
 
 

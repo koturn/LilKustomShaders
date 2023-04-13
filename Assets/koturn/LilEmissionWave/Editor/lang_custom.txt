@@ -1,6 +1,6 @@
 Language	English	Japanese
 sCustomShaderTitle	Emission Wave	エミッション波
-sEmissionWaveColor	Color	色
+sEmissionWaveMaskAndColor	Mask / Color	色 / マスク
 sEmissionWaveNoiseAmp	Noise amplitude	ノイズ振幅
 sEmissionWaveSpeed	Wave speed	波の速度
 sEmissionWaveInitPhase	Initial phase	初期位相
