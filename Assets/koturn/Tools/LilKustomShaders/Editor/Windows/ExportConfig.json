@@ -1,0 +1,52 @@
+{
+  "Packages": [
+    {
+      "Name": "LilCrossfade.unitypackage",
+      "AssetPaths": [
+        "Assets/koturn/LilCrossfade",
+        "Assets/koturn/LilOptimized"
+      ]
+    },
+    {
+      "Name": "LilEmissionWave.unitypackage",
+      "AssetPaths": [
+        "Assets/koturn/LilEmissionWave",
+        "Assets/koturn/LilOptimized"
+      ]
+    },
+    {
+      "Name": "LilHueShift.unitypackage",
+      "AssetPaths": [
+        "Assets/koturn/LilHueShift",
+        "Assets/koturn/LilOptimized"
+      ]
+    },
+    {
+      "Name": "LilOptimized.unitypackage",
+      "AssetPaths": [
+        "Assets/koturn/LilOptimized"
+      ]
+    },
+    {
+      "Name": "LilRefProbe.unitypackage",
+      "AssetPaths": [
+        "Assets/koturn/LilRefProbe",
+        "Assets/koturn/LilOptimized"
+      ]
+    },
+    {
+      "Name": "LilTextOverray.unitypackage",
+      "AssetPaths": [
+        "Assets/koturn/LilTextOverray",
+        "Assets/koturn/LilOptimized"
+      ]
+    },
+    {
+      "Name": "LilWireframe.unitypackage",
+      "AssetPaths": [
+        "Assets/koturn/LilWireframe",
+        "Assets/koturn/LilOptimized"
+      ]
+    }
+  ]
+}
