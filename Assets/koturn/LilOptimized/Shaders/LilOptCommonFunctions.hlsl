@@ -2,6 +2,9 @@
 #define LIL_OPT_COMMON_FUNCTIONS_INCLUDED
 
 
+float lilAtanOpt(float x);
+float lilAtanOpt(float x, float y);
+
 float lilIsIn0to1Opt(float f);
 float lilIsIn0to1Opt(float f, float nv);
 float lilIsIn0to1Opt(float2 f);
@@ -9,6 +12,7 @@ float lilIsIn0to1Opt(float2 f, float nv);
 float3 lilDecodeHDROpt(float4 data, float4 hdr);
 float3 lilCustomReflectionOpt(TEXTURECUBE(tex), float4 hdr, float3 viewDirection, float3 normalDirection, float perceptualRoughness);
 float3 lilToneCorrectionOpt(float3 c, float4 hsvg);
+float2 lilGetPanoramaUVOpt(float3 viewDirection);
 void lilPOMOpt(inout float2 uvMain, inout float2 uv, lilBool useParallax, float4 uv_st, float3 parallaxViewDirection, TEXTURE2D(parallaxMap), float parallaxScale, float parallaxOffsetParam);
 void lilCalcDissolveOpt(
     inout float alpha,
@@ -58,10 +62,13 @@ half3 Unity_GlossyEnvironmentOpt(UNITY_ARGS_TEXCUBE(tex), half4 hdr, Unity_Gloss
 half3 UnityGI_IndirectSpecularOpt(UnityGIInput data, half occlusion, Unity_GlossyEnvironmentData glossIn);
 
 
+#define lilAtan lilAtanOpt
+
 #define lilIsIn0to1 lilIsIn0to1Opt
 #define lilDecodeHDR lilDecodeHDROpt
 #define lilCustomReflection lilCustomReflectionOpt
 #define lilToneCorrection lilToneCorrectionOpt
+#define lilGetPanoramaUV lilGetPanoramaUVOpt
 #define lilPOM lilPOMOpt
 #define lilCalcDissolve lilCalcDissolveOpt
 #define lilCalcDissolveWithNoise lilCalcDissolveWithNoiseOpt
@@ -168,6 +175,58 @@ half3 UnityGI_IndirectSpecularOpt(UnityGIInput data, half occlusion, Unity_Gloss
 #define BoxProjectedCubemapDirection BoxProjectedCubemapDirectionOpt
 #define Unity_GlossyEnvironment Unity_GlossyEnvironmentOpt
 #define UnityGI_IndirectSpecular UnityGI_IndirectSpecularOpt
+
+
+/*!
+ * @brief Fast atan().
+ *
+ * This function is just for overloading.
+ *
+ * @param [in] x  The first argument of atan().
+ * @return Approximate value of atan().
+ * @see https://seblagarde.wordpress.com/2014/12/01/inverse-trigonometric-functions-gpu-optimization-for-amd-gcn-architecture/
+ */
+float lilAtanOpt(float x)
+{
+    float t0 = lilAtanPos(abs(x));
+    return (x < 0.0) ? -t0 : t0;
+}
+
+
+/*!
+ * @brief Fast atan2().
+ *
+ * This function is optimized implemnetation of lilAtan() defined in lil_common_functions_thirdparty.hlsl.
+ * Reduce one "div" instruction and optimize last "cmov".
+ *
+ * @param [in] x  The first argument of atan2().
+ * @param [in] y  The second argument of atan2().
+ * @return Approximate value of atan().
+ * @see https://seblagarde.wordpress.com/2014/12/01/inverse-trigonometric-functions-gpu-optimization-for-amd-gcn-architecture/
+ */
+float lilAtanOpt(float x, float y)
+{
+    const float2 p = float2(x, y);
+    const float2 d = p.xy / p.yx;
+
+    //
+    // Tune for positive input [0, infinity] and provide output [0, PI/2]
+    //
+    const float2 absD = abs(d);
+    const float t0 = absD.x < 1.0 ? absD.x : absD.y;
+#if 1
+    const float poly = (-0.269408 * t0 + 1.05863) * t0;
+#else
+    const float t1 = t0 * t0;
+    float poly = 0.0872929;
+    poly = -0.301895 + poly * t1;
+    poly = 1.0 + poly * t1;
+    poly *= t0;
+#endif
+    const float u0 = absD < 1.0 ? poly : (LIL_HALF_PI - poly);
+
+    return (d >= 0.0 ? u0 : -u0) + (y >= 0.0 ? 0.0 : x >= 0.0 ? LIL_PI : -LIL_PI);
+}
 
 
 #if LIL_ANTIALIAS_MODE == 0
@@ -386,6 +445,21 @@ float3 lilToneCorrectionOpt(float3 c, float4 hsvg)
     //
     const float3 p2 = abs(frac(hsv.xxx + k2.xyz) * 6.0 - k2.www);
     return hsv.z * lerp(k2.xxx, saturate(p2 - k2.xxx), hsv.y);
+}
+
+
+/*!
+ * @brief Get panorama UV coordinate.
+ *
+ * This function is optimized implemnetation of lilGetPanoramaUV() defined in lil_common_functions.hlsl.
+ * Optimize loop breaking.
+ *
+ * @param [in] viewDirection  View direction.
+ * @return Panorama UV.
+ */
+float2 lilGetPanoramaUVOpt(float3 viewDirection)
+{
+    return float2(lilAtanOpt(viewDirection.x, viewDirection.z), lilAcos(viewDirection.y)) * LIL_INV_PI;
 }
 
 
