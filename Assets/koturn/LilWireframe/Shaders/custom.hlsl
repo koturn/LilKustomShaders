@@ -40,11 +40,11 @@
 //#define LIL_V2F_FORCE_TANGENT
 //#define LIL_V2F_FORCE_BITANGENT
 #define LIL_CUSTOM_V2F_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
-    float3 baryCoord : TEXCOORD ## id0; \
-    nointerpolation float3 color0 : TEXCOORD ## id1; \
-    nointerpolation float3 color1 : TEXCOORD ## id2; \
-    nointerpolation float3 color2 : TEXCOORD ## id3; \
-    nointerpolation float3 emissionWeights : TEXCOORD ## id4;
+    float3 baryCoord : TEXCOORD ## id1; \
+    nointerpolation float3 color0 : TEXCOORD ## id2; \
+    nointerpolation float3 color1 : TEXCOORD ## id3; \
+    nointerpolation float3 color2 : TEXCOORD ## id4; \
+    nointerpolation float3 emissionWeights : TEXCOORD ## id5;
 
 // Add vertex copy
 #define LIL_CUSTOM_VERT_COPY \

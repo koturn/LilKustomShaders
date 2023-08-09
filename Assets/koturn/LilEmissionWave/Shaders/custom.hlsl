@@ -45,9 +45,9 @@
 //#define LIL_V2F_FORCE_TANGENT
 //#define LIL_V2F_FORCE_BITANGENT
 #define LIL_CUSTOM_V2G_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
-    float emissionWavePos : TEXCOORD ## id0;
+    float emissionWavePos : TEXCOORD ## id1;
 #define LIL_CUSTOM_V2F_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
-    float emissionWavePos : TEXCOORD ## id0;
+    float emissionWavePos : TEXCOORD ## id1;
 
 // Add vertex copy
 #define LIL_CUSTOM_VERT_COPY \
