@@ -24,7 +24,7 @@ void geomCustom(triangle v2g input[3], inout TriangleStream<v2f> outStream)
     };
     //------------------------------------------------------------------------------------------------------------------------------
     // Invisible
-    UNITY_BRANCH
+    [branch]
     if (_Invisible) {
         return;
     }
@@ -44,7 +44,7 @@ void geomCustom(triangle v2g input[3], inout TriangleStream<v2f> outStream)
         const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
         float3 color0, color1, color2;
-        UNITY_BRANCH
+        [branch]
         if (_WireframeRandomizeColor) {
             const float3 hueOffsets = rand(vertexIndices.zxy, vertexIndices.yzx);
             color0 = rgbAddHue(_WireframeColor, hueOffsets.x);
@@ -155,7 +155,7 @@ void geomCustom(triangle v2g input[3], inout TriangleStream<v2f> outStream)
         };
 
         int loopEnd = _FurLayerNum >= 3 ? 12 : _FurLayerNum >= 2 ? 6 : 3;
-        UNITY_LOOP
+        [loop]
         for (int i = 0; i < loopEnd; i++) {
             AppendFur(outStream, output, input, furVectors, factors[i]);
         }
@@ -174,7 +174,7 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     };
     //------------------------------------------------------------------------------------------------------------------------------
     // Invisible
-    UNITY_BRANCH
+    [branch]
     if (_Invisible) {
         return;
     }
@@ -191,7 +191,7 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
     float3 color0, color1, color2;
-    UNITY_BRANCH
+    [branch]
     if (_WireframeRandomizeColor) {
         const float3 hueOffsets = rand(vertexIndices.zxy, vertexIndices.yzx);
         color0 = rgbAddHue(_WireframeColor, hueOffsets.x);
@@ -205,7 +205,7 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
 
     //------------------------------------------------------------------------------------------------------------------------------
     // Copy
-    UNITY_UNROLL
+    [unroll]
     for (uint i = 0; i < 3; i++) {
         output[i] = input[i].base;
         output[i].baryCoord = baryCoords[i];
@@ -233,7 +233,7 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
 
     //------------------------------------------------------------------------------------------------------------------------------
     // Outline
-    UNITY_UNROLL
+    [unroll]
     for (uint j = 0; j < 3; j++) {
         output[j].positionCS = input[j].positionCSOL;
         #if defined(LIL_PASS_MOTIONVECTOR_INCLUDED)
@@ -268,7 +268,7 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     };
     //------------------------------------------------------------------------------------------------------------------------------
     // Invisible
-    UNITY_BRANCH
+    [branch]
     if (_Invisible) {
         return;
     }
@@ -285,7 +285,7 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
     float3 color0, color1, color2;
-    UNITY_BRANCH
+    [branch]
     if (_WireframeRandomizeColor) {
         const float3 hueOffsets = rand(vertexIndices.zxy, vertexIndices.yzx);
         color0 = rgbAddHue(_WireframeColor, hueOffsets.x);
@@ -299,7 +299,7 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
 
     //------------------------------------------------------------------------------------------------------------------------------
     // Copy
-    UNITY_UNROLL
+    [unroll]
     for (uint i = 0; i < 3; i++) {
         input[i].baryCoord = baryCoords[i];
         input[i].emissionWeights = emissionWeights;
