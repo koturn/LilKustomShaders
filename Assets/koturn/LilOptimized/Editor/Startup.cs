@@ -25,16 +25,16 @@ namespace Koturn.lilToon
         /// </summary>
         private static void UpdateIncludeFiles()
         {
-            // GUIDs of the shader source of koturn/LilOptimized and lilxyzw/lilToon.
+            // GUIDs of the shader source of lilxyzw/lilToon.
             var guids = new[]
             {
-                "b80f99e9a095fbb44b63c064ef09704d",  // LilOptCommonFunctions.hlsl
-                "4b0f89237fb078a41ae330c638eee480",  // LilOptVert.hlsl
-                "e6d87491a115eaf439cd3f5ddf3ae096",  // LilOverride.hlsl
-                "e3dbe4ae202b9094eab458bbc934c964"   // lil_common_vert_fur_thirdparty.hlsl
+                "e3dbe4ae202b9094eab458bbc934c964",  // lil_common_vert_fur_thirdparty.hlsl
+                "c3c0d0056ab91ba4db7516465a6581fe",  // lil_vert_audiolink.hlsl
+                "957b6179a395605459b9e1ef1d0cdc0d",  // lil_vert_encryption.hlsl
+                "683a6eed396c8044bb0c482c77c997d4"   // lil_vert_outline.hlsl
             };
 
-            var dstDirPath = AssetDatabase.GUIDToAssetPath("e1f7fe9f1bbcba64e935a92920779855");
+            var dstDirPath = AssetDatabase.GUIDToAssetPath("a35bbce2bcaa8a6448737c7c3219ca27");
             foreach (var guid in guids)
             {
                 var srcFilePath = AssetDatabase.GUIDToAssetPath(guid);
@@ -81,7 +81,7 @@ namespace Koturn.lilToon
         /// <param name="packageName">Imported package name.</param>
         private static void Startup_ImportPackageCompleted(string packageName)
         {
-            if (packageName != "LilOptimized" && !packageName.StartsWith("lilToon"))
+            if (!packageName.StartsWith("lilToon"))
             {
                 return;
             }
