@@ -1,14 +1,14 @@
 {
   "name": "jp.koturn.lilwireframe",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "displayName": "LilWireframe",
   "description": "koturn's custom shaders of lilToon, LilWireframe.",
   "unity": "2018.1",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.0/LICENSE",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1/LICENSE",
   "license": "MIT",
   "keywords": ["Toon", "Shader", "lilToon"],
-  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.0/jp.koturn.lilwireframe-1.0.0.zip",
+  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1/jp.koturn.lilwireframe-1.1.0.zip",
   "legacyFolders" : {
     "Assets\\koturn\\LilWireframe" : "89e0d1d26d70bb049a4ea7fc4977df1d"
   }
