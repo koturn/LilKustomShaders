@@ -259,5 +259,5 @@ float3 AudioLinkGetTimeOfDay()
 }
 
 
-#include "../../LilOptimized/Shaders/LilOptCommonFunctions.hlsl"
-#include "../../LilOptimized/Shaders/LilOverride.hlsl"
+#include "LilOptCommonFunctions.hlsl"
+#include "LilOverride.hlsl"

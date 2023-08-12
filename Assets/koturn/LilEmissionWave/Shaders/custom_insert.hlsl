@@ -86,5 +86,5 @@ float3 calcEmissionColor(float3 emissionColor, float alpha)
 }
 
 
-#include "../../LilOptimized/Shaders/LilOptCommonFunctions.hlsl"
-#include "../../LilOptimized/Shaders/LilOverride.hlsl"
+#include "LilOptCommonFunctions.hlsl"
+#include "LilOverride.hlsl"

@@ -1,1 +1,1 @@
-#include "../../LilOptimized/Shaders/LilOptVert.hlsl"
+#include "LilOptVert.hlsl"
