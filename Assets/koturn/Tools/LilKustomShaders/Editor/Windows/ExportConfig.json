@@ -1,50 +1,55 @@
 {
   "Packages": [
     {
-      "Name": "LilCrossfade.unitypackage",
-      "AssetPaths": [
-        "Assets/koturn/LilCrossfade",
+      "UnityPackageName": "LilCrossfade.unitypackage",
+      "VpmName": "jp.koturn.lilcrossfade",
+      "AssetPath": "Assets/koturn/LilCrossfade",
+      "DependAssetPaths": [
         "Assets/koturn/LilOptimized"
       ]
     },
     {
-      "Name": "LilEmissionWave.unitypackage",
-      "AssetPaths": [
-        "Assets/koturn/LilEmissionWave",
+      "UnityPackageName": "LilEmissionWave.unitypackage",
+      "VpmName": "jp.koturn.lilemissionwave",
+      "AssetPath": "Assets/koturn/LilEmissionWave",
+      "DependAssetPaths": [
         "Assets/koturn/LilOptimized"
       ]
     },
     {
-      "Name": "LilHueShift.unitypackage",
-      "AssetPaths": [
-        "Assets/koturn/LilHueShift",
+      "UnityPackageName": "LilHueShift.unitypackage",
+      "VpmName": "jp.koturn.lilhueshift",
+      "AssetPath": "Assets/koturn/LilHueShift",
+      "DependAssetPaths": [
         "Assets/koturn/LilOptimized"
       ]
     },
     {
-      "Name": "LilOptimized.unitypackage",
-      "AssetPaths": [
+      "UnityPackageName": "LilOptimized.unitypackage",
+      "VpmName": "jp.koturn.liloptimized",
+      "AssetPath": "Assets/koturn/LilOptimized"
+    },
+    {
+      "UnityPackageName": "LilRefProbe.unitypackage",
+      "VpmName": "jp.koturn.lilrefprobe",
+      "AssetPath": "Assets/koturn/LilRefProbe",
+      "DependAssetPaths": [
         "Assets/koturn/LilOptimized"
       ]
     },
     {
-      "Name": "LilRefProbe.unitypackage",
-      "AssetPaths": [
-        "Assets/koturn/LilRefProbe",
+      "UnityPackageName": "LilTextOverray.unitypackage",
+      "VpmName": "jp.koturn.liltextoverray",
+      "AssetPath": "Assets/koturn/LilTextOverray",
+      "DependAssetPaths": [
         "Assets/koturn/LilOptimized"
       ]
     },
     {
-      "Name": "LilTextOverray.unitypackage",
-      "AssetPaths": [
-        "Assets/koturn/LilTextOverray",
-        "Assets/koturn/LilOptimized"
-      ]
-    },
-    {
-      "Name": "LilWireframe.unitypackage",
-      "AssetPaths": [
-        "Assets/koturn/LilWireframe",
+      "UnityPackageName": "LilWireframe.unitypackage",
+      "VpmName": "jp.koturn.lilwireframe",
+      "AssetPath": "Assets/koturn/LilWireframe",
+      "DependAssetPaths": [
         "Assets/koturn/LilOptimized"
       ]
     }
