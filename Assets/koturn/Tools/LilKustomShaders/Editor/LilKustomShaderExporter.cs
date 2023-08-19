@@ -10,7 +10,7 @@ namespace Koturn.Tools.LilKustomShaders.Windows
     /// <summary>
     /// A window class which replace lilToon shaders to optimized ones.
     /// </summary>
-    public class ExportWindow : EditorWindow
+    public static class LilKustomShaderExporter
     {
         /// <summary>
         /// Version string.
@@ -54,43 +54,25 @@ namespace Koturn.Tools.LilKustomShaders.Windows
 
 
         /// <summary>
-        /// Create and open this window.
-        /// </summary>
-        [MenuItem("Assets/koturn/Tool/LilKustomShaders/Export Packages", false, 9000)]
-        private static void Open()
-        {
-            GetWindow<ExportWindow>("Export Packages");
-        }
-
-
-        /// <summary>
         /// Last export directory path.
         /// </summary>
-        private string _lastExportDirectoryPath;
+        private static string _lastExportDirectoryPath;
+
 
         /// <summary>
         /// Initialize all members.
         /// </summary>
-        public ExportWindow()
+        static LilKustomShaderExporter()
         {
             _lastExportDirectoryPath = string.Empty;
         }
 
-        /// <summary>
-        /// Draw window components.
-        /// </summary>
-        private void OnGUI()
-        {
-            if (GUILayout.Button("Export packages"))
-            {
-                ExportPackages();
-            }
-        }
 
         /// <summary>
         /// Read configuration file and export packages.
         /// </summary>
-        private void ExportPackages()
+        [MenuItem("Assets/koturn/Tool/LilKustomShaders/Export Packages", false, 9000)]
+        private static void ExportPackages()
         {
             var exportDirPath = EditorUtility.SaveFolderPanel(
                 "Select export directory",
@@ -102,7 +84,7 @@ namespace Koturn.Tools.LilKustomShaders.Windows
             }
             _lastExportDirectoryPath = exportDirPath;
 
-            var jsonPath = Path.Combine(Application.dataPath, "koturn/Tools/LilKustomShaders/Editor/Windows/ExportConfig.json");
+            var jsonPath = Path.Combine(Application.dataPath, "koturn/Tools/LilKustomShaders/Editor/ExportConfig.json");
             if (!File.Exists(jsonPath))
             {
                 Debug.LogError($"Configuration json file is not exists: {jsonPath}");
@@ -132,7 +114,7 @@ namespace Koturn.Tools.LilKustomShaders.Windows
         /// <param name="unityPackagePath">Unitypackage file path for export.</param>
         /// <param name="assetPath">Target asset path.</param>
         /// <param name="dependAssetPaths">Dependent asset paths.</param>
-        private void ExportAsUnityPackage(string unityPackagePath, string assetPath, string[] dependAssetPaths)
+        private static void ExportAsUnityPackage(string unityPackagePath, string assetPath, string[] dependAssetPaths)
         {
             if (!unityPackagePath.EndsWith(".unitypackage"))
             {
@@ -166,7 +148,7 @@ namespace Koturn.Tools.LilKustomShaders.Windows
         /// </summary>
         /// <param name="zipFilePath">Zip file path for export.</param>
         /// <param name="assetPath">Target asset path.</param>
-        private void ExportAsZipArchive(string zipFilePath, string assetPath)
+        private static void ExportAsZipArchive(string zipFilePath, string assetPath)
         {
             File.Delete(zipFilePath);
 
