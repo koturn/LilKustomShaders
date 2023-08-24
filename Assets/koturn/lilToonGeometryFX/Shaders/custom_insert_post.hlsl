@@ -117,12 +117,9 @@ void GenerateSide(appdata i0, appdata i1, appdata i2, appdata i3, v2f base0, v2f
 [maxvertexcount(15)]
 void geomCustom(triangle appdataCopy ic[3], uint primitiveID : SV_PrimitiveID, inout TriangleStream<v2f> outStream)
 {
-    LIL_BRANCH
     if(_Invisible) return;
 
     appdata i[3] = {appdataOriginalToCopy(ic[0]), appdataOriginalToCopy(ic[1]), appdataOriginalToCopy(ic[2])};
-
-    _Invisible = false; // Optimization
 
     LIL_SETUP_INSTANCE_ID(i[0]);
     float3 triNormal = normalize(i[0].normalOS + i[1].normalOS + i[2].normalOS);
