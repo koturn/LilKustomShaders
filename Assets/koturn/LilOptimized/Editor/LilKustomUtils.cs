@@ -30,6 +30,8 @@ namespace Koturn.lilToon
                     continue;
                 }
 
+                Undo.RecordObject(material, $"koturn/{customShaderCommonName}/Convert material to custom shader");
+
                 var renderQueue = lilMaterialUtils.GetTrueRenderQueue(material);
                 material.shader = shader;
                 material.renderQueue = renderQueue;
@@ -55,6 +57,8 @@ namespace Koturn.lilToon
                 {
                     continue;
                 }
+
+                Undo.RecordObject(material, $"koturn/{customShaderCommonName}/Convert material to original shader");
 
                 var renderQueue = lilMaterialUtils.GetTrueRenderQueue(material);
                 material.shader = shader;
