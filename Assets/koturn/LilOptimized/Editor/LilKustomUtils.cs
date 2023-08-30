@@ -2,6 +2,8 @@
 using UnityEditor;
 using UnityEngine;
 using lilToon;
+using Koturn.lilToon.Sqlite;
+
 
 namespace Koturn.lilToon
 {
@@ -218,6 +220,20 @@ namespace Koturn.lilToon
                 : customShaderName == "Hidden/" + customShaderCommonName + "/MultiGem" ? "Hidden/lilToonMultiGem"
                 : null;
         }
+
+#if UNITY_EDITOR_WIN
+        /// <summary>
+        /// Refresh shader cache and reimport specified asset.
+        /// </summary>
+        public static void RefreshShaderCache(string assetPath)
+        {
+            using (var dbHandle = SqliteUtil.Open("Library/ShaderCache.db"))
+            {
+                SqliteUtil.Exec(dbHandle, "DELETE FROM shadererrors");
+            }
+            AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ImportRecursive);
+        }
+#endif
     }
 }
 #endif

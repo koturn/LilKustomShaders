@@ -617,6 +617,17 @@ namespace Koturn.lilToon
         {
             LilKustomUtils.ConvertMaterialToOriginalShader(shaderName);
         }
+
+#if UNITY_EDITOR_WIN
+        /// <summary>
+        /// Callback method for menu item which refreshes shader cache and reimport.
+        /// </summary>
+        [MenuItem("Assets/koturn/LilTextOverray/Refresh shader cache", false, 2000)]
+        private static void RefreshShaderCacheMenu()
+        {
+            LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath("091ef78e44ed4a64d8e56caf39f45a54"));
+        }
+#endif
     }
 }
 #endif
