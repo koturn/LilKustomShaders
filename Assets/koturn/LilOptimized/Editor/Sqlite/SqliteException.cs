@@ -59,5 +59,54 @@ namespace Koturn.lilToon.Sqlite
             : base(info, context)
         {
         }
+
+
+        /// <summary>
+        /// Throws <see cref="SqliteException"/>.
+        /// </summary>
+        /// <param name="result">Result code of SQLite3 functions.</param>
+        /// <exception cref="SqliteException">Always thrown.</exception>
+        public static void Throw(SqliteResult result)
+        {
+            throw new SqliteException(result);
+        }
+
+        /// <summary>
+        /// Throws <see cref="SqliteException"/>.
+        /// </summary>
+        /// <param name="result">Result code of SQLite3 functions.</param>
+        /// <param name="message">The additional error message that explains the reason for the exception.</param>
+        /// <exception cref="SqliteException">Always thrown.</exception>
+        public static void Throw(SqliteResult result, string message)
+        {
+            throw new SqliteException(result, message);
+        }
+
+        /// <summary>
+        /// Throws <see cref="SqliteException"/> if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.
+        /// </summary>
+        /// <param name="result">Result code of SQLite3 functions.</param>
+        /// <exception cref="SqliteException">Thrown if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.</exception>
+        public static void ThrowIfFailed(SqliteResult result)
+        {
+            if (result != SqliteResult.OK)
+            {
+                SqliteException.Throw(result);
+            }
+        }
+
+        /// <summary>
+        /// Throws <see cref="SqliteException"/> if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.
+        /// </summary>
+        /// <param name="result">Result code of SQLite3 functions.</param>
+        /// <param name="message">The additional error message that explains the reason for the exception.</param>
+        /// <exception cref="SqliteException">Thrown if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.</exception>
+        public static void ThrowIfFailed(SqliteResult result, string message)
+        {
+            if (result != SqliteResult.OK)
+            {
+                SqliteException.Throw(result, message);
+            }
+        }
     }  // class SqliteException
 }

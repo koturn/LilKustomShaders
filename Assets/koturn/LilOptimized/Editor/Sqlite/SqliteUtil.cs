@@ -16,10 +16,7 @@ namespace Koturn.lilToon.Sqlite
         public static SqliteHandle Open(string filePath)
         {
             var result = NativeMethods.Open(filePath, out var dbHandle);
-            if (result != SqliteResult.OK)
-            {
-                throw new SqliteException(result, "Failed to open database: " + filePath);
-            }
+            SqliteException.ThrowIfFailed(result, "Failed to open database: " + filePath);
             return dbHandle;
         }
 
@@ -30,10 +27,7 @@ namespace Koturn.lilToon.Sqlite
         public static void Exec(SqliteHandle dbHandle, string sql)
         {
             var result = NativeMethods.Exec(dbHandle, sql, IntPtr.Zero, IntPtr.Zero, out var errmsg);
-            if (result != SqliteResult.OK)
-            {
-                throw new SqliteException(result, "Failed to execute SQL: " + errmsg);
-            }
+            SqliteException.ThrowIfFailed(result, "Failed to execute SQL: " + errmsg);
         }
 
         /// <summary>
