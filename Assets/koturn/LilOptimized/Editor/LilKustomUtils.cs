@@ -221,7 +221,6 @@ namespace Koturn.lilToon
                 : null;
         }
 
-#if UNITY_EDITOR_WIN
         /// <summary>
         /// Refresh shader cache and reimport specified asset.
         /// </summary>
@@ -233,7 +232,6 @@ namespace Koturn.lilToon
             }
             AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ImportRecursive);
         }
-#endif
     }
 }
 #endif

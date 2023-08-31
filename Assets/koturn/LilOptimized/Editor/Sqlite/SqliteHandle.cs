@@ -1,4 +1,3 @@
-#if UNITY_EDITOR_WIN
 using System;
 using System.Runtime.InteropServices;
 
@@ -33,4 +32,3 @@ namespace Koturn.lilToon.Sqlite
         }
     }
 }
-#endif

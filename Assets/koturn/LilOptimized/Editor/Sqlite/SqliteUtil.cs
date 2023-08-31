@@ -1,4 +1,3 @@
-#if UNITY_EDITOR_WIN
 using System;
 using System.Runtime.InteropServices;
 
@@ -42,11 +41,25 @@ namespace Koturn.lilToon.Sqlite
         /// </summary>
         internal static class NativeMethods
         {
+#if UNITY_EDITOR && !UNITY_EDITOR_WIN
             /// <summary>
             /// Native library name of SQLite3.
             /// </summary>
-            const string LibraryName = "winsqlite3";
-            // const string LibraryName = "sqlite3";
+            private const string LibraryName = "sqlite3";
+            /// <summary>
+            /// Calling convention of library functions.
+            /// </summary>
+            private const CallingConvention CallConv = CallingConvention.Cdecl;
+#else
+            /// <summary>
+            /// Native library name of SQLite3.
+            /// </summary>
+            private const string LibraryName = "winsqlite3";
+            /// <summary>
+            /// Calling convention of library functions.
+            /// </summary>
+            private const CallingConvention CallConv = CallingConvention.StdCall;
+#endif
 
             /// <summary>
             /// Open database.
@@ -57,7 +70,7 @@ namespace Koturn.lilToon.Sqlite
             /// <remarks>
             /// <seealso href="https://www.sqlite.org/c3ref/open.html"/>
             /// </remarks>
-            [DllImport(LibraryName, EntryPoint = "sqlite3_open", CallingConvention = CallingConvention.StdCall)]
+            [DllImport(LibraryName, EntryPoint = "sqlite3_open", CallingConvention = CallConv)]
             public static extern SqliteResult Open(string filename, out SqliteHandle dbHandle);
 
             /// <summary>
@@ -69,7 +82,7 @@ namespace Koturn.lilToon.Sqlite
             /// <remarks>
             /// <seealso href="https://www.sqlite.org/c3ref/close.html"/>
             /// </remarks>
-            [DllImport(LibraryName, EntryPoint = "sqlite3_close", CallingConvention = CallingConvention.StdCall)]
+            [DllImport(LibraryName, EntryPoint = "sqlite3_close", CallingConvention = CallConv)]
             public static extern SqliteResult Close(IntPtr db);
 
             /// <summary>
@@ -84,9 +97,8 @@ namespace Koturn.lilToon.Sqlite
             /// <remarks>
             /// <seealso href="https://www.sqlite.org/c3ref/exec.html"/>
             /// </remarks>
-            [DllImport(LibraryName, EntryPoint = "sqlite3_exec", CallingConvention = CallingConvention.StdCall)]
+            [DllImport(LibraryName, EntryPoint = "sqlite3_exec", CallingConvention = CallConv)]
             public static extern SqliteResult Exec(SqliteHandle dbHandle, string sql, IntPtr callback, IntPtr callbackArg, out string errmsg);
         }
     }
 }
-#endif
