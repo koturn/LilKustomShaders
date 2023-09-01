@@ -5,14 +5,14 @@ using System.Runtime.InteropServices;
 namespace Koturn.lilToon.Sqlite
 {
     /// <summary>
-    /// Handle for SQLite3 database.
+    /// Handle for memory allocated in SQLite3 functions.
     /// </summary>
-    public sealed class SqliteHandle : SafeHandle
+    internal sealed class SqliteMemoryHandle : SafeHandle
     {
         /// <summary>
         /// Initialize handle with <see cref="IntPtr.Zero"/>.
         /// </summary>
-        private SqliteHandle()
+        private SqliteMemoryHandle()
             : base(IntPtr.Zero, true)
         {
         }
@@ -23,12 +23,14 @@ namespace Koturn.lilToon.Sqlite
         public override bool IsInvalid => handle == IntPtr.Zero;
 
         /// <summary>
-        /// Close data base.
+        /// Free memory.
         /// </summary>
-        /// <returns>True if closing is successful, otherwise false.</returns>
+        /// <returns>Always true.</returns>
         protected override bool ReleaseHandle()
         {
-            return SqliteUtil.Close(handle) == SqliteResult.OK;
+            SqliteUtil.Free(handle);
+            handle = IntPtr.Zero;
+            return true;
         }
     }
 }

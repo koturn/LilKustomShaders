@@ -11,29 +11,147 @@ namespace Koturn.lilToon.Sqlite
     public static class SqliteUtil
     {
         /// <summary>
-        /// Open database.
+        /// Delegate for <see cref="NativeMethods.Open"/> or <see cref="NativeMethods.OpenW"/>.
         /// </summary>
         /// <param name="filePath">SQLite3 database file path.</param>
-        public static SqliteHandle Open(string filePath)
+        /// <param name="db">SQLite db handle.</param>
+        /// <returns>Result code.</returns>
+        private delegate SqliteResult OpenFunc(string filename, out SqliteHandle db);
+        /// <summary>
+        /// Delegate for <see cref="NativeMethods.Close"/> or <see cref="NativeMethods.CloseW"/>.
+        /// </summary>
+        /// <param name="filePath">Database filename.</param>
+        /// <param name="db">SQLite db handle.</param>
+        /// <returns>Result code.</returns>
+        private delegate SqliteResult CloseFunc(IntPtr db);
+        /// <summary>
+        /// Delegate for <see cref="NativeMethods.Execute"/> or <see cref="NativeMethods.ExecuteW"/>.
+        /// </summary>
+        /// <param name="db">An open database.</param>
+        /// <param name="sql">SQL to be evaluated.</param>
+        /// <param name="callback">Callback function.</param>
+        /// <param name="callbackArg">1st argument to callback.</param>
+        /// <param name="errmsgHandle">Error msg written here.</param>
+        private delegate SqliteResult ExecuteFunc(SqliteHandle db, string sql, IntPtr callback, IntPtr callbackArg, out SqliteMemoryHandle errmsgHandle);
+        /// <summary>
+        /// Delegate for <see cref="NativeMethods.Free"/> or <see cref="NativeMethods.FreeW"/>.
+        /// </summary>
+        /// <param name="pMemory">Allocated memory pointer.</param>
+        private delegate void FreeFunc(IntPtr pErrMsg);
+
+        /// <summary>
+        /// Delegate instance of <see cref="NativeMethods.Open"/> or <see cref="NativeMethods.OpenW"/>.
+        /// </summary>
+        private static readonly OpenFunc _open;
+        /// <summary>
+        /// Delegate instance of <see cref="NativeMethods.Close"/> or <see cref="NativeMethods.CloseW"/>.
+        /// </summary>
+        private static readonly CloseFunc _close;
+        /// <summary>
+        /// Delegate instance of <see cref="NativeMethods.Execute"/> or <see cref="NativeMethods.ExecuteW"/>.
+        /// </summary>
+        private static readonly ExecuteFunc _execute;
+        /// <summary>
+        /// Delegate instance of <see cref="NativeMethods.Free"/> or <see cref="NativeMethods.FreeW"/>.
+        /// </summary>
+        private static readonly FreeFunc _free;
+
+
+        /// <summary>
+        /// Setup delegates for P/Invoke functions.
+        /// </summary>
+        static SqliteUtil()
         {
-            var result = NativeMethods.Open(filePath, out var dbHandle);
-            SqliteException.ThrowIfFailed(result, "Failed to open database: " + filePath);
-            return dbHandle;
+#if !UNITY_EDITOR || UNITY_EDITOR_WIN
+            try
+            {
+                // Try to load sqlite3.dll.
+                // If sqlite3.dll is not found, DllNotFoundException is thrown.
+                NativeMethods.Close(IntPtr.Zero);
+
+                _open = NativeMethods.Open;
+                _close = NativeMethods.Close;
+                _execute = NativeMethods.Execute;
+                _free = NativeMethods.Free;
+            }
+            catch (DllNotFoundException)
+            {
+                // Fallback to winsqlite.dll
+                _open = NativeMethods.OpenW;
+                _close = NativeMethods.CloseW;
+                _execute = NativeMethods.ExecuteW;
+                _free = NativeMethods.FreeW;
+            }
+#else
+        _open = NativeMethods.Open;
+        _close = NativeMethods.Close;
+        _execute = NativeMethods.Execute;
+        _free = NativeMethods.Free;
+#endif
         }
 
         /// <summary>
-        /// Execute SQL.
+        /// Open database.
         /// </summary>
-        /// <param name="sql">SQL to execute.</param>
-        public static void Exec(SqliteHandle dbHandle, string sql)
+        /// <param name="filePath">SQLite3 database file path.</param>
+        /// <returns>SQLite db handle.</returns>
+        public static SqliteHandle Open(string filename)
         {
-            var result = NativeMethods.Exec(dbHandle, sql, IntPtr.Zero, IntPtr.Zero, out var pErrMsg);
+            var result = _open(filename, out var db);
+            SqliteException.ThrowIfFailed(result, "Open failed");
+            return db;
+        }
+
+        /// <summary>
+        /// Close database.
+        /// </summary>
+        /// <param name="filePath">Database filename.</param>
+        /// <param name="db">SQLite db handle.</param>
+        /// <returns>Result code.</returns>
+        internal static SqliteResult Close(IntPtr db)
+        {
+            return _close(db);
+        }
+
+        /// <summary>
+        /// Execute specified SQL.
+        /// </summary>
+        /// <param name="db">An open database.</param>
+        /// <param name="sql">SQL to be evaluated.</param>
+        public static void Execute(SqliteHandle db, string sql)
+        {
+            Execute(db, sql, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        /// <summary>
+        /// Execute specified SQL.
+        /// </summary>
+        /// <param name="db">An open database.</param>
+        /// <param name="sql">SQL to be evaluated.</param>
+        /// <param name="callback">Callback function.</param>
+        /// <param name="callbackArg">1st argument to callback.</param>
+        public static void Execute(SqliteHandle db, string sql, IntPtr callback, IntPtr callbackArg)
+        {
+            var result = _execute(db, sql, callback, callbackArg, out var errmsgHandle);
             if (result != SqliteResult.OK)
             {
-                var errmsg = CreateFromUtf8String(pErrMsg);
-                NativeMethods.Free(pErrMsg);
-                SqliteException.Throw(result, "Failed to execute SQL: " + errmsg);
+                using (errmsgHandle)
+                {
+                    unsafe
+                    {
+                        SqliteException.Throw(result, "Execute failed: " + CreateFromUtf8String(errmsgHandle.DangerousGetHandle()));
+                    }
+                }
             }
+        }
+
+        /// <summary>
+        /// Free memory allocated in SQLite3 functions.
+        /// </summary>
+        /// <param name="pMemory">Allocated memory pointer.</param>
+        internal static void Free(IntPtr pMemory)
+        {
+            _free(pMemory);
         }
 
 
@@ -70,26 +188,6 @@ namespace Koturn.lilToon.Sqlite
         /// </summary>
         internal static class NativeMethods
         {
-#if UNITY_EDITOR && !UNITY_EDITOR_WIN
-            /// <summary>
-            /// Native library name of SQLite3.
-            /// </summary>
-            private const string LibraryName = "sqlite3";
-            /// <summary>
-            /// Calling convention of library functions.
-            /// </summary>
-            private const CallingConvention CallConv = CallingConvention.Cdecl;
-#else
-            /// <summary>
-            /// Native library name of SQLite3.
-            /// </summary>
-            private const string LibraryName = "winsqlite3";
-            /// <summary>
-            /// Calling convention of library functions.
-            /// </summary>
-            private const CallingConvention CallConv = CallingConvention.StdCall;
-#endif
-
             /// <summary>
             /// Open database.
             /// </summary>
@@ -99,19 +197,18 @@ namespace Koturn.lilToon.Sqlite
             /// <remarks>
             /// <seealso href="https://www.sqlite.org/c3ref/open.html"/>
             /// </remarks>
-            [DllImport(LibraryName, EntryPoint = "sqlite3_open", CallingConvention = CallConv)]
-            public static extern SqliteResult Open(string filename, out SqliteHandle dbHandle);
+            [DllImport("sqlite3", EntryPoint = "sqlite3_open", CallingConvention = CallingConvention.Cdecl)]
+            public static extern SqliteResult Open(string filePath, out SqliteHandle db);
 
             /// <summary>
             /// Close database.
             /// </summary>
-            /// <param name="filePath">Database filename.</param>
             /// <param name="db">SQLite db handle.</param>
             /// <returns>Result code.</returns>
             /// <remarks>
             /// <seealso href="https://www.sqlite.org/c3ref/close.html"/>
             /// </remarks>
-            [DllImport(LibraryName, EntryPoint = "sqlite3_close", CallingConvention = CallConv)]
+            [DllImport("sqlite3", EntryPoint = "sqlite3_close", CallingConvention = CallingConvention.Cdecl)]
             public static extern SqliteResult Close(IntPtr db);
 
             /// <summary>
@@ -121,13 +218,13 @@ namespace Koturn.lilToon.Sqlite
             /// <param name="sql">SQL to be evaluated.</param>
             /// <param name="callback">Callback function.</param>
             /// <param name="callbackArg">1st argument to callback.</param>
-            /// <param name="pErrMsg">Error msg written here.</param>
+            /// <param name="errmgHandle">Error msg written here (must be release with <see cref="Free"/>).</param>
             /// <returns>Result code.</returns>
             /// <remarks>
             /// <seealso href="https://www.sqlite.org/c3ref/exec.html"/>
             /// </remarks>
-            [DllImport(LibraryName, EntryPoint = "sqlite3_exec", CallingConvention = CallConv)]
-            public static extern SqliteResult Exec(SqliteHandle dbHandle, string sql, IntPtr callback, IntPtr callbackArg, out IntPtr pErrMsg);
+            [DllImport("sqlite3", EntryPoint = "sqlite3_exec", CallingConvention = CallingConvention.Cdecl)]
+            public static extern SqliteResult Execute(SqliteHandle db, string sql, IntPtr callback, IntPtr callbackArg, out SqliteMemoryHandle errmgHandle);
 
             /// <summary>
             /// Free memory allocated in SQLite3 functions.
@@ -136,8 +233,58 @@ namespace Koturn.lilToon.Sqlite
             /// <remarks>
             /// <seealso href="https://www.sqlite.org/c3ref/free.html"/>
             /// </remarks>
-            [DllImport(LibraryName, EntryPoint = "sqlite3_free", CallingConvention = CallConv)]
+            [DllImport("sqlite3", EntryPoint = "sqlite3_free", CallingConvention = CallingConvention.Cdecl)]
             public static extern void Free(IntPtr pMemory);
+
+#if !UNITY_EDITOR || UNITY_EDITOR_WIN
+            /// <summary>
+            /// Close database.
+            /// </summary>
+            /// <param name="filePath">Database filename.</param>
+            /// <param name="db">SQLite db handle.</param>
+            /// <returns>Result code.</returns>
+            /// <remarks>
+            /// <seealso href="https://www.sqlite.org/c3ref/open.html"/>
+            /// </remarks>
+            [DllImport("winsqlite3", EntryPoint = "sqlite3_open", CallingConvention = CallingConvention.StdCall)]
+            public static extern SqliteResult OpenW(string filePath, out SqliteHandle db);
+
+            /// <summary>
+            /// Close database.
+            /// </summary>
+            /// <param name="db">SQLite db handle.</param>
+            /// <returns>Result code.</returns>
+            /// <remarks>
+            /// <seealso href="https://www.sqlite.org/c3ref/close.html"/>
+            /// </remarks>
+            [DllImport("winsqlite3", EntryPoint = "sqlite3_close", CallingConvention = CallingConvention.StdCall)]
+            public static extern SqliteResult CloseW(IntPtr db);
+
+            /// <summary>
+            /// Execute specified SQL.
+            /// </summary>
+            /// <param name="db">An open database.</param>
+            /// <param name="sql">SQL to be evaluated.</param>
+            /// <param name="callback">Callback function.</param>
+            /// <param name="callbackArg">1st argument to callback.</param>
+            /// <param name="errmsgHandle">Error msg written here (must be release with <see cref="FreeW"/>).</param>
+            /// <returns>Result code.</returns>
+            /// <remarks>
+            /// <seealso href="https://www.sqlite.org/c3ref/exec.html"/>
+            /// </remarks>
+            [DllImport("winsqlite3", EntryPoint = "sqlite3_exec", CallingConvention = CallingConvention.StdCall)]
+            public static extern SqliteResult ExecuteW(SqliteHandle db, string sql, IntPtr callback, IntPtr callbackArg, out SqliteMemoryHandle errmsgHandle);
+
+            /// <summary>
+            /// Free memory allocated in SQLite3 functions.
+            /// </summary>
+            /// <param name="pMemory">Allocated memory pointer.</param>
+            /// <remarks>
+            /// <seealso href="https://www.sqlite.org/c3ref/free.html"/>
+            /// </remarks>
+            [DllImport("winsqlite3", EntryPoint = "sqlite3_free", CallingConvention = CallingConvention.StdCall)]
+            public static extern void FreeW(IntPtr pMemory);
+#endif
         }
     }
 }
