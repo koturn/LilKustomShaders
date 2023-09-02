@@ -136,7 +136,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Callback method for menu item which converts shader of material to custom lilToon shader.
         /// </summary>
-        [MenuItem("Assets/koturn/LilOptimized/Convert material to custom shader", false, 1100)]
+        [MenuItem("Assets/" + LilOptimizedShaderManager.shaderName + "/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
             LilKustomUtils.ConvertMaterialToCustomShader(LilOptimizedShaderManager.shaderName);
@@ -145,7 +145,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Callback method for menu item which converts shader of material to original lilToon shader.
         /// </summary>
-        [MenuItem("Assets/koturn/LilOptimized/Convert material to original shader", false, 1101)]
+        [MenuItem("Assets/" + LilOptimizedShaderManager.shaderName + "/Convert material to original shader", false, 1101)]
         private static void ConvertMaterialToOriginalShaderMenu()
         {
             LilKustomUtils.ConvertMaterialToOriginalShader(LilOptimizedShaderManager.shaderName);
@@ -154,7 +154,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Callback method for menu item which refreshes shader cache and reimport.
         /// </summary>
-        [MenuItem("Assets/koturn/LilOptimized/Refresh shader cache", false, 2000)]
+        [MenuItem("Assets/" + LilOptimizedShaderManager.shaderName + "/Refresh shader cache", false, 2000)]
         private static void RefreshShaderCacheMenu()
         {
             LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath("a35bbce2bcaa8a6448737c7c3219ca27"));
@@ -164,7 +164,7 @@ namespace Koturn.lilToon
         /// Menu validation method for <see cref="RefreshShaderCacheMenu"/>.
         /// </summary>
         /// <returns>True if <see cref="RefreshShaderCacheMenu"/> works, otherwise false.</returns>
-        [MenuItem("Assets/koturn/LilOptimized/Refresh shader cache", true)]
+        [MenuItem("Assets/" + LilOptimizedShaderManager.shaderName + "Refresh shader cache", true)]
         private static bool ValidateRefreshShaderCacheMenu()
         {
             return LilKustomUtils.IsRefreshShaderCacheAvailable();

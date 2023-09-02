@@ -105,6 +105,18 @@ namespace Koturn.lilToon
                     m_MaterialEditor.ShaderProperty(_crossFadeTime, GetLoc("sCrossFadeTime"));
                 }
             }
+
+            if (material.shaderKeywords.Length == 0)
+            {
+                Debug.Log("No keywords");
+            }
+            else
+            {
+                foreach (var keyword in material.shaderKeywords)
+                {
+                    Debug.Log(keyword);
+                }
+            }
         }
 
         /// <summary>
@@ -178,7 +190,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Callback method for menu item which converts shader of material to custom lilToon shader.
         /// </summary>
-        [MenuItem("Assets/koturn/LilCrossFade/Convert material to custom shader", false, 1100)]
+        [MenuItem("Assets/" + shaderName + "/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
             LilKustomUtils.ConvertMaterialToCustomShader(shaderName);
@@ -187,7 +199,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Callback method for menu item which converts shader of material to original lilToon shader.
         /// </summary>
-        [MenuItem("Assets/koturn/LilCrossFade/Convert material to original shader", false, 1101)]
+        [MenuItem("Assets/" + shaderName + "/Convert material to original shader", false, 1101)]
         private static void ConvertMaterialToOriginalShaderMenu()
         {
             LilKustomUtils.ConvertMaterialToOriginalShader(shaderName);
@@ -196,7 +208,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Callback method for menu item which refreshes shader cache and reimport.
         /// </summary>
-        [MenuItem("Assets/koturn/LilCrossFade/Refresh shader cache", false, 2000)]
+        [MenuItem("Assets/" + shaderName + "/Refresh shader cache", false, 2000)]
         private static void RefreshShaderCacheMenu()
         {
             LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath("12379b75e32de144594f6458ea0b9b1a"));
@@ -206,7 +218,7 @@ namespace Koturn.lilToon
         /// Menu validation method for <see cref="RefreshShaderCacheMenu"/>.
         /// </summary>
         /// <returns>True if <see cref="RefreshShaderCacheMenu"/> works, otherwise false.</returns>
-        [MenuItem("Assets/koturn/LilCrossFade/Refresh shader cache", true)]
+        [MenuItem("Assets/" + shaderName + "/Refresh shader cache", true)]
         private static bool ValidateRefreshShaderCacheMenu()
         {
             return LilKustomUtils.IsRefreshShaderCacheAvailable();

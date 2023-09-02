@@ -150,7 +150,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Callback method for menu item which converts shader of material to custom lilToon shader.
         /// </summary>
-        [MenuItem("Assets/koturn/LilRefProbe/Convert material to custom shader", false, 1100)]
+        [MenuItem("Assets/" + shaderName + "/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
             LilKustomUtils.ConvertMaterialToCustomShader(shaderName);
@@ -159,7 +159,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Callback method for menu item which converts shader of material to original lilToon shader.
         /// </summary>
-        [MenuItem("Assets/koturn/LilRefProbe/Convert material to original shader", false, 1100)]
+        [MenuItem("Assets/" + shaderName + "/Convert material to original shader", false, 1100)]
         private static void ConvertMaterialToOriginalShaderMenu()
         {
             LilKustomUtils.ConvertMaterialToOriginalShader(shaderName);
@@ -168,7 +168,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Callback method for menu item which refreshes shader cache and reimport.
         /// </summary>
-        [MenuItem("Assets/koturn/LilRefProbe/Refresh shader cache", false, 2000)]
+        [MenuItem("Assets/" + shaderName + "/Refresh shader cache", false, 2000)]
         private static void RefreshShaderCacheMenu()
         {
             LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath("1f3b0ea967ef3c54897ae3c75ac735d7"));
@@ -178,7 +178,7 @@ namespace Koturn.lilToon
         /// Menu validation method for <see cref="RefreshShaderCacheMenu"/>.
         /// </summary>
         /// <returns>True if <see cref="RefreshShaderCacheMenu"/> works, otherwise false.</returns>
-        [MenuItem("Assets/koturn/LilRefProbe/Refresh shader cache", true)]
+        [MenuItem("Assets/" + shaderName + "/Refresh shader cache", true)]
         private static bool ValidateRefreshShaderCacheMenu()
         {
             return LilKustomUtils.IsRefreshShaderCacheAvailable();
