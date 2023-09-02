@@ -137,6 +137,23 @@ namespace Koturn.lilToon.Sqlite
         }
 
         /// <summary>
+        /// Try to load sqlite3.dll (and winsqlite3.dll).
+        /// </summary>
+        /// <returns>True if the load succeeded, otherwise false.</returns>
+        public static bool TryLoad()
+        {
+            try
+            {
+                _free(IntPtr.Zero);
+                return true;
+            }
+            catch (DllNotFoundException)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Open database.
         /// </summary>
         /// <param name="filePath">SQLite3 database file path.</param>

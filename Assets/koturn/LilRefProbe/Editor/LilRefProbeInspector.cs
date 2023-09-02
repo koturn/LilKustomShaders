@@ -173,6 +173,16 @@ namespace Koturn.lilToon
         {
             LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath("1f3b0ea967ef3c54897ae3c75ac735d7"));
         }
+
+        /// <summary>
+        /// Menu validation method for <see cref="RefreshShaderCacheMenu"/>.
+        /// </summary>
+        /// <returns>True if <see cref="RefreshShaderCacheMenu"/> works, otherwise false.</returns>
+        [MenuItem("Assets/koturn/LilRefProbe/Refresh shader cache", true)]
+        private static bool ValidateRefreshShaderCacheMenu()
+        {
+            return LilKustomUtils.IsRefreshShaderCacheAvailable();
+        }
     }
 }
 #endif
