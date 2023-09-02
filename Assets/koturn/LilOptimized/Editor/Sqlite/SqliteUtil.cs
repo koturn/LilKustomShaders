@@ -305,10 +305,7 @@ namespace Koturn.lilToon.Sqlite
             {
                 using (errmsgHandle)
                 {
-                    unsafe
-                    {
-                        SqliteException.Throw(result, "Execute failed: " + CreateFromUtf8String(errmsgHandle.DangerousGetHandle()));
-                    }
+                    SqliteException.Throw(result, "Execute failed: " + CreateFromUtf8String(errmsgHandle.DangerousGetHandle()));
                 }
             }
         }
