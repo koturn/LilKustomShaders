@@ -129,10 +129,10 @@ namespace Koturn.lilToon.Sqlite
                 _free = NativeMethods.FreeW;
             }
 #else
-        _open = NativeMethods.Open;
-        _close = NativeMethods.Close;
-        _execute = NativeMethods.Execute;
-        _free = NativeMethods.Free;
+            _open = NativeMethods.Open;
+            _close = NativeMethods.Close;
+            _execute = NativeMethods.Execute;
+            _free = NativeMethods.Free;
 #endif
         }
 
