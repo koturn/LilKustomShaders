@@ -11,46 +11,46 @@ namespace Koturn.lilToon.Sqlite
     public static class SqliteUtil
     {
         /// <summary>
-        /// Callback delegate of third argument of <see cref="SqliteUtil.Execute(SqliteHandle, string, ExecCallbackFunc, IntPtr)"/>.
+        /// Callback delegate of third argument of <see cref="Execute(SqliteHandle, string, ExecCallbackFunc, IntPtr)"/>.
         /// </summary>
-        /// <param name="arg">Fouth argument of <see cref="SqliteUtil.Execute(SqliteHandle, string, ExecCallbackFunc, IntPtr)"/>.</param>
+        /// <param name="arg">Fouth argument of <see cref="Execute(SqliteHandle, string, ExecCallbackFunc, IntPtr)"/>.</param>
         /// <param name="colCount">Number of columns.</param>
         /// <param name="pColumns">Pointer to null-terminated string array of column text.</param>
         /// <param name="pColumnNames">Pointer to null-terminated string array of column name.</param>
         /// <returns>0 to continue, otherwise to abotd.</returns>
         public delegate int ExecCallbackFunc(IntPtr arg, int colCount, IntPtr pColumns, IntPtr pColumnNames);
         /// <summary>
-        /// Callback delegate of third argument of <see cref="SqliteLibrary.Execute(SqliteHandle, string, ExecStringCallbackFunc, object, out string)"/>.
+        /// Callback delegate of third argument of <see cref="Execute(SqliteHandle, string, ExecStringCallbackFunc, IntPtr)"/>.
         /// </summary>
-        /// <param name="arg">Fouth argument of <see cref="SqliteLibrary.Execute(SqliteHandle, string, ExecStringCallbackFunc, object, out string)"/>.</param>
+        /// <param name="arg">Fouth argument of <see cref="Execute(SqliteHandle, string, ExecStringCallbackFunc, IntPtr)"/>.</param>
         /// <param name="columns">Column text array.</param>
         /// <param name="columnNames">Column name array.</param>
         /// <returns>0 to continue, otherwise to abotd.</returns>
         public delegate int ExecStringCallbackFunc(IntPtr arg, string[] columns, string[] columnNames);
         /// <summary>
-        /// Callback delegate of third argument of <see cref="SqliteLibrary.Execute(SqliteHandle, string, ExecStringNoArgCallbackFunc, out string)"/>.
+        /// Callback delegate of third argument of <see cref="Execute(SqliteHandle, string, ExecStringNoArgCallbackFunc)"/>.
         /// </summary>
         /// <param name="columns">Column text array.</param>
         /// <param name="columnNames">Column name array.</param>
         /// <returns>0 to continue, otherwise to abotd.</returns>
         public delegate int ExecStringNoArgCallbackFunc(string[] columns, string[] columnNames);
         /// <summary>
-        /// Callback delegate of third argument of <see cref="SqliteUtil.Execute(SqliteHandle, string, ExecCallbackFunc, IntPtr)"/>.
+        /// Callback delegate of third argument of <see cref="Execute(SqliteHandle, string, ExecCallbackFunc, IntPtr)"/>.
         /// </summary>
-        /// <param name="arg">Fouth argument of <see cref="SqliteUtil.Execute(SqliteHandle, string, ExecCallbackFunc, IntPtr)"/>.</param>
+        /// <param name="arg">Fouth argument of <see cref="Execute(SqliteHandle, string, ExecCallbackFunc, IntPtr)"/>.</param>
         /// <param name="colCount">Number of columns.</param>
         /// <param name="pColumns">Pointer to null-terminated string array of column text.</param>
         /// <param name="pColumnNames">Pointer to null-terminated string array of column name.</param>
         public delegate void ExecCallbackAction(IntPtr arg, int colCount, IntPtr pColumns, IntPtr pColumnNames);
         /// <summary>
-        /// Callback delegate of third argument of <see cref="SqliteLibrary.Execute(SqliteHandle, string, ExecStringCallbackFunc, object, out string)"/>.
+        /// Callback delegate of third argument of <see cref="Execute(SqliteHandle, string, ExecStringCallbackFunc, IntPtr)"/>.
         /// </summary>
-        /// <param name="arg">Fouth argument of <see cref="SqliteLibrary.Execute(SqliteHandle, string, ExecStringCallbackFunc, object, out string)"/>.</param>
+        /// <param name="arg">Fouth argument of <see cref="Execute(SqliteHandle, string, ExecStringCallbackFunc, IntPtr)"/>.</param>
         /// <param name="columns">Column text array.</param>
         /// <param name="columnNames">Column name array.</param>
         public delegate void ExecStringCallbackAction(IntPtr arg, string[] columns, string[] columnNames);
         /// <summary>
-        /// Callback delegate of third argument of <see cref="SqliteLibrary.Execute(SqliteHandle, string, ExecStringNoArgCallbackFunc, out string)"/>.
+        /// Callback delegate of third argument of <see cref="Execute(SqliteHandle, string, ExecStringNoArgCallbackFunc)"/>.
         /// </summary>
         /// <param name="columns">Column text array.</param>
         /// <param name="columnNames">Column name array.</param>
@@ -62,11 +62,10 @@ namespace Koturn.lilToon.Sqlite
         /// <param name="filePath">SQLite3 database file path.</param>
         /// <param name="db">SQLite db handle.</param>
         /// <returns>Result code.</returns>
-        private delegate SqliteResult OpenFunc(string filename, out SqliteHandle db);
+        private delegate SqliteResult OpenFunc(string filePath, out SqliteHandle db);
         /// <summary>
         /// Delegate for <see cref="NativeMethods.Close"/> or <see cref="NativeMethods.CloseW"/>.
         /// </summary>
-        /// <param name="filePath">Database filename.</param>
         /// <param name="db">SQLite db handle.</param>
         /// <returns>Result code.</returns>
         private delegate SqliteResult CloseFunc(IntPtr db);
@@ -83,7 +82,7 @@ namespace Koturn.lilToon.Sqlite
         /// Delegate for <see cref="NativeMethods.Free"/> or <see cref="NativeMethods.FreeW"/>.
         /// </summary>
         /// <param name="pMemory">Allocated memory pointer.</param>
-        private delegate void FreeFunc(IntPtr pErrMsg);
+        private delegate void FreeFunc(IntPtr pMemory);
 
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.Open"/> or <see cref="NativeMethods.OpenW"/>.
@@ -171,9 +170,9 @@ namespace Koturn.lilToon.Sqlite
         /// </summary>
         /// <param name="filePath">SQLite3 database file path.</param>
         /// <returns>SQLite db handle.</returns>
-        public static SqliteHandle Open(string filename)
+        public static SqliteHandle Open(string filePath)
         {
-            var result = _open(filename, out var db);
+            var result = _open(filePath, out var db);
             SqliteException.ThrowIfFailed(result, "Open failed");
             return db;
         }
@@ -181,7 +180,6 @@ namespace Koturn.lilToon.Sqlite
         /// <summary>
         /// Close database.
         /// </summary>
-        /// <param name="filePath">Database filename.</param>
         /// <param name="db">SQLite db handle.</param>
         /// <returns>Result code.</returns>
         internal static SqliteResult Close(IntPtr db)
