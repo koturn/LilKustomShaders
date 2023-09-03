@@ -113,7 +113,7 @@ namespace Koturn.lilToon.Sqlite
             {
                 // Try to load sqlite3.dll.
                 // If sqlite3.dll is not found, DllNotFoundException is thrown.
-                NativeMethods.Close(IntPtr.Zero);
+                NativeMethods.Free(IntPtr.Zero);
 
                 _open = NativeMethods.Open;
                 _close = NativeMethods.Close;
@@ -122,11 +122,24 @@ namespace Koturn.lilToon.Sqlite
             }
             catch (DllNotFoundException)
             {
-                // Fallback to winsqlite.dll
-                _open = NativeMethods.OpenW;
-                _close = NativeMethods.CloseW;
-                _execute = NativeMethods.ExecuteW;
-                _free = NativeMethods.FreeW;
+                try
+                {
+                    // Fallback to winsqlite3.dll
+                    NativeMethods.FreeW(IntPtr.Zero);
+
+                    _open = NativeMethods.OpenW;
+                    _close = NativeMethods.CloseW;
+                    _execute = NativeMethods.ExecuteW;
+                    _free = NativeMethods.FreeW;
+                }
+                catch (DllNotFoundException)
+                {
+                    // If winsqlite.dll not found, Refer to sqlite3.dll, assuming the user will add it later.
+                    _open = NativeMethods.Open;
+                    _close = NativeMethods.Close;
+                    _execute = NativeMethods.Execute;
+                    _free = NativeMethods.Free;
+                }
             }
 #else
             _open = NativeMethods.Open;
