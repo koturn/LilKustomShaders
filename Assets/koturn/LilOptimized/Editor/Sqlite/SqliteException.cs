@@ -20,7 +20,7 @@ namespace Koturn.lilToon.Sqlite
         /// </summary>
         /// <param name="result">Result code of SQLite3.</param>
         public SqliteException(SqliteResult result)
-            : base($"{result} ({(int)result})")
+            : base($"{SqliteUtil.GetErrorString(result)} ({(int)result})")
         {
             Result = result;
         }
@@ -31,7 +31,7 @@ namespace Koturn.lilToon.Sqlite
         /// <param name="result">Result code of SQLite3.</param>
         /// <param name="message">The additional error message that explains the reason for the exception.</param>
         public SqliteException(SqliteResult result, string message)
-            : base($"{result} ({(int)result}): {message}")
+            : base($"{SqliteUtil.GetErrorString(result)} ({(int)result}): {message}")
         {
             Result = result;
         }

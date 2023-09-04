@@ -83,6 +83,20 @@ namespace Koturn.lilToon.Sqlite
         /// </summary>
         /// <param name="pMemory">Allocated memory pointer.</param>
         private delegate void FreeFunc(IntPtr pMemory);
+        /// <summary>
+        /// Delegate for <see cref="NativeMethods.GetErrorMessage"/> or <see cref="NativeMethods.GetErrorMessageW"/>.
+        /// </summary>
+        /// <param name="db">SQLite db handle.</param>
+        /// <returns>Pointer to latest error message (UTF-8).</returns>
+        private delegate IntPtr GetErrorMessageFunc(SqliteHandle db);
+
+        /// <summary>
+        /// Delegate for <see cref="NativeMethods.GetErrorString"/> or <see cref="NativeMethods.GetErrorStringW"/>.
+        /// </summary>
+        /// <param name="result">Result code.</param>
+        /// <returns>Pointer to English-language text that describes the <see cref="SqliteResult"/> (UTF-8).</returns>
+        private delegate IntPtr GetErrorStringFunc(SqliteResult result);
+
 
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.Open"/> or <see cref="NativeMethods.OpenW"/>.
@@ -100,6 +114,14 @@ namespace Koturn.lilToon.Sqlite
         /// Delegate instance of <see cref="NativeMethods.Free"/> or <see cref="NativeMethods.FreeW"/>.
         /// </summary>
         private static readonly FreeFunc _free;
+        /// <summary>
+        /// Delegate instance of <see cref="NativeMethods.GetErrorMessage"/> or <see cref="NativeMethods.GetErrorMessageW"/>.
+        /// </summary>
+        private static readonly GetErrorMessageFunc _getErrorMessage;
+        /// <summary>
+        /// Delegate instance of <see cref="NativeMethods.GetErrorString"/> or <see cref="NativeMethods.GetErrorStringW"/>.
+        /// </summary>
+        private static readonly GetErrorStringFunc _getErrorString;
 
 
         /// <summary>
@@ -118,6 +140,8 @@ namespace Koturn.lilToon.Sqlite
                 _close = NativeMethods.Close;
                 _execute = NativeMethods.Execute;
                 _free = NativeMethods.Free;
+                _getErrorMessage = NativeMethods.GetErrorMessage;
+                _getErrorString = NativeMethods.GetErrorString;
             }
             catch (DllNotFoundException)
             {
@@ -130,6 +154,8 @@ namespace Koturn.lilToon.Sqlite
                     _close = NativeMethods.CloseW;
                     _execute = NativeMethods.ExecuteW;
                     _free = NativeMethods.FreeW;
+                    _getErrorMessage = NativeMethods.GetErrorMessageW;
+                    _getErrorString = NativeMethods.GetErrorStringW;
                 }
                 catch (DllNotFoundException)
                 {
@@ -138,6 +164,8 @@ namespace Koturn.lilToon.Sqlite
                     _close = NativeMethods.Close;
                     _execute = NativeMethods.Execute;
                     _free = NativeMethods.Free;
+                    _getErrorMessage = NativeMethods.GetErrorMessage;
+                    _getErrorString = NativeMethods.GetErrorString;
                 }
             }
 #else
@@ -145,6 +173,8 @@ namespace Koturn.lilToon.Sqlite
             _close = NativeMethods.Close;
             _execute = NativeMethods.Execute;
             _free = NativeMethods.Free;
+            _getErrorMessage = NativeMethods.GetErrorMessage;
+            _getErrorString = NativeMethods.GetErrorString;
 #endif
         }
 
@@ -173,7 +203,7 @@ namespace Koturn.lilToon.Sqlite
         public static SqliteHandle Open(string filePath)
         {
             var result = _open(filePath, out var db);
-            SqliteException.ThrowIfFailed(result, "Open failed");
+            SqliteException.ThrowIfFailed(result, "Failed to open " + filePath + "; " + GetErrorMessage(db));
             return db;
         }
 
@@ -316,7 +346,7 @@ namespace Koturn.lilToon.Sqlite
             {
                 using (errmsgHandle)
                 {
-                    SqliteException.Throw(result, "Execute failed: " + CreateFromUtf8String(errmsgHandle.DangerousGetHandle()));
+                    SqliteException.Throw(result, "Execute failed; " + CreateFromUtf8String(errmsgHandle.DangerousGetHandle()));
                 }
             }
         }
@@ -328,6 +358,26 @@ namespace Koturn.lilToon.Sqlite
         internal static void Free(IntPtr pMemory)
         {
             _free(pMemory);
+        }
+
+        /// <summary>
+        /// Get latest error message occured in SQLite3 functions.
+        /// </summary>
+        /// <param name="db">SQLite db handle.</param>
+        /// <returns>Latest error message (UTF-8).</returns>
+        public static string GetErrorMessage(SqliteHandle db)
+        {
+            return CreateFromUtf8String(_getErrorMessage(db));
+        }
+
+        /// <summary>
+        /// Get the English-language text that describes the <see cref="SqliteResult"/>, as UTF-8.
+        /// </summary>
+        /// <param name="result">Result code.</param>
+        /// <returns>English-language text that describes the <see cref="SqliteResult"/> (UTF-8).</returns>
+        public static string GetErrorString(SqliteResult result)
+        {
+            return CreateFromUtf8String(_getErrorString(result));
         }
 
 
@@ -421,6 +471,36 @@ namespace Koturn.lilToon.Sqlite
             [DllImport("sqlite3", EntryPoint = "sqlite3_free", CallingConvention = CallingConvention.Cdecl)]
             public static extern void Free(IntPtr pMemory);
 
+            /// <summary>
+            /// Get latest error message occured in SQLite3 functions.
+            /// </summary>
+            /// <param name="db">SQLite db handle.</param>
+            /// <returns>Poiner to latest error message (UTF-8).</returns>
+            /// <remarks>
+            /// <para><seealso href="https://www.sqlite.org/capi3ref.html#sqlite3_errcode"/></para>
+            /// <para>
+            /// Because returns value is pointer to constant string memory in sqlite3.dll,
+            /// the returns value MUST NOT BE overwriten or freed with <see cref="Free"/>.
+            /// </para>
+            /// </remarks>
+            [DllImport("sqlite3", EntryPoint = "sqlite3_errmsg", CallingConvention = CallingConvention.Cdecl)]
+            public static extern IntPtr GetErrorMessage(SqliteHandle db);
+
+            /// <summary>
+            /// Get the English-language text that describes the <see cref="SqliteResult"/>, as UTF-8.
+            /// </summary>
+            /// <param name="result">Result code.</param>
+            /// <returns>Poiner to English-language text that describes the <see cref="SqliteResult"/> (UTF-8).</returns>
+            /// <remarks>
+            /// <para><seealso href="https://www.sqlite.org/capi3ref.html#sqlite3_errcode"/></para>
+            /// <para>
+            /// Because returns value is pointer to constant string memory in sqlite3.dll,
+            /// the returns value MUST NOT BE overwriten or freed with <see cref="Free"/>.
+            /// </para>
+            /// </remarks>
+            [DllImport("sqlite3", EntryPoint = "sqlite3_errstr", CallingConvention = CallingConvention.Cdecl)]
+            public static extern IntPtr GetErrorString(SqliteResult result);
+
 #if !UNITY_EDITOR || UNITY_EDITOR_WIN
             /// <summary>
             /// Close database.
@@ -469,6 +549,36 @@ namespace Koturn.lilToon.Sqlite
             /// </remarks>
             [DllImport("winsqlite3", EntryPoint = "sqlite3_free", CallingConvention = CallingConvention.StdCall)]
             public static extern void FreeW(IntPtr pMemory);
+
+            /// <summary>
+            /// Get latest error message occured in SQLite3 functions.
+            /// </summary>
+            /// <param name="db">SQLite db handle.</param>
+            /// <returns>Poiner to latest error message (UTF-8).</returns>
+            /// <remarks>
+            /// <para><seealso href="https://www.sqlite.org/capi3ref.html#sqlite3_errcode"/></para>
+            /// <para>
+            /// Because returns value is pointer to constant string memory in sqlite3.dll,
+            /// the returns value MUST NOT BE overwriten or freed with <see cref="Free"/>.
+            /// </para>
+            /// </remarks>
+            [DllImport("winsqlite3", EntryPoint = "sqlite3_errmsg", CallingConvention = CallingConvention.StdCall)]
+            public static extern IntPtr GetErrorMessageW(SqliteHandle db);
+
+            /// <summary>
+            /// Get the English-language text that describes the <see cref="SqliteResult"/>, as UTF-8.
+            /// </summary>
+            /// <param name="result">Result code.</param>
+            /// <returns>Poiner to English-language text that describes the <see cref="SqliteResult"/> (UTF-8).</returns>
+            /// <remarks>
+            /// <para><seealso href="https://www.sqlite.org/capi3ref.html#sqlite3_errcode"/></para>
+            /// <para>
+            /// Because returns value is pointer to constant string memory in sqlite3.dll,
+            /// the returns value MUST NOT BE overwriten or freed with <see cref="Free"/>.
+            /// </para>
+            /// </remarks>
+            [DllImport("winsqlite3", EntryPoint = "sqlite3_errstr", CallingConvention = CallingConvention.StdCall)]
+            public static extern IntPtr GetErrorStringW(SqliteResult result);
 #endif
         }
     }
