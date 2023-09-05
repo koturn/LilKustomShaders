@@ -346,7 +346,7 @@ namespace Koturn.lilToon.Sqlite
             {
                 using (errmsgHandle)
                 {
-                    SqliteException.Throw(result, "Execute failed; " + CreateFromUtf8String(errmsgHandle.DangerousGetHandle()));
+                    SqliteException.Throw(result, "Execute failed; " + PtrToStringUTF8(errmsgHandle.DangerousGetHandle()));
                 }
             }
         }
@@ -367,7 +367,7 @@ namespace Koturn.lilToon.Sqlite
         /// <returns>Latest error message (UTF-8).</returns>
         public static string GetErrorMessage(SqliteHandle db)
         {
-            return CreateFromUtf8String(_getErrorMessage(db));
+            return Marshal.PtrToStringUni(_getErrorMessage(db));
         }
 
         /// <summary>
@@ -377,7 +377,7 @@ namespace Koturn.lilToon.Sqlite
         /// <returns>English-language text that describes the <see cref="SqliteResult"/> (UTF-8).</returns>
         public static string GetErrorString(SqliteResult result)
         {
-            return CreateFromUtf8String(_getErrorString(result));
+            return PtrToStringUTF8(_getErrorString(result));
         }
 
 
@@ -386,12 +386,16 @@ namespace Koturn.lilToon.Sqlite
         /// </summary>
         /// <param name="p">Pointer to UTF-8 byte sequence.</param>
         /// <returns>Created <see cref="string"/>.</returns>
-        private static string CreateFromUtf8String(IntPtr p)
+        private static string PtrToStringUTF8(IntPtr p)
         {
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP1_1_OR_GREATER
+            return Marshal.PtrToStringUTF8(p);
+#else
             unsafe
             {
                 return CreateFromUtf8String((sbyte *)p);
             }
+#endif
         }
 
         /// <summary>
@@ -401,9 +405,14 @@ namespace Koturn.lilToon.Sqlite
         /// <returns>Created <see cref="string"/>.</returns>
         private static unsafe string CreateFromUtf8String(sbyte *psb)
         {
+#if NETSTANDARD2_1_OR_GREATER || NETCOREAPP1_1_OR_GREATER
+            return Marshal.PtrToStringUTF8((IntPtr)p);
+#else
             return new string(psb, 0, ByteLengthOf(psb), Encoding.UTF8);
+#endif
         }
 
+#if !NETSTANDARD2_1_OR_GREATER && !NETCOREAPP1_1_OR_GREATER
         /// <summary>
         /// Get byte length of null-terminated string.
         /// </summary>
@@ -417,6 +426,7 @@ namespace Koturn.lilToon.Sqlite
             }
             return (int)(psbEnd - psb);
         }
+#endif
 
         /// <summary>
         /// Provides some native methods of SQLite3.
@@ -432,7 +442,7 @@ namespace Koturn.lilToon.Sqlite
             /// <remarks>
             /// <seealso href="https://www.sqlite.org/c3ref/open.html"/>
             /// </remarks>
-            [DllImport("sqlite3", EntryPoint = "sqlite3_open", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("sqlite3", EntryPoint = "sqlite3_open16", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Unicode)]
             public static extern SqliteResult Open(string filePath, out SqliteHandle db);
 
             /// <summary>
@@ -475,7 +485,7 @@ namespace Koturn.lilToon.Sqlite
             /// Get latest error message occured in SQLite3 functions.
             /// </summary>
             /// <param name="db">SQLite db handle.</param>
-            /// <returns>Poiner to latest error message (UTF-8).</returns>
+            /// <returns>Poiner to latest error message (UTF-16).</returns>
             /// <remarks>
             /// <para><seealso href="https://www.sqlite.org/capi3ref.html#sqlite3_errcode"/></para>
             /// <para>
@@ -483,7 +493,7 @@ namespace Koturn.lilToon.Sqlite
             /// the returns value MUST NOT BE overwriten or freed with <see cref="Free"/>.
             /// </para>
             /// </remarks>
-            [DllImport("sqlite3", EntryPoint = "sqlite3_errmsg", CallingConvention = CallingConvention.Cdecl)]
+            [DllImport("sqlite3", EntryPoint = "sqlite3_errmsg16", CallingConvention = CallingConvention.Cdecl)]
             public static extern IntPtr GetErrorMessage(SqliteHandle db);
 
             /// <summary>
@@ -511,7 +521,7 @@ namespace Koturn.lilToon.Sqlite
             /// <remarks>
             /// <seealso href="https://www.sqlite.org/c3ref/open.html"/>
             /// </remarks>
-            [DllImport("winsqlite3", EntryPoint = "sqlite3_open", CallingConvention = CallingConvention.StdCall)]
+            [DllImport("winsqlite3", EntryPoint = "sqlite3_open16", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode)]
             public static extern SqliteResult OpenW(string filePath, out SqliteHandle db);
 
             /// <summary>
@@ -554,7 +564,7 @@ namespace Koturn.lilToon.Sqlite
             /// Get latest error message occured in SQLite3 functions.
             /// </summary>
             /// <param name="db">SQLite db handle.</param>
-            /// <returns>Poiner to latest error message (UTF-8).</returns>
+            /// <returns>Poiner to latest error message (UTF-16).</returns>
             /// <remarks>
             /// <para><seealso href="https://www.sqlite.org/capi3ref.html#sqlite3_errcode"/></para>
             /// <para>
@@ -562,7 +572,7 @@ namespace Koturn.lilToon.Sqlite
             /// the returns value MUST NOT BE overwriten or freed with <see cref="Free"/>.
             /// </para>
             /// </remarks>
-            [DllImport("winsqlite3", EntryPoint = "sqlite3_errmsg", CallingConvention = CallingConvention.StdCall)]
+            [DllImport("winsqlite3", EntryPoint = "sqlite3_errmsg16", CallingConvention = CallingConvention.StdCall)]
             public static extern IntPtr GetErrorMessageW(SqliteHandle db);
 
             /// <summary>
