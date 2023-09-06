@@ -40,7 +40,7 @@ namespace Koturn.lilToon
 
             // If you want to change rendering modes in the editor, specify the shader here
             ReplaceToCustomShaders();
-            isShowRenderMode = !material.shader.name.Contains("Optional");
+            isShowRenderMode = !material.shader.name.Contains("/[Optional] ");
 
             LoadCustomLanguage("5b004fec885014b4e9f3e8889f4bc808");
 

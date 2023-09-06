@@ -165,7 +165,7 @@ namespace Koturn.lilToon
 
             // If you want to change rendering modes in the editor, specify the shader here
             ReplaceToCustomShaders();
-            isShowRenderMode = !material.shader.name.Contains("Optional");
+            isShowRenderMode = !material.shader.name.Contains("/[Optional] ");
 
             LoadCustomLanguage("1856a3bb6b48464458ac52d525e02701");
             _spriteTex = FindProperty("_SpriteTex", props);
