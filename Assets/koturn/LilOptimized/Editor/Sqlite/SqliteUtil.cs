@@ -203,7 +203,7 @@ namespace Koturn.lilToon.Sqlite
         public static SqliteHandle Open(string filePath)
         {
             var result = _open(filePath, out var db);
-            SqliteException.ThrowIfFailed(result, "Failed to open " + filePath + "; " + GetErrorMessage(db));
+            SqliteException.ThrowIfFailed("sqlite3_open16", result, "Failed to open " + filePath + "; " + GetErrorMessage(db));
             return db;
         }
 
@@ -346,7 +346,7 @@ namespace Koturn.lilToon.Sqlite
             {
                 using (errmsgHandle)
                 {
-                    SqliteException.Throw(result, "Execute failed; " + PtrToStringUTF8(errmsgHandle.DangerousGetHandle()));
+                    SqliteException.Throw("sqlite3_exec", result, "Execute failed; " + PtrToStringUTF8(errmsgHandle.DangerousGetHandle()));
                 }
             }
         }

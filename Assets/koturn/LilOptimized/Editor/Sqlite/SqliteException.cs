@@ -11,42 +11,68 @@ namespace Koturn.lilToon.Sqlite
     public class SqliteException : Exception
     {
         /// <summary>
+        /// Function name in sqlite3.dll.
+        /// </summary>
+        public string FuncName { get; }
+        /// <summary>
         /// Result code of SQLite3 functions.
         /// </summary>
         public SqliteResult Result { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SqliteException"/> class.
+        /// Initializes a new instance of the <see cref="SqliteException"/> class
+        /// with a function name and its result code of SQLite3 API.
         /// </summary>
+        /// <param name="funcName">Function name in sqlite3.dll.</param>
         /// <param name="result">Result code of SQLite3.</param>
-        public SqliteException(SqliteResult result)
-            : base($"{SqliteUtil.GetErrorString(result)} ({(int)result})")
+        public SqliteException(string funcName, SqliteResult result)
+            : base($"{SqliteUtil.GetErrorString(result)} ({funcName}: {(int)result})")
         {
+            FuncName = funcName;
             Result = result;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SqliteException"/> class with a specified error message.
+        /// Initializes a new instance of the <see cref="SqliteException"/> class
+        /// with a function name, its result code of SQLite3 API and an additional error message.
         /// </summary>
+        /// <param name="funcName">Function name in sqlite3.dll.</param>
         /// <param name="result">Result code of SQLite3.</param>
         /// <param name="message">The additional error message that explains the reason for the exception.</param>
-        public SqliteException(SqliteResult result, string message)
-            : base($"{SqliteUtil.GetErrorString(result)} ({(int)result}): {message}")
+        public SqliteException(string funcName, SqliteResult result, string message)
+            : base($"{SqliteUtil.GetErrorString(result)} ({funcName}: {(int)result}): {message}")
         {
             Result = result;
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SqliteException"/> class with
-        /// a specified error message and a reference to the inner exception that
-        /// is the cause of this exception.
+        /// Initializes a new instance of the <see cref="SqliteException"/> class
+        /// with a function name, its result code of SQLite3 API and additional error message
+        /// and a reference to the inner exception that is the cause of this exception.
         /// </summary>
-        /// <param name="message">The error message that explains the reason for the exception.</param>
+        /// <param name="funcName">Function name in sqlite3.dll.</param>
+        /// <param name="result">Result code of SQLite3.</param>
         /// <param name="inner">The exception that is the cause of the current exception.
         /// If the innerException parameter is not a null reference,
         /// the current exception is raised in a catch block that handles the inner exception.</param>
-        public SqliteException(string message, Exception inner)
-            : base(message, inner)
+        public SqliteException(string funcName, SqliteResult result, Exception inner)
+            : base($"{SqliteUtil.GetErrorString(result)} ({funcName}: {(int)result})", inner)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SqliteException"/> class
+        /// with a function name, its result code of SQLite3 API and additional error message,
+        /// an additional error message and a reference to the inner exception that is the cause of this exception.
+        /// </summary>
+        /// <param name="funcName">Function name in sqlite3.dll.</param>
+        /// <param name="result">Result code of SQLite3.</param>
+        /// <param name="message">The additional error message that explains the reason for the exception.</param>
+        /// <param name="inner">The exception that is the cause of the current exception.
+        /// If the innerException parameter is not a null reference,
+        /// the current exception is raised in a catch block that handles the inner exception.</param>
+        public SqliteException(string funcName, SqliteResult result, string message, Exception inner)
+            : base($"{SqliteUtil.GetErrorString(result)} ({funcName}: {(int)result}): {message}", inner)
         {
         }
 
@@ -64,49 +90,53 @@ namespace Koturn.lilToon.Sqlite
         /// <summary>
         /// Throws <see cref="SqliteException"/>.
         /// </summary>
+        /// <param name="funcName">Function name in sqlite3.dll.</param>
         /// <param name="result">Result code of SQLite3 functions.</param>
         /// <exception cref="SqliteException">Always thrown.</exception>
-        public static void Throw(SqliteResult result)
+        public static void Throw(string funcName, SqliteResult result)
         {
-            throw new SqliteException(result);
+            throw new SqliteException(funcName, result);
         }
 
         /// <summary>
         /// Throws <see cref="SqliteException"/>.
         /// </summary>
+        /// <param name="funcName">Function name in sqlite3.dll.</param>
         /// <param name="result">Result code of SQLite3 functions.</param>
         /// <param name="message">The additional error message that explains the reason for the exception.</param>
         /// <exception cref="SqliteException">Always thrown.</exception>
-        public static void Throw(SqliteResult result, string message)
+        public static void Throw(string funcName, SqliteResult result, string message)
         {
-            throw new SqliteException(result, message);
+            throw new SqliteException(funcName, result, message);
         }
 
         /// <summary>
         /// Throws <see cref="SqliteException"/> if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.
         /// </summary>
+        /// <param name="funcName">Function name in sqlite3.dll.</param>
         /// <param name="result">Result code of SQLite3 functions.</param>
         /// <exception cref="SqliteException">Thrown if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.</exception>
-        public static void ThrowIfFailed(SqliteResult result)
+        public static void ThrowIfFailed(string funcName, SqliteResult result)
         {
             if (result != SqliteResult.OK)
             {
-                SqliteException.Throw(result);
+                Throw(funcName, result);
             }
         }
 
         /// <summary>
         /// Throws <see cref="SqliteException"/> if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.
         /// </summary>
+        /// <param name="funcName">Function name in sqlite3.dll.</param>
         /// <param name="result">Result code of SQLite3 functions.</param>
         /// <param name="message">The additional error message that explains the reason for the exception.</param>
         /// <exception cref="SqliteException">Thrown if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.</exception>
-        public static void ThrowIfFailed(SqliteResult result, string message)
+        public static void ThrowIfFailed(string funcName, SqliteResult result, string message)
         {
             if (result != SqliteResult.OK)
             {
-                SqliteException.Throw(result, message);
+                Throw(funcName, result, message);
             }
         }
-    }  // class SqliteException
+    }
 }
