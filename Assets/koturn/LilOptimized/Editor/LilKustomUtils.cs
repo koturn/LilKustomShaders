@@ -227,9 +227,9 @@ namespace Koturn.lilToon
         /// <param name="assetPath">Asset path to reimport.</param>
         public static void RefreshShaderCache(string assetPath)
         {
-            using (var dbHandle = SqliteUtil.Open("Library/ShaderCache.db"))
+            using (var client = new SqliteClient("Library/ShaderCache.db"))
             {
-                SqliteUtil.Execute(dbHandle, "DELETE FROM shadererrors");
+                client.Execute("DELETE FROM shadererrors");
             }
             AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ImportRecursive);
         }

@@ -19,19 +19,6 @@ namespace Koturn.lilToon.Sqlite
         /// <param name="pColumnNames">Pointer to null-terminated string array of column name.</param>
         /// <returns>0 to continue, otherwise to abotd.</returns>
         public delegate int ExecCallbackFunc(IntPtr arg, int colCount, IntPtr pColumns, IntPtr pColumnNames);
-        /// <summary>
-        /// Callback delegate of third argument of <see cref="Execute(SqliteHandle, string, ExecStringCallbackAction)"/>.
-        /// </summary>
-        /// <param name="columns">Column text array.</param>
-        /// <param name="columnNames">Column name array.</param>
-        public delegate void ExecStringCallbackAction(string[] columns, string[] columnNames);
-        /// <summary>
-        /// Callback delegate of third argument of <see cref="Execute(SqliteHandle, string, ExecStringCallbackFunc)"/>.
-        /// </summary>
-        /// <param name="columns">Column text array.</param>
-        /// <param name="columnNames">Column name array.</param>
-        /// <returns>True to continue, otherwise to abort.</returns>
-        public delegate bool ExecStringCallbackFunc(string[] columns, string[] columnNames);
 
         /// <summary>
         /// Delegate for <see cref="NativeMethods.Open"/> or <see cref="NativeMethods.OpenW"/>.
@@ -313,74 +300,6 @@ namespace Koturn.lilToon.Sqlite
         }
 
         /// <summary>
-        /// Execute SQL.
-        /// </summary>
-        /// <param name="db">An open database.</param>
-        /// <param name="sql">SQL to execute.</param>
-        /// <param name="callback">Callback function.</param>
-        public static void Execute(SqliteHandle db, string sql, ExecStringCallbackAction callback)
-        {
-            Execute(
-                db,
-                sql,
-                new ExecStringCallbackFunc((columns, columnNames) =>
-                {
-                    callback(columns, columnNames);
-                    return true;
-                }));
-        }
-
-        /// <summary>
-        /// Execute SQL.
-        /// </summary>
-        /// <param name="db">An open database.</param>
-        /// <param name="sql">SQL to execute.</param>
-        /// <param name="callback">Callback function.</param>
-        public static void Execute(SqliteHandle db, string sql, ExecStringCallbackFunc callback)
-        {
-            var sqlUtf8Bytes = Encoding.UTF8.GetBytes(sql);
-            unsafe
-            {
-                fixed (byte *pbSqlBase = sqlUtf8Bytes)
-                {
-                    var pbSql = pbSqlBase;
-                    string[] columnNames = null;
-                    string[] columnTexts = null;
-                    while (*pbSql != 0)
-                    {
-                        using (var stmt = Prepare(db, ref pbSql, sqlUtf8Bytes.Length - (int)((ulong)pbSql - (ulong)pbSqlBase)))
-                        {
-                            var columnCount = _columnCount(stmt);
-                            if (columnNames == null || columnNames.Length != columnCount)
-                            {
-                                columnNames = new string[columnCount];
-                                columnTexts = new string[columnCount];
-                            }
-
-                            // Get columns names.
-                            for (int i = 0; i < columnNames.Length; i++)
-                            {
-                                columnNames[i] = Marshal.PtrToStringUni(_columnName(stmt, i));
-                            }
-
-                            while (Step(stmt, db))
-                            {
-                                for (int i = 0; i < columnNames.Length; i++)
-                                {
-                                    columnTexts[i] = Marshal.PtrToStringUni(_columnText(stmt, i));
-                                }
-                                if (!callback(columnTexts, columnNames))
-                                {
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// Free memory allocated in SQLite3 functions.
         /// </summary>
         /// <param name="pMemory">Allocated memory pointer.</param>
@@ -396,9 +315,10 @@ namespace Koturn.lilToon.Sqlite
         /// <param name="pbSql">Pointer to SQL to be evaluated (UTF-8).</param>
         /// <param name="nBytes">Maximum length of SQL in bytes.</param>
         /// <returns>Statement handle.</returns>
-        internal unsafe static SqliteStatementHandle Prepare(SqliteHandle db, ref byte *pbSql, int nBytes)
+        public unsafe static SqliteStatementHandle Prepare(SqliteHandle db, ref byte *pbSql, ref int nBytes)
         {
             var result = Prepare(db, pbSql, nBytes, out var pbSqlNext);
+            nBytes -= (int)((ulong)pbSqlNext - (ulong)pbSql);
             pbSql = pbSqlNext;
             return result;
         }
@@ -411,7 +331,7 @@ namespace Koturn.lilToon.Sqlite
         /// <param name="nBytes">Maximum length of SQL in bytes.</param>
         /// <param name="pbSqlNext">Pointer to unused portion of <paramref name="pbSql"/>.</param>
         /// <returns>Statement handle.</returns>
-        internal unsafe static SqliteStatementHandle Prepare(SqliteHandle db, byte *pbSql, int nBytes, out byte *pbSqlNext)
+        public unsafe static SqliteStatementHandle Prepare(SqliteHandle db, byte *pbSql, int nBytes, out byte *pbSqlNext)
         {
             var result = _prepare(db, (IntPtr)pbSql, nBytes, out var stmt, out var pSqlNext);
             SqliteException.ThrowIfFailed("sqlite3_prepare", result, GetErrorMessage(db));
@@ -454,6 +374,38 @@ namespace Koturn.lilToon.Sqlite
         }
 
         /// <summary>
+        /// Get the number of columns in a result set returned by the prepared statement.
+        /// </summary>
+        /// <param name="stmt">Statement handle.</param>
+        /// <returns>The number of columns in the result set.</returns>
+        public static int ColumnCount(SqliteStatementHandle stmt)
+        {
+            return _columnCount(stmt);
+        }
+
+        /// <summary>
+        /// Get column name in a result set.
+        /// </summary>
+        /// <param name="stmt">Statement handle.</param>
+        /// <param name="n">Index of column.</param>
+        /// <returns>Column name.</returns>
+        public static string ColumnName(SqliteStatementHandle stmt, int n)
+        {
+            return Marshal.PtrToStringUni(_columnName(stmt, n));
+        }
+
+        /// <summary>
+        /// Get result value as string from a query.
+        /// </summary>
+        /// <param name="stmt">Statement handle.</param>
+        /// <param name="n">Index of column.</param>
+        /// <returns>Column value as string.</returns>
+        public static string ColumnText(SqliteStatementHandle stmt, int n)
+        {
+            return Marshal.PtrToStringUni(_columnText(stmt, n));
+        }
+
+        /// <summary>
         /// Get latest error message occured in SQLite3 functions.
         /// </summary>
         /// <param name="db">SQLite db handle.</param>
@@ -486,7 +438,7 @@ namespace Koturn.lilToon.Sqlite
 #else
             unsafe
             {
-                return CreateFromUtf8String((sbyte *)p);
+                return PtrToStringUTF8((sbyte *)p);
             }
 #endif
         }
@@ -496,7 +448,7 @@ namespace Koturn.lilToon.Sqlite
         /// </summary>
         /// <param name="psb">Pointer to UTF-8 byte sequence.</param>
         /// <returns>Created <see cref="string"/>.</returns>
-        private static unsafe string CreateFromUtf8String(sbyte *psb)
+        private static unsafe string PtrToStringUTF8(sbyte *psb)
         {
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP1_1_OR_GREATER
             return Marshal.PtrToStringUTF8((IntPtr)p);
