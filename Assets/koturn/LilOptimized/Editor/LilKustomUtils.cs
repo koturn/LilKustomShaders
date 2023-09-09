@@ -36,6 +36,24 @@ namespace Koturn.lilToon
         }
 
         /// <summary>
+        /// Check whether there is one or more material which shader can be converted to custom lilToon shader.
+        /// </summary>
+        /// <param name="customShaderCommonName">Common part of custom lilToon shader name.</param>
+        /// <returns>True if one or more the convertible shader exists, otherwise false.</returns>
+        public static bool ValidateConvertMaterialToCustomShader(string customShaderCommonName)
+        {
+            var count = 0;
+            foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
+            {
+                if (GetCorrespondingCustomShaderName(material.shader.name, customShaderCommonName) != null)
+                {
+                    count++;
+                }
+            }
+            return count > 0;
+        }
+
+        /// <summary>
         /// Try to replace the shader of the material to original lilToon shader.
         /// </summary>
         /// <param name="customShaderCommonName">Common part of custom lilToon shader name.</param>
@@ -56,6 +74,24 @@ namespace Koturn.lilToon
                 material.shader = shader;
                 material.renderQueue = renderQueue;
             }
+        }
+
+        /// <summary>
+        /// Check whether there is one or more material which shader can be converted to original lilToon shader.
+        /// </summary>
+        /// <param name="customShaderCommonName">Common part of custom lilToon shader name.</param>
+        /// <returns>True if one or more the convertible shader exists, otherwise false.</returns>
+        public static bool ValidateConvertMaterialToOriginalShader(string customShaderCommonName)
+        {
+            var count = 0;
+            foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
+            {
+                if (GetCorrespondingOriginalShaderName(material.shader.name, customShaderCommonName) != null)
+                {
+                    count++;
+                }
+            }
+            return count > 0;
         }
 
         /// <summary>

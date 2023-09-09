@@ -158,12 +158,32 @@ namespace Koturn.lilToon
         }
 
         /// <summary>
+        /// Menu validation method for <see cref="ConvertMaterialToCustomShaderMenu"/>.
+        /// </summary>
+        /// <returns>True if <see cref="ConvertMaterialToCustomShaderMenu"/> works, otherwise false.</returns>
+        [MenuItem("Assets/" + shaderName + "/Convert material to custom shader", true)]
+        private static bool ValidateConvertMaterialToCustomShaderMenu()
+        {
+            return LilKustomUtils.ValidateConvertMaterialToCustomShader(shaderName);
+        }
+
+        /// <summary>
         /// Callback method for menu item which converts shader of material to original lilToon shader.
         /// </summary>
         [MenuItem("Assets/" + shaderName + "/Convert material to original shader", false, 1101)]
         private static void ConvertMaterialToOriginalShaderMenu()
         {
             LilKustomUtils.ConvertMaterialToOriginalShader(shaderName);
+        }
+
+        /// <summary>
+        /// Menu validation method for <see cref="ValidateConvertMaterialToOriginalShaderMenu"/>.
+        /// </summary>
+        /// <returns>True if <see cref="ValidateConvertMaterialToOriginalShaderMenu"/> works, otherwise false.</returns>
+        [MenuItem("Assets/" + shaderName + "/Convert material to original shader", true)]
+        private static bool ValidateConvertMaterialToOriginalShaderMenu()
+        {
+            return LilKustomUtils.ValidateConvertMaterialToOriginalShader(shaderName);
         }
 
         /// <summary>
