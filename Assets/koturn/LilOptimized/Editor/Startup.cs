@@ -11,19 +11,24 @@ namespace Koturn.lilToon
     internal static class Startup
     {
         /// <summary>
+        /// GUID of shader directory.
+        /// </summary>
+        private const string GuidShaderDir = "a35bbce2bcaa8a6448737c7c3219ca27";
+
+        /// <summary>
         /// A method called at Unity startup.
         /// </summary>
         [InitializeOnLoadMethod]
         private static void OnStartup()
         {
             AssetDatabase.importPackageCompleted += Startup_ImportPackageCompleted;
-            UpdateIncludeFiles();
+            UpdateIncludeResolverFiles();
         }
 
         /// <summary>
         /// Update local include files, LilOptCommonFunctions.hlsl, LilOptVert.hlsl and LilOverride.hlsl.
         /// </summary>
-        private static void UpdateIncludeFiles()
+        private static void UpdateIncludeResolverFiles()
         {
             // GUIDs of the shader source of lilxyzw/lilToon.
             var guids = new[]
@@ -34,7 +39,7 @@ namespace Koturn.lilToon
                 "683a6eed396c8044bb0c482c77c997d4"   // lil_vert_outline.hlsl
             };
 
-            var dstDirPath = AssetDatabase.GUIDToAssetPath("a35bbce2bcaa8a6448737c7c3219ca27");
+            var dstDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
             foreach (var guid in guids)
             {
                 var srcFilePath = AssetDatabase.GUIDToAssetPath(guid);
@@ -85,7 +90,7 @@ namespace Koturn.lilToon
             {
                 return;
             }
-            UpdateIncludeFiles();
+            UpdateIncludeResolverFiles();
         }
     }
 }

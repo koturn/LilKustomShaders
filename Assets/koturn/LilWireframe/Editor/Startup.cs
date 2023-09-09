@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using lilToon;
 
 
 namespace Koturn.lilToon
@@ -10,6 +11,11 @@ namespace Koturn.lilToon
     /// </summary>
     internal static class Startup
     {
+        /// <summary>
+        /// GUID of shader directory.
+        /// </summary>
+        private const string GuidShaderDir = "e1f7fe9f1bbcba64e935a92920779855";
+
         /// <summary>
         /// A method called at Unity startup.
         /// </summary>
@@ -21,9 +27,18 @@ namespace Koturn.lilToon
         }
 
         /// <summary>
-        /// Update local include files, LilOptCommonFunctions.hlsl, LilOptVert.hlsl and LilOverride.hlsl.
+        /// Update include files of shaders.
         /// </summary>
         private static void UpdateIncludeFiles()
+        {
+            UpdateIncludeResolverFiles();
+            UpdateVersionDefFile();
+        }
+
+        /// <summary>
+        /// Update local include files, LilOptCommonFunctions.hlsl, LilOptVert.hlsl and LilOverride.hlsl.
+        /// </summary>
+        private static void UpdateIncludeResolverFiles()
         {
             // GUIDs of the shader source of koturn/LilOptimized and lilxyzw/lilToon.
             var guids = new[]
@@ -34,7 +49,7 @@ namespace Koturn.lilToon
                 "e3dbe4ae202b9094eab458bbc934c964"   // lil_common_vert_fur_thirdparty.hlsl
             };
 
-            var dstDirPath = AssetDatabase.GUIDToAssetPath("e1f7fe9f1bbcba64e935a92920779855");
+            var dstDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
             foreach (var guid in guids)
             {
                 var srcFilePath = AssetDatabase.GUIDToAssetPath(guid);
@@ -59,6 +74,29 @@ namespace Koturn.lilToon
 
                 Debug.Log($"Update {dstFilePath}");
             }
+        }
+
+        /// <summary>
+        /// Update definition file of version value of lilToon, lil_current_version_value.hlsl
+        /// </summary>
+        private static void UpdateVersionDefFile()
+        {
+            var dstDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
+            var line = $"#define LIL_CURRENT_VERSION_VALUE {lilConstants.currentVersionValue}";
+            var dstFilePath = Path.Combine(dstDirPath, "lil_current_version_value.hlsl");
+            if (File.Exists(dstFilePath) && ReadFirstLine(dstFilePath) == line)
+            {
+                return;
+            }
+
+            using (var fs = new FileStream(dstFilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
+            using (var sw = new StreamWriter(fs))
+            {
+                sw.Write(line);
+                sw.Write('\n');
+            }
+
+            Debug.Log($"Update {dstFilePath}");
         }
 
         /// <summary>

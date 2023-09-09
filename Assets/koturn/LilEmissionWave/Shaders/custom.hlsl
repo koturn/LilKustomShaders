@@ -1,5 +1,6 @@
 //----------------------------------------------------------------------------------------------------------------------
 // Macro
+#include "lil_current_version_value.hlsl"
 
 // Custom variables
 //#define LIL_CUSTOM_PROPERTIES \
@@ -44,10 +45,19 @@
 //#define LIL_V2F_FORCE_NORMAL
 //#define LIL_V2F_FORCE_TANGENT
 //#define LIL_V2F_FORCE_BITANGENT
-#define LIL_CUSTOM_V2G_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
-    float emissionWavePos : TEXCOORD ## id1;
+#if LIL_CURRENT_VERSION_VALUE == 34 && defined(UNITY_PASS_SHADOWCASTER)
+// Work around for the following bug in lilxyzw/lilToon ver.1.4.0:
+//   https://github.com/lilxyzw/lilToon/issues/98
+// Fixed in lilxyzw/lilToon ver.1.4.1:
+//   https://github.com/lilxyzw/lilToon/commit/a8548792c56537575bb2933d65233c8c9bdca4de
+#    define LIL_CUSTOM_V2G_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
+        float emissionWavePos : TEXCOORD ## id1;
+#else
+#    define LIL_CUSTOM_V2G_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
+        float emissionWavePos : TEXCOORD ## id0;
+#endif
 #define LIL_CUSTOM_V2F_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7) \
-    float emissionWavePos : TEXCOORD ## id1;
+    float emissionWavePos : TEXCOORD ## id0;
 
 // Add vertex copy
 #define LIL_CUSTOM_VERT_COPY \

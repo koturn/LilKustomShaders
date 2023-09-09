@@ -1,7 +1,6 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using lilToon;
 
 
 namespace Koturn.lilToon
@@ -11,11 +10,6 @@ namespace Koturn.lilToon
     /// </summary>
     internal static class Startup
     {
-        /// <summary>
-        /// GUID of shader directory.
-        /// </summary>
-        private const string GuidShaderDir = "cae014f24d49f764c9e627c0aed3c812";
-
         /// <summary>
         /// A method called at Unity startup.
         /// </summary>
@@ -27,18 +21,9 @@ namespace Koturn.lilToon
         }
 
         /// <summary>
-        /// Update include files of shaders.
-        /// </summary>
-        private static void UpdateIncludeFiles()
-        {
-            UpdateIncludeResolverFiles();
-            UpdateVersionDefFile();
-        }
-
-        /// <summary>
         /// Update local include files, LilOptCommonFunctions.hlsl, LilOptVert.hlsl and LilOverride.hlsl.
         /// </summary>
-        private static void UpdateIncludeResolverFiles()
+        private static void UpdateIncludeFiles()
         {
             // GUIDs of the shader source of koturn/LilOptimized.
             var guids = new[]
@@ -48,7 +33,7 @@ namespace Koturn.lilToon
                 "e6d87491a115eaf439cd3f5ddf3ae096"   // LilOverride.hlsl
             };
 
-            var dstDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
+            var dstDirPath = AssetDatabase.GUIDToAssetPath("c629057225676cb48a71496ff054d2af");
             foreach (var guid in guids)
             {
                 var srcFilePath = AssetDatabase.GUIDToAssetPath(guid);
@@ -73,29 +58,6 @@ namespace Koturn.lilToon
 
                 Debug.Log($"Update {dstFilePath}");
             }
-        }
-
-        /// <summary>
-        /// Update definition file of version value of lilToon, lil_current_version_value.hlsl
-        /// </summary>
-        private static void UpdateVersionDefFile()
-        {
-            var dstDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
-            var line = $"#define LIL_CURRENT_VERSION_VALUE {lilConstants.currentVersionValue}";
-            var dstFilePath = Path.Combine(dstDirPath, "lil_current_version_value.hlsl");
-            if (File.Exists(dstFilePath) && ReadFirstLine(dstFilePath) == line)
-            {
-                return;
-            }
-
-            using (var fs = new FileStream(dstFilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
-            using (var sw = new StreamWriter(fs))
-            {
-                sw.Write(line);
-                sw.Write('\n');
-            }
-
-            Debug.Log($"Update {dstFilePath}");
         }
 
         /// <summary>
