@@ -29,6 +29,7 @@ namespace Koturn.lilToon
                 var shader = GetCorrespondingCustomShader(material.shader, customShaderCommonName);
                 if (shader == null)
                 {
+                    Debug.LogWarning($"Ignore {AssetDatabase.GetAssetPath(material)}. \"{material.shader.name}\" is not original lilToon shader.");
                     continue;
                 }
 
@@ -57,6 +58,7 @@ namespace Koturn.lilToon
                 var shader = GetCorrespondingOriginalShader(material.shader, customShaderCommonName);
                 if (shader == null)
                 {
+                    Debug.LogWarning($"Ignore {AssetDatabase.GetAssetPath(material)}. \"{material.shader.name}\" is not custom lilToon shader, \"{customShaderCommonName}\".");
                     continue;
                 }
 
