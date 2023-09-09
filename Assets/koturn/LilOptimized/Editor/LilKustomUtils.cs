@@ -18,14 +18,8 @@ namespace Koturn.lilToon
         /// <param name="customShaderCommonName">Common part of custom lilToon shader name.</param>
         public static void ConvertMaterialToCustomShader(string customShaderCommonName)
         {
-            foreach (var obj in Selection.objects)
+            foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
             {
-                var material = obj as Material;
-                if (material == null)
-                {
-                    continue;
-                }
-
                 var shader = GetCorrespondingCustomShader(material.shader, customShaderCommonName);
                 if (shader == null)
                 {
@@ -47,14 +41,8 @@ namespace Koturn.lilToon
         /// <param name="customShaderCommonName">Common part of custom lilToon shader name.</param>
         public static void ConvertMaterialToOriginalShader(string customShaderCommonName)
         {
-            foreach (var obj in Selection.objects)
+            foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
             {
-                var material = obj as Material;
-                if (material == null)
-                {
-                    continue;
-                }
-
                 var shader = GetCorrespondingOriginalShader(material.shader, customShaderCommonName);
                 if (shader == null)
                 {
