@@ -73,8 +73,9 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    m_MaterialEditor.ShaderProperty(_refProbeMask, GetLoc("sRefProbeMask"));
-                    m_MaterialEditor.ShaderProperty(_refProbeBlendCoeff, GetLoc("sRefProbeBlendCoeff"));
+                    var me = m_MaterialEditor;
+                    me.ShaderProperty(_refProbeMask, GetLoc("sRefProbeMask"));
+                    me.ShaderProperty(_refProbeBlendCoeff, GetLoc("sRefProbeBlendCoeff"));
                 }
             }
         }

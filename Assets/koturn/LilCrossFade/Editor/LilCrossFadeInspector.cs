@@ -84,13 +84,14 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    m_MaterialEditor.ShaderProperty(_mainTexArray, GetLoc("sMainTexArray"));
+                    var me = m_MaterialEditor;
+                    me.ShaderProperty(_mainTexArray, GetLoc("sMainTexArray"));
 
                     var texValue = _mainTexArray.textureValue;
                     var depth = texValue is null ? 0.0f : (float)((Texture2DArray)texValue).depth;
                     using (new EditorGUI.DisabledScope(texValue is null))
                     {
-                        m_MaterialEditor.ShaderProperty(_numTextures, GetLoc("sNumTextures"));
+                        me.ShaderProperty(_numTextures, GetLoc("sNumTextures"));
                         if (GUILayout.Button("Set to texture count"))
                         {
                             _numTextures.floatValue = depth;
@@ -101,8 +102,8 @@ namespace Koturn.lilToon
                         }
                     }
 
-                    m_MaterialEditor.ShaderProperty(_displayCycleTime, GetLoc("sDisplayTime"));
-                    m_MaterialEditor.ShaderProperty(_crossFadeTime, GetLoc("sCrossFadeTime"));
+                    me.ShaderProperty(_displayCycleTime, GetLoc("sDisplayTime"));
+                    me.ShaderProperty(_crossFadeTime, GetLoc("sCrossFadeTime"));
                 }
             }
 

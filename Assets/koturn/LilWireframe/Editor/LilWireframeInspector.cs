@@ -93,15 +93,16 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    m_MaterialEditor.ShaderProperty(_wireframeWidth, GetLoc("sWireframeWidth"));
-                    m_MaterialEditor.TexturePropertySingleLine(
+                    var me = m_MaterialEditor;
+                    me.ShaderProperty(_wireframeWidth, GetLoc("sWireframeWidth"));
+                    me.TexturePropertySingleLine(
                         new GUIContent(GetLoc("sWireframeMaskAndColor")),
                         _wireframeMask,
                         _wireframeColor);
-                    m_MaterialEditor.ShaderProperty(_wireframeRandomizeColor, GetLoc("sWireframeRandomizeColor"));
+                    me.ShaderProperty(_wireframeRandomizeColor, GetLoc("sWireframeRandomizeColor"));
 
-                    m_MaterialEditor.ShaderProperty(_wireframeCycleTime, GetLoc("sWireframeCycleTime"));
-                    m_MaterialEditor.ShaderProperty(_wireframeDecayTime, GetLoc("sWireframeDecayTime"));
+                    me.ShaderProperty(_wireframeCycleTime, GetLoc("sWireframeCycleTime"));
+                    me.ShaderProperty(_wireframeDecayTime, GetLoc("sWireframeDecayTime"));
                 }
             }
         }

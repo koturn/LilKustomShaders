@@ -118,18 +118,19 @@ namespace Koturn.lilToon
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    m_MaterialEditor.TexturePropertySingleLine(
+                    var me = m_MaterialEditor;
+                    me.TexturePropertySingleLine(
                         new GUIContent(GetLoc("sEmissionWaveMaskAndColor")),
                         _emissionWaveMask,
                         _emissionWaveColor);
-                    m_MaterialEditor.ShaderProperty(_emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
-                    m_MaterialEditor.ShaderProperty(_emissionWaveSpeed, GetLoc("sEmissionWaveSpeed"));
-                    m_MaterialEditor.ShaderProperty(_emissionWaveInitPhase, GetLoc("sEmissionWaveInitPhase"));
-                    m_MaterialEditor.ShaderProperty(_emissionWaveParam, GetLoc("sEmissionWaveParam"));
-                    m_MaterialEditor.ShaderProperty(_emissionPosMin, GetLoc("sEmissionPosMin"));
-                    m_MaterialEditor.ShaderProperty(_emissionPosMax, GetLoc("sEmissionPosMax"));
-                    m_MaterialEditor.ShaderProperty(_wavePosSpace, GetLoc("sWavePosSpace"));
-                    m_MaterialEditor.ShaderProperty(_waveAxis, GetLoc("sWaveAxis"));
+                    me.ShaderProperty(_emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
+                    me.ShaderProperty(_emissionWaveSpeed, GetLoc("sEmissionWaveSpeed"));
+                    me.ShaderProperty(_emissionWaveInitPhase, GetLoc("sEmissionWaveInitPhase"));
+                    me.ShaderProperty(_emissionWaveParam, GetLoc("sEmissionWaveParam"));
+                    me.ShaderProperty(_emissionPosMin, GetLoc("sEmissionPosMin"));
+                    me.ShaderProperty(_emissionPosMax, GetLoc("sEmissionPosMax"));
+                    me.ShaderProperty(_wavePosSpace, GetLoc("sWavePosSpace"));
+                    me.ShaderProperty(_waveAxis, GetLoc("sWaveAxis"));
                     using (new EditorGUI.IndentLevelScope())
                     using (new EditorGUI.DisabledScope((int)_waveAxis.floatValue != 3))
                     {
