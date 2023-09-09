@@ -256,7 +256,7 @@ namespace Koturn.lilToon.Sqlite
         public static SqliteHandle Open(string filePath)
         {
             var result = _open(filePath, out var db);
-            SqliteException.ThrowIfFailed("sqlite3_open16", result, "Failed to open " + filePath + "; " + GetErrorMessage(db));
+            SqliteException.ThrowIfFailed("sqlite3_open16", result, db, "Failed to open: " + filePath);
             return db;
         }
 
@@ -294,7 +294,7 @@ namespace Koturn.lilToon.Sqlite
             {
                 using (errmsgHandle)
                 {
-                    SqliteException.Throw("sqlite3_exec", result, "Execute failed; " + PtrToStringUTF8(errmsgHandle.DangerousGetHandle()));
+                    SqliteException.Throw("sqlite3_exec", result, PtrToStringUTF8(errmsgHandle.DangerousGetHandle()));
                 }
             }
         }
@@ -334,7 +334,7 @@ namespace Koturn.lilToon.Sqlite
         public unsafe static SqliteStatementHandle Prepare(SqliteHandle db, byte *pbSql, int nBytes, out byte *pbSqlNext)
         {
             var result = _prepare(db, (IntPtr)pbSql, nBytes, out var stmt, out var pSqlNext);
-            SqliteException.ThrowIfFailed("sqlite3_prepare", result, GetErrorMessage(db));
+            SqliteException.ThrowIfFailed("sqlite3_prepare", result, db);
             pbSqlNext = (byte *)pSqlNext;
             return stmt;
         }
@@ -345,7 +345,7 @@ namespace Koturn.lilToon.Sqlite
         /// <param name="stmt">Statement handle.</param>
         /// <param name="db">An open database to get error message with <see cref="GetErrorMessage(SqliteHandle)"/>.</param>
         /// <returns>True if row exists, otherwise false.</returns>
-        internal static bool Step(SqliteStatementHandle stmt, SqliteHandle db)
+        public static bool Step(SqliteStatementHandle stmt, SqliteHandle db)
         {
             var result = _step(stmt);
             switch (result)
@@ -356,7 +356,7 @@ namespace Koturn.lilToon.Sqlite
                 case SqliteResult.Row:
                     return true;
                 default:
-                    SqliteException.ThrowIfFailed("sqlite3_step", result, GetErrorMessage(db));
+                    SqliteException.Throw("sqlite3_step", result, GetErrorMessage(db));
                     break;
             }
 

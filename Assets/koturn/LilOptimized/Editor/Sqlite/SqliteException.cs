@@ -129,6 +129,21 @@ namespace Koturn.lilToon.Sqlite
         /// </summary>
         /// <param name="funcName">Function name in sqlite3.dll.</param>
         /// <param name="result">Result code of SQLite3 functions.</param>
+        /// <param name="db">Database handle to get error message.</param>
+        /// <exception cref="SqliteException">Thrown if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.</exception>
+        public static void ThrowIfFailed(string funcName, SqliteResult result, SqliteHandle db)
+        {
+            if (result != SqliteResult.OK)
+            {
+                Throw(funcName, result, SqliteUtil.GetErrorMessage(db));
+            }
+        }
+
+        /// <summary>
+        /// Throws <see cref="SqliteException"/> if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.
+        /// </summary>
+        /// <param name="funcName">Function name in sqlite3.dll.</param>
+        /// <param name="result">Result code of SQLite3 functions.</param>
         /// <param name="message">The additional error message that explains the reason for the exception.</param>
         /// <exception cref="SqliteException">Thrown if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.</exception>
         public static void ThrowIfFailed(string funcName, SqliteResult result, string message)
@@ -136,6 +151,22 @@ namespace Koturn.lilToon.Sqlite
             if (result != SqliteResult.OK)
             {
                 Throw(funcName, result, message);
+            }
+        }
+
+        /// <summary>
+        /// Throws <see cref="SqliteException"/> if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.
+        /// </summary>
+        /// <param name="funcName">Function name in sqlite3.dll.</param>
+        /// <param name="result">Result code of SQLite3 functions.</param>
+        /// <param name="db">Database handle to get error message.</param>
+        /// <param name="message">The additional error message that explains the reason for the exception.</param>
+        /// <exception cref="SqliteException">Thrown if <paramref name="result"/> is not <see cref="SqliteResult.OK"/>.</exception>
+        public static void ThrowIfFailed(string funcName, SqliteResult result, SqliteHandle db, string message)
+        {
+            if (result != SqliteResult.OK)
+            {
+                Throw(funcName, result, SqliteUtil.GetErrorMessage(db) + ": " + message);
             }
         }
     }
