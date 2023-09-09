@@ -106,18 +106,6 @@ namespace Koturn.lilToon
                     me.ShaderProperty(_crossFadeTime, GetLoc("sCrossFadeTime"));
                 }
             }
-
-            if (material.shaderKeywords.Length == 0)
-            {
-                Debug.Log("No keywords");
-            }
-            else
-            {
-                foreach (var keyword in material.shaderKeywords)
-                {
-                    Debug.Log(keyword);
-                }
-            }
         }
 
         /// <summary>
