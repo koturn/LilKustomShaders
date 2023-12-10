@@ -139,6 +139,26 @@ namespace Koturn.lilToon.Sqlite
         }
 
         /// <summary>
+        /// Execute first query of specified SQL string.
+        /// </summary>
+        /// <param name="sql">SQL to be evaluated.</param>
+        public void ExecuteSingle(string sql)
+        {
+            var sqlUtf8Bytes = Encoding.UTF8.GetBytes(sql);
+            unsafe
+            {
+                fixed (byte *pbSqlBase = sqlUtf8Bytes)
+                {
+                    byte *_;
+                    using (var stmt = SqliteUtil.Prepare(_db, pbSqlBase, sqlUtf8Bytes.Length, out _))
+                    {
+                        SqliteUtil.Step(stmt, _db);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Release resources.
         /// </summary>
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;

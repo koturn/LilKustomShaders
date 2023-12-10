@@ -255,7 +255,7 @@ namespace Koturn.lilToon
         {
             using (var client = new SqliteClient("Library/ShaderCache.db"))
             {
-                client.Execute("DELETE FROM shadererrors");
+                client.ExecuteSingle("DELETE FROM shadererrors");
             }
             AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ImportRecursive);
         }
