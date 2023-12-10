@@ -40,6 +40,16 @@ namespace Koturn.lilToon.Windows
         /// </summary>
         private void ReplaceToOptimizedOnes()
         {
+            var dialogResult = EditorUtility.DisplayDialog(
+                "Replace lilToon shaders of all materials under Assets directory to optimized ones",
+                "Are you sure want to replace original lilToon to optimized ones?",
+                "Yes",
+                "No");
+            if (!dialogResult)
+            {
+                return;
+            }
+
             var shouldSave = false;
 
             foreach (var guid in AssetDatabase.FindAssets("t:Material", null))
@@ -73,6 +83,16 @@ namespace Koturn.lilToon.Windows
         /// </summary>
         private void ReplaceToOriginalOnes()
         {
+            var dialogResult = EditorUtility.DisplayDialog(
+                "Replace optimized lilToon shader of all materials under Assets directory to original ones",
+                "Are you sure want to replace original lilToon to optimized ones?",
+                "Yes",
+                "No");
+            if (!dialogResult)
+            {
+                return;
+            }
+
             var shouldSave = false;
 
             foreach (var guid in AssetDatabase.FindAssets("t:Material", null))
