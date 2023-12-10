@@ -29,5 +29,5 @@ float4 crossFadeSample(lilFragData fd)
 }
 
 
-#include "LilOptCommonFunctions.hlsl"
-#include "LilOverride.hlsl"
+#include "lil_opt_common_functions.hlsl"
+#include "lil_override.hlsl"

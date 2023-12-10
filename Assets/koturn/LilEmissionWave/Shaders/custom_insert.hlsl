@@ -86,5 +86,5 @@ float3 calcEmissionColor(float3 emissionColor, float alpha)
 }
 
 
-#include "LilOptCommonFunctions.hlsl"
-#include "LilOverride.hlsl"
+#include "lil_opt_common_functions.hlsl"
+#include "lil_override.hlsl"

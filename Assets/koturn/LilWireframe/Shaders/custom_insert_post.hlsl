@@ -314,4 +314,4 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
 #endif  // defined(LIL_PASS_FORWARD_FUR_INCLUDED)
 
 
-#include "LilOptVert.hlsl"
+#include "lil_opt_vert.hlsl"

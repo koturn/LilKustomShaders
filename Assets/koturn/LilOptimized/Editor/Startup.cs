@@ -26,7 +26,8 @@ namespace Koturn.lilToon
         }
 
         /// <summary>
-        /// Update local include files, LilOptCommonFunctions.hlsl, LilOptVert.hlsl and LilOverride.hlsl.
+        /// Update local include files, lil_common_vert_fur_thirdparty.hlsl, lil_vert_audiolink.hlsl,
+        /// lil_vert_encryption.hlsl and lil_vert_outline.hlsl.
         /// </summary>
         private static void UpdateIncludeResolverFiles()
         {

@@ -21,16 +21,16 @@ namespace Koturn.lilToon
         }
 
         /// <summary>
-        /// Update local include files, LilOptCommonFunctions.hlsl, LilOptVert.hlsl and LilOverride.hlsl.
+        /// Update local include files, lil_opt_common_functions.hlsl, lil_opt_vert.hlsl and lil_override.hlsl.
         /// </summary>
         private static void UpdateIncludeFiles()
         {
             // GUIDs of the shader source of koturn/LilOptimized.
             var guids = new[]
             {
-                "b80f99e9a095fbb44b63c064ef09704d",  // LilOptCommonFunctions.hlsl
-                "4b0f89237fb078a41ae330c638eee480",  // LilOptVert.hlsl
-                "e6d87491a115eaf439cd3f5ddf3ae096"   // LilOverride.hlsl
+                "b80f99e9a095fbb44b63c064ef09704d",  // lil_opt_common_functions.hlsl
+                "4b0f89237fb078a41ae330c638eee480",  // lil_opt_vert.hlsl
+                "e6d87491a115eaf439cd3f5ddf3ae096"   // lil_override.hlsl
             };
 
             var dstDirPath = AssetDatabase.GUIDToAssetPath("c629057225676cb48a71496ff054d2af");
