@@ -1,14 +1,14 @@
 {
   "name": "jp.koturn.lilhueshift",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "displayName": "LilHueShift",
   "description": "koturn's custom shaders of lilToon, LilHueShift.",
   "unity": "2018.1",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.1/LICENSE",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.2/LICENSE",
   "license": "MIT",
   "keywords": ["Toon", "Shader", "lilToon"],
-  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.1/jp.koturn.lilhueshift-1.1.1.zip",
+  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.2/jp.koturn.lilhueshift-1.1.2.zip",
   "legacyFolders" : {
     "Assets\\koturn\\LilHueShift" : "4a85cd2586ec46142817d97ea38b8741"
   }

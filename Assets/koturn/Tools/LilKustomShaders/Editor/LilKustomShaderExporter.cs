@@ -15,7 +15,7 @@ namespace Koturn.Tools.LilKustomShaders.Windows
         /// <summary>
         /// Version string.
         /// </summary>
-        private const string Version = "1.1.1";
+        private const string Version = "1.1.2";
 
         /// <summary>
         /// Entire json data.
