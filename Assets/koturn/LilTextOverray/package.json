@@ -1,14 +1,14 @@
 {
   "name": "jp.koturn.liltextoverray",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "displayName": "LilTextOverray",
   "description": "koturn's custom shaders of lilToon, LilTextOverray.",
   "unity": "2018.1",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1/LICENSE",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.1/LICENSE",
   "license": "MIT",
   "keywords": ["Toon", "Shader", "lilToon"],
-  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1/jp.koturn.liltextoverray-1.1.0.zip",
+  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.1/jp.koturn.liltextoverray-1.1.1.zip",
   "legacyFolders" : {
     "Assets\\koturn\\LilTextOverray" : "d02fb98160c0b3940a199d14edb68527"
   }
