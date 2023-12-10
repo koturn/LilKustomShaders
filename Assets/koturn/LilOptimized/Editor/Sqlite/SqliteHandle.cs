@@ -28,7 +28,7 @@ namespace Koturn.lilToon.Sqlite
         /// <returns>True if closing is successful, otherwise false.</returns>
         protected override bool ReleaseHandle()
         {
-            return SqliteUtil.Close(handle) == SqliteResult.OK;
+            return SqliteLibrary.Close(handle) == SqliteResult.OK;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Koturn.lilToon.Sqlite
     /// <summary>
     /// Entry point class
     /// </summary>
-    public static class SqliteUtil
+    public static class SqliteLibrary
     {
         /// <summary>
         /// Callback delegate of third argument of <see cref="Execute(SqliteHandle, string, ExecCallbackFunc, IntPtr)"/>.
@@ -156,7 +156,7 @@ namespace Koturn.lilToon.Sqlite
         /// <summary>
         /// Setup delegates for P/Invoke functions.
         /// </summary>
-        static SqliteUtil()
+        static SqliteLibrary()
         {
 #if !UNITY_EDITOR || UNITY_EDITOR_WIN
             try

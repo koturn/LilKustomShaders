@@ -7,7 +7,7 @@ namespace Koturn.lilToon.Sqlite
     /// <summary>
     /// SQLite3 client.
     /// </summary>
-    public class SqliteClient : IDisposable
+    public class SqliteConnection : IDisposable
     {
         /// <summary>
         /// A flag property which indicates this instance is disposed or not.
@@ -23,7 +23,7 @@ namespace Koturn.lilToon.Sqlite
         /// <summary>
         /// Create SQLite3 client and open SQLite3 database file.
         /// </summary>
-        public SqliteClient()
+        public SqliteConnection()
         {
         }
 
@@ -31,7 +31,7 @@ namespace Koturn.lilToon.Sqlite
         /// Create SQLite3 client and open SQLite3 database file.
         /// </summary>
         /// <param name="filePath">SQLite3 database file path.</param>
-        public SqliteClient(string filePath)
+        public SqliteConnection(string filePath)
         {
             Open(filePath);
         }
@@ -42,7 +42,7 @@ namespace Koturn.lilToon.Sqlite
         /// <param name="filePath">SQLite3 database file path.</param>
         public void Open(string filePath)
         {
-            _db = SqliteUtil.Open(filePath);
+            _db = SqliteLibrary.Open(filePath);
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Koturn.lilToon.Sqlite
         [Obsolete("This method uses legacy API, sqlite3_exec()")]
         public void ExecuteLegacy(string sql)
         {
-            SqliteUtil.Execute(_db, sql);
+            SqliteLibrary.Execute(_db, sql);
         }
 
         /// <summary>
@@ -78,9 +78,9 @@ namespace Koturn.lilToon.Sqlite
                     var pbSql = pbSqlBase;
                     while (*pbSql != 0)
                     {
-                        using (var stmt = SqliteUtil.Prepare(_db, ref pbSql, ref byteCount))
+                        using (var stmt = SqliteLibrary.Prepare(_db, ref pbSql, ref byteCount))
                         {
-                            while (SqliteUtil.Step(stmt, _db))
+                            while (SqliteLibrary.Step(stmt, _db))
                             {
 
                             }
@@ -108,9 +108,9 @@ namespace Koturn.lilToon.Sqlite
                     string[] columnTexts = null;
                     while (*pbSql != 0)
                     {
-                        using (var stmt = SqliteUtil.Prepare(_db, ref pbSql, ref byteCount))
+                        using (var stmt = SqliteLibrary.Prepare(_db, ref pbSql, ref byteCount))
                         {
-                            var columnCount = SqliteUtil.ColumnCount(stmt);
+                            var columnCount = SqliteLibrary.ColumnCount(stmt);
                             if (columnNames is null || columnNames.Length != columnCount)
                             {
                                 columnNames = new string[columnCount];
@@ -119,13 +119,13 @@ namespace Koturn.lilToon.Sqlite
 
                             for (int i = 0; i < columnNames.Length; i++)
                             {
-                                columnNames[i] = SqliteUtil.ColumnName(stmt, i);
+                                columnNames[i] = SqliteLibrary.ColumnName(stmt, i);
                             }
-                            while (SqliteUtil.Step(stmt, _db))
+                            while (SqliteLibrary.Step(stmt, _db))
                             {
                                 for (int i = 0; i < columnTexts.Length; i++)
                                 {
-                                    columnTexts[i] = SqliteUtil.ColumnText(stmt, i);
+                                    columnTexts[i] = SqliteLibrary.ColumnText(stmt, i);
                                 }
                                 if (!callback(columnTexts, columnNames))
                                 {
@@ -150,9 +150,9 @@ namespace Koturn.lilToon.Sqlite
                 fixed (byte *pbSqlBase = sqlUtf8Bytes)
                 {
                     byte *_;
-                    using (var stmt = SqliteUtil.Prepare(_db, pbSqlBase, sqlUtf8Bytes.Length, out _))
+                    using (var stmt = SqliteLibrary.Prepare(_db, pbSqlBase, sqlUtf8Bytes.Length, out _))
                     {
-                        SqliteUtil.Step(stmt, _db);
+                        SqliteLibrary.Step(stmt, _db);
                     }
                 }
             }
@@ -181,7 +181,7 @@ namespace Koturn.lilToon.Sqlite
         }
 
         /// <summary>
-        /// Release all resources used by the <see cref="SqliteClient"/> object.
+        /// Release all resources used by the <see cref="SqliteConnection"/> object.
         /// </summary>
         public void Dispose()
         {

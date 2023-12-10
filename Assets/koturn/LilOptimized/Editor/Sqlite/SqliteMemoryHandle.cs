@@ -28,7 +28,7 @@ namespace Koturn.lilToon.Sqlite
         /// <returns>Always true.</returns>
         protected override bool ReleaseHandle()
         {
-            SqliteUtil.Free(handle);
+            SqliteLibrary.Free(handle);
             handle = IntPtr.Zero;
             return true;
         }

@@ -26,7 +26,7 @@ namespace Koturn.lilToon.Sqlite
         /// <param name="funcName">Function name in sqlite3.dll.</param>
         /// <param name="result">Result code of SQLite3.</param>
         public SqliteException(string funcName, SqliteResult result)
-            : base($"{SqliteUtil.GetErrorString(result)} ({funcName}: {(int)result})")
+            : base($"{SqliteLibrary.GetErrorString(result)} ({funcName}: {(int)result})")
         {
             FuncName = funcName;
             Result = result;
@@ -40,7 +40,7 @@ namespace Koturn.lilToon.Sqlite
         /// <param name="result">Result code of SQLite3.</param>
         /// <param name="message">The additional error message that explains the reason for the exception.</param>
         public SqliteException(string funcName, SqliteResult result, string message)
-            : base($"{SqliteUtil.GetErrorString(result)} ({funcName}: {(int)result}): {message}")
+            : base($"{SqliteLibrary.GetErrorString(result)} ({funcName}: {(int)result}): {message}")
         {
             Result = result;
         }
@@ -56,7 +56,7 @@ namespace Koturn.lilToon.Sqlite
         /// If the innerException parameter is not a null reference,
         /// the current exception is raised in a catch block that handles the inner exception.</param>
         public SqliteException(string funcName, SqliteResult result, Exception inner)
-            : base($"{SqliteUtil.GetErrorString(result)} ({funcName}: {(int)result})", inner)
+            : base($"{SqliteLibrary.GetErrorString(result)} ({funcName}: {(int)result})", inner)
         {
         }
 
@@ -72,7 +72,7 @@ namespace Koturn.lilToon.Sqlite
         /// If the innerException parameter is not a null reference,
         /// the current exception is raised in a catch block that handles the inner exception.</param>
         public SqliteException(string funcName, SqliteResult result, string message, Exception inner)
-            : base($"{SqliteUtil.GetErrorString(result)} ({funcName}: {(int)result}): {message}", inner)
+            : base($"{SqliteLibrary.GetErrorString(result)} ({funcName}: {(int)result}): {message}", inner)
         {
         }
 
@@ -135,7 +135,7 @@ namespace Koturn.lilToon.Sqlite
         {
             if (result != SqliteResult.OK)
             {
-                Throw(funcName, result, SqliteUtil.GetErrorMessage(db));
+                Throw(funcName, result, SqliteLibrary.GetErrorMessage(db));
             }
         }
 
@@ -166,7 +166,7 @@ namespace Koturn.lilToon.Sqlite
         {
             if (result != SqliteResult.OK)
             {
-                Throw(funcName, result, SqliteUtil.GetErrorMessage(db) + ": " + message);
+                Throw(funcName, result, SqliteLibrary.GetErrorMessage(db) + ": " + message);
             }
         }
     }
