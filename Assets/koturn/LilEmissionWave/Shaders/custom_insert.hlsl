@@ -13,6 +13,9 @@
 #    elif defined(_WAVEAXIS_FREE)
 #        define _WaveAxis kWaveAxisFree
 #    endif
+#    define BRANCH
+#else
+#    define BRANCH UNITY_BRANCH
 #endif  // LIL_MULTI
 
 
@@ -32,7 +35,7 @@ static const int kWaveAxisFree = 3;
 
 float3 getEmissionPos(float3 positionOS)
 {
-    UNITY_BRANCH
+    BRANCH
     if (_WavePosSpace == kWavePosSpaceObject) {
         return positionOS;
     } else {
@@ -47,7 +50,7 @@ float3 getEmissionPos(float3 positionOS)
 
 float pickupPosition(float3 pos)
 {
-    UNITY_BRANCH
+    BRANCH
     if (_WaveAxis == kWaveAxisFree) {
         float3 s3, c3;
         sincos(_WaveAxisAngles, s3, c3);
