@@ -253,7 +253,7 @@ namespace Koturn.lilToon
         /// <param name="assetPath">Asset path to reimport.</param>
         public static void RefreshShaderCache(string assetPath)
         {
-            using (var client = new SqliteClient("Library/ShaderCache.db"))
+            using (var client = new SqliteConnection("Library/ShaderCache.db"))
             {
                 client.ExecuteSingle("DELETE FROM shadererrors");
             }
@@ -266,7 +266,7 @@ namespace Koturn.lilToon
         /// <returns>True if sqlite3.dll (or winsqlite3.dll) is available, otherwise false.</returns>
         public static bool IsRefreshShaderCacheAvailable()
         {
-            return SqliteUtil.TryLoad();
+            return SqliteLibrary.TryLoad();
         }
     }
 }
