@@ -1,1 +1,1 @@
-#include "Packages/jp.koturn.liloptimized/Shaders/lil_override.hlsl"
+#include "Assets/koturn/LilOptimized/Shaders/lil_override.hlsl"

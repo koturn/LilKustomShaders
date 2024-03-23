@@ -1,4 +1,11 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
-        //_CustomVariable ("Custom Variable", Float) = 0
+        [Enum(Generic, 0, VRC, 1)] _VisibilityMode ("Mode", Int) = 1
+        [Enum(Show In Both, 0, Show Only In Mirror, 1, Dont Show In Mirror, 2)] _Mirror ("Mirror Visibility", Int) = 0
+        [lilToggle] _VisibilityVRCRegular ("Normal (Outside Mirror/Camera)", Int) = 1
+        [lilToggle] _VisibilityVRCMirrorVR ("Mirror (VR)", Int) = 1
+        [lilToggle] _VisibilityVRCMirrorDesktop ("Mirror (Desktop)", Int) = 1
+        [lilToggle] _VisibilityVRCCameraVR ("Camera (VR)", Int) = 1
+        [lilToggle] _VisibilityVRCCameraDesktop ("Camera (Desktop)", Int) = 1
+        [lilToggle] _VisibilityVRCCameraScreenshot ("Screenshot", Int) = 1

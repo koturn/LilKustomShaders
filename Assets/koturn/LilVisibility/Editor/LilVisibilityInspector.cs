@@ -1,16 +1,47 @@
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
+using lilToon;
 
-namespace lilToon
+namespace Koturn.lilToon
 {
     /// <summary>
-    /// <see cref="ShaderGUI"/> for the custom shader variations of lilToon.
+    /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilVisibility".
     /// </summary>
-    public class TemplateFullInspector : lilToonInspector
+    public class LilVisibilityInspector : lilToonInspector
     {
-        // Custom properties
-        //private MaterialProperty customVariable;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_VisibilityMode".
+        /// </summary>
+        private MaterialProperty _visibilityMode;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_Mirror".
+        /// </summary>
+        private MaterialProperty _mirror;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_VisibilityVRCRegular".
+        /// </summary>
+        private MaterialProperty _visibilityVRCRegular;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_VisibilityVRCMirrorVR".
+        /// </summary>
+        private MaterialProperty _visibilityVRCMirrorVR;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_VisibilityVRCMirrorDesktop".
+        /// </summary>
+        private MaterialProperty _visibilityVRCMirrorDesktop;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_VisibilityVRCCameraVR".
+        /// </summary>
+        private MaterialProperty _visibilityVRCCameraVR;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_VisibilityVRCCameraDesktop".
+        /// </summary>
+        private MaterialProperty _visibilityVRCCameraDesktop;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_VisibilityVRCCameraScreenshot".
+        /// </summary>
+        private MaterialProperty _visibilityVRCCameraScreenshot;
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
@@ -20,7 +51,7 @@ namespace lilToon
         /// <summary>
         /// Name of this custom shader.
         /// </summary>
-        private const string shaderName = "TemplateFull";
+        private const string shaderName = "koturn/LilVisibility";
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.
@@ -33,13 +64,18 @@ namespace lilToon
 
             // If you want to change rendering modes in the editor, specify the shader here
             ReplaceToCustomShaders();
-            isShowRenderMode = !material.shader.name.Contains("Optional");
+            isShowRenderMode = !material.shader.name.Contains("/[Optional] ");
 
-            // If not, set isShowRenderMode to false
-            //isShowRenderMode = false;
+            LoadCustomLanguage("cccc4d111127e8d4f97e012f4510f48c");
 
-            //LoadCustomLanguage("");
-            //customVariable = FindProperty("_CustomVariable", props);
+            _visibilityMode = FindProperty("_VisibilityMode", props);
+            _mirror = FindProperty("_Mirror", props);
+            _visibilityVRCRegular = FindProperty("_VisibilityVRCRegular", props);
+            _visibilityVRCMirrorVR = FindProperty("_VisibilityVRCMirrorVR", props);
+            _visibilityVRCMirrorDesktop = FindProperty("_VisibilityVRCMirrorDesktop", props);
+            _visibilityVRCCameraVR = FindProperty("_VisibilityVRCCameraVR", props);
+            _visibilityVRCCameraDesktop = FindProperty("_VisibilityVRCCameraDesktop", props);
+            _visibilityVRCCameraScreenshot = FindProperty("_VisibilityVRCCameraScreenshot", props);
         }
 
         /// <summary>
@@ -64,10 +100,21 @@ namespace lilToon
 
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
-                EditorGUILayout.LabelField(GetLoc("Custom Properties"), customToggleFont);
+                EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    //m_MaterialEditor.ShaderProperty(customVariable, "Custom Variable");
+                    var me = m_MaterialEditor;
+                    me.ShaderProperty(_visibilityMode, GetLoc("sVisibilityMode"));
+                    if ((int)_visibilityMode.floatValue == 1) {
+                        me.ShaderProperty(_visibilityVRCRegular, GetLoc("sVisibilityVRCRegular"));
+                        me.ShaderProperty(_visibilityVRCMirrorVR, GetLoc("sVisibilityVRCMirrorVR"));
+                        me.ShaderProperty(_visibilityVRCMirrorDesktop, GetLoc("sVisibilityVRCMirrorDesktop"));
+                        me.ShaderProperty(_visibilityVRCCameraVR, GetLoc("sVisibilityVRCCameraVR"));
+                        me.ShaderProperty(_visibilityVRCCameraDesktop, GetLoc("sVisibilityVRCCameraDesktop"));
+                        me.ShaderProperty(_visibilityVRCCameraScreenshot, GetLoc("sVisibilityVRCCameraScreenshot"));
+                    } else {
+                        me.ShaderProperty(_mirror, GetLoc("sMirror"));
+                    }
                 }
             }
         }
@@ -140,30 +187,62 @@ namespace lilToon
             ltsmgem     = Shader.Find("Hidden/" + shaderName + "/MultiGem");
         }
 
-        // You can create a menu like this
-        /*
-        // <summary>
-        // Call back method for menu item.
-        // </summary>
-        [MenuItem("Assets/TemplateFull/Convert material to custom shader", false, 1100)]
+        /// <summary>
+        /// Callback method for menu item which converts shader of material to custom lilToon shader.
+        /// </summary>
+        [MenuItem("Assets/" + shaderName + "/Convert material to custom shader", false, 1100)]
         private static void ConvertMaterialToCustomShaderMenu()
         {
-            var objects = Selection.objects;
-            if (objects.Length == 0)
-            {
-                return;
-            }
-            var inspector = new TemplateFullInspector();
-            for (int i = 0; i < objects.Length; i++)
-            {
-                var material = objects[i] as Material;
-                if (material != null)
-                {
-                    inspector.ConvertMaterialToCustomShader(material);
-                }
-            }
+            LilKustomUtils.ConvertMaterialToCustomShader(shaderName);
         }
-        */
+
+        /// <summary>
+        /// Menu validation method for <see cref="ConvertMaterialToCustomShaderMenu"/>.
+        /// </summary>
+        /// <returns>True if <see cref="ConvertMaterialToCustomShaderMenu"/> works, otherwise false.</returns>
+        [MenuItem("Assets/" + shaderName + "/Convert material to custom shader", true)]
+        private static bool ValidateConvertMaterialToCustomShaderMenu()
+        {
+            return LilKustomUtils.ValidateConvertMaterialToCustomShader(shaderName);
+        }
+
+        /// <summary>
+        /// Callback method for menu item which converts shader of material to original lilToon shader.
+        /// </summary>
+        [MenuItem("Assets/" + shaderName + "/Convert material to original shader", false, 1101)]
+        private static void ConvertMaterialToOriginalShaderMenu()
+        {
+            LilKustomUtils.ConvertMaterialToOriginalShader(shaderName);
+        }
+
+        /// <summary>
+        /// Menu validation method for <see cref="ValidateConvertMaterialToOriginalShaderMenu"/>.
+        /// </summary>
+        /// <returns>True if <see cref="ValidateConvertMaterialToOriginalShaderMenu"/> works, otherwise false.</returns>
+        [MenuItem("Assets/" + shaderName + "/Convert material to original shader", true)]
+        private static bool ValidateConvertMaterialToOriginalShaderMenu()
+        {
+            return LilKustomUtils.ValidateConvertMaterialToOriginalShader(shaderName);
+        }
+
+        /// <summary>
+        /// Callback method for menu item which refreshes shader cache and reimport.
+        /// </summary>
+        [MenuItem("Assets/" + shaderName + "/Refresh shader cache", false, 2000)]
+        private static void RefreshShaderCacheMenu()
+        {
+            LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath("3ce3747739004f34da13c4da5fc01542"));
+        }
+
+        /// <summary>
+        /// Menu validation method for <see cref="RefreshShaderCacheMenu"/>.
+        /// </summary>
+        /// <returns>True if <see cref="RefreshShaderCacheMenu"/> works, otherwise false.</returns>
+        [MenuItem("Assets/" + shaderName + "/Refresh shader cache", true)]
+        private static bool ValidateRefreshShaderCacheMenu()
+        {
+            return LilKustomUtils.IsRefreshShaderCacheAvailable();
+        }
     }
 }
 #endif

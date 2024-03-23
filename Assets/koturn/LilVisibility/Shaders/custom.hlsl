@@ -4,7 +4,20 @@
 // Custom variables
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
-#define LIL_CUSTOM_PROPERTIES
+#define LIL_CUSTOM_PROPERTIES \
+    int _VisibilityMode; \
+    int _Mirror; \
+    bool _VisibilityVRCRegular; \
+    bool _VisibilityVRCMirrorVR; \
+    bool _VisibilityVRCMirrorDesktop; \
+    bool _VisibilityVRCCameraVR; \
+    bool _VisibilityVRCCameraDesktop; \
+    bool _VisibilityVRCCameraScreenshot;
+
+//! Camera mode in VRChat: 0 => Normal, 1 => VR HandCam, 2 => Desktop Handcam, 3 => Screenshot/Photo.
+float _VRChatCameraMode;
+//! Mirror mode in VRChat: 0 => Normal, 1 => Mirror (VR), 2 => Mirror (Desktop).
+float _VRChatMirrorMode;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES
@@ -36,7 +49,23 @@
 //#define LIL_CUSTOM_V2F_MEMBER(id0,id1,id2,id3,id4,id5,id6,id7)
 
 // Add vertex copy
-#define LIL_CUSTOM_VERT_COPY
+#define LIL_CUSTOM_VERT_COPY \
+    bool isInvisible = false; \
+    if (_VisibilityMode == 1) { \
+        isInvisible = (!_VisibilityVRCRegular && ((_VRChatMirrorMode == 0.0) && (_VRChatCameraMode == 0.0))) \
+            || (!_VisibilityVRCMirrorVR && (_VRChatMirrorMode == 1.0)) \
+            || (!_VisibilityVRCMirrorDesktop && (_VRChatMirrorMode == 2.0)) \
+            || (!_VisibilityVRCCameraVR && (_VRChatCameraMode == 1.0)) \
+            || (!_VisibilityVRCCameraDesktop && (_VRChatCameraMode == 2.0)) \
+            || (!_VisibilityVRCCameraScreenshot && (_VRChatCameraMode == 3.0)); \
+    } else if (_Mirror != 0) { \
+        isInvisible = (_Mirror == 1) != isInMirror(); \
+    } \
+    if (isInvisible) { \
+        LIL_INITIALIZE_STRUCT(v2f, LIL_V2F_OUT_BASE); \
+        LIL_V2F_OUT_BASE.positionCS = asfloat(0x7fc00000).xxxx; \
+        return LIL_V2F_OUT; \
+    }
 
 // Inserting a process into the vertex shader
 //#define LIL_CUSTOM_VERTEX_OS
