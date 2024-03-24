@@ -1,0 +1,24 @@
+Shader "*LIL_SHADER_NAME*/lilToonMulti"
+{
+    Properties
+    {
+        lilProperties "Default"
+        lilProperties "DefaultOpaque"
+        lilProperties "lilCustomShaderProperties.lilblock"
+    }
+
+    HLSLINCLUDE
+        #pragma shader_feature_local_vertex _WAVEPOSSPACE_OBJECT _WAVEPOSSPACE_WORLD
+        #pragma shader_feature_local_vertex _WAVEAXIS_X _WAVEAXIS_Y _WAVEAXIS_Z _WAVEAXIS_FREE
+        #include "custom.hlsl"
+    ENDHLSL
+
+    lilSubShaderTags {"RenderType" = "Opaque" "Queue" = "Geometry"}
+    lilSubShaderInsert "lilCustomShaderInsert.lilblock"
+    lilSubShaderInsertPost "lilCustomShaderInsertPost.lilblock"
+    lilSubShaderBRP "DefaultMulti"
+    lilSubShaderURP "DefaultMulti"
+    lilSubShaderHDRP "DefaultMulti"
+
+    CustomEditor "*LIL_EDITOR_NAME*"
+}

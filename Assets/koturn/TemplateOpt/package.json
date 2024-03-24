@@ -1,0 +1,15 @@
+{
+  "name": "jp.koturn.templateopt",
+  "version": "1.1.2",
+  "displayName": "TemplateOpt",
+  "description": "koturn's custom shaders of lilToon, TemplateOpt.",
+  "unity": "2018.1",
+  "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.2/LICENSE",
+  "license": "MIT",
+  "keywords": ["Toon", "Shader", "lilToon"],
+  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.2/jp.koturn.templateopt-1.1.2.zip",
+  "legacyFolders" : {
+    "Assets\\koturn\\TemplateOpt" : "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  }
+}
