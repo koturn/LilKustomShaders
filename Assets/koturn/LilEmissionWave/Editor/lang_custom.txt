@@ -1,0 +1,12 @@
+Language	English	Japanese
+sCustomShaderTitle	Emission Wave	エミッション波
+sEmissionWaveMaskAndColor	Mask / Color	色 / マスク
+sEmissionWaveNoiseAmp	Noise amplitude	ノイズ振幅
+sEmissionWaveSpeed	Wave speed	波の速度
+sEmissionWaveInitPhase	Initial phase	初期位相
+sEmissionWaveParam	Factor	係数
+sEmissionPosMin	Minimum position	位置の最小値
+sEmissionPosMax	Maximum position	位置の最大値
+sWavePosSpace	Position space	位置計算空間
+sWaveAxis	Wave direction axis	波方向軸
+sWaveAxisAngles	Wave direction angle (Degrees)	波方向角度（度）

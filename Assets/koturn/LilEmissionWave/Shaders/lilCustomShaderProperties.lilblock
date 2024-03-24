@@ -1,0 +1,20 @@
+
+        //----------------------------------------------------------------------------------------------------------------------
+        // Custom Properties
+        [NoScaleOffset] _EmissionWaveMask ("Mask of emission wave", 2D) = "white" {}
+        [HDR] _EmissionWaveColor ("Color of emission wave", Color) = (0.3015505, 0.3015505, 1.599893, 1.0)
+        _EmissionWaveNoiseAmp ("Emission wave noise amplitude", Float) = 0.02
+        _EmissionWaveSpeed ("Emission wave speed", Float) = 1.0
+        _EmissionWaveInitPhase ("Initial phase of emission wave", Range(0.0, 1.0)) = 0.0
+        [lilVec2] _EmissionWaveParam ("Factor of emission wave", Vector) = (1.0, 16.0, 0.0, 0.0)
+        _EmissionPosMin ("Minimum emission position", Float) = 0.0
+        _EmissionPosMax ("Maximum emission position", Float) = 1.0
+
+        [KeywordEnum(Object, World)]
+        _WavePosSpace ("Wave position space", Int) = 0
+
+        [KeywordEnum(X, Y, Z, FREE)]
+        _WaveAxis ("Wave direction axis", Int) = 1
+
+        [lilVec3]
+        _WaveAxisAngles ("Wave direction (Radians)", Vector) = (0.0, 0.0, 0.0, 0.0)

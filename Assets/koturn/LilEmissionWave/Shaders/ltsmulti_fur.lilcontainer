@@ -1,0 +1,24 @@
+Shader "Hidden/*LIL_SHADER_NAME*/MultiFur"
+{
+    Properties
+    {
+        lilProperties "Default"
+        lilProperties "DefaultFurTransparent"
+        lilProperties "lilCustomShaderProperties.lilblock"
+    }
+
+    HLSLINCLUDE
+        #pragma shader_feature_local_vertex _WAVEPOSSPACE_OBJECT _WAVEPOSSPACE_WORLD
+        #pragma shader_feature_local_vertex _WAVEAXIS_X _WAVEAXIS_Y _WAVEAXIS_Z _WAVEAXIS_FREE
+        #include "custom.hlsl"
+    ENDHLSL
+
+    lilSubShaderTags {"RenderType" = "Transparent" "Queue" = "Transparent"}
+    lilSubShaderInsert "lilCustomShaderInsert.lilblock"
+    lilSubShaderInsertPost "lilCustomShaderInsertPost.lilblock"
+    lilSubShaderBRP "DefaultMultiFur"
+    lilSubShaderURP "DefaultMultiFur"
+    lilSubShaderHDRP "DefaultMultiFur"
+
+    CustomEditor "*LIL_EDITOR_NAME*"
+}

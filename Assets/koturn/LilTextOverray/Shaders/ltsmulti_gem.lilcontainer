@@ -1,0 +1,26 @@
+Shader "Hidden/*LIL_SHADER_NAME*/MultiGem"
+{
+    Properties
+    {
+        lilProperties "Default"
+        lilProperties "DefaultGem"
+        lilProperties "lilCustomShaderProperties.lilblock"
+    }
+
+    HLSLINCLUDE
+        #pragma shader_feature_local_fragment _ _ENABLEELAPSEDTIME_ON
+        #pragma shader_feature_local_fragment _ _ENABLEALTIMEOFDAY_ON
+        #pragma shader_feature_local_fragment _ _ENABLEFRAMERATE_ON
+        #pragma shader_feature_local_fragment _ _ENABLEWORLDPOS_ON
+        #include "custom.hlsl"
+    ENDHLSL
+
+    lilSubShaderTags {"RenderType" = "Opaque" "Queue" = "Transparent-100"}
+    lilSubShaderInsert "lilCustomShaderInsert.lilblock"
+    lilSubShaderInsertPost "lilCustomShaderInsertPost.lilblock"
+    lilSubShaderBRP "DefaultMultiGem"
+    lilSubShaderURP "DefaultMultiGem"
+    lilSubShaderHDRP "DefaultMultiGem"
+
+    CustomEditor "*LIL_EDITOR_NAME*"
+}

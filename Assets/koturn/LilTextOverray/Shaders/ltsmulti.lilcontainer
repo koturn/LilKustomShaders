@@ -1,0 +1,26 @@
+Shader "*LIL_SHADER_NAME*/lilToonMulti"
+{
+    Properties
+    {
+        lilProperties "Default"
+        lilProperties "DefaultOpaque"
+        lilProperties "lilCustomShaderProperties.lilblock"
+    }
+
+    HLSLINCLUDE
+        #pragma shader_feature_local_fragment _ _ENABLEELAPSEDTIME_ON
+        #pragma shader_feature_local_fragment _ _ENABLEALTIMEOFDAY_ON
+        #pragma shader_feature_local_fragment _ _ENABLEFRAMERATE_ON
+        #pragma shader_feature_local_fragment _ _ENABLEWORLDPOS_ON
+        #include "custom.hlsl"
+    ENDHLSL
+
+    lilSubShaderTags {"RenderType" = "Opaque" "Queue" = "Geometry"}
+    lilSubShaderInsert "lilCustomShaderInsert.lilblock"
+    lilSubShaderInsertPost "lilCustomShaderInsertPost.lilblock"
+    lilSubShaderBRP "DefaultMulti"
+    lilSubShaderURP "DefaultMulti"
+    lilSubShaderHDRP "DefaultMulti"
+
+    CustomEditor "*LIL_EDITOR_NAME*"
+}
