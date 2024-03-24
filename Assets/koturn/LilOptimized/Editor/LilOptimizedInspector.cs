@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 using lilToon;
@@ -191,4 +190,3 @@ namespace Koturn.lilToon
         }
     }
 }
-#endif
