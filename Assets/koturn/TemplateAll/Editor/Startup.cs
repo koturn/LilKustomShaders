@@ -1,4 +1,6 @@
+using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
@@ -123,13 +125,117 @@ namespace lilToon
         /// <returns>True if two byte data is same, otherwise false.</returns>
         private static bool CompareMemory(byte[] data1, int offset1, byte[] data2, int offset2, int length)
         {
-            for (int i = 0; i < length; i++)
+            if (Environment.Is64BitProcess)
             {
-                if (data1[i] != data2[i])
+                return CompareMemoryNaiveX64(data1, offset1, data2, offset2, length);
+            }
+            else
+            {
+                return CompareMemoryNaiveX86(data1, offset1, data2, offset2, length);
+            }
+        }
+
+        /// <summary>
+        /// Compare two byte data for x64 environment.
+        /// </summary>
+        /// <param name="data1">First byte data array.</param>
+        /// <param name="offset1">Offset of first byte data array.</param>
+        /// <param name="data2">Second byte data array.</param>
+        /// <param name="offset2">Offset of second byte data array.</param>
+        /// <param name="length">Data length of <paramref name="data1"/> and <paramref name="data2"/>.</param>
+        /// <returns>True if two byte data is same, otherwise false.</returns>
+        private static bool CompareMemoryNaiveX64(byte[] data1, int offset1, byte[] data2, int offset2, int length)
+        {
+            unsafe
+            {
+                fixed (byte* pData1 = &data1[offset1])
+                fixed (byte* pData2 = &data2[offset2])
+                {
+                    return CompareMemoryNaiveX64(pData1, pData2, (ulong)length);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Compare two byte data for x64 environment.
+        /// </summary>
+        /// <param name="pData1">First pointer to byte data array.</param>
+        /// <param name="pData2">Second pointer to byte data array.</param>
+        /// <param name="dataLength">Data length of <paramref name="pData1"/> and <paramref name="pData2"/>.</param>
+        /// <returns>True if two byte data is same, otherwise false.</returns>
+        private static unsafe bool CompareMemoryNaiveX64(byte* pData1, byte* pData2, ulong dataLength)
+        {
+            const ulong stride = sizeof(ulong);
+            var n = dataLength & ~(stride - 1);
+
+            for (ulong i = 0; i < n; i += stride)
+            {
+                if (*(ulong*)&pData1[i] != *(ulong*)&pData2[i])
                 {
                     return false;
                 }
             }
+
+            for (ulong i = n; i < dataLength; i++)
+            {
+                if (pData1[i] != pData2[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Compare two byte data for x86 environment.
+        /// </summary>
+        /// <param name="data1">First byte data array.</param>
+        /// <param name="offset1">Offset of first byte data array.</param>
+        /// <param name="data2">Second byte data array.</param>
+        /// <param name="offset2">Offset of second byte data array.</param>
+        /// <param name="length">Data length of <paramref name="data1"/> and <paramref name="data2"/>.</param>
+        /// <returns>True if two byte data is same, otherwise false.</returns>
+        private static bool CompareMemoryNaiveX86(byte[] data1, int offset1, byte[] data2, int offset2, int length)
+        {
+            unsafe
+            {
+                fixed (byte* pData1 = &data1[offset1])
+                fixed (byte* pData2 = &data2[offset2])
+                {
+                    return CompareMemoryNaiveX86(pData1, pData2, (uint)length);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Compare two byte data for x86 environment.
+        /// </summary>
+        /// <param name="pData1">First pointer to byte data array.</param>
+        /// <param name="pData2">Second pointer to byte data array.</param>
+        /// <param name="dataLength">Data length of <paramref name="pData1"/> and <paramref name="pData2"/>.</param>
+        /// <returns>True if two byte data is same, otherwise false.</returns>
+        private static unsafe bool CompareMemoryNaiveX86(byte* pData1, byte* pData2, uint dataLength)
+        {
+            const uint stride = sizeof(uint);
+            var n = dataLength & ~(stride - 1);
+
+            for (uint i = 0; i < n; i += stride)
+            {
+                if (*(uint*)&pData1[i] != *(uint*)&pData2[i])
+                {
+                    return false;
+                }
+            }
+
+            for (uint i = n; i < dataLength; i++)
+            {
+                if (pData1[i] != pData2[i])
+                {
+                    return false;
+                }
+            }
+
             return true;
         }
 
