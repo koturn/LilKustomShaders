@@ -52,7 +52,7 @@ namespace lilToon
                 WriteVersionFileBytes(ms);
                 var buffer = ms.GetBuffer();
                 var length = (int)ms.Length;
-                var dstFilePath = Path.Combine(dstDirPath, "lil_current_version_value.hlsl");
+                var dstFilePath = Path.Combine(dstDirPath, "lil_current_version.hlsl");
                 if (CompareFileBytes(dstFilePath, buffer, 0, length))
                 {
                     return;
@@ -74,7 +74,28 @@ namespace lilToon
         {
             using (var writer = new StreamWriter(s, Encoding.ASCII, BufferSize, true))
             {
+                writer.Write("#ifndef LIL_CURRENT_VERSION_INCLUDED\n");
+                writer.Write("#define LIL_CURRENT_VERSION_INCLUDED\n");
+                writer.Write('\n');
                 writer.Write("#define LIL_CURRENT_VERSION_VALUE {0}\n", lilConstants.currentVersionValue);
+
+                var verTokens = lilConstants.currentVersionName.Split('.');
+                int verNum;
+                if (int.TryParse(verTokens[0], out verNum))
+                {
+                    writer.Write("#define LIL_CURRENT_VERSION_MAJOR {0}\n", verNum);
+                }
+                if (verTokens.Length > 0 && int.TryParse(verTokens[1], out verNum))
+                {
+                    writer.Write("#define LIL_CURRENT_VERSION_MINOR {0}\n", verNum);
+                }
+                if (verTokens.Length > 1 && int.TryParse(verTokens[2], out verNum))
+                {
+                    writer.Write("#define LIL_CURRENT_VERSION_PATCH {0}\n", verNum);
+                }
+
+                writer.Write('\n');
+                writer.Write("#endif  // LIL_CURRENT_VERSION_INCLUDED\n");
             }
         }
 
