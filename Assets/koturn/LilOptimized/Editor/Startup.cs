@@ -22,14 +22,32 @@ namespace Koturn.lilToon
         private static void OnStartup()
         {
             AssetDatabase.importPackageCompleted += Startup_ImportPackageCompleted;
-            UpdateIncludeResolverFiles();
+            UpdateIncludeFiles();
+        }
+
+        /// <summary>
+        /// Update include files of shaders.
+        /// </summary>
+        private static void UpdateIncludeFiles()
+        {
+            var shaderDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
+            if (shaderDirPath == "")
+            {
+                throw new InvalidDataException("Cannot find file or directory corresponding to GUID: " + GuidShaderDir);
+            }
+            if (!Directory.Exists(shaderDirPath))
+            {
+                throw new DirectoryNotFoundException($"Directory not found: {shaderDirPath} (GUID: {GuidShaderDir})");
+            }
+            UpdateIncludeResolverFiles(shaderDirPath);
         }
 
         /// <summary>
         /// Update local include files, lil_common_vert_fur_thirdparty.hlsl, lil_vert_audiolink.hlsl,
         /// lil_vert_encryption.hlsl and lil_vert_outline.hlsl.
         /// </summary>
-        private static void UpdateIncludeResolverFiles()
+        /// <param name="shaderDirPath">Destination shader directory path.</param>
+        private static void UpdateIncludeResolverFiles(string shaderDirPath)
         {
             // GUIDs of the shader source of lilxyzw/lilToon.
             var guids = new[]
@@ -40,44 +58,13 @@ namespace Koturn.lilToon
                 "683a6eed396c8044bb0c482c77c997d4"   // lil_vert_outline.hlsl
             };
 
-            var dstDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
             foreach (var guid in guids)
             {
-                var srcFilePath = AssetDatabase.GUIDToAssetPath(guid);
-                if (srcFilePath is null)
+                var dstFilePath = LilKustomUtils.UpdateIncludeResolverFile(shaderDirPath, guid);
+                if (dstFilePath != null)
                 {
-                    continue;
+                    Debug.LogFormat("Update {0}", dstFilePath);
                 }
-                var line = $"#include \"{srcFilePath}\"";
-
-                var dstFilePath = Path.Combine(dstDirPath, Path.GetFileName(srcFilePath));
-                if (File.Exists(dstFilePath) && ReadFirstLine(dstFilePath) == line)
-                {
-                    continue;
-                }
-
-                using (var fs = new FileStream(dstFilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
-                using (var sw = new StreamWriter(fs))
-                {
-                    sw.Write(line);
-                    sw.Write('\n');
-                }
-
-                Debug.Log($"Update {dstFilePath}");
-            }
-        }
-
-        /// <summary>
-        /// Read first line of the specified file.
-        /// </summary>
-        /// <param name="filePath">File to read.</param>
-        /// <returns>First line of <paramref name="filePath"/>.</returns>
-        private static string ReadFirstLine(string filePath)
-        {
-            using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-            using (var sr = new StreamReader(fs))
-            {
-                return sr.ReadLine();
             }
         }
 
@@ -91,7 +78,7 @@ namespace Koturn.lilToon
             {
                 return;
             }
-            UpdateIncludeResolverFiles();
+            UpdateIncludeFiles();
         }
     }
 }

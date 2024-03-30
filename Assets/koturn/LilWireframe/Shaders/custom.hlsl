@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------------------------------------------------------
 // Macro
-#include "lil_current_version_value.hlsl"
+#include "lil_current_version.hlsl"
 
 // Custom variables
 //#define LIL_CUSTOM_PROPERTIES \

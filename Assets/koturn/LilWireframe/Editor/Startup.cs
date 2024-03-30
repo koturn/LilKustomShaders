@@ -31,14 +31,25 @@ namespace Koturn.lilToon
         /// </summary>
         private static void UpdateIncludeFiles()
         {
-            UpdateIncludeResolverFiles();
-            UpdateVersionDefFile();
+            var shaderDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
+            if (shaderDirPath == "")
+            {
+                throw new InvalidDataException("Cannot find file or directory corresponding to GUID: " + GuidShaderDir);
+            }
+            if (!Directory.Exists(shaderDirPath))
+            {
+                throw new DirectoryNotFoundException($"Directory not found: {shaderDirPath} (GUID: {GuidShaderDir})");
+            }
+            UpdateIncludeResolverFiles(shaderDirPath);
+            UpdateVersionDefFile(shaderDirPath);
         }
 
         /// <summary>
-        /// Update local include files, lil_opt_common_functions.hlsl, lil_opt_vert.hlsl and lil_override.hlsl.
+        /// Update local include files, lil_opt_common_functions.hlsl, lil_opt_vert.hlsl, lil_override.hlsl
+        /// and lil_common_vert_fur_thirdparty.hlsl.
         /// </summary>
-        private static void UpdateIncludeResolverFiles()
+        /// <param name="shaderDirPath">Destination shader directory path.</param>
+        private static void UpdateIncludeResolverFiles(string shaderDirPath)
         {
             // GUIDs of the shader source of koturn/LilOptimized and lilxyzw/lilToon.
             var guids = new[]
@@ -49,67 +60,26 @@ namespace Koturn.lilToon
                 "e3dbe4ae202b9094eab458bbc934c964"   // lil_common_vert_fur_thirdparty.hlsl
             };
 
-            var dstDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
             foreach (var guid in guids)
             {
-                var srcFilePath = AssetDatabase.GUIDToAssetPath(guid);
-                if (srcFilePath is null)
+                var dstFilePath = LilKustomUtils.UpdateIncludeResolverFile(shaderDirPath, guid);
+                if (dstFilePath != null)
                 {
-                    continue;
+                    Debug.LogFormat("Update {0}", dstFilePath);
                 }
-                var line = $"#include \"{srcFilePath}\"";
-
-                var dstFilePath = Path.Combine(dstDirPath, Path.GetFileName(srcFilePath));
-                if (File.Exists(dstFilePath) && ReadFirstLine(dstFilePath) == line)
-                {
-                    continue;
-                }
-
-                using (var fs = new FileStream(dstFilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
-                using (var sw = new StreamWriter(fs))
-                {
-                    sw.Write(line);
-                    sw.Write('\n');
-                }
-
-                Debug.Log($"Update {dstFilePath}");
             }
         }
 
         /// <summary>
         /// Update definition file of version value of lilToon, lil_current_version_value.hlsl
         /// </summary>
-        private static void UpdateVersionDefFile()
+        /// <param name="shaderDirPath">Destination shader directory path.</param>
+        private static void UpdateVersionDefFile(string shaderDirPath)
         {
-            var dstDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
-            var line = $"#define LIL_CURRENT_VERSION_VALUE {lilConstants.currentVersionValue}";
-            var dstFilePath = Path.Combine(dstDirPath, "lil_current_version_value.hlsl");
-            if (File.Exists(dstFilePath) && ReadFirstLine(dstFilePath) == line)
+            var dstFilePath = LilKustomUtils.UpdateVersionDefFile(Path.Combine(shaderDirPath, "lil_current_version.hlsl"));
+            if (dstFilePath != null)
             {
-                return;
-            }
-
-            using (var fs = new FileStream(dstFilePath, FileMode.Create, FileAccess.Write, FileShare.Read))
-            using (var sw = new StreamWriter(fs))
-            {
-                sw.Write(line);
-                sw.Write('\n');
-            }
-
-            Debug.Log($"Update {dstFilePath}");
-        }
-
-        /// <summary>
-        /// Read first line of the specified file.
-        /// </summary>
-        /// <param name="filePath">File to read.</param>
-        /// <returns>First line of <paramref name="filePath"/>.</returns>
-        private static string ReadFirstLine(string filePath)
-        {
-            using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-            using (var sr = new StreamReader(fs))
-            {
-                return sr.ReadLine();
+                Debug.LogFormat($"Update {0}", dstFilePath);
             }
         }
 
