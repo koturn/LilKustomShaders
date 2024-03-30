@@ -12,7 +12,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Name of this custom shader.
         /// </summary>
-        public const string shaderName = "koturn/LilOptimized";
+        public const string ShaderName = "koturn/LilOptimized";
 
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/lilToon".
@@ -246,67 +246,67 @@ namespace Koturn.lilToon
         /// </summary>
         static LilOptimizedShaderManager()
         {
-            lts         = Shader.Find(shaderName + "/lilToon");
-            ltsc        = Shader.Find("Hidden/" + shaderName + "/Cutout");
-            ltst        = Shader.Find("Hidden/" + shaderName + "/Transparent");
-            ltsot       = Shader.Find("Hidden/" + shaderName + "/OnePassTransparent");
-            ltstt       = Shader.Find("Hidden/" + shaderName + "/TwoPassTransparent");
+            lts         = Shader.Find(ShaderName + "/lilToon");
+            ltsc        = Shader.Find("Hidden/" + ShaderName + "/Cutout");
+            ltst        = Shader.Find("Hidden/" + ShaderName + "/Transparent");
+            ltsot       = Shader.Find("Hidden/" + ShaderName + "/OnePassTransparent");
+            ltstt       = Shader.Find("Hidden/" + ShaderName + "/TwoPassTransparent");
 
-            ltso        = Shader.Find("Hidden/" + shaderName + "/OpaqueOutline");
-            ltsco       = Shader.Find("Hidden/" + shaderName + "/CutoutOutline");
-            ltsto       = Shader.Find("Hidden/" + shaderName + "/TransparentOutline");
-            ltsoto      = Shader.Find("Hidden/" + shaderName + "/OnePassTransparentOutline");
-            ltstto      = Shader.Find("Hidden/" + shaderName + "/TwoPassTransparentOutline");
+            ltso        = Shader.Find("Hidden/" + ShaderName + "/OpaqueOutline");
+            ltsco       = Shader.Find("Hidden/" + ShaderName + "/CutoutOutline");
+            ltsto       = Shader.Find("Hidden/" + ShaderName + "/TransparentOutline");
+            ltsoto      = Shader.Find("Hidden/" + ShaderName + "/OnePassTransparentOutline");
+            ltstto      = Shader.Find("Hidden/" + ShaderName + "/TwoPassTransparentOutline");
 
-            ltsoo       = Shader.Find(shaderName + "/[Optional] OutlineOnly/Opaque");
-            ltscoo      = Shader.Find(shaderName + "/[Optional] OutlineOnly/Cutout");
-            ltstoo      = Shader.Find(shaderName + "/[Optional] OutlineOnly/Transparent");
+            ltsoo       = Shader.Find(ShaderName + "/[Optional] OutlineOnly/Opaque");
+            ltscoo      = Shader.Find(ShaderName + "/[Optional] OutlineOnly/Cutout");
+            ltstoo      = Shader.Find(ShaderName + "/[Optional] OutlineOnly/Transparent");
 
-            ltstess     = Shader.Find("Hidden/" + shaderName + "/Tessellation/Opaque");
-            ltstessc    = Shader.Find("Hidden/" + shaderName + "/Tessellation/Cutout");
-            ltstesst    = Shader.Find("Hidden/" + shaderName + "/Tessellation/Transparent");
-            ltstessot   = Shader.Find("Hidden/" + shaderName + "/Tessellation/OnePassTransparent");
-            ltstesstt   = Shader.Find("Hidden/" + shaderName + "/Tessellation/TwoPassTransparent");
+            ltstess     = Shader.Find("Hidden/" + ShaderName + "/Tessellation/Opaque");
+            ltstessc    = Shader.Find("Hidden/" + ShaderName + "/Tessellation/Cutout");
+            ltstesst    = Shader.Find("Hidden/" + ShaderName + "/Tessellation/Transparent");
+            ltstessot   = Shader.Find("Hidden/" + ShaderName + "/Tessellation/OnePassTransparent");
+            ltstesstt   = Shader.Find("Hidden/" + ShaderName + "/Tessellation/TwoPassTransparent");
 
-            ltstesso    = Shader.Find("Hidden/" + shaderName + "/Tessellation/OpaqueOutline");
-            ltstessco   = Shader.Find("Hidden/" + shaderName + "/Tessellation/CutoutOutline");
-            ltstessto   = Shader.Find("Hidden/" + shaderName + "/Tessellation/TransparentOutline");
-            ltstessoto  = Shader.Find("Hidden/" + shaderName + "/Tessellation/OnePassTransparentOutline");
-            ltstesstto  = Shader.Find("Hidden/" + shaderName + "/Tessellation/TwoPassTransparentOutline");
+            ltstesso    = Shader.Find("Hidden/" + ShaderName + "/Tessellation/OpaqueOutline");
+            ltstessco   = Shader.Find("Hidden/" + ShaderName + "/Tessellation/CutoutOutline");
+            ltstessto   = Shader.Find("Hidden/" + ShaderName + "/Tessellation/TransparentOutline");
+            ltstessoto  = Shader.Find("Hidden/" + ShaderName + "/Tessellation/OnePassTransparentOutline");
+            ltstesstto  = Shader.Find("Hidden/" + ShaderName + "/Tessellation/TwoPassTransparentOutline");
 
-            ltsl        = Shader.Find(shaderName + "/lilToonLite");
-            ltslc       = Shader.Find("Hidden/" + shaderName + "/Lite/Cutout");
-            ltslt       = Shader.Find("Hidden/" + shaderName + "/Lite/Transparent");
-            ltslot      = Shader.Find("Hidden/" + shaderName + "/Lite/OnePassTransparent");
-            ltsltt      = Shader.Find("Hidden/" + shaderName + "/Lite/TwoPassTransparent");
+            ltsl        = Shader.Find(ShaderName + "/lilToonLite");
+            ltslc       = Shader.Find("Hidden/" + ShaderName + "/Lite/Cutout");
+            ltslt       = Shader.Find("Hidden/" + ShaderName + "/Lite/Transparent");
+            ltslot      = Shader.Find("Hidden/" + ShaderName + "/Lite/OnePassTransparent");
+            ltsltt      = Shader.Find("Hidden/" + ShaderName + "/Lite/TwoPassTransparent");
 
-            ltslo       = Shader.Find("Hidden/" + shaderName + "/Lite/OpaqueOutline");
-            ltslco      = Shader.Find("Hidden/" + shaderName + "/Lite/CutoutOutline");
-            ltslto      = Shader.Find("Hidden/" + shaderName + "/Lite/TransparentOutline");
-            ltsloto     = Shader.Find("Hidden/" + shaderName + "/Lite/OnePassTransparentOutline");
-            ltsltto     = Shader.Find("Hidden/" + shaderName + "/Lite/TwoPassTransparentOutline");
+            ltslo       = Shader.Find("Hidden/" + ShaderName + "/Lite/OpaqueOutline");
+            ltslco      = Shader.Find("Hidden/" + ShaderName + "/Lite/CutoutOutline");
+            ltslto      = Shader.Find("Hidden/" + ShaderName + "/Lite/TransparentOutline");
+            ltsloto     = Shader.Find("Hidden/" + ShaderName + "/Lite/OnePassTransparentOutline");
+            ltsltto     = Shader.Find("Hidden/" + ShaderName + "/Lite/TwoPassTransparentOutline");
 
-            ltsref      = Shader.Find("Hidden/" + shaderName + "/Refraction");
-            ltsrefb     = Shader.Find("Hidden/" + shaderName + "/RefractionBlur");
-            ltsfur      = Shader.Find("Hidden/" + shaderName + "/Fur");
-            ltsfurc     = Shader.Find("Hidden/" + shaderName + "/FurCutout");
-            ltsfurtwo   = Shader.Find("Hidden/" + shaderName + "/FurTwoPass");
-            ltsfuro     = Shader.Find(shaderName + "/[Optional] FurOnly/Transparent");
-            ltsfuroc    = Shader.Find(shaderName + "/[Optional] FurOnly/Cutout");
-            ltsfurotwo  = Shader.Find(shaderName + "/[Optional] FurOnly/TwoPass");
-            ltsgem      = Shader.Find("Hidden/" + shaderName + "/Gem");
-            ltsfs       = Shader.Find(shaderName + "/[Optional] FakeShadow");
+            ltsref      = Shader.Find("Hidden/" + ShaderName + "/Refraction");
+            ltsrefb     = Shader.Find("Hidden/" + ShaderName + "/RefractionBlur");
+            ltsfur      = Shader.Find("Hidden/" + ShaderName + "/Fur");
+            ltsfurc     = Shader.Find("Hidden/" + ShaderName + "/FurCutout");
+            ltsfurtwo   = Shader.Find("Hidden/" + ShaderName + "/FurTwoPass");
+            ltsfuro     = Shader.Find(ShaderName + "/[Optional] FurOnly/Transparent");
+            ltsfuroc    = Shader.Find(ShaderName + "/[Optional] FurOnly/Cutout");
+            ltsfurotwo  = Shader.Find(ShaderName + "/[Optional] FurOnly/TwoPass");
+            ltsgem      = Shader.Find("Hidden/" + ShaderName + "/Gem");
+            ltsfs       = Shader.Find(ShaderName + "/[Optional] FakeShadow");
 
-            ltsover     = Shader.Find(shaderName + "/[Optional] Overlay");
-            ltsoover    = Shader.Find(shaderName + "/[Optional] OverlayOnePass");
-            ltslover    = Shader.Find(shaderName + "/[Optional] LiteOverlay");
-            ltsloover   = Shader.Find(shaderName + "/[Optional] LiteOverlayOnePass");
+            ltsover     = Shader.Find(ShaderName + "/[Optional] Overlay");
+            ltsoover    = Shader.Find(ShaderName + "/[Optional] OverlayOnePass");
+            ltslover    = Shader.Find(ShaderName + "/[Optional] LiteOverlay");
+            ltsloover   = Shader.Find(ShaderName + "/[Optional] LiteOverlayOnePass");
 
-            ltsm        = Shader.Find(shaderName + "/lilToonMulti");
-            ltsmo       = Shader.Find("Hidden/" + shaderName + "/MultiOutline");
-            ltsmref     = Shader.Find("Hidden/" + shaderName + "/MultiRefraction");
-            ltsmfur     = Shader.Find("Hidden/" + shaderName + "/MultiFur");
-            ltsmgem     = Shader.Find("Hidden/" + shaderName + "/MultiGem");
+            ltsm        = Shader.Find(ShaderName + "/lilToonMulti");
+            ltsmo       = Shader.Find("Hidden/" + ShaderName + "/MultiOutline");
+            ltsmref     = Shader.Find("Hidden/" + ShaderName + "/MultiRefraction");
+            ltsmfur     = Shader.Find("Hidden/" + ShaderName + "/MultiFur");
+            ltsmgem     = Shader.Find("Hidden/" + ShaderName + "/MultiGem");
         }
 
         /// <summary>
