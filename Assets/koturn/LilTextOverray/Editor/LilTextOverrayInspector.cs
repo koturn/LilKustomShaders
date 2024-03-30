@@ -165,7 +165,8 @@ namespace Koturn.lilToon
             ReplaceToCustomShaders();
             isShowRenderMode = !material.shader.name.Contains("/[Optional] ");
 
-            LoadCustomLanguage("1856a3bb6b48464458ac52d525e02701");
+            LoadCustomLanguage(AssetGuid.LangCustom);
+
             _spriteTex = FindProperty("_SpriteTex", props);
             _enableElapsedTime = FindProperty("_EnableElapsedTime", props);
             _elapsedTimeColor = FindProperty("_ElapsedTimeColor", props);
@@ -643,7 +644,7 @@ namespace Koturn.lilToon
         [MenuItem("Assets/" + ShaderName + "/Refresh shader cache", false, 2000)]
         private static void RefreshShaderCacheMenu()
         {
-            LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath("091ef78e44ed4a64d8e56caf39f45a54"));
+            LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath(AssetGuid.ShaderDir));
         }
 
         /// <summary>

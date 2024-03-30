@@ -77,7 +77,7 @@ namespace Koturn.lilToon
             ReplaceToCustomShaders();
             isShowRenderMode = !material.shader.name.Contains("/[Optional] ");
 
-            LoadCustomLanguage("14a288e6eea913a4098bef443f2c7d81");
+            LoadCustomLanguage(AssetGuid.LangCustom);
 
             _emissionWaveMask = FindProperty("_EmissionWaveMask", props);
             _emissionWaveColor = FindProperty("_EmissionWaveColor", props);
@@ -285,7 +285,7 @@ namespace Koturn.lilToon
         [MenuItem("Assets/" + ShaderName + "/Refresh shader cache", false, 2000)]
         private static void RefreshShaderCacheMenu()
         {
-            LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath("cae014f24d49f764c9e627c0aed3c812"));
+            LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath(AssetGuid.ShaderDir));
         }
 
         /// <summary>

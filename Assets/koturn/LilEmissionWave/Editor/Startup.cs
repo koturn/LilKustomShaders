@@ -1,7 +1,6 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using lilToon;
 
 
 namespace Koturn.lilToon
@@ -11,11 +10,6 @@ namespace Koturn.lilToon
     /// </summary>
     internal static class Startup
     {
-        /// <summary>
-        /// GUID of shader directory.
-        /// </summary>
-        private const string GuidShaderDir = "cae014f24d49f764c9e627c0aed3c812";
-
         /// <summary>
         /// A method called at Unity startup.
         /// </summary>
@@ -31,14 +25,14 @@ namespace Koturn.lilToon
         /// </summary>
         private static void UpdateIncludeFiles()
         {
-            var shaderDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
+            var shaderDirPath = AssetDatabase.GUIDToAssetPath(AssetGuid.ShaderDir);
             if (shaderDirPath == "")
             {
-                throw new InvalidDataException("Cannot find file or directory corresponding to GUID: " + GuidShaderDir);
+                throw new InvalidDataException("Cannot find file or directory corresponding to GUID: " + AssetGuid.ShaderDir);
             }
             if (!Directory.Exists(shaderDirPath))
             {
-                throw new DirectoryNotFoundException($"Directory not found: {shaderDirPath} (GUID: {GuidShaderDir})");
+                throw new DirectoryNotFoundException($"Directory not found: {shaderDirPath} (GUID: {AssetGuid.ShaderDir})");
             }
             UpdateIncludeResolverFiles(shaderDirPath);
             UpdateVersionDefFile(shaderDirPath);
@@ -53,9 +47,9 @@ namespace Koturn.lilToon
             // GUIDs of the shader source of koturn/LilOptimized.
             var guids = new[]
             {
-                "b80f99e9a095fbb44b63c064ef09704d",  // lil_opt_common_functions.hlsl
-                "4b0f89237fb078a41ae330c638eee480",  // lil_opt_vert.hlsl
-                "e6d87491a115eaf439cd3f5ddf3ae096"   // lil_override.hlsl
+                AssetGuid.LilOptCommonFunctions,
+                AssetGuid.LilOptVert,
+                AssetGuid.LilOverride
             };
 
             foreach (var guid in guids)

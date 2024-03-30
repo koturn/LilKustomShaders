@@ -1,7 +1,6 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-using lilToon;
 
 
 namespace Koturn.lilToon
@@ -11,11 +10,6 @@ namespace Koturn.lilToon
     /// </summary>
     internal static class Startup
     {
-        /// <summary>
-        /// GUID of shader directory.
-        /// </summary>
-        private const string GuidShaderDir = "e1f7fe9f1bbcba64e935a92920779855";
-
         /// <summary>
         /// A method called at Unity startup.
         /// </summary>
@@ -32,14 +26,14 @@ namespace Koturn.lilToon
         [MenuItem("Assets/" + LilWireframeInspector.ShaderName + "/Regenerate include files", false, 9000)]
         private static void UpdateIncludeFiles()
         {
-            var shaderDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
+            var shaderDirPath = AssetDatabase.GUIDToAssetPath(AssetGuid.ShaderDir);
             if (shaderDirPath == "")
             {
-                throw new InvalidDataException("Cannot find file or directory corresponding to GUID: " + GuidShaderDir);
+                throw new InvalidDataException("Cannot find file or directory corresponding to GUID: " + AssetGuid.ShaderDir);
             }
             if (!Directory.Exists(shaderDirPath))
             {
-                throw new DirectoryNotFoundException($"Directory not found: {shaderDirPath} (GUID: {GuidShaderDir})");
+                throw new DirectoryNotFoundException($"Directory not found: {shaderDirPath} (GUID: {AssetGuid.ShaderDir})");
             }
             UpdateIncludeResolverFiles(shaderDirPath);
             UpdateVersionDefFile(shaderDirPath);
@@ -55,10 +49,10 @@ namespace Koturn.lilToon
             // GUIDs of the shader source of koturn/LilOptimized and lilxyzw/lilToon.
             var guids = new[]
             {
-                "b80f99e9a095fbb44b63c064ef09704d",  // lil_opt_common_functions.hlsl
-                "4b0f89237fb078a41ae330c638eee480",  // lil_opt_vert.hlsl
-                "e6d87491a115eaf439cd3f5ddf3ae096",  // lil_override.hlsl
-                "e3dbe4ae202b9094eab458bbc934c964"   // lil_common_vert_fur_thirdparty.hlsl
+                AssetGuid.LilOptCommonFunctions,
+                AssetGuid.LilOptVert,
+                AssetGuid.LilOverride,
+                AssetGuid.LilCommonVertFurThirdparty
             };
 
             foreach (var guid in guids)

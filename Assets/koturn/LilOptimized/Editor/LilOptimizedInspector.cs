@@ -176,7 +176,7 @@ namespace Koturn.lilToon
         [MenuItem("Assets/" + LilOptimizedShaderManager.ShaderName + "/Refresh shader cache", false, 2000)]
         private static void RefreshShaderCacheMenu()
         {
-            LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath("a35bbce2bcaa8a6448737c7c3219ca27"));
+            LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath(AssetGuid.ShaderDir));
         }
 
         /// <summary>
