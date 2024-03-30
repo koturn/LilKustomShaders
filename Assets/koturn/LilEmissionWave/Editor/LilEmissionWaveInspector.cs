@@ -10,6 +10,16 @@ namespace Koturn.lilToon
     public class LilEmissionWaveInspector : lilToonInspector
     {
         /// <summary>
+        /// Name of this custom shader.
+        /// </summary>
+        public const string ShaderName = "koturn/LilEmissionWave";
+
+        /// <summary>
+        /// A flag whether to fold custom properties or not.
+        /// </summary>
+        private static bool isShowCustomProperties;
+
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_EmissionWaveMask".
         /// </summary>
         private MaterialProperty _emissionWaveMask;
@@ -53,16 +63,6 @@ namespace Koturn.lilToon
         /// <see cref="MaterialProperty"/> of "_WaveAxisAngles".
         /// </summary>
         private MaterialProperty _waveAxisAngles;
-
-        /// <summary>
-        /// A flag whether to fold custom properties or not.
-        /// </summary>
-        private static bool isShowCustomProperties;
-
-        /// <summary>
-        /// Name of this custom shader.
-        /// </summary>
-        private const string ShaderName = "koturn/LilEmissionWave";
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.

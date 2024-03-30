@@ -29,6 +29,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Update include files of shaders.
         /// </summary>
+        [MenuItem("Assets/" + LilWireframeInspector.ShaderName + "/Regenerate include files", false, 9000)]
         private static void UpdateIncludeFiles()
         {
             var shaderDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);

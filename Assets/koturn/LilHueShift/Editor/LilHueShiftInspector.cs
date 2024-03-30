@@ -10,13 +10,9 @@ namespace Koturn.lilToon
     public class LilHueShiftInspector : lilToonInspector
     {
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_HsMask".
+        /// Name of this custom shader.
         /// </summary>
-        private MaterialProperty _hsMask;
-        /// <summary>
-        /// <see cref="MaterialProperty"/> of "_HsSpeed".
-        /// </summary>
-        private MaterialProperty _hsSpeed;
+        public const string ShaderName = "koturn/LilHueShift";
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
@@ -24,9 +20,13 @@ namespace Koturn.lilToon
         private static bool isShowCustomProperties;
 
         /// <summary>
-        /// Name of this custom shader.
+        /// <see cref="MaterialProperty"/> of "_HsMask".
         /// </summary>
-        private const string ShaderName = "koturn/LilHueShift";
+        private MaterialProperty _hsMask;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_HsSpeed".
+        /// </summary>
+        private MaterialProperty _hsSpeed;
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.

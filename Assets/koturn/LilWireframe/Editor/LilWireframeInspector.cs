@@ -10,6 +10,16 @@ namespace Koturn.lilToon
     public class LilWireframeInspector : lilToonInspector
     {
         /// <summary>
+        /// Name of this custom shader.
+        /// </summary>
+        public const string ShaderName = "koturn/LilWireframe";
+
+        /// <summary>
+        /// A flag whether to fold custom properties or not.
+        /// </summary>
+        private static bool isShowCustomProperties;
+
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_WireframeWidth".
         /// </summary>
         private MaterialProperty _wireframeWidth;
@@ -33,16 +43,6 @@ namespace Koturn.lilToon
         /// <see cref="MaterialProperty"/> of "_WireframeDecayTime".
         /// </summary>
         private MaterialProperty _wireframeDecayTime;
-
-        /// <summary>
-        /// A flag whether to fold custom properties or not.
-        /// </summary>
-        private static bool isShowCustomProperties;
-
-        /// <summary>
-        /// Name of this custom shader.
-        /// </summary>
-        private const string ShaderName = "koturn/LilWireframe";
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.

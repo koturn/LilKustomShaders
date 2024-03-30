@@ -10,6 +10,11 @@ namespace Koturn.lilToon
     public class LilRefProbeInspector : lilToonInspector
     {
         /// <summary>
+        /// Name of this custom shader.
+        /// </summary>
+        public const string ShaderName = "koturn/LilRefProbe";
+
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_RefProbeMask".
         /// </summary>
         private MaterialProperty _refProbeMask;
@@ -22,11 +27,6 @@ namespace Koturn.lilToon
         /// A flag whether to fold custom properties or not.
         /// </summary>
         private static bool isShowCustomProperties;
-
-        /// <summary>
-        /// Name of this custom shader.
-        /// </summary>
-        private const string ShaderName = "koturn/LilRefProbe";
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.

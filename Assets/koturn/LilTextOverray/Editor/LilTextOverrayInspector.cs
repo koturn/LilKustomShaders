@@ -13,6 +13,21 @@ namespace Koturn.lilToon
     public class LilTextOverrayInspector : lilToonInspector
     {
         /// <summary>
+        /// Name of this custom shader.
+        /// </summary>
+        public const string ShaderName = "koturn/LilTextOverray";
+
+        /// <summary>
+        /// A flag whether to fold custom properties or not.
+        /// </summary>
+        private static bool isShowCustomProperties;
+        /// <summary>
+        /// Cache of reflection result of following lambda.
+        /// </summary>
+        /// <remarks><seealso cref="CreateToggleKeywordDelegate"/></remarks>
+        private static Action<Shader, MaterialProperty, bool> _toggleKeyword;
+
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_SpriteTex".
         /// </summary>
         private MaterialProperty _spriteTex;
@@ -136,22 +151,6 @@ namespace Koturn.lilToon
         /// <see cref="MaterialProperty"/> of "_WorldPosAlign".
         /// </summary>
         private MaterialProperty _worldPosAlign;
-
-        /// <summary>
-        /// A flag whether to fold custom properties or not.
-        /// </summary>
-        private static bool isShowCustomProperties;
-
-        /// <summary>
-        /// Cache of reflection result of following lambda.
-        /// </summary>
-        /// <remarks><seealso cref="CreateToggleKeywordDelegate"/></remarks>
-        private static Action<Shader, MaterialProperty, bool> _toggleKeyword;
-
-        /// <summary>
-        /// Name of this custom shader.
-        /// </summary>
-        private const string ShaderName = "koturn/LilTextOverray";
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.

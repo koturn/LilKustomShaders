@@ -10,6 +10,16 @@ namespace Koturn.lilToon
     public class LilVisibilityInspector : lilToonInspector
     {
         /// <summary>
+        /// Name of this custom shader.
+        /// </summary>
+        public const string ShaderName = "koturn/LilVisibility";
+
+        /// <summary>
+        /// A flag whether to fold custom properties or not.
+        /// </summary>
+        private static bool isShowCustomProperties;
+
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_VisibilityMode".
         /// </summary>
         private MaterialProperty _visibilityMode;
@@ -41,16 +51,6 @@ namespace Koturn.lilToon
         /// <see cref="MaterialProperty"/> of "_VisibilityVRCCameraScreenshot".
         /// </summary>
         private MaterialProperty _visibilityVRCCameraScreenshot;
-
-        /// <summary>
-        /// A flag whether to fold custom properties or not.
-        /// </summary>
-        private static bool isShowCustomProperties;
-
-        /// <summary>
-        /// Name of this custom shader.
-        /// </summary>
-        private const string ShaderName = "koturn/LilVisibility";
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.
