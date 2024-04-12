@@ -28,12 +28,6 @@ namespace Koturn.lilToon.Sqlite
         /// <returns>Result code.</returns>
         private delegate SqliteResult OpenFunc(string filePath, out SqliteHandle db);
         /// <summary>
-        /// Delegate for <see cref="NativeMethods.Close"/> or <see cref="NativeMethods.CloseW"/>.
-        /// </summary>
-        /// <param name="db">SQLite db handle.</param>
-        /// <returns>Result code.</returns>
-        private delegate SqliteResult CloseFunc(IntPtr db);
-        /// <summary>
         /// Delegate for <see cref="NativeMethods.Execute"/> or <see cref="NativeMethods.ExecuteW"/>.
         /// </summary>
         /// <param name="db">An open database.</param>
@@ -44,23 +38,6 @@ namespace Koturn.lilToon.Sqlite
         /// <returns>Result code.</returns>
         private delegate SqliteResult ExecuteFunc(SqliteHandle db, string sql, ExecCallbackFunc callback, IntPtr callbackArg, out SqliteMemoryHandle errmsgHandle);
         /// <summary>
-        /// Delegate for <see cref="NativeMethods.Free"/> or <see cref="NativeMethods.FreeW"/>.
-        /// </summary>
-        /// <param name="pMemory">Allocated memory pointer.</param>
-        private delegate void FreeFunc(IntPtr pMemory);
-        /// <summary>
-        /// Delegate for <see cref="NativeMethods.GetErrorMessage"/> or <see cref="NativeMethods.GetErrorMessageW"/>.
-        /// </summary>
-        /// <param name="db">SQLite db handle.</param>
-        /// <returns>Pointer to latest error message (UTF-8).</returns>
-        private delegate IntPtr GetErrorMessageFunc(SqliteHandle db);
-        /// <summary>
-        /// Delegate for <see cref="NativeMethods.GetErrorString"/> or <see cref="NativeMethods.GetErrorStringW"/>.
-        /// </summary>
-        /// <param name="result">Result code.</param>
-        /// <returns>Pointer to English-language text that describes the <see cref="SqliteResult"/> (UTF-8).</returns>
-        private delegate IntPtr GetErrorStringFunc(SqliteResult result);
-        /// <summary>
         /// Delegate for <see cref="NativeMethods.Prepare"/> or <see cref="NativeMethods.PrepareW"/>.
         /// </summary>
         /// <param name="db">An open database.</param>
@@ -70,38 +47,6 @@ namespace Koturn.lilToon.Sqlite
         /// <param name="pSqlTail">Pointer to unused portion of <paramref name="pSql"/>.</param>
         /// <returns>Result code.</returns>
         private delegate SqliteResult PrepareFunc(SqliteHandle db, IntPtr pSql, int nBytes, out SqliteStatementHandle stmt, out IntPtr pSqlTail);
-        /// <summary>
-        /// Delegate for <see cref="NativeMethods.Step"/> or <see cref="NativeMethods.StepW"/>.
-        /// </summary>
-        /// <param name="stmt">Statement handle.</param>
-        /// <returns>Result code.</returns>
-        private delegate SqliteResult StepFunc(SqliteStatementHandle stmt);
-        /// <summary>
-        /// Delegate for <see cref="NativeMethods.Finalize"/> or <see cref="NativeMethods.FinalizeW"/>.
-        /// </summary>
-        /// <param name="pStmt">Statement handle.</param>
-        /// <returns>Result code.</returns>
-        private delegate SqliteResult FinalizeFunc(IntPtr pStmt);
-        /// <summary>
-        /// Delegate for <see cref="NativeMethods.ColumnCount"/> or <see cref="NativeMethods.ColumnCountW"/>.
-        /// </summary>
-        /// <param name="stmt">Statement handle.</param>
-        /// <returns>The number of columns in the result set.</returns>
-        private delegate int ColumnCountFunc(SqliteStatementHandle stmt);
-        /// <summary>
-        /// Delegate for <see cref="NativeMethods.ColumnName"/> or <see cref="NativeMethods.ColumnNameW"/>.
-        /// </summary>
-        /// <param name="stmt">Statement handle.</param>
-        /// <param name="n">Index of column.</param>
-        /// <returns>Poiner to column name string (UTF-16).</returns>
-        private delegate IntPtr ColumnNameFunc(SqliteStatementHandle stmt, int n);
-        /// <summary>
-        /// Delegate for <see cref="NativeMethods.ColumnText"/> or <see cref="NativeMethods.ColumnTextW"/>.
-        /// </summary>
-        /// <param name="stmt">Statement handle.</param>
-        /// <param name="n">Index of column.</param>
-        /// <returns>Poiner to column value string (UTF-16).</returns>
-        private delegate IntPtr ColumnTextFunc(SqliteStatementHandle stmt, int n);
 
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.Open"/> or <see cref="NativeMethods.OpenW"/>.
@@ -110,7 +55,7 @@ namespace Koturn.lilToon.Sqlite
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.Close"/> or <see cref="NativeMethods.CloseW"/>.
         /// </summary>
-        private static readonly CloseFunc _close;
+        private static readonly Func<IntPtr, SqliteResult> _close;
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.Execute"/> or <see cref="NativeMethods.ExecuteW"/>.
         /// </summary>
@@ -118,15 +63,15 @@ namespace Koturn.lilToon.Sqlite
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.Free"/> or <see cref="NativeMethods.FreeW"/>.
         /// </summary>
-        private static readonly FreeFunc _free;
+        private static readonly Action<IntPtr> _free;
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.GetErrorMessage"/> or <see cref="NativeMethods.GetErrorMessageW"/>.
         /// </summary>
-        private static readonly GetErrorMessageFunc _getErrorMessage;
+        private static readonly Func<SqliteHandle, IntPtr> _getErrorMessage;
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.GetErrorString"/> or <see cref="NativeMethods.GetErrorStringW"/>.
         /// </summary>
-        private static readonly GetErrorStringFunc _getErrorString;
+        private static readonly Func<SqliteResult, IntPtr> _getErrorString;
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.Prepare"/> or <see cref="NativeMethods.PrepareW"/>.
         /// </summary>
@@ -134,23 +79,23 @@ namespace Koturn.lilToon.Sqlite
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.Step"/> or <see cref="NativeMethods.StepW"/>.
         /// </summary>
-        private static readonly StepFunc _step;
+        private static readonly Func<SqliteStatementHandle, SqliteResult> _step;
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.Finalize"/> or <see cref="NativeMethods.FinalizeW"/>.
         /// </summary>
-        private static readonly FinalizeFunc _finalize;
+        private static readonly Func<IntPtr, SqliteResult> _finalize;
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.ColumnCount"/> or <see cref="NativeMethods.ColumnCountW"/>.
         /// </summary>
-        private static readonly ColumnCountFunc _columnCount;
+        private static readonly Func<SqliteStatementHandle, int> _columnCount;
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.ColumnName"/> or <see cref="NativeMethods.ColumnNameW"/>.
         /// </summary>
-        private static readonly ColumnNameFunc _columnName;
+        private static readonly Func<SqliteStatementHandle, int, IntPtr> _columnName;
         /// <summary>
         /// Delegate instance of <see cref="NativeMethods.ColumnText"/> or <see cref="NativeMethods.ColumnTextW"/>.
         /// </summary>
-        private static readonly ColumnTextFunc _columnText;
+        private static readonly Func<SqliteStatementHandle, int, IntPtr> _columnText;
 
 
         /// <summary>
