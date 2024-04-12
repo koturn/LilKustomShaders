@@ -159,12 +159,45 @@ namespace Koturn.lilToon.Sqlite
         static SqliteLibrary()
         {
 #if !UNITY_EDITOR || UNITY_EDITOR_WIN
+            var useWinSqlite = false;
             try
             {
                 // Try to load sqlite3.dll.
                 // If sqlite3.dll is not found, DllNotFoundException is thrown.
                 NativeMethods.Free(IntPtr.Zero);
+            }
+            catch (DllNotFoundException)
+            {
+                try
+                {
+                    // Fallback to winsqlite3.dll
+                    NativeMethods.FreeW(IntPtr.Zero);
+                    useWinSqlite = true;
+                }
+                catch (DllNotFoundException)
+                {
+                    // If winsqlite.dll not found, Refer to sqlite3.dll, assuming the user will add it later.
+                }
+            }
 
+            if (useWinSqlite)
+            {
+                _open = NativeMethods.OpenW;
+                _close = NativeMethods.CloseW;
+                _execute = NativeMethods.ExecuteW;
+                _free = NativeMethods.FreeW;
+                _getErrorMessage = NativeMethods.GetErrorMessageW;
+                _getErrorString = NativeMethods.GetErrorStringW;
+                _prepare = NativeMethods.PrepareW;
+                _step = NativeMethods.StepW;
+                _finalize = NativeMethods.FinalizeW;
+                _columnCount = NativeMethods.ColumnCountW;
+                _columnName = NativeMethods.ColumnNameW;
+                _columnText = NativeMethods.ColumnTextW;
+            }
+            else
+            {
+#endif  // !UNITY_EDITOR || UNITY_EDITOR_WIN
                 _open = NativeMethods.Open;
                 _close = NativeMethods.Close;
                 _execute = NativeMethods.Execute;
@@ -177,58 +210,9 @@ namespace Koturn.lilToon.Sqlite
                 _columnCount = NativeMethods.ColumnCount;
                 _columnName = NativeMethods.ColumnName;
                 _columnText = NativeMethods.ColumnText;
+#if !UNITY_EDITOR || UNITY_EDITOR_WIN
             }
-            catch (DllNotFoundException)
-            {
-                try
-                {
-                    // Fallback to winsqlite3.dll
-                    NativeMethods.FreeW(IntPtr.Zero);
-
-                    _open = NativeMethods.OpenW;
-                    _close = NativeMethods.CloseW;
-                    _execute = NativeMethods.ExecuteW;
-                    _free = NativeMethods.FreeW;
-                    _getErrorMessage = NativeMethods.GetErrorMessageW;
-                    _getErrorString = NativeMethods.GetErrorStringW;
-                    _prepare = NativeMethods.PrepareW;
-                    _step = NativeMethods.StepW;
-                    _finalize = NativeMethods.FinalizeW;
-                    _columnCount = NativeMethods.ColumnCountW;
-                    _columnName = NativeMethods.ColumnNameW;
-                    _columnText = NativeMethods.ColumnTextW;
-                }
-                catch (DllNotFoundException)
-                {
-                    // If winsqlite.dll not found, Refer to sqlite3.dll, assuming the user will add it later.
-                    _open = NativeMethods.Open;
-                    _close = NativeMethods.Close;
-                    _execute = NativeMethods.Execute;
-                    _free = NativeMethods.Free;
-                    _getErrorMessage = NativeMethods.GetErrorMessage;
-                    _getErrorString = NativeMethods.GetErrorString;
-                    _prepare = NativeMethods.Prepare;
-                    _step = NativeMethods.Step;
-                    _finalize = NativeMethods.Finalize;
-                    _columnCount = NativeMethods.ColumnCount;
-                    _columnName = NativeMethods.ColumnName;
-                    _columnText = NativeMethods.ColumnText;
-                }
-            }
-#else
-            _open = NativeMethods.Open;
-            _close = NativeMethods.Close;
-            _execute = NativeMethods.Execute;
-            _free = NativeMethods.Free;
-            _getErrorMessage = NativeMethods.GetErrorMessage;
-            _getErrorString = NativeMethods.GetErrorString;
-            _prepare = NativeMethods.Prepare;
-            _step = NativeMethods.Step;
-            _finalize = NativeMethods.Finalize;
-            _columnCount = NativeMethods.ColumnCount;
-            _columnName = NativeMethods.ColumnName;
-            _columnText = NativeMethods.ColumnText;
-#endif
+#endif  // !UNITY_EDITOR || UNITY_EDITOR_WIN
         }
 
         /// <summary>
