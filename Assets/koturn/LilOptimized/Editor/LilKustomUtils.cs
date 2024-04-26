@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 using lilToon;
@@ -422,19 +423,13 @@ namespace Koturn.lilToon
                 writer.Write('\n');
                 writer.Write("#define LIL_CURRENT_VERSION_VALUE {0}\n", lilConstants.currentVersionValue);
 
-                var verTokens = lilConstants.currentVersionName.Split('.');
-                int verNum;
-                if (int.TryParse(verTokens[0], out verNum))
+                var match = new Regex(@"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)").Match(lilConstants.currentVersionName);
+                if (match.Success)
                 {
-                    writer.Write("#define LIL_CURRENT_VERSION_MAJOR {0}\n", verNum);
-                }
-                if (verTokens.Length > 0 && int.TryParse(verTokens[1], out verNum))
-                {
-                    writer.Write("#define LIL_CURRENT_VERSION_MINOR {0}\n", verNum);
-                }
-                if (verTokens.Length > 1 && int.TryParse(verTokens[2], out verNum))
-                {
-                    writer.Write("#define LIL_CURRENT_VERSION_PATCH {0}\n", verNum);
+                    var groups = match.Groups;
+                    writer.Write("#define LIL_CURRENT_VERSION_MAJOR {0}\n", groups[1].Value);
+                    writer.Write("#define LIL_CURRENT_VERSION_MINOR {0}\n", groups[2].Value);
+                    writer.Write("#define LIL_CURRENT_VERSION_PATCH {0}\n", groups[3].Value);
                 }
 
                 writer.Write('\n');
