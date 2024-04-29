@@ -344,7 +344,7 @@ namespace Koturn.lilToon
         /// <param name="offset">Offset of <paramref name="contentData"/>,</param>
         /// <param name="length">Length of <paramref name="contentData"/>.</param>
         /// <param name="bufferSize">Buffer size for temporary buffer and <see cref="FileStream"/>.</param>
-        /// <returns>True if file content is same to <see cref="contentData"/>, otherwise false.</returns>
+        /// <returns>True if file content is same to <paramref name="contentData"/>, otherwise false.</returns>
         public static bool CompareFileBytes(string filePath, byte[] contentData, int offset, int length, int bufferSize = 1024)
         {
             if (!File.Exists(filePath))
@@ -444,7 +444,7 @@ namespace Koturn.lilToon
         /// <param name="data">Data to write.</param>
         /// <param name="offset">Offset of data.</param>
         /// <param name="count">Number of Bytes to write.</param>
-        /// <param name="bufferSize">Buffer size for <see cref="FileStream"/>,
+        /// <param name="bufferSize">Buffer size for <see cref="FileStream"/></param>
         private static void WriteBytes(string filePath, byte[] data, int offset, int count, int bufferSize = 4096)
         {
             using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Read, bufferSize))
