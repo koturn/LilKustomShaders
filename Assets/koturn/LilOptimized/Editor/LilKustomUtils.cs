@@ -449,7 +449,7 @@ namespace Koturn.lilToon
         {
             using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Read, bufferSize))
             {
-                fs.Write(data, 0, count);
+                fs.Write(data, offset, count);
             }
         }
 
