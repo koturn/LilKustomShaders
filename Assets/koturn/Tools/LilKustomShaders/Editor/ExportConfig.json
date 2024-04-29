@@ -3,54 +3,108 @@
     {
       "UnityPackageName": "LilCrossfade.unitypackage",
       "VpmName": "jp.koturn.lilcrossfade",
-      "AssetPath": "Assets/koturn/LilCrossfade",
-      "DependAssetPaths": [
-        "Assets/koturn/LilOptimized"
+      "Assets": [
+        {
+          "BasePath": "Assets/koturn/LilCrossfade"
+        }
+      ],
+      "DependAssets": [
+        {
+          "BasePath": "Assets/koturn/LilOptimized"
+        }
       ]
     },
     {
       "UnityPackageName": "LilEmissionWave.unitypackage",
       "VpmName": "jp.koturn.lilemissionwave",
-      "AssetPath": "Assets/koturn/LilEmissionWave",
-      "DependAssetPaths": [
-        "Assets/koturn/LilOptimized"
+      "Assets": [
+        {
+          "BasePath": "Assets/koturn/LilEmissionWave"
+        }
+      ],
+      "DependAssets": [
+        {
+          "BasePath": "Assets/koturn/LilOptimized"
+        }
       ]
     },
     {
       "UnityPackageName": "LilHueShift.unitypackage",
       "VpmName": "jp.koturn.lilhueshift",
-      "AssetPath": "Assets/koturn/LilHueShift",
-      "DependAssetPaths": [
-        "Assets/koturn/LilOptimized"
+      "Assets": [
+        {
+          "BasePath": "Assets/koturn/LilHueShift"
+        }
+      ],
+      "DependAssets": [
+        {
+          "BasePath": "Assets/koturn/LilOptimized"
+        }
       ]
     },
     {
       "UnityPackageName": "LilOptimized.unitypackage",
       "VpmName": "jp.koturn.liloptimized",
-      "AssetPath": "Assets/koturn/LilOptimized"
+      "Assets": [
+        {
+          "BasePath": "Assets/koturn/LilOptimized"
+        }
+      ]
     },
     {
       "UnityPackageName": "LilRefProbe.unitypackage",
       "VpmName": "jp.koturn.lilrefprobe",
-      "AssetPath": "Assets/koturn/LilRefProbe",
-      "DependAssetPaths": [
-        "Assets/koturn/LilOptimized"
+      "Assets": [
+        {
+          "BasePath": "Assets/koturn/LilRefProbe"
+        }
+      ],
+      "DependAssets": [
+        {
+          "BasePath": "Assets/koturn/LilOptimized"
+        }
       ]
     },
     {
       "UnityPackageName": "LilTextOverray.unitypackage",
       "VpmName": "jp.koturn.liltextoverray",
-      "AssetPath": "Assets/koturn/LilTextOverray",
-      "DependAssetPaths": [
-        "Assets/koturn/LilOptimized"
+      "Assets": [
+        {
+          "BasePath": "Assets/koturn/LilTextOverray"
+        }
+      ],
+      "DependAssets": [
+        {
+          "BasePath": "Assets/koturn/LilOptimized"
+        }
+      ]
+    },
+    {
+      "UnityPackageName": "LilVisibility.unitypackage",
+      "VpmName": "jp.koturn.lilvisibility",
+      "Assets": [
+        {
+          "BasePath": "Assets/koturn/LilVisibility"
+        }
+      ],
+      "DependAssets": [
+        {
+          "BasePath": "Assets/koturn/LilOptimized"
+        }
       ]
     },
     {
       "UnityPackageName": "LilWireframe.unitypackage",
       "VpmName": "jp.koturn.lilwireframe",
-      "AssetPath": "Assets/koturn/LilWireframe",
-      "DependAssetPaths": [
-        "Assets/koturn/LilOptimized"
+      "Assets": [
+        {
+          "BasePath": "Assets/koturn/LilWireframe"
+        }
+      ],
+      "DependAssets": [
+        {
+          "BasePath": "Assets/koturn/LilOptimized"
+        }
       ]
     }
   ]
