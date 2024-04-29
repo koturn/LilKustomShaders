@@ -151,7 +151,9 @@ namespace Koturn.lilToon
         /// Callback method for menu item which converts shader of material to custom lilToon shader.
         /// </summary>
         [MenuItem("Assets/" + ShaderName + "/Convert material to custom shader", false, 1100)]
+#pragma warning disable IDE0052 // Remove unread private members
         private static void ConvertMaterialToCustomShaderMenu()
+#pragma warning restore IDE0052 // Remove unread private members
         {
             LilKustomUtils.ConvertMaterialToCustomShader(ShaderName);
         }
@@ -161,7 +163,9 @@ namespace Koturn.lilToon
         /// </summary>
         /// <returns>True if <see cref="ConvertMaterialToCustomShaderMenu"/> works, otherwise false.</returns>
         [MenuItem("Assets/" + ShaderName + "/Convert material to custom shader", true)]
+#pragma warning disable IDE0051 // Remove unused private members
         private static bool ValidateConvertMaterialToCustomShaderMenu()
+#pragma warning restore IDE0051 // Remove unused private members
         {
             return LilKustomUtils.ValidateConvertMaterialToCustomShader(ShaderName);
         }
@@ -170,7 +174,9 @@ namespace Koturn.lilToon
         /// Callback method for menu item which converts shader of material to original lilToon shader.
         /// </summary>
         [MenuItem("Assets/" + ShaderName + "/Convert material to original shader", false, 1101)]
+#pragma warning disable IDE0051 // Remove unused private members
         private static void ConvertMaterialToOriginalShaderMenu()
+#pragma warning restore IDE0051 // Remove unused private members
         {
             LilKustomUtils.ConvertMaterialToOriginalShader(ShaderName);
         }
@@ -180,7 +186,9 @@ namespace Koturn.lilToon
         /// </summary>
         /// <returns>True if <see cref="ValidateConvertMaterialToOriginalShaderMenu"/> works, otherwise false.</returns>
         [MenuItem("Assets/" + ShaderName + "/Convert material to original shader", true)]
+#pragma warning disable IDE0052 // Remove unread private members
         private static bool ValidateConvertMaterialToOriginalShaderMenu()
+#pragma warning restore IDE0052 // Remove unread private members
         {
             return LilKustomUtils.ValidateConvertMaterialToOriginalShader(ShaderName);
         }
@@ -189,7 +197,9 @@ namespace Koturn.lilToon
         /// Callback method for menu item which refreshes shader cache and reimport.
         /// </summary>
         [MenuItem("Assets/" + ShaderName + "/Refresh shader cache", false, 2000)]
+#pragma warning disable IDE0052 // Remove unread private members
         private static void RefreshShaderCacheMenu()
+#pragma warning restore IDE0052 // Remove unread private members
         {
             LilKustomUtils.RefreshShaderCache(AssetDatabase.GUIDToAssetPath(AssetGuid.ShaderDir));
         }
@@ -199,7 +209,9 @@ namespace Koturn.lilToon
         /// </summary>
         /// <returns>True if <see cref="RefreshShaderCacheMenu"/> works, otherwise false.</returns>
         [MenuItem("Assets/" + ShaderName + "/Refresh shader cache", true)]
+#pragma warning disable IDE0051 // Remove unused private members
         private static bool ValidateRefreshShaderCacheMenu()
+#pragma warning restore IDE0051 // Remove unused private members
         {
             return LilKustomUtils.IsRefreshShaderCacheAvailable();
         }

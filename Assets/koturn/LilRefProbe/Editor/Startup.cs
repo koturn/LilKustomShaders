@@ -14,7 +14,9 @@ namespace Koturn.lilToon
         /// A method called at Unity startup.
         /// </summary>
         [InitializeOnLoadMethod]
+#pragma warning disable IDE0051 // Remove unused private members
         private static void OnStartup()
+#pragma warning restore IDE0051 // Remove unused private members
         {
             AssetDatabase.importPackageCompleted += Startup_ImportPackageCompleted;
             UpdateIncludeFiles();

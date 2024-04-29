@@ -14,7 +14,9 @@ namespace Koturn.lilToon.Windows
         /// Create and open this window.
         /// </summary>
         [MenuItem("Assets/koturn/LilOptimized/Sharder Replacer", false, 1200)]
+#pragma warning disable IDE0051 // Remove unused private members
         private static void Open()
+#pragma warning restore IDE0051 // Remove unused private members
         {
             GetWindow<ShaderReplacerWindow>("LilOptimized Shader Replacer");
         }
@@ -22,7 +24,9 @@ namespace Koturn.lilToon.Windows
         /// <summary>
         /// Draw window components.
         /// </summary>
+#pragma warning disable IDE0051 // Remove unused private members
         private void OnGUI()
+#pragma warning restore IDE0051 // Remove unused private members
         {
             if (GUILayout.Button("Replace Shaders to Optimized Ones"))
             {
