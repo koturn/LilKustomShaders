@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.IO.Compression;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,11 +13,6 @@ namespace Koturn.Tools.LilKustomShaders.Windows
     /// </summary>
     public static class LilKustomShaderExporter
     {
-        /// <summary>
-        /// Version string.
-        /// </summary>
-        private const string Version = "1.1.2";
-
         /// <summary>
         /// Entire json data.
         /// </summary>
@@ -105,7 +101,7 @@ namespace Koturn.Tools.LilKustomShaders.Windows
                     package.AssetPath,
                     package.DependAssetPaths);
                 ExportAsZipArchive(
-                    Path.Combine(exportDirPath, $"{package.VpmName}-{Version}.zip"),
+                    Path.Combine(exportDirPath, $"{package.VpmName}-{GetAssemblyVersionStringForExport()}.zip"),
                     package.AssetPath);
             }
         }
@@ -190,6 +186,16 @@ namespace Koturn.Tools.LilKustomShaders.Windows
 #else
             return assetPath.Replace("Assets", Application.dataPath);
 #endif
+        }
+
+        /// <summary>
+        /// Get self assembly version string as following form: "[Major].[Minor].[Build]".
+        /// </summary>
+        /// <returns>Assembly version string</returns>
+        private static string GetAssemblyVersionStringForExport()
+        {
+            var ver = Assembly.GetExecutingAssembly().GetName().Version;
+            return $"{ver.Major}.{ver.Minor}.{ver.Build}";
         }
     }
 }
