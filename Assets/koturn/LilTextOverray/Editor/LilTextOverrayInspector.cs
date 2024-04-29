@@ -517,7 +517,7 @@ namespace Koturn.lilToon
         private static Action<Shader, MaterialProperty, bool> CreateToggleKeywordDelegate()
         {
             // Get assembly from public class.
-            var asm = Assembly.GetAssembly(typeof(UnityEditor.MaterialPropertyDrawer));
+            var asm = Assembly.GetAssembly(typeof(MaterialPropertyDrawer));
 
             // Get type of UnityEditor.MaterialPropertyHandler which is the internal class.
             var typeMph = asm.GetType("UnityEditor.MaterialPropertyHandler")
