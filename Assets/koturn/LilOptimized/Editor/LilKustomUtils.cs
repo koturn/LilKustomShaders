@@ -45,15 +45,14 @@ namespace Koturn.lilToon
         /// <returns>True if one or more the convertible shader exists, otherwise false.</returns>
         public static bool ValidateConvertMaterialToCustomShader(string customShaderCommonName)
         {
-            var count = 0;
             foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
             {
                 if (GetCorrespondingCustomShaderName(material.shader.name, customShaderCommonName) != null)
                 {
-                    count++;
+                    return true;
                 }
             }
-            return count > 0;
+            return false;
         }
 
         /// <summary>
@@ -86,15 +85,14 @@ namespace Koturn.lilToon
         /// <returns>True if one or more the convertible shader exists, otherwise false.</returns>
         public static bool ValidateConvertMaterialToOriginalShader(string customShaderCommonName)
         {
-            var count = 0;
             foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
             {
                 if (GetCorrespondingOriginalShaderName(material.shader.name, customShaderCommonName) != null)
                 {
-                    count++;
+                    return true;
                 }
             }
-            return count > 0;
+            return false;
         }
 
         /// <summary>
