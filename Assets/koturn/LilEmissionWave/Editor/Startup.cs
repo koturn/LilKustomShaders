@@ -73,7 +73,7 @@ namespace Koturn.lilToon
             var dstFilePath = LilKustomUtils.UpdateVersionDefFile(Path.Combine(shaderDirPath, "lil_current_version.hlsl"));
             if (dstFilePath != null)
             {
-                Debug.LogFormat($"Update {0}", dstFilePath);
+                Debug.LogFormat("Update {0}", dstFilePath);
             }
         }
 
