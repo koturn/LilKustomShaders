@@ -176,8 +176,6 @@ namespace Koturn.Tools.LilKustomShaders
         /// <returns>Asset paths.</returns>
         private static string[] ToAssetPaths(AssetFileInfo[] assets)
         {
-            Debug.Log(assets.Length);
-
             var count = 0;
             foreach (var asset in assets)
             {
