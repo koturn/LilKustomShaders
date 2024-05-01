@@ -357,7 +357,7 @@ namespace Koturn.lilToon
             }
 
             var minBufferSize = Math.Min(length, bufferSize);
-            using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, minBufferSize))
+            using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, minBufferSize))
             {
                 var buffer = new byte[minBufferSize];
                 int nRead;
