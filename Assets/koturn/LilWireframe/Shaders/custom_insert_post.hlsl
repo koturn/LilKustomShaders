@@ -4,6 +4,9 @@
 #    else
 #        define _WireframeRandomizeColor false
 #    endif  // defined(_WIREFRAME_RANDOMIZE_COLOR_ON)
+#    define BRANCH
+#else
+#    define BRANCH UNITY_BRANCH
 #endif  // defind(LIL_MULTI)
 
 
@@ -44,7 +47,7 @@ void geomCustom(triangle v2g input[3], inout TriangleStream<v2f> outStream)
         const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
         float3 color0, color1, color2;
-        [branch]
+        BRANCH
         if (_WireframeRandomizeColor) {
             const float3 hueOffsets = rand(vertexIndices.zxy, vertexIndices.yzx);
             color0 = rgbAddHue(_WireframeColor, hueOffsets.x);
@@ -191,7 +194,7 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
     float3 color0, color1, color2;
-    [branch]
+    BRANCH
     if (_WireframeRandomizeColor) {
         const float3 hueOffsets = rand(vertexIndices.zxy, vertexIndices.yzx);
         color0 = rgbAddHue(_WireframeColor, hueOffsets.x);
@@ -285,7 +288,7 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
     float3 color0, color1, color2;
-    [branch]
+    BRANCH
     if (_WireframeRandomizeColor) {
         const float3 hueOffsets = rand(vertexIndices.zxy, vertexIndices.yzx);
         color0 = rgbAddHue(_WireframeColor, hueOffsets.x);
