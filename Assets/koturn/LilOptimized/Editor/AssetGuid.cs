@@ -10,6 +10,10 @@ namespace Koturn.lilToon
         /// </summary>
         public const string ShaderDir = "a35bbce2bcaa8a6448737c7c3219ca27";
         /// <summary>
+        /// GUID of "Assets/lilToon/Shader/".
+        /// </summary>
+        public const string LilToonShaderDir = "ac0a8f602b5e72f458f4914bf08f0269";
+        /// <summary>
         /// GUID of "Assets/lilToon/Shader/Includes/lil_common_vert_fur_thirdparty.hlsl".
         /// </summary>
         public const string LilCommonVertFurThirdparty = "e3dbe4ae202b9094eab458bbc934c964";

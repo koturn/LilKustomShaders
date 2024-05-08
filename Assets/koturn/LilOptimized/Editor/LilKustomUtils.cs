@@ -259,6 +259,7 @@ namespace Koturn.lilToon
                 client.ExecuteSingle("DELETE FROM shadererrors");
             }
             AssetDatabase.ImportAsset(assetPath, ImportAssetOptions.ImportRecursive);
+            AssetDatabase.ImportAsset(AssetDatabase.GUIDToAssetPath(AssetGuid.LilToonShaderDir), ImportAssetOptions.ImportRecursive);
         }
 
         /// <summary>
