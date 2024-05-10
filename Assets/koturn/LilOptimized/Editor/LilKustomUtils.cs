@@ -128,8 +128,8 @@ namespace Koturn.lilToon
                 case "Hidden/lilToonOnePassTransparentOutline": return "Hidden/" + customShaderCommonName + "/OnePassTransparentOutline";
                 case "Hidden/lilToonTwoPassTransparentOutline": return "Hidden/" + customShaderCommonName + "/TwoPassTransparentOutline";
                 case "_lil/[Optional] lilToonOutlineOnly": return customShaderCommonName + "/[Optional] OutlineOnly/Opaque";
-                case "_lil/[Optional] lilToonCutoutOutlineOnly": return customShaderCommonName + "/[Optional] OutlineOnly/Cutout";
-                case "_lil/[Optional] lilToonTransparentOutlineOnly": return customShaderCommonName + "/[Optional] OutlineOnly/Transparent";
+                case "_lil/[Optional] lilToonOutlineOnlyCutout": return customShaderCommonName + "/[Optional] OutlineOnly/Cutout";
+                case "_lil/[Optional] lilToonOutlineOnlyTransparent": return customShaderCommonName + "/[Optional] OutlineOnly/Transparent";
                 case "Hidden/lilToonTessellation": return "Hidden/" + customShaderCommonName + "/Tessellation/Opaque";
                 case "Hidden/lilToonTessellationCutout": return "Hidden/" + customShaderCommonName + "/Tessellation/Cutout";
                 case "Hidden/lilToonTessellationTransparent": return "Hidden/" + customShaderCommonName + "/Tessellation/Transparent";
@@ -155,11 +155,11 @@ namespace Koturn.lilToon
                 case "Hidden/lilToonFur": return "Hidden/" + customShaderCommonName + "/Fur";
                 case "Hidden/lilToonFurCutout": return "Hidden/" + customShaderCommonName + "/FurCutout";
                 case "Hidden/lilToonFurTwoPass": return "Hidden/" + customShaderCommonName + "/FurTwoPass";
-                case "_lil/[Optional] lilToonFurOnly": return customShaderCommonName + "/[Optional] FurOnly/Transparent";
+                case "_lil/[Optional] lilToonFurOnlyTransparent": return customShaderCommonName + "/[Optional] FurOnly/Transparent";
                 case "_lil/[Optional] lilToonFurOnlyCutout": return customShaderCommonName + "/[Optional] FurOnly/Cutout";
                 case "_lil/[Optional] lilToonFurOnlyTwoPass": return customShaderCommonName + "/[Optional] FurOnly/TwoPass";
                 case "Hidden/lilToonGem": return "Hidden/" + customShaderCommonName + "/Gem";
-                case "_lil/lilToonFakeShadow": return customShaderCommonName + "/[Optional] FakeShadow";
+                case "_lil/[Optional] lilToonFakeShadow": return customShaderCommonName + "/[Optional] FakeShadow";
                 case "_lil/[Optional] lilToonOverlay": return customShaderCommonName + "/[Optional] Overlay";
                 case "_lil/[Optional] lilToonOverlayOnePass": return customShaderCommonName + "/[Optional] OverlayOnePass";
                 case "_lil/[Optional] lilToonLiteOverlay": return customShaderCommonName + "/[Optional] LiteOverlay";
@@ -204,8 +204,8 @@ namespace Koturn.lilToon
                 : customShaderName == "Hidden/" + customShaderCommonName + "/OnePassTransparentOutline" ? "Hidden/lilToonOnePassTransparentOutline"
                 : customShaderName == "Hidden/" + customShaderCommonName + "/TwoPassTransparentOutline" ? "Hidden/lilToonTwoPassTransparentOutline"
                 : customShaderName == customShaderCommonName + "/[Optional] OutlineOnly/Opaque" ? "_lil/[Optional] lilToonOutlineOnly"
-                : customShaderName == customShaderCommonName + "/[Optional] OutlineOnly/Cutout" ? "_lil/[Optional] lilToonCutoutOutlineOnly"
-                : customShaderName == customShaderCommonName + "/[Optional] OutlineOnly/Transparent" ? "_lil/[Optional] lilToonTransparentOutlineOnly"
+                : customShaderName == customShaderCommonName + "/[Optional] OutlineOnly/Cutout" ? "_lil/[Optional] lilToonOutlineOnlyCutout"
+                : customShaderName == customShaderCommonName + "/[Optional] OutlineOnly/Transparent" ? "_lil/[Optional] lilToonOutlineOnlyTransparent"
                 : customShaderName == "Hidden/" + customShaderCommonName + "/Tessellation/Opaque" ? "Hidden/lilToonTessellation"
                 : customShaderName == "Hidden/" + customShaderCommonName + "/Tessellation/Cutout" ? "Hidden/lilToonTessellationCutout"
                 : customShaderName == "Hidden/" + customShaderCommonName + "/Tessellation/Transparent" ? "Hidden/lilToonTessellationTransparent"
@@ -231,11 +231,11 @@ namespace Koturn.lilToon
                 : customShaderName == "Hidden/" + customShaderCommonName + "/Fur" ? "Hidden/lilToonFur"
                 : customShaderName == "Hidden/" + customShaderCommonName + "/FurCutout" ? "Hidden/lilToonFurCutout"
                 : customShaderName == "Hidden/" + customShaderCommonName + "/FurTwoPass" ? "Hidden/lilToonFurTwoPass"
-                : customShaderName == customShaderCommonName + "/[Optional] FurOnly/Transparent" ? "_lil/[Optional] lilToonFurOnly"
+                : customShaderName == customShaderCommonName + "/[Optional] FurOnly/Transparent" ? "_lil/[Optional] lilToonFurOnlyTransparent"
                 : customShaderName == customShaderCommonName + "/[Optional] FurOnly/Cutout" ? "_lil/[Optional] lilToonFurOnlyCutout"
                 : customShaderName == customShaderCommonName + "/[Optional] FurOnly/TwoPass" ? "_lil/[Optional] lilToonFurOnlyTwoPass"
                 : customShaderName == "Hidden/" + customShaderCommonName + "/Gem" ? "Hidden/lilToonGem"
-                : customShaderName == customShaderCommonName + "/[Optional] FakeShadow" ? "_lil/lilToonFakeShadow"
+                : customShaderName == customShaderCommonName + "/[Optional] FakeShadow" ? "_lil/[Optional] lilToonFakeShadow"
                 : customShaderName == customShaderCommonName + "/[Optional] Overlay" ? "_lil/[Optional] lilToonOverlay"
                 : customShaderName == customShaderCommonName + "/[Optional] OverlayOnePass" ? "_lil/[Optional] lilToonOverlayOnePass"
                 : customShaderName == customShaderCommonName + "/[Optional] LiteOverlay" ? "_lil/[Optional] lilToonLiteOverlay"
