@@ -1,5 +1,6 @@
 Language	English	Japanese
 sCustomShaderTitle	Emission Wave	エミッション波
+sCustomPropertyCategory	Emission Wave	エミッション波
 sEmissionWaveMaskAndColor	Mask / Color	色 / マスク
 sEmissionWaveNoiseAmp	Noise amplitude	ノイズ振幅
 sEmissionWaveSpeed	Wave speed	波の速度

@@ -1,5 +1,6 @@
 Language	English	Japanese
 sCustomShaderTitle	Wireframe	ワイヤフレーム
+sCustomPropertyCategory	Wireframe	ワイヤフレーム
 sWireframeWidth	Width	幅
 sWireframeMaskAndColor	Color / Mask	色 / マスク
 sWireframeRandomizeColor	Randomize hue of color	色相のランダム化

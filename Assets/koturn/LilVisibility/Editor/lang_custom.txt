@@ -1,5 +1,6 @@
 Language	English	Japanese
 sCustomShaderTitle	Mirror/Camera Visibility	鏡/カメラでの可視性
+sCustomPropertyCategory	Mirror/Camera Visibility	鏡/カメラでの可視性
 sVisibilityMode	Mode	モード
 sMirror	Mirror Visibility	鏡
 sVisibilityVRCRegular	Normal (Outside Mirror/Camera)	通常 (鏡・カメラ外)
