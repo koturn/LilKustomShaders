@@ -83,7 +83,7 @@ namespace Koturn.Tools.LilKustomShaders
         /// <summary>
         /// Read configuration file and export packages.
         /// </summary>
-        [MenuItem("Assets/koturn/Tool/KRayMarching/Export Packages", false, 9000)]
+        [MenuItem("Assets/koturn/Tool/LilKustomShaders/Export Packages", false, 9000)]
 #pragma warning disable IDE0051 // Remove unused private members
         private static void ExportPackages()
 #pragma warning restore IDE0051 // Remove unused private members
