@@ -23,6 +23,14 @@ namespace Koturn.lilToon
         {
             foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
             {
+#if UNITY_2022_1_OR_NEWER
+                if (material.parent != null)
+                {
+                    Debug.LogWarningFormat("Ignore {0} because it is Material Variant", AssetDatabase.GetAssetPath(material));
+                    continue;
+                }
+#endif  // UNITY_2022_1_OR_NEWER
+
                 var shader = GetCorrespondingCustomShader(material.shader, customShaderCommonName);
                 if (shader == null)
                 {
@@ -47,6 +55,14 @@ namespace Koturn.lilToon
         {
             foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
             {
+#if UNITY_2022_1_OR_NEWER
+                if (material.parent != null)
+                {
+                    Debug.LogWarningFormat("Ignore {0} because it is Material Variant", AssetDatabase.GetAssetPath(material));
+                    continue;
+                }
+#endif  // UNITY_2022_1_OR_NEWER
+
                 if (GetCorrespondingCustomShaderName(material.shader.name, customShaderCommonName) != null)
                 {
                     return true;
@@ -63,6 +79,14 @@ namespace Koturn.lilToon
         {
             foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
             {
+#if UNITY_2022_1_OR_NEWER
+                if (material.parent != null)
+                {
+                    Debug.LogWarningFormat("Ignore {0} because it is Material Variant", AssetDatabase.GetAssetPath(material));
+                    continue;
+                }
+#endif  // UNITY_2022_1_OR_NEWER
+
                 var shader = GetCorrespondingOriginalShader(material.shader, customShaderCommonName);
                 if (shader == null)
                 {
@@ -87,6 +111,14 @@ namespace Koturn.lilToon
         {
             foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
             {
+#if UNITY_2022_1_OR_NEWER
+                if (material.parent != null)
+                {
+                    Debug.LogWarningFormat("Ignore {0} because it is Material Variant", AssetDatabase.GetAssetPath(material));
+                    continue;
+                }
+#endif  // UNITY_2022_1_OR_NEWER
+
                 if (GetCorrespondingOriginalShaderName(material.shader.name, customShaderCommonName) != null)
                 {
                     return true;
