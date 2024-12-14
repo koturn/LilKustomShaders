@@ -34,7 +34,7 @@ namespace Koturn.lilToon
         private static void UpdateIncludeFiles()
         {
             var shaderDirPath = AssetDatabase.GUIDToAssetPath(GuidShaderDir);
-            if (shaderDirPath == "")
+            if (shaderDirPath.Length == 0)
             {
                 throw new InvalidDataException("Cannot find file or directory corresponding to GUID: " + GuidShaderDir);
             }

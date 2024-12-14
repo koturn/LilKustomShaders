@@ -101,7 +101,7 @@ namespace Koturn.lilToon.Windows
                 "asset",
                 "Enter a file name to save the Texture2DArray to",
                 Path.GetDirectoryName(_assetPath));
-            if (assetPath == "")
+            if (assetPath.Length == 0)
             {
                 return;
             }

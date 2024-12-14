@@ -314,7 +314,7 @@ namespace Koturn.lilToon
         public static string UpdateIncludeResolverFile(string shaderDirPath, string guidIncFile, int bufferSize = 256)
         {
             var srcFilePath = AssetDatabase.GUIDToAssetPath(guidIncFile);
-            if (srcFilePath == "")
+            if (srcFilePath.Length == 0)
             {
                 throw new InvalidDataException("Cannot find file or directory corresponding to GUID: " + guidIncFile);
             }
