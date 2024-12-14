@@ -156,7 +156,7 @@ float4 lilTooningScaleOverride(float4 aascale, float4 value, float4 border, floa
 }
 
 
-#if defined(LIL_FEATURE_SHADOW) && !defined(LIL_GEM)
+#if defined(LIL_FEATURE_SHADOW) && !defined(LIL_GEM) && !defined(LIL_FAKESHADOW) && !defined(LIL_BAKER)
 
 #ifndef OVERRIDE_SHADOW
 #    define OVERRIDE_SHADOW \
@@ -442,7 +442,7 @@ void lilGetShadingOverride(inout lilFragData fd LIL_SAMP_IN_FUNC(samp))
     }
 }
 #endif  // !LIL_LITE
-#endif  // defined(LIL_FEATURE_SHADOW) && !defined(LIL_GEM)
+#endif  // defined(LIL_FEATURE_SHADOW) && !defined(LIL_GEM) && !defined(LIL_FAKESHADOW) && !defined(LIL_BAKER)
 
 
 #if defined(LIL_REFRACTION) && !defined(LIL_LITE)
@@ -484,7 +484,7 @@ void lilRefractionOverride(inout lilFragData fd LIL_SAMP_IN_FUNC(samp))
 #endif  // defined(LIL_REFRACTION) && !defined(LIL_LITE)
 
 
-#if defined(LIL_FEATURE_REFLECTION) && !defined(LIL_LITE)
+#if defined(LIL_FEATURE_REFLECTION) && !defined(LIL_LITE) && !defined(LIL_FAKESHADOW) && !defined(LIL_BAKER)
 /*!
  * @brief Calculate specular.
  *
@@ -701,7 +701,7 @@ void lilReflectionOverride(inout lilFragData fd LIL_SAMP_IN_FUNC(samp) LIL_OVERR
 #endif  // !LIL_PASS_FORWARDADD
     }
 }
-#endif  //  defined(LIL_FEATURE_REFLECTION) && !defined(LIL_LITE)
+#endif  // defined(LIL_FEATURE_REFLECTION) && !defined(LIL_LITE) && !defined(LIL_FAKESHADOW) && !defined(LIL_BAKER)
 
 
 #endif  // LIL_OVERRIDE_INCLUDED
