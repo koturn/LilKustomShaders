@@ -1,7 +1,18 @@
 Language	English	Japanese
 sCustomShaderTitle	Emission Wave	エミッション波
 sCustomPropertyCategory	Emission Wave	エミッション波
-sEmissionWaveMaskAndColor	Mask / Color	色 / マスク
+sDisplayTime	Display time for one texture (seconds)	1テクスチャの周期時間（秒）
+sCrossFadeTime	Time to cross fade (seconds)	クロスフェード時間（秒）
+sNumColors	Number of colors	色数
+sEmissionWaveMask	Emission Wave Mask	エミッション波マスク
+sColor1	Color 1	色1
+sColor2	Color 2	色2
+sColor3	Color 3	色3
+sColor4	Color 4	色4
+sEmissionWaveColor1	Wave Color 1	波色1
+sEmissionWaveColor2	Wave Color 2	波色2
+sEmissionWaveColor3	Wave Color 3	波色3
+sEmissionWaveColor4	Wave Color 4	波色4
 sEmissionWaveNoiseAmp	Noise amplitude	ノイズ振幅
 sEmissionWaveSpeed	Wave speed	波の速度
 sEmissionWaveInitPhase	Initial phase	初期位相

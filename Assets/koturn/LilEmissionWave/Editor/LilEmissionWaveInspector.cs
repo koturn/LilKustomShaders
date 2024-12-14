@@ -20,13 +20,29 @@ namespace Koturn.lilToon
         private static bool isShowCustomProperties;
 
         /// <summary>
+        /// <see cref="MaterialProperty"/> of "_DisplayTime".
+        /// </summary>
+        private MaterialProperty _displayCycleTime;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_CrossFadeTime".
+        /// </summary>
+        private MaterialProperty _crossFadeTime;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_NumColors".
+        /// </summary>
+        private MaterialProperty _numColors;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_Color",  "_Color2", "_Color3" and "_Color4".
+        /// </summary>
+        private MaterialProperty[] _colors;
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_EmissionWaveMask".
         /// </summary>
         private MaterialProperty _emissionWaveMask;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_EmissionWaveColor".
+        /// <see cref="MaterialProperty"/> of "_EmissionWaveColor1",  "_EmissionWaveColor2", "_EmissionWaveColor3" adn "_EmissionWaveColor4".
         /// </summary>
-        private MaterialProperty _emissionWaveColor;
+        private MaterialProperty[] _emissionWaveColors;
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_EmissionWaveNoiseAmp".
         /// </summary>
@@ -79,8 +95,23 @@ namespace Koturn.lilToon
 
             LoadCustomLanguage(AssetGuid.LangCustom);
 
+            _displayCycleTime = FindProperty("_DisplayTime", props);
+            _crossFadeTime = FindProperty("_CrossFadeTime", props); _numColors = FindProperty("_NumColors", props);
+            _colors = new[]
+            {
+                FindProperty("_Color", props),
+                FindProperty("_Color2", props),
+                FindProperty("_Color3", props),
+                FindProperty("_Color4", props)
+            };
             _emissionWaveMask = FindProperty("_EmissionWaveMask", props);
-            _emissionWaveColor = FindProperty("_EmissionWaveColor", props);
+            _emissionWaveColors = new[]
+            {
+                FindProperty("_EmissionWaveColor1", props),
+                FindProperty("_EmissionWaveColor2", props),
+                FindProperty("_EmissionWaveColor3", props),
+                FindProperty("_EmissionWaveColor4", props)
+            };
             _emissionWaveNoiseAmp = FindProperty("_EmissionWaveNoiseAmp", props);
             _emissionWaveSpeed = FindProperty("_EmissionWaveSpeed", props);
             _emissionWaveInitPhase = FindProperty("_EmissionWaveInitPhase", props);
@@ -119,10 +150,30 @@ namespace Koturn.lilToon
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;
-                    me.TexturePropertySingleLine(
-                        new GUIContent(GetLoc("sEmissionWaveMaskAndColor")),
-                        _emissionWaveMask,
-                        _emissionWaveColor);
+                    me.ShaderProperty(_displayCycleTime, GetLoc("sDisplayTime"));
+                    me.ShaderProperty(_crossFadeTime, GetLoc("sCrossFadeTime"));
+
+                    me.ShaderProperty(_numColors, GetLoc("sNumColors"));
+                    var colorCount = (int)_numColors.floatValue;
+
+                    me.ShaderProperty(_emissionWaveMask, GetLoc("sEmissionWaveMask"));
+
+                    me.ShaderProperty(_emissionWaveColors[0], GetLoc("sEmissionWaveColor1"));
+                    // Same as _Color.
+                    using (new EditorGUI.DisabledScope(true))
+                    {
+                        me.ShaderProperty(_colors[0], GetLoc("sColor1"));
+                    }
+                    for (int i = 1; i < _colors.Length; i++)
+                    {
+                        EditorGUILayout.Space();
+                        using (new EditorGUI.DisabledScope(i >= colorCount))
+                        {
+                            me.ShaderProperty(_emissionWaveColors[i], GetLoc("sEmissionWaveColor" + (i + 1)));
+                            me.ShaderProperty(_colors[i], GetLoc("sColor" + (i + 1)));
+                        }
+                    }
+
                     me.ShaderProperty(_emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
                     me.ShaderProperty(_emissionWaveSpeed, GetLoc("sEmissionWaveSpeed"));
                     me.ShaderProperty(_emissionWaveInitPhase, GetLoc("sEmissionWaveInitPhase"));

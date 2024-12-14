@@ -6,7 +6,16 @@
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
 #define LIL_CUSTOM_PROPERTIES \
-    float4 _EmissionWaveColor; \
+    float _DisplayTime; \
+    float _CrossFadeTime; \
+    float _NumColors; \
+    float4 _Color2; \
+    float4 _Color3; \
+    float4 _Color4; \
+    float4 _EmissionWaveColor1; \
+    float4 _EmissionWaveColor2; \
+    float4 _EmissionWaveColor3; \
+    float4 _EmissionWaveColor4; \
     float _EmissionWaveNoiseAmp; \
     float _EmissionWaveSpeed; \
     float _EmissionWaveInitPhase; \
@@ -62,7 +71,7 @@
 // Add vertex copy
 #define LIL_CUSTOM_VERT_COPY \
     output.emissionWavePos = pickupPosition(getEmissionPos(input.positionOS)) \
-        + (2.0 * rand(float2((float)input.vertexID, LIL_TIME)) - 1.0) * _EmissionWaveNoiseAmp;
+        + (2.0 * rand((float)input.vertexID, LIL_TIME) - 1.0) * _EmissionWaveNoiseAmp;
 
 // Inserting a process into the vertex shader
 //#define LIL_CUSTOM_VERTEX_OS
@@ -72,11 +81,28 @@
 //#define BEFORE_xx
 //#define OVERRIDE_xx
 
+#define BEFORE_UNPACK_V2F \
+    const float baseTime = LIL_TIME * _EmissionWaveSpeed + _EmissionWaveInitPhase - remap01(input.emissionWavePos, _EmissionPosMin, _EmissionPosMax); \
+    const float crossFadeTime = max(1.0e-5, _CrossFadeTime); \
+    const float oneCycleTime = _DisplayTime + crossFadeTime; \
+    const float colorShiftTmpIdx1 = floor(fmodglsl(baseTime, oneCycleTime * _NumColors) / oneCycleTime); \
+    const float colorShiftTmpIdx2 = round(fmodglsl(colorShiftTmpIdx1 + 1.0, _NumColors)); \
+    const float colorShiftIdx1 = _EmissionWaveSpeed >= 0.0 ? colorShiftTmpIdx1 : colorShiftTmpIdx2; \
+    const float colorShiftIdx2 = _EmissionWaveSpeed >= 0.0 ? colorShiftTmpIdx2 : colorShiftTmpIdx1; \
+    const float crossFadeRate = fmodglsl(baseTime, oneCycleTime) / crossFadeTime; \
+    float colorShiftBlend = saturate(crossFadeRate); \
+    colorShiftBlend = (_EmissionWaveSpeed >= 0.0 ? colorShiftBlend : 1.0 - colorShiftBlend);
+
+#define OVERRIDE_MAIN \
+    LIL_GET_MAIN_TEX \
+    LIL_APPLY_MAIN_TONECORRECTION \
+    fd.col *= colorShiftGetTint(colorShiftIdx1, colorShiftIdx2, colorShiftBlend);
+
 #define BEFORE_BLEND_EMISSION \
-    const float uDiff = frac(LIL_TIME * _EmissionWaveSpeed + _EmissionWaveInitPhase) - remap01(_EmissionPosMin, _EmissionPosMax, input.emissionWavePos); \
-    const float sDiff = 2.0 * uDiff - 1.0; \
+    const float4 emissionWaveColors[] = {_EmissionWaveColor1, _EmissionWaveColor2, _EmissionWaveColor3, _EmissionWaveColor4}; \
+    const float sDiff = 2.0 * colorShiftBlend - 1.0; \
     const float eFact = pow(0.5 * cos(clamp(sDiff * _EmissionWaveParam.x, -1.0, 1.0) * UNITY_PI) + 0.5, _EmissionWaveParam.y); \
-    fd.col.rgb += calcEmissionColor(_EmissionWaveColor * LIL_SAMPLE_2D(_EmissionWaveMask, sampler_MainTex, fd.uvMain) * eFact, fd.col.a);
+    fd.col.rgb += calcEmissionColor(emissionWaveColors[(int)colorShiftIdx2] * LIL_SAMPLE_2D(_EmissionWaveMask, sampler_MainTex, fd.uvMain) * eFact, fd.col.a);
 
 
 
@@ -188,12 +214,41 @@
 // uint     featureFlags            feature flags (for HDRP)
 // uint2    tileIndex               tile index (for HDRP)
 
-float remap01(float a, float b, float x)
+
+/*!
+ * @brief Returns a value between 0.0 and 1.0 based on the linear interpolation
+ * of the value of input x between a and b.
+ *
+ * @param [in] x  Input value.
+ * @param [in] a  Minimum value for input interpolation.
+ * @param [in] b  Maximum value for input interpolation.
+ * @return Linear interpolated value of x.
+ */
+float remap01(float x, float a, float b)
 {
     return (x - a) / (b - a);
 }
 
-float rand(float2 co)
+
+/*!
+ * @brief Returns a random value between 0.0 and 1.0.
+ * @param [in] x  First seed value vector used for generation.
+ * @param [in] y  Second seed value vector used for generation.
+ * @return Pseudo-random number value between 0.0 and 1.0.
+ */
+float rand(float x, float y)
 {
-    return frac(sin(dot(co.xy, float2(12.9898, 78.233))) * 43758.5453);
+    return frac(sin(x * 12.9898 + y * 78.233) * 43758.5453);
+}
+
+
+/*!
+ * @brief Returns the remainder of x divided by y with the same sign as y.
+ * @param [in] x  Vector or scalar numerator.
+ * @param [in] y  Vector or scalar denominator.
+ * @return Remainder of x / y with the same sign as y.
+ */
+float fmodglsl(float x, float y)
+{
+    return x - y * floor(x / y);
 }

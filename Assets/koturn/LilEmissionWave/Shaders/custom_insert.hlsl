@@ -33,6 +33,11 @@ static const int kWaveAxisZ = 2;
 static const int kWaveAxisFree = 3;
 
 
+/*!
+ * @brief Get emission position.
+ * @param [in] positionOS  Object space position.
+ * @return Emisssion position.
+ */
 float3 getEmissionPos(float3 positionOS)
 {
     BRANCH
@@ -48,6 +53,11 @@ float3 getEmissionPos(float3 positionOS)
 }
 
 
+/*!
+ * @brief Extract emission wave factor position.
+ * @param [in] pos  Emission position.
+ * @return Emisssion wave factor position.
+ */
 float pickupPosition(float3 pos)
 {
     BRANCH
@@ -70,6 +80,40 @@ float pickupPosition(float3 pos)
             : _WaveAxis == kWaveAxisY ? pos.y
             : pos.z;
     }
+}
+
+
+/*!
+ * @brief Get cross faded color.
+ * @param [in] crossFadeIdx1  Texture index 1.
+ * @param [in] crossFadeIdx2  Texture index 2.
+ * @param [in] blendCoeff  Blend coefficient.
+ * @param [in] fd  Fragment data.
+ * @return Blended color.
+ */
+float4 colorShiftGetTint(float crossFadeIdx1, float crossFadeIdx2, float blendCoeff)
+{
+    float4 colors[4] = {_Color, _Color2, _Color3, _Color4};
+    const float4 col1 = colors[(int)crossFadeIdx1];
+    const float4 col2 = colors[(int)crossFadeIdx2];
+    return lerp(col1, col2, blendCoeff);
+}
+
+
+/*!
+ * @brief Get cross faded emission wave color.
+ * @param [in] crossFadeIdx1  Texture index 1.
+ * @param [in] crossFadeIdx2  Texture index 2.
+ * @param [in] blendCoeff  Blend coefficient.
+ * @param [in] fd  Fragment data.
+ * @return Blended emission wave color.
+ */
+float4 colorShiftGetEmissionWaveColor(float crossFadeIdx1, float crossFadeIdx2, float blendCoeff)
+{
+    float4 colors[4] = {_Color, _Color2, _Color3, _Color4};
+    const float4 col1 = colors[(int)crossFadeIdx1];
+    const float4 col2 = colors[(int)crossFadeIdx2];
+    return lerp(col1, col2, blendCoeff);
 }
 
 
