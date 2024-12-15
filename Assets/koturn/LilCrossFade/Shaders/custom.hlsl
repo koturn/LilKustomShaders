@@ -7,11 +7,16 @@
 #define LIL_CUSTOM_PROPERTIES \
     float _DisplayTime; \
     float _CrossFadeTime; \
-    float _NumTextures;
+    float _NumTextures; \
+    float _AtlasRows; \
+    float _AtlasCols;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES \
-    TEXTURE2D_ARRAY(_MainTexArray);
+    TEXTURE2D_ARRAY(_MainTexArray); \
+    TEXTURE2D(_MainTex2); \
+    TEXTURE2D(_MainTex3); \
+    TEXTURE2D(_MainTex4);
 
 // Add vertex shader input
 //#define LIL_REQUIRE_APP_POSITION
@@ -54,9 +59,6 @@
     LIL_APPLY_MAIN_TONECORRECTION \
     fd.col *= _Color;
 
-#ifndef LIL_OUTLINE
-#    define sampler_MainTex sampler_MainTexArray
-#endif  // LIL_OUTLINE
 
 //----------------------------------------------------------------------------------------------------------------------
 // Information about variables
@@ -175,4 +177,24 @@
 float fmodglsl(float x, float y)
 {
     return x - y * floor(x / y);
+}
+
+
+/*!
+ * @brief Calculate atlas UV coordinate.
+ * @param [in] uv  Original uv coordinate.
+ * @param [in] n  Tile index.
+ * @param [in] nRows  Number of row in atlas texture.
+ * @param [in] nCols  Number of columns in atlas texture.
+ * @return Atlas UV coordinate.
+ */
+float2 calcAtlasUv(float2 uv, float n, float nRows, float nCols)
+{
+    float2 tileIdx;
+    tileIdx.y = nRows - 1.0 - floor(n / nCols + 0.001);
+    tileIdx.x = n - nCols * tileIdx.y;
+
+    // u: [0.0, 1.0] -> [tileIdx.y / nRows, (tileIdx.y + 1.0) / nRows]
+    // v: [0.0, 1.0] -> [tileIdx.x / nCols, (tileIdx.x + 1.0) / nCols]
+    return (uv + tileIdx) / float2(nRows, nCols);
 }

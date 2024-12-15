@@ -1,7 +1,14 @@
 Language	English	Japanese
 sCustomShaderTitle	Cross Fade	クロスフェード
 sCustomPropertyCategory	Cross Fade	クロスフェード
-sMainTexArray	Main texture array	メインテクスチャ配列
-sNumTextures	Number of textures	テクスチャ数
 sDisplayTime	Display time for one texture (seconds)	1テクスチャの周期時間（秒）
 sCrossFadeTime	Time to cross fade (seconds)	クロスフェード時間（秒）
+sNumTextures	Number of textures	テクスチャ数
+sAtlasRows	Number of rows in atlas texture	アトラステクスチャの行数
+sAtlasCols	Number of columns in atlas texture	アトラステクスチャの列数
+sTexMode	Texture mode	テクスチャモード
+sMainTexArray	Main texture array	メインテクスチャ配列
+sMainTex1	Main texture 1	メインテクスチャ1
+sMainTex2	Main texture 2	メインテクスチャ2
+sMainTex3	Main texture 3	メインテクスチャ3
+sMainTex4	Main texture 4	メインテクスチャ4

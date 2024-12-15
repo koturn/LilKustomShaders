@@ -1,1 +1,2 @@
+#pragma shader_feature_local _TEXMODE_TEXTURES _TEXMODE_MAIN_TEXTURE_AS_ATLAS _TEXMODE_SECOND_TEXTURE_AS_ATLAS _TEXMODE_TEXTUR_EARRAY
 #include "custom_insert.hlsl"
