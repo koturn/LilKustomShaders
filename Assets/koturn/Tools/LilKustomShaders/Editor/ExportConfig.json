@@ -52,6 +52,20 @@
       ]
     },
     {
+      "UnityPackageName": "LilOptimized.NDMF.unitypackage",
+      "VpmName": "jp.koturn.liloptimized.ndmf",
+      "Assets": [
+        {
+          "BasePath": "Assets/koturn/LilOptimized.NDMF"
+        }
+      ],
+      "DependAssets": [
+        {
+          "BasePath": "Assets/koturn/LilOptimized"
+        }
+      ]
+    },
+    {
       "UnityPackageName": "LilRefProbe.unitypackage",
       "VpmName": "jp.koturn.lilrefprobe",
       "Assets": [
