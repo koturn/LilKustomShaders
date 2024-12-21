@@ -3,7 +3,7 @@ namespace Koturn.lilToon
     /// <summary>
     /// Provides Asset GUIDs.
     /// </summary>
-    internal class AssetGuid
+    internal static class AssetGuid
     {
         /// <summary>
         /// GUID of "Assets/koturn/LilWireframe/Editor/lang_custom.txt".

@@ -7,7 +7,7 @@ namespace Koturn.lilToon
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilWireframe".
     /// </summary>
-    public class LilWireframeInspector : lilToonInspector
+    public sealed class LilWireframeInspector : lilToonInspector
     {
         /// <summary>
         /// Name of this custom shader.

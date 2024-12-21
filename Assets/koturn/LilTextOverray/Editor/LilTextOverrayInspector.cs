@@ -10,7 +10,7 @@ namespace Koturn.lilToon
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilTextOverray".
     /// </summary>
-    public class LilTextOverrayInspector : lilToonInspector
+    public sealed class LilTextOverrayInspector : lilToonInspector
     {
         /// <summary>
         /// Name of this custom shader.

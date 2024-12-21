@@ -8,7 +8,7 @@ namespace Koturn.lilToon
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilCrossFade".
     /// </summary>
-    public class LilCrossFadeInspector : lilToonInspector
+    public sealed class LilCrossFadeInspector : lilToonInspector
     {
         /// <summary>
         /// Name of this custom shader.

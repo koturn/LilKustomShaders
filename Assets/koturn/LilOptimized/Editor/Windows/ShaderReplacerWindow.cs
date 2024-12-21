@@ -8,7 +8,7 @@ namespace Koturn.lilToon.Windows
     /// <summary>
     /// A window class which replace lilToon shaders to optimized ones.
     /// </summary>
-    public class ShaderReplacerWindow : EditorWindow
+    public sealed class ShaderReplacerWindow : EditorWindow
     {
         /// <summary>
         /// Create and open this window.

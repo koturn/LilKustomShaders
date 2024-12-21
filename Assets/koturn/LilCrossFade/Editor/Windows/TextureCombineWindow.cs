@@ -11,7 +11,7 @@ namespace Koturn.lilToon.Windows
     /// <summary>
     /// A window class for creating Texture2DArray.
     /// </summary>
-    public class TextureCombineWindow : EditorWindow
+    public sealed class TextureCombineWindow : EditorWindow
     {
         /// <summary>
         /// Texture list.

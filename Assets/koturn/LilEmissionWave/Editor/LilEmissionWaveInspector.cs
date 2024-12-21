@@ -7,7 +7,7 @@ namespace Koturn.lilToon
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilEmissionWave".
     /// </summary>
-    public class LilEmissionWaveInspector : lilToonInspector
+    public sealed class LilEmissionWaveInspector : lilToonInspector
     {
         /// <summary>
         /// Name of this custom shader.

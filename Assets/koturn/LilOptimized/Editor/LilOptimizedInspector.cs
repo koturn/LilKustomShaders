@@ -7,7 +7,7 @@ namespace Koturn.lilToon
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of lilToon.
     /// </summary>
-    public class LilOptimizedInspector : lilToonInspector
+    public sealed class LilOptimizedInspector : lilToonInspector
     {
         // Custom properties
         // private MaterialProperty customVariable;
