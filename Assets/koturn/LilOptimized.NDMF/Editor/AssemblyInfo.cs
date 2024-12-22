@@ -31,9 +31,9 @@ using nadena.dev.ndmf;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.1.3.0")]
-[assembly: AssemblyFileVersion("1.1.3.0")]
-[assembly: AssemblyInformationalVersion("1.1.3.0")]
+[assembly: AssemblyVersion("1.1.4.0")]
+[assembly: AssemblyFileVersion("1.1.4.0")]
+[assembly: AssemblyInformationalVersion("1.1.4.0")]
 
 // Metadata
 [assembly: AssemblyMetadata("RepositoryUrl", "https://github.com/koturn/LillKustomShaders")]

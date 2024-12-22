@@ -1,15 +1,15 @@
 {
   "name": "jp.koturn.lilemissionwave",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "displayName": "LilEmissionWave",
   "description": "koturn's custom shaders of lilToon, LilEmissionWave.",
   "unity": "2018.1",
-  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v113",
+  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v114",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.3/LICENSE",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.4/LICENSE",
   "license": "MIT",
   "keywords": ["Toon", "Shader", "lilToon"],
-  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.3/jp.koturn.lilemissionwave-1.1.3.zip",
+  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.4/jp.koturn.lilemissionwave-1.1.4.zip",
   "legacyFolders" : {
     "Assets\\koturn\\LilEmissionWave" : "eee965a7ab3157c479bb33ea01a05b68"
   }

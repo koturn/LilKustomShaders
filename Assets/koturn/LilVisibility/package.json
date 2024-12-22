@@ -1,15 +1,15 @@
 {
   "name": "jp.koturn.lilvisibility",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "displayName": "LilVisibility",
   "description": "koturn's custom shaders of lilToon, LilVisibility.",
   "unity": "2018.1",
-  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v113",
+  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v114",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.3/LICENSE",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.4/LICENSE",
   "license": "MIT",
   "keywords": ["Toon", "Shader", "lilToon"],
-  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.3/jp.koturn.lilvisibility-1.1.3.zip",
+  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.4/jp.koturn.lilvisibility-1.1.4.zip",
   "legacyFolders" : {
     "Assets\\koturn\\LilVisibility" : "41af4cbd689b6914487d9b55e3e31664"
   }

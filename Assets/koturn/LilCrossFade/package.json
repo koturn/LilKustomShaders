@@ -1,15 +1,15 @@
 {
   "name": "jp.koturn.lilcrossfade",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "displayName": "LilCrossFade",
   "description": "koturn's custom shaders of lilToon, LilCrossFade.",
   "unity": "2018.1",
-  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v113",
+  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v114",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.3/LICENSE",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.4/LICENSE",
   "license": "MIT",
   "keywords": ["Toon", "Shader", "lilToon"],
-  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.3/jp.koturn.lilcrossfade-1.1.3.zip",
+  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.4/jp.koturn.lilcrossfade-1.1.4.zip",
   "legacyFolders" : {
     "Assets\\koturn\\LilCrossFade" : "0ce429a6901c0e84285e6eb1d9ddd9d2"
   }

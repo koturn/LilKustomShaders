@@ -1,15 +1,15 @@
 {
   "name": "jp.koturn.liloptimized.ndmf",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "displayName": "LilOptimized.NDMF",
   "description": "NDMF plugin for koturn/LilOptimized.",
   "unity": "2018.1",
-  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v113",
+  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v114",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.3/LICENSE",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.4/LICENSE",
   "license": "MIT",
   "keywords": ["NDMF plugin"],
-  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.3/jp.koturn.liloptimized.ndmf-1.1.3.zip",
+  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.4/jp.koturn.liloptimized.ndmf-1.1.4.zip",
   "legacyFolders" : {
     "Assets\\koturn\\LilOptimized.NDMF" : "3f6b064b6cec8f944bd804c2eddc2715"
   }
