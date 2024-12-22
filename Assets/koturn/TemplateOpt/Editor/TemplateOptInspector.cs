@@ -7,7 +7,7 @@ namespace Koturn.lilToon
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/TemplateOpt".
     /// </summary>
-    public class TemplateOptInspector : lilToonInspector
+    public sealed class TemplateOptInspector : lilToonInspector
     {
         /// <summary>
         /// Name of this custom shader.
