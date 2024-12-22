@@ -1,2 +1,3 @@
 Language	English	Japanese
 sCustomShaderTitle	Custom Shader Title	カスタムシェーダー名
+sCustomPropertyCategory	Property Category	プロパティカテゴリ

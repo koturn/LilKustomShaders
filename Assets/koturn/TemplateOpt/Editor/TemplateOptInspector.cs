@@ -56,7 +56,8 @@ namespace Koturn.lilToon
             // customBox        box (similar to unity default box)
             // customToggleFont label for box
 
-            isShowCustomProperties = Foldout("Custom Properties", "Custom Properties", isShowCustomProperties);
+            var titleLoc = GetLoc("sCustomShaderTitle");
+            isShowCustomProperties = Foldout(titleLoc, titleLoc, isShowCustomProperties);
             if (!isShowCustomProperties)
             {
                 return;
