@@ -20,13 +20,14 @@ namespace Koturn.lilToon
         private static bool isShowCustomProperties;
 
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_HsMask".
+        /// <see cref="MaterialProperty"/> of "_HueShiftMask".
         /// </summary>
-        private MaterialProperty _hsMask;
+        private MaterialProperty _hueShiftMask;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_HsSpeed".
+        /// <see cref="MaterialProperty"/> of "_HueShiftSpeed".
         /// </summary>
-        private MaterialProperty _hsSpeed;
+        private MaterialProperty _hueShiftSpeed;
+
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.
@@ -43,8 +44,8 @@ namespace Koturn.lilToon
 
             LoadCustomLanguage(AssetGuid.LangCustom);
 
-            _hsMask = FindProperty("_HsMask", props);
-            _hsSpeed = FindProperty("_HsSpeed", props);
+            _hueShiftMask = FindProperty("_HueShiftMask", props);
+            _hueShiftSpeed = FindProperty("_HueShiftSpeed", props);
         }
 
         /// <summary>
@@ -74,8 +75,8 @@ namespace Koturn.lilToon
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;
-                    me.ShaderProperty(_hsMask, GetLoc("sHsMask"));
-                    me.ShaderProperty(_hsSpeed, GetLoc("sHsSpeed"));
+                    me.ShaderProperty(_hueShiftMask, GetLoc("sHueShiftMask"));
+                    me.ShaderProperty(_hueShiftSpeed, GetLoc("sHueShiftSpeed"));
                 }
             }
         }

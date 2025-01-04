@@ -1,5 +1,5 @@
 Language	English	Japanese
 sCustomShaderTitle	Hue Shift	色相シフト
 sCustomPropertyCategory	Hue Shift	色相シフト
-sHsMask	Mask	マスク
-sHsSpeed	Hue shift speed	色相変化速度
+sHueShiftMask	Mask	マスク
+sHueShiftSpeed	Hue shift speed	色相変化速度

@@ -5,11 +5,11 @@
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
 #define LIL_CUSTOM_PROPERTIES \
-    float _HsSpeed;
+    float _HueShiftSpeed;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES \
-    TEXTURE2D(_HsMask);
+    TEXTURE2D(_HueShiftMask);
 
 // Add vertex shader input
 //#define LIL_REQUIRE_APP_POSITION
@@ -48,8 +48,8 @@
 //#define BEFORE_xx
 //#define OVERRIDE_xx
 #define BEFORE_SHADOW \
-    const float hsValue = _Time.y * _HsSpeed * LIL_SAMPLE_2D(_HsMask, sampler_MainTex, fd.uvMain).r; \
-    fd.col.rgb = rgbAddHue(fd.col.rgb, hsValue); \
+    const float hueShiftValue = _Time.y * _HueShiftSpeed * LIL_SAMPLE_2D(_HueShiftMask, sampler_MainTex, fd.uvMain).r; \
+    fd.col.rgb = rgbAddHue(fd.col.rgb, hueShiftValue); \
     fd.albedo = fd.col.rgb;
 
 
