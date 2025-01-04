@@ -3,3 +3,5 @@ sCustomShaderTitle	Hue Shift	色相シフト
 sCustomPropertyCategory	Hue Shift	色相シフト
 sHueShiftMask	Mask	マスク
 sHueShiftSpeed	Hue shift speed	色相変化速度
+sHueShiftEmission	Enable Hue Shift on Emission 1st	発光テクスチャに対して適用
+sHueShiftEmission2nd	Enable Hue Shift on Emission 2nd	発光テクスチャ2ndに対して適用

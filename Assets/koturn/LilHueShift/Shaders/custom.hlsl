@@ -5,7 +5,9 @@
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
 #define LIL_CUSTOM_PROPERTIES \
-    float _HueShiftSpeed;
+    float _HueShiftSpeed; \
+    lilBool _HueShiftEmission; \
+    lilBool _HueShiftEmission2nd;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES \

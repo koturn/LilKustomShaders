@@ -27,6 +27,14 @@ namespace Koturn.lilToon
         /// <see cref="MaterialProperty"/> of "_HueShiftSpeed".
         /// </summary>
         private MaterialProperty _hueShiftSpeed;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_HueShiftEmission".
+        /// </summary>
+        private MaterialProperty _hueShiftEmission;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_HueShiftEmission2nd".
+        /// </summary>
+        private MaterialProperty _hueShiftEmission2nd;
 
 
         /// <summary>
@@ -46,6 +54,8 @@ namespace Koturn.lilToon
 
             _hueShiftMask = FindProperty("_HueShiftMask", props);
             _hueShiftSpeed = FindProperty("_HueShiftSpeed", props);
+            _hueShiftEmission = FindProperty("_HueShiftEmission", props);
+            _hueShiftEmission2nd = FindProperty("_HueShiftEmission2nd", props);
         }
 
         /// <summary>
@@ -77,6 +87,8 @@ namespace Koturn.lilToon
                     var me = m_MaterialEditor;
                     me.ShaderProperty(_hueShiftMask, GetLoc("sHueShiftMask"));
                     me.ShaderProperty(_hueShiftSpeed, GetLoc("sHueShiftSpeed"));
+                    me.ShaderProperty(_hueShiftEmission, GetLoc("sHueShiftEmission"));
+                    me.ShaderProperty(_hueShiftEmission2nd, GetLoc("sHueShiftEmission2nd"));
                 }
             }
         }
