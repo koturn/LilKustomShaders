@@ -120,6 +120,20 @@
           "BasePath": "Assets/koturn/LilOptimized"
         }
       ]
+    },
+    {
+      "UnityPackageName": "LilKoturnAvatarFace.unitypackage",
+      "VpmName": "jp.koturn.lilkoturnavatarface",
+      "Assets": [
+        {
+          "BasePath": "Assets/koturn/LilKoturnAvatarFace"
+        }
+      ],
+      "DependAssets": [
+        {
+          "BasePath": "Assets/koturn/LilOptimized"
+        }
+      ]
     }
   ]
 }

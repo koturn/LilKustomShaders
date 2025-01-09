@@ -1,0 +1,16 @@
+{
+  "name": "jp.koturn.lilkoturnavatarface",
+  "version": "1.1.4",
+  "displayName": "LilKoturnAvatarFace",
+  "description": "koturn's custom shaders of lilToon, LilKoturnAvatarFace.",
+  "unity": "2018.1",
+  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v114",
+  "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.1.4/LICENSE",
+  "license": "MIT",
+  "keywords": ["Toon", "Shader", "lilToon"],
+  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.4/jp.koturn.lilkoturnavatarface-1.1.4.zip",
+  "legacyFolders" : {
+    "Assets\\koturn\\LilKoturnAvatarFace" : "186701eae92be894c8e84496184b493a"
+  }
+}

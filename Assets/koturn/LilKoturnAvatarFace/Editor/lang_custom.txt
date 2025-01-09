@@ -1,0 +1,18 @@
+Language	English	Japanese
+sKoturnGraphTitle	Graph of Koturn	Koturnマーク
+sKoturnGraphColor	Color	色
+sKoturnGraphOffset	Offset	オフセット
+sKoturnGraphScale	Scale	スケール
+sKoturnGraphRotAngle	Rotate angle (Degrees)	回転角（度）
+sStarTitle	Star emission	星のエミッション
+sStarColor	Color	色
+sStarOffset	Offset	オフセット
+sStarScale	Scale	スケール
+sStarRotAngle	Rotate angle (Degrees)	回転角（度）
+sStarRotSpeed	Rotate angle (deg/s)	回転角（度/秒）
+sStarWidth	Width	線の幅
+sCustomShaderTitle	Hue Shift	色相シフト
+sHueShiftMask	Mask	マスク
+sHueShiftSpeed	Hue shift speed	色相変化速度
+sHueShiftEmission	Enable Hue Shift on Emission 1st	発光テクスチャに対して適用
+sHueShiftEmission2nd	Enable Hue Shift on Emission 2nd	発光テクスチャ2ndに対して適用
