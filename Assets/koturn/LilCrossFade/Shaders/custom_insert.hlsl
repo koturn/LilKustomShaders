@@ -43,19 +43,35 @@ float4 crossFadeSample(lilFragData fd)
     const float2 atlasUv2 = calcAtlasUv(fd.uv0, texIdx2, _AtlasRows, _AtlasCols);
     const float4 col2 = LIL_SAMPLE_2D(_MainTex, sampler_MainTex, atlasUv2);
 #else
-    float4 cols[4];
-    cols[0] = LIL_SAMPLE_2D(_MainTex, sampler_MainTex, fd.uvMain);
-    if (_NumTextures > 1) {
-        cols[1] = LIL_SAMPLE_2D(_MainTex2, sampler_MainTex, fd.uvMain);
+    float4 col1;
+    if (texIdx1 < 2.0) {
+        if (texIdx1 < 1.0) {
+            col1 = LIL_SAMPLE_2D(_MainTex, sampler_MainTex, fd.uvMain);
+        } else {
+            col1 = LIL_SAMPLE_2D(_MainTex2, sampler_MainTex, fd.uvMain);
+        }
+    } else {
+        if (texIdx1 < 3.0) {
+            col1 = LIL_SAMPLE_2D(_MainTex3, sampler_MainTex, fd.uvMain);
+        } else {
+            col1 = LIL_SAMPLE_2D(_MainTex4, sampler_MainTex, fd.uvMain);
+        }
     }
-    if (_NumTextures > 2) {
-        cols[2] = LIL_SAMPLE_2D(_MainTex3, sampler_MainTex, fd.uvMain);
+
+    float4 col2;
+    if (texIdx2 < 2.0) {
+        if (texIdx2 < 1.0) {
+            col2 = LIL_SAMPLE_2D(_MainTex, sampler_MainTex, fd.uvMain);
+        } else {
+            col2 = LIL_SAMPLE_2D(_MainTex2, sampler_MainTex, fd.uvMain);
+        }
+    } else {
+        if (texIdx2 < 3.0) {
+            col2 = LIL_SAMPLE_2D(_MainTex3, sampler_MainTex, fd.uvMain);
+        } else {
+            col2 = LIL_SAMPLE_2D(_MainTex4, sampler_MainTex, fd.uvMain);
+        }
     }
-    if (_NumTextures > 3) {
-        cols[3] = LIL_SAMPLE_2D(_MainTex4, sampler_MainTex, fd.uvMain);
-    }
-    const float4 col1 = cols[texIdx1];
-    const float4 col2 = cols[texIdx2];
 #endif  // defined(_TEXMODE_TEXTURE_ARRAY)
     const float t2 = fmodglsl(_Time.y, oneCycleTime);
     const float blendCoeff = saturate(t2 / crossFadeTime);

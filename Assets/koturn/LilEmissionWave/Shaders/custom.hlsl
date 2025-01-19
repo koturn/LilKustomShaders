@@ -99,12 +99,9 @@
     fd.col *= colorShiftGetTint(colorShiftIdx1, colorShiftIdx2, colorShiftBlend);
 
 #define BEFORE_BLEND_EMISSION \
-    const float4 emissionWaveColors[] = {_EmissionWaveColor1, _EmissionWaveColor2, _EmissionWaveColor3, _EmissionWaveColor4}; \
     const float sDiff = 2.0 * colorShiftBlend - 1.0; \
     const float eFact = pow(0.5 * cos(clamp(sDiff * _EmissionWaveParam.x, -1.0, 1.0) * UNITY_PI) + 0.5, _EmissionWaveParam.y); \
-    fd.col.rgb += calcEmissionColor(emissionWaveColors[(int)colorShiftIdx2] * LIL_SAMPLE_2D(_EmissionWaveMask, sampler_MainTex, fd.uvMain) * eFact, fd.col.a);
-
-
+    fd.col.rgb += calcEmissionColor(getEmissionWaveColor(colorShiftIdx2) * LIL_SAMPLE_2D(_EmissionWaveMask, sampler_MainTex, fd.uvMain) * eFact, fd.col.a);
 
 
 //----------------------------------------------------------------------------------------------------------------------

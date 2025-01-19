@@ -84,35 +84,68 @@ float pickupPosition(float3 pos)
 
 
 /*!
- * @brief Get cross faded color.
- * @param [in] crossFadeIdx1  Texture index 1.
- * @param [in] crossFadeIdx2  Texture index 2.
- * @param [in] blendCoeff  Blend coefficient.
- * @param [in] fd  Fragment data.
- * @return Blended color.
+ * @brief Get Tint color.
+ * @param [in] colorIdx  Tint color index.
+ * @return _Color, _Color2, _Color3 or _Color4.
  */
-float4 colorShiftGetTint(float crossFadeIdx1, float crossFadeIdx2, float blendCoeff)
+float4 getTintColor(float colorIdx)
 {
-    float4 colors[4] = {_Color, _Color2, _Color3, _Color4};
-    const float4 col1 = colors[(int)crossFadeIdx1];
-    const float4 col2 = colors[(int)crossFadeIdx2];
-    return lerp(col1, col2, blendCoeff);
+    float4 color;
+    if (colorIdx < 2.0) {
+        if (colorIdx < 1.0) {
+            color = _Color;
+        } else {
+            color = _Color2;
+        }
+    } else {
+        if (colorIdx < 3.0) {
+            color = _Color3;
+        } else {
+            color = _Color4;
+        }
+    }
+
+    return color;
 }
 
 
 /*!
- * @brief Get cross faded emission wave color.
- * @param [in] crossFadeIdx1  Texture index 1.
- * @param [in] crossFadeIdx2  Texture index 2.
- * @param [in] blendCoeff  Blend coefficient.
- * @param [in] fd  Fragment data.
- * @return Blended emission wave color.
+ * @brief Get emission wave color.
+ * @param [in] colorIdx  Emission wave color index.
+ * @return _EmissionWaveColor1, _EmissionWaveColor2, _EmissionWaveColor3 or _EmissionWaveColor4.
  */
-float4 colorShiftGetEmissionWaveColor(float crossFadeIdx1, float crossFadeIdx2, float blendCoeff)
+float4 getEmissionWaveColor(float colorIdx)
 {
-    float4 colors[4] = {_Color, _Color2, _Color3, _Color4};
-    const float4 col1 = colors[(int)crossFadeIdx1];
-    const float4 col2 = colors[(int)crossFadeIdx2];
+    float4 color;
+    if (colorIdx < 2.0) {
+        if (colorIdx < 1.0) {
+            color = _EmissionWaveColor1;
+        } else {
+            color = _EmissionWaveColor2;
+        }
+    } else {
+        if (colorIdx < 3.0) {
+            color = _EmissionWaveColor3;
+        } else {
+            color = _EmissionWaveColor4;
+        }
+    }
+
+    return color;
+}
+
+
+/*!
+ * @brief Get cross faded tint color.
+ * @param [in] crossFadeIdx1  COlor index 1.
+ * @param [in] crossFadeIdx2  COlor index 2.
+ * @param [in] blendCoeff  Blend coefficient.
+ * @return Blended color.
+ */
+float4 colorShiftGetTint(float crossFadeIdx1, float crossFadeIdx2, float blendCoeff)
+{
+    const float4 col1 = getTintColor(crossFadeIdx1);
+    const float4 col2 = getTintColor(crossFadeIdx2);
     return lerp(col1, col2, blendCoeff);
 }
 
