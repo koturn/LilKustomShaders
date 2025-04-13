@@ -127,7 +127,8 @@ namespace Koturn.lilToon
             // customBox        box (similar to unity default box)
             // customToggleFont label for box
 
-            isShowCustomProperties = Foldout("Custom Properties", "Custom Properties", isShowCustomProperties);
+            var titleLoc = GetLoc("sCustomShaderTitle");
+            isShowCustomProperties = Foldout(titleLoc, titleLoc, isShowCustomProperties);
             if (!isShowCustomProperties)
             {
                 return;
@@ -137,7 +138,7 @@ namespace Koturn.lilToon
             {
                 var me = m_MaterialEditor;
 
-                EditorGUILayout.LabelField(GetLoc("sKoturnGraphTitle"), customToggleFont);
+                EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryKoturnGraph"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     me.ShaderProperty(_graphKoturnColor, GetLoc("sKoturnGraphColor"));
@@ -145,7 +146,7 @@ namespace Koturn.lilToon
                     me.ShaderProperty(_graphKoturnRotAngle, GetLoc("sKoturnGraphRotAngle"));
                 }
 
-                EditorGUILayout.LabelField(GetLoc("sStarTitle"), customToggleFont);
+                EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryStar"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     using (var ccScope = new EditorGUI.ChangeCheckScope())

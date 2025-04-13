@@ -1,10 +1,11 @@
 Language	English	Japanese
-sKoturnGraphTitle	Graph of Koturn	Koturnマーク
+sCustomShaderTitle	koturn Avatar Face	Koturnアバター顔
+sCustomPropertyCategoryKoturnGraph	Graph of Koturn	Koturnマーク
 sKoturnGraphColor	Color	色
 sKoturnGraphOffset	Offset	オフセット
 sKoturnGraphScale	Scale	スケール
 sKoturnGraphRotAngle	Rotate angle (Degrees)	回転角（度）
-sStarTitle	Star emission	星のエミッション
+sCustomPropertyCategoryStar	Star emission	星のエミッション
 sStarColor	Color	色
 sStarOffset	Offset	オフセット
 sStarScale	Scale	スケール
