@@ -8,7 +8,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// GUID of "Assets/koturn/LilVisibility/Editor/lang_custom.txt".
         /// </summary>
-        public const string LangCustom = "";
+        public const string LangCustom = "cccc4d111127e8d4f97e012f4510f48c";
         /// <summary>
         /// GUID of "Assets/koturn/LilVisibility/Shaders/".
         /// </summary>
