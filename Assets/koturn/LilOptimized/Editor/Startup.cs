@@ -55,10 +55,9 @@ namespace Koturn.lilToon
             // GUIDs of the shader source of lilxyzw/lilToon.
             var guids = new[]
             {
-                "e3dbe4ae202b9094eab458bbc934c964",  // lil_common_vert_fur_thirdparty.hlsl
-                "c3c0d0056ab91ba4db7516465a6581fe",  // lil_vert_audiolink.hlsl
-                "957b6179a395605459b9e1ef1d0cdc0d",  // lil_vert_encryption.hlsl
-                "683a6eed396c8044bb0c482c77c997d4"   // lil_vert_outline.hlsl
+                AssetGuid.LilCommonVertFurThirdparty,
+                AssetGuid.LilVertAudioLink,
+                AssetGuid.LilVertOutline
             };
 
             foreach (var guid in guids)
