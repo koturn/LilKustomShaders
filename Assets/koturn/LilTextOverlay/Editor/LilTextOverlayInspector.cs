@@ -7,17 +7,17 @@ using lilToon;
 using Koturn.LilOptimized.Editor;
 
 
-namespace Koturn.LilTextOverray.Editor
+namespace Koturn.LilTextOverlay.Editor
 {
     /// <summary>
-    /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilTextOverray".
+    /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilTextOverlay".
     /// </summary>
-    public sealed class LilTextOverrayInspector : lilToonInspector
+    public sealed class LilTextOverlayInspector : lilToonInspector
     {
         /// <summary>
         /// Name of this custom shader.
         /// </summary>
-        public const string ShaderName = "koturn/LilTextOverray";
+        public const string ShaderName = "koturn/LilTextOverlay";
 
         /// <summary>
         /// A flag whether to fold custom properties or not.

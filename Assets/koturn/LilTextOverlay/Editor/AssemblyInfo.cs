@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Koturn.LilTextOverray.Editor")]
-[assembly: AssemblyDescription("Material inspector of koturn/LilTextOverray.")]
+[assembly: AssemblyTitle("Koturn.LilTextOverlay.Editor")]
+[assembly: AssemblyDescription("Material inspector of koturn/LilTextOverlay.")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("koturn")]
-[assembly: AssemblyProduct("Koturn.LilTextOverray.Editor")]
+[assembly: AssemblyProduct("Koturn.LilTextOverlay.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2022 koturn All Rights Reserverd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

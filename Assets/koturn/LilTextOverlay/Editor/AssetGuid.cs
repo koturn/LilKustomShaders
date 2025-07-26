@@ -1,4 +1,4 @@
-namespace Koturn.LilTextOverray.Editor
+namespace Koturn.LilTextOverlay.Editor
 {
     /// <summary>
     /// Provides Asset GUIDs.
@@ -6,11 +6,11 @@ namespace Koturn.LilTextOverray.Editor
     internal static class AssetGuid
     {
         /// <summary>
-        /// GUID of "Assets/koturn/LilTextOverray/Editor/lang_custom.txt".
+        /// GUID of "Assets/koturn/LilTextOverlay/Editor/lang_custom.txt".
         /// </summary>
         public const string LangCustom = "1856a3bb6b48464458ac52d525e02701";
         /// <summary>
-        /// GUID of "Assets/koturn/LilTextOverray/Shaders/".
+        /// GUID of "Assets/koturn/LilTextOverlay/Shaders/".
         /// </summary>
         public const string ShaderDir = "091ef78e44ed4a64d8e56caf39f45a54";
         /// <summary>
