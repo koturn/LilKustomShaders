@@ -1,6 +1,6 @@
 {
     "name": "Koturn.Tools.LilKustomShaders.Editor",
-    "rootNamespace": "",
+    "rootNamespace": "Koturn.Tools.LilKustomShaders.Editor",
     "references": [],
     "includePlatforms": [
         "Editor"

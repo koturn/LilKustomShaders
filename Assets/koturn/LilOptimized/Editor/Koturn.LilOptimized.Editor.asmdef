@@ -1,6 +1,6 @@
 {
     "name": "Koturn.LilOptimized.Editor",
-    "rootNamespace": "",
+    "rootNamespace": "Koturn.LilOptimized.Editor",
     "references": [
         "GUID:e7f0f8dffe955d640bbc76d1d4f4986e"
     ],
