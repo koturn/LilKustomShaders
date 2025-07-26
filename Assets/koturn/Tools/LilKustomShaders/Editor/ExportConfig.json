@@ -80,11 +80,11 @@
       ]
     },
     {
-      "UnityPackageName": "LilTextOverray.unitypackage",
-      "VpmName": "jp.koturn.liltextoverray",
+      "UnityPackageName": "LilTextOverlay.unitypackage",
+      "VpmName": "jp.koturn.liltextoverlay",
       "Assets": [
         {
-          "BasePath": "Assets/koturn/LilTextOverray"
+          "BasePath": "Assets/koturn/LilTextOverlay"
         }
       ],
       "DependAssets": [

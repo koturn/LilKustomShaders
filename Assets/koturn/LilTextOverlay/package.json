@@ -11,6 +11,6 @@
   "keywords": ["Toon", "Shader", "lilToon"],
   "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.1.4/jp.koturn.liltextoverray-1.1.4.zip",
   "legacyFolders" : {
-    "Assets\\koturn\\LilTextOverray" : "d02fb98160c0b3940a199d14edb68527"
+    "Assets\\koturn\\LilTextOverlay" : "d02fb98160c0b3940a199d14edb68527"
   }
 }

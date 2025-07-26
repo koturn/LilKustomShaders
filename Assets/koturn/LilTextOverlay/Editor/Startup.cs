@@ -4,7 +4,7 @@ using UnityEngine;
 using Koturn.LilOptimized.Editor;
 
 
-namespace Koturn.LilTextOverray.Editor
+namespace Koturn.LilTextOverlay.Editor
 {
     /// <summary>
     /// Startup method provider.
@@ -44,7 +44,7 @@ namespace Koturn.LilTextOverray.Editor
         /// <summary>
         /// Update include files of shaders.
         /// </summary>
-        [MenuItem("Assets/" + LilTextOverrayInspector.ShaderName + "/Regenerate include files", false, 9000)]
+        [MenuItem("Assets/" + LilTextOverlayInspector.ShaderName + "/Regenerate include files", false, 9000)]
         private static void UpdateIncludeFiles()
         {
             var shaderDirPath = AssetDatabase.GUIDToAssetPath(AssetGuid.ShaderDir);

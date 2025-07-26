@@ -1,6 +1,6 @@
 {
-    "name": "Koturn.LilTextOverray.Editor",
-    "rootNamespace": "Koturn.LilTextOverray.Editor",
+    "name": "Koturn.LilTextOverlay.Editor",
+    "rootNamespace": "Koturn.LilTextOverlay.Editor",
     "references": [
         "GUID:e7f0f8dffe955d640bbc76d1d4f4986e",
         "GUID:3d1a1d2b00e4eff42a4ec9a457cbf725"

@@ -1,6 +1,6 @@
 Language	English	Japanese
-sCustomShaderTitle	Text Overray	テキストオーバーレイ
-sCustomPropertyCategory	Text Overray	テキストオーバーレイ
+sCustomShaderTitle	Text Overlay	テキストオーバーレイ
+sCustomPropertyCategory	Text Overlay	テキストオーバーレイ
 sSpriteTex	Sprite Sheet Texture	スプライトシート
 sEnableElapsedTime	Elapsed time	経過時間
 sElapsedTimeColor	Color	色
