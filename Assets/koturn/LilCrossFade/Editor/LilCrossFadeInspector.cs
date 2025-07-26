@@ -55,7 +55,7 @@ namespace Koturn.lilToon
         /// <summary>
         /// Keywords to preserve.
         /// </summary>
-        private List<string> _shaderKeywords = new List<string>();
+        private readonly List<string> _shaderKeywords = new List<string>();
 
         /// <summary>
         /// Draw property items.
@@ -176,7 +176,7 @@ namespace Koturn.lilToon
                     {
                         var texValue = _mainTexArray.textureValue;
                         var depth = texValue == null ? 0.0f : (float)((Texture2DArray)texValue).depth;
-                        using (new EditorGUI.DisabledScope(texValue is null))
+                        using (new EditorGUI.DisabledScope(texValue == null))
                         {
                             me.ShaderProperty(_numTextures, GetLoc("sNumTextures"));
                             if (GUILayout.Button("Set to texture count"))

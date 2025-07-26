@@ -124,7 +124,7 @@ namespace Koturn.lilToon.Windows
                     continue;
                 }
                 var texture = CreateReadableTexture2D(textures[i]);
-                tex2dArray.SetPixels(texture.GetPixels(0), i, 0);
+                tex2dArray.SetPixels32(texture.GetPixels32(0), i, 0);
                 DestroyImmediate(texture);
             }
             tex2dArray.Apply();
@@ -166,7 +166,7 @@ namespace Koturn.lilToon.Windows
         [MenuItem("Assets/koturn/LilCrossFade/Texture Combine Tool", false, 1200)]
         public static void Open()
         {
-            EditorWindow.GetWindow<TextureCombineWindow>("Texture Combine Tool");
+            GetWindow<TextureCombineWindow>("Texture Combine Tool");
         }
     }
 }

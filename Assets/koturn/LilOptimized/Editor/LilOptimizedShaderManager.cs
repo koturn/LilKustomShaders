@@ -14,6 +14,7 @@ namespace Koturn.lilToon
         /// </summary>
         public const string ShaderName = "koturn/LilOptimized";
 
+#pragma warning disable IDE1006 // Naming Styles
         /// <summary>
         /// An instance of the <see cref="Shader"/>, "koturn/LilOptimized/lilToon".
         ///</summary>
@@ -239,6 +240,7 @@ namespace Koturn.lilToon
         /// An instance of the <see cref="Shader"/>, "Hidden/koturn/LilOptimized/MultiGem".
         ///</summary>
         public static Shader ltsmgem { get; }
+#pragma warning restore IDE1006 // Naming Styles
 
 
         /// <summary>
