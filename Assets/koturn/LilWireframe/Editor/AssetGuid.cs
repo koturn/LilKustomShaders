@@ -1,4 +1,4 @@
-namespace Koturn.lilToon
+namespace Koturn.LilWireframe.Editor
 {
     /// <summary>
     /// Provides Asset GUIDs.

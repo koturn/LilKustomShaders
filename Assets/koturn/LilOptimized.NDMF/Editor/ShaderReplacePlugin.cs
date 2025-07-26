@@ -1,9 +1,10 @@
 #if VRC_SDK_VRCSDK3
 using UnityEngine;
 using nadena.dev.ndmf;
-using Koturn.lilToon.LilOptimized.NDMF.Runtime;
+using Koturn.LilOptimized.Editor;
+using Koturn.LilOptimized.NDMF.Runtime;
 
-namespace Koturn.lilToon.LilOptimized.NDMF
+namespace Koturn.LilOptimized.NDMF.Editor
 {
     /// <summary>
     /// Provides a NDMF plugin which replace lilToon shaders to optimized ones.

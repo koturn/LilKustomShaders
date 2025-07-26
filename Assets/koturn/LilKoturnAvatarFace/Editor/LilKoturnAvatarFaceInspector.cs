@@ -1,8 +1,10 @@
 using UnityEditor;
 using UnityEngine;
 using lilToon;
+using Koturn.LilOptimized.Editor;
 
-namespace Koturn.lilToon
+
+namespace Koturn.LilKoturnAvatarFace.Editor
 {
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilKoturnAvatarFace".

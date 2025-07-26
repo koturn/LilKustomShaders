@@ -5,10 +5,10 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 using lilToon;
-using Koturn.lilToon.Sqlite;
+using Koturn.LilOptimized.Editor.Sqlite;
 
 
-namespace Koturn.lilToon
+namespace Koturn.LilOptimized.Editor
 {
     /// <summary>
     /// Utility class for LilKustomShaders.

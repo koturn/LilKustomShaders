@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Koturn.LilHueShift")]
+[assembly: AssemblyTitle("Koturn.LilHueShift.Editor")]
 [assembly: AssemblyDescription("Material inspector of koturn/LilHueShift.")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("koturn")]
-[assembly: AssemblyProduct("Koturn.LilHueShift")]
+[assembly: AssemblyProduct("Koturn.LilHueShift.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2022 koturn All Rights Reserverd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

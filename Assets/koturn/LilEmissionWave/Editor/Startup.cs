@@ -1,9 +1,10 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using Koturn.LilOptimized.Editor;
 
 
-namespace Koturn.lilToon
+namespace Koturn.LilEmissionWave.Editor
 {
     /// <summary>
     /// Startup method provider.

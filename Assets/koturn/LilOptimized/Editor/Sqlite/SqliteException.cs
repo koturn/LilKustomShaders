@@ -2,7 +2,7 @@ using System;
 using System.Runtime.Serialization;
 
 
-namespace Koturn.lilToon.Sqlite
+namespace Koturn.LilOptimized.Editor.Sqlite
 {
     /// <summary>
     /// Exception class for some failed P/Invoke of SQLite3 calls.

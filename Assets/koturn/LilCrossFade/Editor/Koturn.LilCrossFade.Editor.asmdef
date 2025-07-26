@@ -1,6 +1,10 @@
 {
-    "name": "Koturn.Tools.LilKustomShaders",
-    "references": [],
+    "name": "Koturn.LilCrossFade.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e7f0f8dffe955d640bbc76d1d4f4986e",
+        "GUID:3d1a1d2b00e4eff42a4ec9a457cbf725"
+    ],
     "includePlatforms": [
         "Editor"
     ],

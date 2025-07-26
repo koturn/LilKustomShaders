@@ -7,11 +7,11 @@ using nadena.dev.ndmf;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Koturn.LilOptimized.NDMF")]
+[assembly: AssemblyTitle("Koturn.LilOptimized.NDMF.Editor")]
 [assembly: AssemblyDescription("NDMF plugin for koturn/LilOptimized.")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("koturn")]
-[assembly: AssemblyProduct("Koturn.LilOptimized.NDMF")]
+[assembly: AssemblyProduct("Koturn.LilOptimized.NDMF.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2024 koturn All Rights Reserverd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -40,5 +40,5 @@ using nadena.dev.ndmf;
 
 #if VRC_SDK_VRCSDK3
 // Export plugin
-[assembly: ExportsPlugin(typeof(Koturn.lilToon.LilOptimized.NDMF.ShaderReplacePlugin))]
+[assembly: ExportsPlugin(typeof(Koturn.LilOptimized.NDMF.Editor.ShaderReplacePlugin))]
 #endif  // VRC_SDK_VRCSDK3

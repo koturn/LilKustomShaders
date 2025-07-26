@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Koturn.LilEmissionWave")]
+[assembly: AssemblyTitle("Koturn.LilEmissionWave.Editor")]
 [assembly: AssemblyDescription("Material inspector of koturn/LilEmissionWave.")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("koturn")]
-[assembly: AssemblyProduct("Koturn.LilEmissionWave")]
+[assembly: AssemblyProduct("Koturn.LilEmissionWave.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2022 koturn All Rights Reserverd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,9 +1,9 @@
 using UnityEditor;
 using UnityEngine;
-using Koturn.lilToon;
+using Koturn.LilOptimized.Editor;
 
 
-namespace Koturn.lilToon.Windows
+namespace Koturn.LilOptimized.Editor.Windows
 {
     /// <summary>
     /// A window class which replace lilToon shaders to optimized ones.

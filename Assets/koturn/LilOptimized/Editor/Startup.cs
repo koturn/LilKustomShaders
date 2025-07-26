@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-namespace Koturn.lilToon
+namespace Koturn.LilOptimized.Editor
 {
     /// <summary>
     /// Startup method provider.
