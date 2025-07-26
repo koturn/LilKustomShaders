@@ -1,4 +1,4 @@
-namespace Koturn.lilToon
+namespace Koturn.LilCrossFade.Editor
 {
     /// <summary>
     /// Provides Asset GUIDs.

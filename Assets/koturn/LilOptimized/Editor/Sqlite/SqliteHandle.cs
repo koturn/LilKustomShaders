@@ -2,7 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 
 
-namespace Koturn.lilToon.Sqlite
+namespace Koturn.LilOptimized.Editor.Sqlite
 {
     /// <summary>
     /// Handle for SQLite3 database.

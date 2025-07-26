@@ -1,19 +1,18 @@
 {
-    "name": "Koturn.lilToon.LilOptimized.NDMF",
+    "name": "Koturn.LilOptimized.NDMF.Runtime",
     "rootNamespace": "",
     "references": [
         "GUID:e7f0f8dffe955d640bbc76d1d4f4986e",
         "GUID:3d1a1d2b00e4eff42a4ec9a457cbf725",
-        "GUID:62ced99b048af7f4d8dfe4bed8373d76",
-        "GUID:8d81b4be4b2e65c4ca0b1670081ebf9e"
+        "GUID:62ced99b048af7f4d8dfe4bed8373d76"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "VRCSDKBase.dll"
+    ],
     "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],

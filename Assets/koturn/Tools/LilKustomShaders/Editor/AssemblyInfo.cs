@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Koturn.Tools.LilKustomShaders")]
+[assembly: AssemblyTitle("Koturn.Tools.LilKustomShaders.Editor")]
 [assembly: AssemblyDescription("Utilities for koturn/LilKustomShaders.")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("koturn")]
-[assembly: AssemblyProduct("Koturn.Tools.LilKustomShaders")]
+[assembly: AssemblyProduct("Koturn.Tools.LilKustomShaders.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2023 koturn All Rights Reserverd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

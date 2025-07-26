@@ -1,4 +1,4 @@
-namespace Koturn.lilToon
+namespace Koturn.LilHueShift.Editor
 {
     /// <summary>
     /// Provides Asset GUIDs.

@@ -1,4 +1,4 @@
-namespace Koturn.lilToon
+namespace Koturn.LilCrossFade.Editor
 {
     /// <summary>
     /// Enum values for shader property, "_TexMode".

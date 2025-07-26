@@ -2,7 +2,7 @@ using UnityEngine;
 using lilToon;
 
 
-namespace Koturn.lilToon
+namespace Koturn.LilOptimized.Editor
 {
     /// <summary>
     /// Shader manager of koturn/LilOptimized.

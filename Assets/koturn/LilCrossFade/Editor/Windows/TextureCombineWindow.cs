@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-namespace Koturn.lilToon.Windows
+namespace Koturn.LilCrossFade.Editor.Windows
 {
     /// <summary>
     /// A window class for creating Texture2DArray.

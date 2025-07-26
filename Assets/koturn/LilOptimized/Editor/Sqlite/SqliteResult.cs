@@ -1,4 +1,4 @@
-namespace Koturn.lilToon.Sqlite
+namespace Koturn.LilOptimized.Editor.Sqlite
 {
     /// <summary>
     /// Error code values of SQLite3.

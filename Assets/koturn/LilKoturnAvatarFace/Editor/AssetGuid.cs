@@ -1,4 +1,4 @@
-namespace Koturn.lilToon
+namespace Koturn.LilKoturnAvatarFace.Editor
 {
     /// <summary>
     /// Provides Asset GUIDs.

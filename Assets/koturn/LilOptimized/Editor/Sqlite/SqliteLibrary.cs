@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 
-namespace Koturn.lilToon.Sqlite
+namespace Koturn.LilOptimized.Editor.Sqlite
 {
     /// <summary>
     /// Entry point class

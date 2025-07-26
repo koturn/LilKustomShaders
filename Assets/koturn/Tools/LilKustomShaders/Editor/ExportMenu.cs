@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-namespace Koturn.Tools.KRayMarching
+namespace Koturn.Tools.LilKustomShaders.Editor
 {
     /// <summary>
     /// Export menu class.

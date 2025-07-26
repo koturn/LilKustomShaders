@@ -2,7 +2,8 @@ using UnityEditor;
 using UnityEngine;
 using lilToon;
 
-namespace Koturn.lilToon
+
+namespace Koturn.LilOptimized.Editor
 {
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of lilToon.

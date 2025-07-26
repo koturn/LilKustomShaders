@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Koturn.lilToon.LilOptimized.NDMF.Runtime
+namespace Koturn.LilOptimized.NDMF.Runtime
 {
     /// <summary>
     /// Base class of Avatar tag component.

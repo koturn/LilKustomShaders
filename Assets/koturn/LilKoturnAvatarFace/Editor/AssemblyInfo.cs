@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Koturn.LilKoturnAvatarFace")]
+[assembly: AssemblyTitle("Koturn.LilKoturnAvatarFace.Editor")]
 [assembly: AssemblyDescription("Material inspector of koturn/LilKoturnAvatarFace.")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCompany("koturn")]
-[assembly: AssemblyProduct("Koturn.LilKoturnAvatarFace")]
+[assembly: AssemblyProduct("Koturn.LilKoturnAvatarFace.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2023 koturn All Rights Reserverd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

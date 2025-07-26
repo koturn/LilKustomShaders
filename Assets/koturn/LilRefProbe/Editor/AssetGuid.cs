@@ -1,4 +1,4 @@
-namespace Koturn.lilToon
+namespace Koturn.LilRefProbe.Editor
 {
     /// <summary>
     /// Provides Asset GUIDs.

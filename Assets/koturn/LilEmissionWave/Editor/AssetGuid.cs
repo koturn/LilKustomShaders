@@ -1,4 +1,4 @@
-namespace Koturn.lilToon
+namespace Koturn.LilEmissionWave.Editor
 {
     /// <summary>
     /// Provides Asset GUIDs.
