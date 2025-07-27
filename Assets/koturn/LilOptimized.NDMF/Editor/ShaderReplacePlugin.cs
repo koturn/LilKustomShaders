@@ -1,4 +1,5 @@
 #if VRC_SDK_VRCSDK3
+using System.Collections.Generic;
 using UnityEngine;
 using nadena.dev.ndmf;
 using Koturn.LilOptimized.Editor;
@@ -31,16 +32,19 @@ namespace Koturn.LilOptimized.NDMF.Editor
                     GameObject.DestroyImmediate(config);
 
                     var renderers = avatar.GetComponentsInChildren<Renderer>(true);
+                    var shaderMaterialList = new List<Material>();
 
                     foreach (var renderer in renderers)
                     {
-                        var materials = renderer.sharedMaterials;
-                        for (int i = 0; i < materials.Length; i++)
+                        var materialIndex = -1;
+                        renderer.GetSharedMaterials(shaderMaterialList);
+                        foreach (var material in shaderMaterialList)
                         {
-                            var mat = materials[i];
+                            materialIndex++;
+                            var mat = material;
                             if (mat == null)
                             {
-                                Debug.LogWarningFormat("Renderer=[{0}] Material[{1}] is null", renderer.name, i);
+                                Debug.LogWarningFormat("Renderer=[{0}] Material[{1}] is null", renderer.name, materialIndex);
                                 continue;
                             }
 #if UNITY_2022_1_OR_NEWER
