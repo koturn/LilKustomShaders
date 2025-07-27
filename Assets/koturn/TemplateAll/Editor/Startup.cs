@@ -11,20 +11,40 @@ namespace lilToon
     /// <summary>
     /// Startup method provider.
     /// </summary>
-    internal static class Startup
+    internal sealed class Startup : AssetPostprocessor
     {
         /// <summary>
         /// Buffer size of streams.
         /// </summary>
         private const int DefaultBufferSize = 1024;
 
+#if UNITY_2021_2_OR_NEWER
         /// <summary>
-        /// A method called at Unity startup.
+        /// This is called after importing of any number of assets is complete.
         /// </summary>
-        [InitializeOnLoadMethod]
-        private static void OnStartup()
+        /// <param name="importedAssets">Array of paths to imported assets.</param>
+        /// <param name="deletedAssets">Array of paths to deleted assets.</param>
+        /// <param name="movedAssets">Array of paths to moved assets.</param>
+        /// <param name="movedFromAssetPaths">Array of original paths for moved assets.</param>
+        /// <param name="didDomainReload">Boolean set to true if there has been a domain reload.</param>
+        /// <remarks>
+        /// <seealso href="https://docs.unity3d.com/2022.3/Documentation/ScriptReference/AssetPostprocessor.OnPostprocessAllAssets.html"/>
+        /// </remarks>
+        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths, bool didDomainReload)
+#else
+        /// <summary>
+        /// This is called after importing of any number of assets is complete.
+        /// </summary>
+        /// <param name="importedAssets">Array of paths to imported assets.</param>
+        /// <param name="deletedAssets">Array of paths to deleted assets.</param>
+        /// <param name="movedAssets">Array of paths to moved assets.</param>
+        /// <param name="movedFromAssetPaths">Array of original paths for moved assets.</param>
+        /// <remarks>
+        /// <seealso href="https://docs.unity3d.com/2019.4/Documentation/ScriptReference/AssetPostprocessor.OnPostprocessAllAssets.html"/>
+        /// </remarks>
+        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+#endif  // UNITY_2021_2_OR_NEWER
         {
-            AssetDatabase.importPackageCompleted += Startup_ImportPackageCompleted;
             UpdateVersionDefFile();
         }
 
@@ -268,19 +288,6 @@ namespace lilToon
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// A callback method for <see cref="AssetDatabase.importPackageCompleted"/>.
-        /// </summary>
-        /// <param name="packageName">Imported package name.</param>
-        private static void Startup_ImportPackageCompleted(string packageName)
-        {
-            if (!packageName.StartsWith("lilToon"))
-            {
-                return;
-            }
-            UpdateVersionDefFile();
         }
     }
 }
