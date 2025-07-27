@@ -34,16 +34,21 @@ namespace Koturn.LilOptimized.NDMF.Editor
 
                     foreach (var renderer in renderers)
                     {
-                        var materials = renderer.materials;
+                        var materials = renderer.sharedMaterials;
                         for (int i = 0; i < materials.Length; i++)
                         {
                             var mat = materials[i];
+                            if (mat == null)
+                            {
+                                Debug.LogWarningFormat("Renderer=[{0}] Material[{1}] is null", renderer.name, i);
+                                continue;
+                            }
 #if UNITY_2022_1_OR_NEWER
                             // NDMF first create copy of material; material variant will be a material.
                             // Therefore, material variants should not be detected.
                             if (mat.parent != null)
                             {
-                                Debug.LogWarningFormat("{0} is material variant", mat.name);
+                                Debug.LogWarningFormat("Renderer=[{0}] {1} is material variant", renderer.name, mat.name);
                                 for (; mat.parent != null; mat = mat.parent)
                                 {
                                     // Do nothing
@@ -64,7 +69,7 @@ namespace Koturn.LilOptimized.NDMF.Editor
 
                             mat.shader = newShader;
 
-                            Debug.LogFormat("{0}: {1} -> {2}", mat.name, shader.name, newShader.name);
+                            Debug.LogFormat("Renderer=[{0}] Replaced shader of {1}: {2} -> {3}", renderer.name, mat.name, shader.name, newShader.name);
                         }
                     }
                 });
