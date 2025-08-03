@@ -23,7 +23,7 @@ namespace Koturn.LilKoturnAvatarFace.Editor
         /// <remarks>
         /// <seealso href="https://docs.unity3d.com/2022.3/Documentation/ScriptReference/AssetPostprocessor.OnPostprocessAllAssets.html"/>
         /// </remarks>
-        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths, bool didDomainReload)
+        private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths, bool didDomainReload)
 #else
         /// <summary>
         /// This is called after importing of any number of assets is complete.
@@ -35,7 +35,7 @@ namespace Koturn.LilKoturnAvatarFace.Editor
         /// <remarks>
         /// <seealso href="https://docs.unity3d.com/2019.4/Documentation/ScriptReference/AssetPostprocessor.OnPostprocessAllAssets.html"/>
         /// </remarks>
-        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+        private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 #endif  // UNITY_2021_2_OR_NEWER
         {
             UpdateIncludeFiles();
