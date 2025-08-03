@@ -388,7 +388,7 @@ namespace Koturn.LilOptimized.Editor
             }
 
             var minBufferSize = Math.Min(length, bufferSize);
-            using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, minBufferSize))
+            using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, minBufferSize, FileOptions.SequentialScan))
             {
                 var buffer = new byte[minBufferSize];
                 int nRead;
@@ -484,7 +484,7 @@ namespace Koturn.LilOptimized.Editor
         /// <param name="bufferSize">Buffer size for <see cref="FileStream"/></param>
         private static void WriteBytes(string filePath, byte[] data, int offset, int count, int bufferSize = 4096)
         {
-            using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Read, bufferSize))
+            using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.Read, bufferSize, FileOptions.SequentialScan))
             {
                 fs.Write(data, offset, count);
             }
