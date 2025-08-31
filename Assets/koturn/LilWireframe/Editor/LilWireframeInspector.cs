@@ -96,15 +96,12 @@ namespace Koturn.LilWireframe.Editor
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;
-                    me.ShaderProperty(_wireframeWidth, GetLoc("sWireframeWidth"));
-                    me.TexturePropertySingleLine(
-                        new GUIContent(GetLoc("sWireframeMaskAndColor")),
-                        _wireframeMask,
-                        _wireframeColor);
-                    me.ShaderProperty(_wireframeRandomizeColor, GetLoc("sWireframeRandomizeColor"));
+                    lilEditorGUI.LocalizedProperty(me, _wireframeWidth);
+                    lilEditorGUI.TexturePropertySingleLine(me, new GUIContent(GetLoc("sWireframeMaskAndColor"), GetLoc("sTextureRGB")), _wireframeMask, _wireframeColor);
+                    lilEditorGUI.LocalizedProperty(me, _wireframeRandomizeColor);
 
-                    me.ShaderProperty(_wireframeCycleTime, GetLoc("sWireframeCycleTime"));
-                    me.ShaderProperty(_wireframeDecayTime, GetLoc("sWireframeDecayTime"));
+                    lilEditorGUI.LocalizedProperty(me, _wireframeCycleTime);
+                    lilEditorGUI.LocalizedProperty(me, _wireframeDecayTime);
                 }
             }
         }

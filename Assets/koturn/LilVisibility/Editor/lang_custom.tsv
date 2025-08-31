@@ -1,8 +1,13 @@
 Language	English	Japanese
 sCustomShaderTitle	Mirror/Camera Visibility	鏡/カメラでの可視性
+sGeneric	Generic	汎用
+sVRC	VRC	VRC
 sCustomPropertyCategory	Mirror/Camera Visibility	鏡/カメラでの可視性
 sVisibilityMode	Mode	モード
 sMirror	Mirror Visibility	鏡
+sShowBoth	Show In Both	ミラー内外どちらも可視
+sShowOnlyInMirror	Show Only In Mirror	ミラー内でのみ可視
+sDontShowInMirror	Don't Show In Mirror	ミラーでは不可視
 sVisibilityVRCRegular	Normal (Outside Mirror/Camera)	通常 (鏡・カメラ外)
 sVisibilityVRCMirrorVR	Mirror (VR)	鏡 (VR)
 sVisibilityVRCMirrorDesktop	"Mirror (Desktop)	鏡 (デスクトップ)

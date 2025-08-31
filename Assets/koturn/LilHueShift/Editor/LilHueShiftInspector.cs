@@ -87,10 +87,10 @@ namespace Koturn.LilHueShift.Editor
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;
-                    me.ShaderProperty(_hueShiftMask, GetLoc("sHueShiftMask"));
-                    me.ShaderProperty(_hueShiftSpeed, GetLoc("sHueShiftSpeed"));
-                    me.ShaderProperty(_hueShiftEmission, GetLoc("sHueShiftEmission"));
-                    me.ShaderProperty(_hueShiftEmission2nd, GetLoc("sHueShiftEmission2nd"));
+                    lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMask"), GetLoc("sTextureRGB")), _hueShiftMask);
+                    lilEditorGUI.LocalizedProperty(me, _hueShiftSpeed);
+                    lilEditorGUI.LocalizedProperty(me, _hueShiftEmission);
+                    lilEditorGUI.LocalizedProperty(me, _hueShiftEmission2nd);
                 }
             }
         }

@@ -1,19 +1,18 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
-        _GraphKoturnColor ("Color of graph of koturn", Color) = (0.6333333, 0.6333333, 0.95, 1.0)
-        _GraphKoturnOffsetScale ("Offsets and Scales of graph of koturn", Vector) = (0.0, 0.0, 1.0, 1.0)
-        [lilAngle] _GraphKoturnRotAngle ("Rotate angle of graph of koturn (Radians)", Float) = 0.0
+        [lilHDR] _GraphKoturnColor ("sColorAlpha", Color) = (0.6333333, 0.6333333, 0.95, 1.0)
+        _GraphKoturnOffsetScale ("sOffsetScale", Vector) = (0.0, 0.0, 1.0, 1.0)
+        [lilAngle] _GraphKoturnRotAngle ("sGraphKoturnRotAngle", Float) = 0.0
 
-        // [Enum(Normal, 0, Add, 1, Screen, 2, Multiply, 3)] _StarBlendMode ("Blend mode of star", Int) = 1
-        [Enum(Normal, 0, Add, 1, Screen, 2, Multiply, 3)] _StarBlendMode ("Blend mode of star", Int) = 1
-        [HDR] _StarColor ("Color of star", Color) = (1.0, 1.0, 0.0, 1.0)
-        _StarOffsetScale ("Offsets and Scales of star", Vector) = (0.0, 0.0, 1.0, 1.0)
-        [lilAngle] _StarRotAngle ("Rotate angle of star (Radians)", Float) = 0.0
-        [lilAngle] _StarRotSpeed ("Rotate speed of star (Rad/s)", Float) = 0.25
-        _StarWidth ("Width of star", Float) = 0.05
+        [lilEnum] _StarBlendMode ("sBlendModes", Int) = 1
+        [lilHDR] _StarColor ("sColorAlpha", Color) = (1.0, 1.0, 0.0, 1.0)
+        _StarOffsetScale ("sOffsetScale", Vector) = (0.0, 0.0, 1.0, 1.0)
+        [lilAngle] _StarRotAngle ("sStarRotAngle", Float) = 0.0
+        [lilAngle] _StarRotSpeed ("sStarRotSpeed", Float) = 0.25
+        _StarWidth ("sStarWidth", Float) = 0.05
 
-        _HueShiftMask ("Mask for Hue Shift", 2D) = "white" {}
-        _HueShiftSpeed ("Hue Shift speed", Float) = 0.1
-        [lilToggle] _HueShiftEmission ("Enable Hue Shift on Emission 1st", Int) = 1
-        [lilToggle] _HueShiftEmission2nd ("Enable Hue Shift on Emission 2nd", Int) = 1
+        _HueShiftMask ("sHueShiftMask", 2D) = "white" {}
+        _HueShiftSpeed ("sHueShiftSpeed", Float) = 0.1
+        [lilToggle] _HueShiftEmission ("sHueShiftEmission", Int) = 1
+        [lilToggle] _HueShiftEmission2nd ("sHueShiftEmission2nd", Int) = 1

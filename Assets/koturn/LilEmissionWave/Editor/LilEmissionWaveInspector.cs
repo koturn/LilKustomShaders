@@ -152,42 +152,42 @@ namespace Koturn.LilEmissionWave.Editor
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;
-                    me.ShaderProperty(_displayCycleTime, GetLoc("sDisplayTime"));
-                    me.ShaderProperty(_crossFadeTime, GetLoc("sCrossFadeTime"));
+                    lilEditorGUI.LocalizedProperty(me, _displayCycleTime);
+                    lilEditorGUI.LocalizedProperty(me, _crossFadeTime);
 
-                    me.ShaderProperty(_numColors, GetLoc("sNumColors"));
+                    lilEditorGUI.LocalizedProperty(me, _numColors);
                     var colorCount = (int)_numColors.floatValue;
 
-                    me.ShaderProperty(_emissionWaveMask, GetLoc("sEmissionWaveMask"));
+                    lilEditorGUI.LocalizedProperty(me, _emissionWaveMask);
 
-                    me.ShaderProperty(_emissionWaveColors[0], GetLoc("sEmissionWaveColor1"));
+                    lilEditorGUI.LocalizedProperty(me, _emissionWaveColors[0]);
                     // Same as _Color.
                     using (new EditorGUI.DisabledScope(true))
                     {
-                        me.ShaderProperty(_colors[0], GetLoc("sColor1"));
+                        lilEditorGUI.LocalizedProperty(me, _colors[0]);
                     }
                     for (int i = 1; i < _colors.Length; i++)
                     {
                         EditorGUILayout.Space();
                         using (new EditorGUI.DisabledScope(i >= colorCount))
                         {
-                            me.ShaderProperty(_emissionWaveColors[i], GetLoc("sEmissionWaveColor" + (i + 1)));
-                            me.ShaderProperty(_colors[i], GetLoc("sColor" + (i + 1)));
+                            lilEditorGUI.LocalizedProperty(me, _emissionWaveColors[i]);
+                            lilEditorGUI.LocalizedProperty(me, _colors[i]);
                         }
                     }
 
-                    me.ShaderProperty(_emissionWaveNoiseAmp, GetLoc("sEmissionWaveNoiseAmp"));
-                    me.ShaderProperty(_emissionWaveSpeed, GetLoc("sEmissionWaveSpeed"));
-                    me.ShaderProperty(_emissionWaveInitPhase, GetLoc("sEmissionWaveInitPhase"));
-                    me.ShaderProperty(_emissionWaveParam, GetLoc("sEmissionWaveParam"));
-                    me.ShaderProperty(_emissionPosMin, GetLoc("sEmissionPosMin"));
-                    me.ShaderProperty(_emissionPosMax, GetLoc("sEmissionPosMax"));
-                    me.ShaderProperty(_wavePosSpace, GetLoc("sWavePosSpace"));
-                    me.ShaderProperty(_waveAxis, GetLoc("sWaveAxis"));
+                    lilEditorGUI.LocalizedProperty(me, _emissionWaveNoiseAmp);
+                    lilEditorGUI.LocalizedProperty(me, _emissionWaveSpeed);
+                    lilEditorGUI.LocalizedProperty(me, _emissionWaveInitPhase);
+                    lilEditorGUI.LocalizedProperty(me, _emissionWaveParam);
+                    lilEditorGUI.LocalizedProperty(me, _emissionPosMin);
+                    lilEditorGUI.LocalizedProperty(me, _emissionPosMax);
+                    lilEditorGUI.LocalizedProperty(me, _wavePosSpace);
+                    lilEditorGUI.LocalizedProperty(me, _waveAxis);
                     using (new EditorGUI.IndentLevelScope())
                     using (new EditorGUI.DisabledScope((int)_waveAxis.floatValue != 3))
                     {
-                        DrawAngleVec3(_waveAxisAngles, GetLoc("sWaveAxisAngles"));
+                        DrawAngleVec3(_waveAxisAngles);
                     }
                 }
             }
@@ -265,9 +265,13 @@ namespace Koturn.LilEmissionWave.Editor
         /// Draw Vector3 Field of angles.
         /// </summary>
         /// <param name="prop"><see cref="MaterialProperty"/> of vector.</param>
-        /// <param name="label">Label string for this <see cref="MaterialProperty"/>.</param>
-        private static void DrawAngleVec3(MaterialProperty prop, string label)
+        private static void DrawAngleVec3(MaterialProperty prop)
         {
+            if (!lilEditorGUI.CheckPropertyToDraw(prop))
+            {
+                return;
+            }
+
             var position = EditorGUILayout.GetControlRect(
                 true,
                 MaterialEditor.GetDefaultPropertyHeight(prop) / 2.0f,
@@ -282,6 +286,12 @@ namespace Koturn.LilEmissionWave.Editor
             EditorGUI.showMixedValue = prop.hasMixedValue;
             using (var ccScope = new EditorGUI.ChangeCheckScope())
             {
+                var label = lilLanguageManager.GetDisplayName(prop);
+                if (Event.current.alt)
+                {
+                    label += ".xyz";
+                }
+
                 var vec = EditorGUI.Vector3Field(position, label, propVec);
                 if (ccScope.changed)
                 {

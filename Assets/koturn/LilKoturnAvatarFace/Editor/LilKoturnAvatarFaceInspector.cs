@@ -73,10 +73,6 @@ namespace Koturn.LilKoturnAvatarFace.Editor
         /// <see cref="MaterialProperty"/> of "_HueShiftEmission2nd".
         /// </summary>
         private MaterialProperty _hueShiftEmission2nd;
-        /// <summary>
-        /// Blend mode choices.
-        /// </summary>
-        private string[] _blendModes;
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.
@@ -106,13 +102,6 @@ namespace Koturn.LilKoturnAvatarFace.Editor
             _hueShiftSpeed = FindProperty("_HueShiftSpeed", props);
             _hueShiftEmission = FindProperty("_HueShiftEmission", props);
             _hueShiftEmission2nd = FindProperty("_HueShiftEmission2nd", props);
-            _blendModes = new string[]
-            {
-                GetLoc("sBlendModeNormal"),
-                GetLoc("sBlendModeAdd"),
-                GetLoc("sBlendModeScreen"),
-                GetLoc("sBlendModeMul")
-            };
         }
 
         /// <summary>
@@ -143,36 +132,29 @@ namespace Koturn.LilKoturnAvatarFace.Editor
                 EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryKoturnGraph"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    me.ShaderProperty(_graphKoturnColor, GetLoc("sKoturnGraphColor"));
-                    DrawVector4AsOffsetScale2x2(_graphKoturnOffsetScale, GetLoc("sKoturnGraphOffset"), GetLoc("sKoturnGraphScale"));
-                    me.ShaderProperty(_graphKoturnRotAngle, GetLoc("sKoturnGraphRotAngle"));
+                    lilEditorGUI.LocalizedProperty(me, _graphKoturnColor);
+                    DrawVector4AsOffsetScale2x2(_graphKoturnOffsetScale);
+                    lilEditorGUI.LocalizedProperty(me, _graphKoturnRotAngle);
                 }
 
                 EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryStar"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    using (var ccScope = new EditorGUI.ChangeCheckScope())
-                    {
-                        var selectedIndex = EditorGUILayout.Popup(GetLoc("sBlendMode"), (int)_starBlendMode.floatValue, _blendModes);
-                        if (ccScope.changed)
-                        {
-                            _starBlendMode.floatValue = (float)selectedIndex;
-                        }
-                    }
-                    me.ShaderProperty(_starColor, GetLoc("sStarColor"));
-                    DrawVector4AsOffsetScale2x2(_starOffsetScale, GetLoc("sStarOffset"), GetLoc("sStarScale"));
-                    me.ShaderProperty(_starRotAngle, GetLoc("sStarRotAngle"));
-                    me.ShaderProperty(_starRotSpeed, GetLoc("sStarRotSpeed"));
-                    me.ShaderProperty(_starWidth, GetLoc("sStarWidth"));
+                    lilEditorGUI.LocalizedProperty(me, _starBlendMode);
+                    lilEditorGUI.LocalizedProperty(me, _starColor);
+                    DrawVector4AsOffsetScale2x2(_starOffsetScale);
+                    lilEditorGUI.LocalizedProperty(me, _starRotAngle);
+                    lilEditorGUI.LocalizedProperty(me, _starRotSpeed);
+                    lilEditorGUI.LocalizedProperty(me, _starWidth);
                 }
 
                 EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    me.ShaderProperty(_hueShiftMask, GetLoc("sHueShiftMask"));
-                    me.ShaderProperty(_hueShiftSpeed, GetLoc("sHueShiftSpeed"));
-                    me.ShaderProperty(_hueShiftEmission, GetLoc("sHueShiftEmission"));
-                    me.ShaderProperty(_hueShiftEmission2nd, GetLoc("sHueShiftEmission2nd"));
+                    lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMask"), GetLoc("sTextureRGB")), _hueShiftMask);
+                    lilEditorGUI.LocalizedProperty(me, _hueShiftSpeed);
+                    lilEditorGUI.LocalizedProperty(me, _hueShiftEmission);
+                    lilEditorGUI.LocalizedProperty(me, _hueShiftEmission2nd);
                 }
             }
         }
@@ -250,10 +232,13 @@ namespace Koturn.LilKoturnAvatarFace.Editor
         /// <para>X and Y are offsets, Z and W are scales.</para>
         /// </summary>
         /// <param name="prop"><see cref="MaterialProperty"/> of vector.</param>
-        /// <param name="offsetLabel">String for offset vector.</param>
-        /// <param name="scaleLabel">String for scale vector.</param>
-        private static void DrawVector4AsOffsetScale2x2(MaterialProperty prop, string offsetLabel, string scaleLabel)
+        private static void DrawVector4AsOffsetScale2x2(MaterialProperty prop)
         {
+            if (!lilEditorGUI.CheckPropertyToDraw(prop))
+            {
+                return;
+            }
+
             using (var ccScope = new EditorGUI.ChangeCheckScope())
             {
                 var position = EditorGUILayout.GetControlRect(
@@ -261,13 +246,15 @@ namespace Koturn.LilKoturnAvatarFace.Editor
                     MaterialEditor.GetDefaultPropertyHeight(prop) / 2.0f,
                     EditorStyles.layerMaskField);
                 EditorGUI.showMixedValue = prop.hasMixedValue;
-                var vec = EditorGUI.Vector2Field(position, offsetLabel, prop.vectorValue);
+                var label = Event.current.alt ? prop.name + ".xy" : GetLoc("sOffset");
+                var vec = EditorGUI.Vector2Field(position, label, prop.vectorValue);
                 EditorGUI.showMixedValue = false;
                 if (ccScope.changed)
                 {
                     prop.vectorValue = new Vector4(vec.x, vec.y, prop.vectorValue.z, prop.vectorValue.w);
                 }
             }
+
             using (var ccScope = new EditorGUI.ChangeCheckScope())
             {
                 var position = EditorGUILayout.GetControlRect(
@@ -275,7 +262,8 @@ namespace Koturn.LilKoturnAvatarFace.Editor
                     MaterialEditor.GetDefaultPropertyHeight(prop) / 2.0f,
                     EditorStyles.layerMaskField);
                 EditorGUI.showMixedValue = prop.hasMixedValue;
-                var vec = EditorGUI.Vector2Field(position, scaleLabel, new Vector2(prop.vectorValue.z, prop.vectorValue.w));
+                var label = Event.current.alt ? prop.name + ".zw" : GetLoc("sScale");
+                var vec = EditorGUI.Vector2Field(position, label, new Vector2(prop.vectorValue.z, prop.vectorValue.w));
                 EditorGUI.showMixedValue = false;
                 if (ccScope.changed)
                 {

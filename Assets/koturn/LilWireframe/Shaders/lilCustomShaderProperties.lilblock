@@ -1,9 +1,9 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
-        _WireframeWidth ("Wireframe width", Range(0.0, 1.0)) = 0.025
-        [NoScaleOffset] _WireframeMask ("Wireframe mask texture", 2D) = "white" {}
-        [HDR] _WireframeColor ("Wireframe color", Color) = (0.0, 1.0, 0.0, 1.0)
-        [Toggle(_WIREFRAME_RANDOMIZE_COLOR_ON)] _WireframeRandomizeColor ("Randomize hue of wireframe color", Int) = 0
-        _WireframeCycleTime ("Wireframe animation cycle (seconds)", Float) = 16.0
-        _WireframeDecayTime ("Wireframe emission decay time (seconds)", Float) = 1.0
+        _WireframeWidth ("sWireframeWidth", Range(0.0, 1.0)) = 0.025
+        [NoScaleOffset] _WireframeMask ("sWireframeMask", 2D) = "white" {}
+        [lilHDR] _WireframeColor ("sWireframeColor", Color) = (0.0, 1.0, 0.0, 1.0)
+        [Toggle(_WIREFRAME_RANDOMIZE_COLOR_ON)] _WireframeRandomizeColor ("sWireframeRandomizeColor", Int) = 0
+        _WireframeCycleTime ("sWireframeCycleTime", Float) = 16.0
+        _WireframeDecayTime ("sWireframeDecayTime", Float) = 1.0

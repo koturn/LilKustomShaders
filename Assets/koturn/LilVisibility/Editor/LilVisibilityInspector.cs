@@ -106,16 +106,19 @@ namespace Koturn.LilVisibility.Editor
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;
-                    me.ShaderProperty(_visibilityMode, GetLoc("sVisibilityMode"));
-                    if ((int)_visibilityMode.floatValue == 1) {
-                        me.ShaderProperty(_visibilityVRCRegular, GetLoc("sVisibilityVRCRegular"));
-                        me.ShaderProperty(_visibilityVRCMirrorVR, GetLoc("sVisibilityVRCMirrorVR"));
-                        me.ShaderProperty(_visibilityVRCMirrorDesktop, GetLoc("sVisibilityVRCMirrorDesktop"));
-                        me.ShaderProperty(_visibilityVRCCameraVR, GetLoc("sVisibilityVRCCameraVR"));
-                        me.ShaderProperty(_visibilityVRCCameraDesktop, GetLoc("sVisibilityVRCCameraDesktop"));
-                        me.ShaderProperty(_visibilityVRCCameraScreenshot, GetLoc("sVisibilityVRCCameraScreenshot"));
-                    } else {
-                        me.ShaderProperty(_mirror, GetLoc("sMirror"));
+                    lilEditorGUI.LocalizedProperty(me, _visibilityMode);
+                    if ((int)_visibilityMode.floatValue == 1)
+                    {
+                        lilEditorGUI.LocalizedProperty(me, _visibilityVRCRegular);
+                        lilEditorGUI.LocalizedProperty(me, _visibilityVRCMirrorVR);
+                        lilEditorGUI.LocalizedProperty(me, _visibilityVRCMirrorDesktop);
+                        lilEditorGUI.LocalizedProperty(me, _visibilityVRCCameraVR);
+                        lilEditorGUI.LocalizedProperty(me, _visibilityVRCCameraDesktop);
+                        lilEditorGUI.LocalizedProperty(me, _visibilityVRCCameraScreenshot);
+                    }
+                    else
+                    {
+                        lilEditorGUI.LocalizedProperty(me, _mirror);
                     }
                 }
             }

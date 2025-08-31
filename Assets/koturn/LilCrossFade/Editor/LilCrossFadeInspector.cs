@@ -134,9 +134,11 @@ namespace Koturn.LilCrossFade.Editor
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;
-                    me.ShaderProperty(_displayCycleTime, GetLoc("sDisplayTime"));
-                    me.ShaderProperty(_crossFadeTime, GetLoc("sCrossFadeTime"));
-                    me.ShaderProperty(_texMode, GetLoc("sTexMode"));
+                    lilEditorGUI.LocalizedProperty(me, _displayCycleTime);
+                    lilEditorGUI.LocalizedProperty(me, _crossFadeTime);
+                    lilEditorGUI.LocalizedProperty(me, _texMode);
+
+                    var tooltipText = GetLoc("sTextureRGB");
 
                     var texMode = (TexMode)_texMode.floatValue;
                     if (texMode == TexMode.Textures)
@@ -151,7 +153,7 @@ namespace Koturn.LilCrossFade.Editor
                             }
                         }
 
-                        me.ShaderProperty(_numTextures, GetLoc("sNumTextures"));
+                        lilEditorGUI.LocalizedProperty(me, _numTextures);
                         if (GUILayout.Button("Set to texture count"))
                         {
                             _numTextures.floatValue = texCount;
@@ -163,14 +165,14 @@ namespace Koturn.LilCrossFade.Editor
 
                         using (new EditorGUI.DisabledScope(true))
                         {
-                            me.ShaderProperty(_mainTexes[0], GetLoc("sMainTex1"));
+                            lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMainTex1"), tooltipText), _mainTexes[0]);
                         }
                         for (int i = 1; i < _mainTexes.Length; i++)
                         {
                             EditorGUILayout.Space();
                             using (new EditorGUI.DisabledScope(i > texCount))
                             {
-                                me.ShaderProperty(_mainTexes[i], GetLoc("sMainTex" + (i + 1)));
+                                lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMainTex" + (i + 1)), tooltipText), _mainTexes[i]);
                             }
                         }
                     }
@@ -180,7 +182,7 @@ namespace Koturn.LilCrossFade.Editor
                         var depth = texValue == null ? 0.0f : (float)((Texture2DArray)texValue).depth;
                         using (new EditorGUI.DisabledScope(texValue == null))
                         {
-                            me.ShaderProperty(_numTextures, GetLoc("sNumTextures"));
+                            lilEditorGUI.LocalizedProperty(me, _numTextures);
                             if (GUILayout.Button("Set to texture count"))
                             {
                                 _numTextures.floatValue = depth;
@@ -190,24 +192,24 @@ namespace Koturn.LilCrossFade.Editor
                                 _numTextures.floatValue = Mathf.Clamp(Mathf.Floor(_numTextures.floatValue), 1.0f, depth);
                             }
                         }
-                        me.ShaderProperty(_mainTexArray, GetLoc("sMainTexArray"));
+                        lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc(_mainTexArray.displayName), tooltipText), _mainTexArray);
                     }
                     else
                     {
-                        me.ShaderProperty(_numTextures, GetLoc("sNumTextures"));
-                        me.ShaderProperty(_atlasRows, GetLoc("sAtlasRows"));
-                        me.ShaderProperty(_atlasCols, GetLoc("sAtlasCols"));
+                        lilEditorGUI.LocalizedProperty(me, _numTextures);
+                        lilEditorGUI.LocalizedProperty(me, _atlasRows);
+                        lilEditorGUI.LocalizedProperty(me, _atlasCols);
                         _numTextures.floatValue = Mathf.Clamp(_numTextures.floatValue, 1.0f, _atlasRows.floatValue * _atlasCols.floatValue);
                         if (texMode == TexMode.MainTextureAsAtlas)
                         {
                             using (new EditorGUI.DisabledScope(true))
                             {
-                                me.ShaderProperty(_mainTexes[0], GetLoc("sMainTex1"));
+                                lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMainTex1"), tooltipText), _mainTexes[0]);
                             }
                         }
                         else
                         {
-                            me.ShaderProperty(_mainTexes[1], GetLoc("sMainTex2"));
+                            lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMainTex2"), tooltipText), _mainTexes[1]);
                         }
                     }
                 }

@@ -76,8 +76,8 @@ namespace Koturn.LilRefProbe.Editor
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;
-                    me.ShaderProperty(_refProbeMask, GetLoc("sRefProbeMask"));
-                    me.ShaderProperty(_refProbeBlendCoeff, GetLoc("sRefProbeBlendCoeff"));
+                    lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMask"), GetLoc("sTextureRGB")), _refProbeMask);
+                    lilEditorGUI.LocalizedProperty(me, _refProbeBlendCoeff);
                 }
             }
         }

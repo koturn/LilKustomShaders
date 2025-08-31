@@ -229,7 +229,7 @@ namespace Koturn.LilTextOverlay.Editor
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;
-                    me.ShaderProperty(_spriteTex, GetLoc("sSpriteTex"));
+                    lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc(_spriteTex.displayName), GetLoc("sTextureRGBA")), _spriteTex);
 
                     using (new EditorGUILayout.VerticalScope(boxOuter))
                     {
@@ -238,11 +238,11 @@ namespace Koturn.LilTextOverlay.Editor
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                             {
-                                me.ShaderProperty(_elapsedTimeColor, GetLoc("sElapsedTimeColor"));
-                                DrawVector4AsOffsetScale2x2(_elapsedTimeOffsetScale, GetLoc("sElapsedTimeOffset"), GetLoc("sElapsedTimeScale"));
-                                me.ShaderProperty(_elapsedTimeRotAngle, GetLoc("sElapsedTimeRotAngle"));
-                                me.ShaderProperty(_elapsedTimeDisplayLength, GetLoc("sElapsedTimeDisplayLength"));
-                                me.ShaderProperty(_elapsedTimeAlign, GetLoc("sElapsedTimeAlign"));
+                                lilEditorGUI.LocalizedProperty(me, _elapsedTimeColor);
+                                DrawVector4AsOffsetScale2x2(_elapsedTimeOffsetScale);
+                                lilEditorGUI.LocalizedProperty(me, _elapsedTimeRotAngle);
+                                lilEditorGUI.LocalizedProperty(me, _elapsedTimeDisplayLength);
+                                lilEditorGUI.LocalizedProperty(me, _elapsedTimeAlign);
                             }
                         }
                     }
@@ -254,24 +254,24 @@ namespace Koturn.LilTextOverlay.Editor
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                             {
-                                me.ShaderProperty(_alTimeOfDayColor, GetLoc("sALTimeOfDayColor"));
-                                DrawVector4AsOffsetScale2x2(_alTimeOfDayOffsetScale, GetLoc("sALTimeOfDayOffset"), GetLoc("sALTimeOfDayScale"));
-                                me.ShaderProperty(_alTimeOfDayRotAngle, GetLoc("sALTimeOfDayRotAngle"));
-                                me.ShaderProperty(_alTimeOfDayDisplayLength, GetLoc("sALTimeOfDayDisplayLength"));
-                                me.ShaderProperty(_alTimeOfDayAlign, GetLoc("sALTimeOfDayAlign"));
-                                me.ShaderProperty(_alTimeOfDayKind, GetLoc("sALTimeOfDayKind"));
+                                lilEditorGUI.LocalizedProperty(me, _alTimeOfDayColor);
+                                DrawVector4AsOffsetScale2x2(_alTimeOfDayOffsetScale);
+                                lilEditorGUI.LocalizedProperty(me, _alTimeOfDayRotAngle);
+                                lilEditorGUI.LocalizedProperty(me, _alTimeOfDayDisplayLength);
+                                lilEditorGUI.LocalizedProperty(me, _alTimeOfDayAlign);
+                                lilEditorGUI.LocalizedProperty(me, _alTimeOfDayKind);
                                 var showFallback = false;
                                 if ((int)_alTimeOfDayKind.floatValue == 1) {
-                                    me.ShaderProperty(_enableALTimeOfDayUtcFallback, GetLoc("sEnableALTimeOfDayUtcFallback"));
+                                    lilEditorGUI.LocalizedProperty(me, _enableALTimeOfDayUtcFallback);
                                     if (ToBool(_enableALTimeOfDayUtcFallback.floatValue)) {
                                         showFallback = true;
                                     }
                                 }
                                 if ((int)_alTimeOfDayKind.floatValue == 0 || showFallback) {
-                                    me.ShaderProperty(_alTimeOfDayLocalTimeOffsetSeconds, GetLoc("sALTimeOfDayLocalTimeOffsetSeconds"));
+                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayLocalTimeOffsetSeconds);
                                 }
                                 if ((int)_alTimeOfDayKind.floatValue == 1) {
-                                    me.ShaderProperty(_alTimeOfDayUtcOffsetSeconds, GetLoc("sALTimeOfDayUtcOffsetSeconds"));
+                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayUtcOffsetSeconds);
                                 }
                             }
                         }
@@ -284,11 +284,11 @@ namespace Koturn.LilTextOverlay.Editor
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                             {
-                                me.ShaderProperty(_framerateColor, GetLoc("sFramerateColor"));
-                                DrawVector4AsOffsetScale2x2(_framerateOffsetScale, GetLoc("sFramerateOffset"), GetLoc("sFramerateScale"));
-                                me.ShaderProperty(_framerateRotAngle, GetLoc("sFramerateRotAngle"));
-                                me.ShaderProperty(_framerateDisplayLength, GetLoc("sFramerateDisplayLength"));
-                                me.ShaderProperty(_framerateAlign, GetLoc("sFramerateAlign"));
+                                lilEditorGUI.LocalizedProperty(me, _framerateColor);
+                                DrawVector4AsOffsetScale2x2(_framerateOffsetScale);
+                                lilEditorGUI.LocalizedProperty(me, _framerateRotAngle);
+                                lilEditorGUI.LocalizedProperty(me, _framerateDisplayLength);
+                                lilEditorGUI.LocalizedProperty(me, _framerateAlign);
                             }
                         }
                     }
@@ -300,13 +300,13 @@ namespace Koturn.LilTextOverlay.Editor
                         {
                             using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                             {
-                                me.ShaderProperty(_worldPosColorX, GetLoc("sWorldPosColorX"));
-                                me.ShaderProperty(_worldPosColorY, GetLoc("sWorldPosColorY"));
-                                me.ShaderProperty(_worldPosColorZ, GetLoc("sWorldPosColorZ"));
-                                DrawVector4AsOffsetScale2x2(_worldPosOffsetScale, GetLoc("sWorldPosOffset"), GetLoc("sWorldPosScale"));
-                                me.ShaderProperty(_worldPosRotAngle, GetLoc("sWorldPosRotAngle"));
-                                me.ShaderProperty(_worldPosDisplayLength, GetLoc("sWorldPosDisplayLength"));
-                                me.ShaderProperty(_worldPosAlign, GetLoc("sWorldPosAlign"));
+                                lilEditorGUI.LocalizedProperty(me, _worldPosColorX);
+                                lilEditorGUI.LocalizedProperty(me, _worldPosColorY);
+                                lilEditorGUI.LocalizedProperty(me, _worldPosColorZ);
+                                DrawVector4AsOffsetScale2x2(_worldPosOffsetScale);
+                                lilEditorGUI.LocalizedProperty(me, _worldPosRotAngle);
+                                lilEditorGUI.LocalizedProperty(me, _worldPosDisplayLength);
+                                lilEditorGUI.LocalizedProperty(me, _worldPosAlign);
                             }
                         }
                     }
@@ -387,10 +387,13 @@ namespace Koturn.LilTextOverlay.Editor
         /// <para>X and Y are offsets, Z and W are scales.</para>
         /// </summary>
         /// <param name="prop"><see cref="MaterialProperty"/> of vector.</param>
-        /// <param name="offsetLabel">String for offset vector.</param>
-        /// <param name="scaleLabel">String for scale vector.</param>
-        private static void DrawVector4AsOffsetScale2x2(MaterialProperty prop, string offsetLabel, string scaleLabel)
+        private static void DrawVector4AsOffsetScale2x2(MaterialProperty prop)
         {
+            if (!lilEditorGUI.CheckPropertyToDraw(prop))
+            {
+                return;
+            }
+
             using (var ccScope = new EditorGUI.ChangeCheckScope())
             {
                 var position = EditorGUILayout.GetControlRect(
@@ -398,13 +401,15 @@ namespace Koturn.LilTextOverlay.Editor
                     MaterialEditor.GetDefaultPropertyHeight(prop) / 2.0f,
                     EditorStyles.layerMaskField);
                 EditorGUI.showMixedValue = prop.hasMixedValue;
-                var vec = EditorGUI.Vector2Field(position, offsetLabel, prop.vectorValue);
+                var label = Event.current.alt ? prop.name + ".xy" : GetLoc("sOffset");
+                var vec = EditorGUI.Vector2Field(position, label, prop.vectorValue);
                 EditorGUI.showMixedValue = false;
                 if (ccScope.changed)
                 {
                     prop.vectorValue = new Vector4(vec.x, vec.y, prop.vectorValue.z, prop.vectorValue.w);
                 }
             }
+
             using (var ccScope = new EditorGUI.ChangeCheckScope())
             {
                 var position = EditorGUILayout.GetControlRect(
@@ -412,7 +417,8 @@ namespace Koturn.LilTextOverlay.Editor
                     MaterialEditor.GetDefaultPropertyHeight(prop) / 2.0f,
                     EditorStyles.layerMaskField);
                 EditorGUI.showMixedValue = prop.hasMixedValue;
-                var vec = EditorGUI.Vector2Field(position, scaleLabel, new Vector2(prop.vectorValue.z, prop.vectorValue.w));
+                var label = Event.current.alt ? prop.name + ".zw" : GetLoc("sScale");
+                var vec = EditorGUI.Vector2Field(position, label, new Vector2(prop.vectorValue.z, prop.vectorValue.w));
                 EditorGUI.showMixedValue = false;
                 if (ccScope.changed)
                 {

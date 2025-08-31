@@ -1,15 +1,15 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
-        _DisplayTime ("Display time for one texture (seconds)", Float) = 5.0
-        _CrossFadeTime ("Time to cross fade (seconds)", Float) = 1.0
+        _DisplayTime ("sDisplayTime", Float) = 5.0
+        _CrossFadeTime ("sCrossFadeTime", Float) = 1.0
 
-        [KeywordEnum(Textures, Main Texture As Atlas, Second Texture As Atlas, Texture Array)] _TexMode ("Texture mode", Int) = 0
-        _NumTextures ("Number of textures", Int) = 2
-        [NoScaleOffset] _MainTex2 ("Main texture 2", 2D) = "white" {}
-        [NoScaleOffset] _MainTex3 ("Main texture 3", 2D) = "white" {}
-        [NoScaleOffset] _MainTex4 ("Main texture 4", 2D) = "white" {}
-        [NoScaleOffset] _MainTexArray ("Main texture array", 2DArray) = "white" {}
+        [KeywordEnum(Textures, Main Texture As Atlas, Second Texture As Atlas, Texture Array)] _TexMode ("sTexMode", Int) = 0
+        _NumTextures ("sNumTextures", Int) = 2
+        [NoScaleOffset] _MainTex2 ("Texture", 2D) = "white" {}
+        [NoScaleOffset] _MainTex3 ("Texture", 2D) = "white" {}
+        [NoScaleOffset] _MainTex4 ("Texture", 2D) = "white" {}
+        [NoScaleOffset] _MainTexArray ("sMainTexArray", 2DArray) = "white" {}
 
-        [IntRange] _AtlasRows ("Number of rows in atlas texture", Range(1, 128)) = 2
-        [IntRange] _AtlasCols ("Number of columns in atlas texture", Range(1, 128)) = 2
+        [IntRange] _AtlasRows ("sAtlasRows", Range(1, 128)) = 2
+        [IntRange] _AtlasCols ("sAtlasCols", Range(1, 128)) = 2

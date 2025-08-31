@@ -1,7 +1,7 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
-        [NoScaleOffset] _HueShiftMask ("Mask for Hue Shift", 2D) = "white" {}
-        _HueShiftSpeed ("Hue Shift speed", Float) = 0.1
-        [lilToggle] _HueShiftEmission ("Enable Hue Shift on Emission 1st", Int) = 1
-        [lilToggle] _HueShiftEmission2nd ("Enable Hue Shift on Emission 2nd", Int) = 1
+        [NoScaleOffset] _HueShiftMask ("sHueShiftMask", 2D) = "white" {}
+        _HueShiftSpeed ("sHueShiftSpeed", Float) = 0.1
+        [lilToggle] _HueShiftEmission ("sHueShiftEmission", Int) = 1
+        [lilToggle] _HueShiftEmission2nd ("sHueShiftEmission2nd", Int) = 1

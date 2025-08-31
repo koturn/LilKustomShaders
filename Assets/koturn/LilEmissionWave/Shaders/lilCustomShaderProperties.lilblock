@@ -1,32 +1,32 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
-        _DisplayTime ("Display time for one color (seconds)", Float) = 5.0
-        _CrossFadeTime ("Time to cross fade (seconds)", Float) = 1.0
+        _DisplayTime ("sDisplayTime", Float) = 5.0
+        _CrossFadeTime ("sCrossFadeTime", Float) = 1.0
 
-        [lilHDR] _Color2 ("Color 2", Color) = (0.6980392, 0.8039216, 1.0, 1.0)
-        [lilHDR] _Color3 ("Color 3", Color) = (1.0, 0.6980392, 0.8980392, 1.0)
-        [lilHDR] _Color4 ("Color 4", Color) = (0.7986928, 1.0, 0.6980392, 1.0)
+        [lilHDR] _Color2 ("sColor2", Color) = (0.6980392, 0.8039216, 1.0, 1.0)
+        [lilHDR] _Color3 ("sColor3", Color) = (1.0, 0.6980392, 0.8980392, 1.0)
+        [lilHDR] _Color4 ("sColor4", Color) = (0.7986928, 1.0, 0.6980392, 1.0)
 
-        [NoScaleOffset] _EmissionWaveMask ("Mask of emission wave", 2D) = "white" {}
-        [IntRange] _NumColors ("Number of colors", Range(1.0, 4.0)) = 2.0
-        [lilHDR] _EmissionWaveColor1 ("Emission wave color 1", Color) = (2.416589, 2.416589, 2.416589, 1.0)
-        [lilHDR] _EmissionWaveColor2 ("Emission wave color 2", Color) = (0.2416589, 0.9619284, 2.416589, 1.0)
-        [lilHDR] _EmissionWaveColor3 ("Emission wave color 3", Color) = (2.416589, 0.2530458, 1.695407, 1.0)
-        [lilHDR] _EmissionWaveColor4 ("Emission wave color 4", Color) = (0.2530458, 2.416589, 0.2530458, 1.0)
+        [NoScaleOffset] _EmissionWaveMask ("sMask", 2D) = "white" {}
+        [IntRange] _NumColors ("sNumColors", Range(1.0, 4.0)) = 2.0
+        [lilHDR] _EmissionWaveColor1 ("sEmissionWaveColor1", Color) = (2.416589, 2.416589, 2.416589, 1.0)
+        [lilHDR] _EmissionWaveColor2 ("sEmissionWaveColor2", Color) = (0.2416589, 0.9619284, 2.416589, 1.0)
+        [lilHDR] _EmissionWaveColor3 ("sEmissionWaveColor3", Color) = (2.416589, 0.2530458, 1.695407, 1.0)
+        [lilHDR] _EmissionWaveColor4 ("sEmissionWaveColor4", Color) = (0.2530458, 2.416589, 0.2530458, 1.0)
 
-        _EmissionWaveNoiseAmp ("Emission wave noise amplitude", Float) = 0.02
-        _EmissionWaveSpeed ("Emission wave speed", Float) = 1.0
-        _EmissionWaveInitPhase ("Initial phase of emission wave", Range(0.0, 1.0)) = 0.0
-        [lilVec2] _EmissionWaveParam ("Factor of emission wave", Vector) = (1.0, 16.0, 0.0, 0.0)
-        _EmissionPosMin ("Minimum emission position", Float) = 0.0
-        _EmissionPosMax ("Maximum emission position", Float) = 1.0
+        _EmissionWaveNoiseAmp ("sEmissionWaveNoiseAmp", Float) = 0.02
+        _EmissionWaveSpeed ("sEmissionWaveSpeed", Float) = 1.0
+        _EmissionWaveInitPhase ("sEmissionWaveInitPhase", Range(0.0, 1.0)) = 0.0
+        [lilVec2] _EmissionWaveParam ("sEmissionWaveParam", Vector) = (1.0, 16.0, 0.0, 0.0)
+        _EmissionPosMin ("sEmissionPosMin", Float) = 0.0
+        _EmissionPosMax ("sEmissionPosMax", Float) = 1.0
 
         [KeywordEnum(Object, World)]
-        _WavePosSpace ("Wave position space", Int) = 0
+        _WavePosSpace ("sWavePosSpace", Int) = 0
 
         [KeywordEnum(X, Y, Z, FREE)]
-        _WaveAxis ("Wave direction axis", Int) = 1
+        _WaveAxis ("sWaveAxis", Int) = 1
 
         [lilVec3]
-        _WaveAxisAngles ("Wave direction (Radians)", Vector) = (0.0, 0.0, 0.0, 0.0)
+        _WaveAxisAngles ("sWaveAxisAngles", Vector) = (0.0, 0.0, 0.0, 0.0)

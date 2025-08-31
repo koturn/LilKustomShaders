@@ -1,5 +1,5 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
-        [NoScaleOffset] _RefProbeMask ("Mask for reflection probe", 2D) = "white" {}
-        _RefProbeBlendCoeff ("Coeeficient of probeblending reflection probe", Range(0.0, 1.0)) = 0.5
+        [NoScaleOffset] _RefProbeMask ("sMask", 2D) = "white" {}
+        _RefProbeBlendCoeff ("sRefProbeBlendCoeff", Range(0.0, 1.0)) = 0.5
