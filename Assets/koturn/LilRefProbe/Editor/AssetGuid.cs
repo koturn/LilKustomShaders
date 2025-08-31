@@ -6,7 +6,7 @@ namespace Koturn.LilRefProbe.Editor
     internal static class AssetGuid
     {
         /// <summary>
-        /// GUID of "Assets/koturn/LilRefProbe/Editor/lang_custom.txt".
+        /// GUID of "Assets/koturn/LilRefProbe/Editor/lang_custom.tsv".
         /// </summary>
         public const string LangCustom = "4413d87c05000644ca2db471a92eac03";
         /// <summary>

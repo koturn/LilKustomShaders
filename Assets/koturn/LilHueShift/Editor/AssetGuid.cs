@@ -6,7 +6,7 @@ namespace Koturn.LilHueShift.Editor
     internal static class AssetGuid
     {
         /// <summary>
-        /// GUID of "Assets/koturn/LilHueShift/Editor/lang_custom.txt".
+        /// GUID of "Assets/koturn/LilHueShift/Editor/lang_custom.tsv".
         /// </summary>
         public const string LangCustom = "5b004fec885014b4e9f3e8889f4bc808";
         /// <summary>

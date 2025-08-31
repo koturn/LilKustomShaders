@@ -6,7 +6,7 @@ namespace Koturn.LilVisibility.Editor
     internal static class AssetGuid
     {
         /// <summary>
-        /// GUID of "Assets/koturn/LilVisibility/Editor/lang_custom.txt".
+        /// GUID of "Assets/koturn/LilVisibility/Editor/lang_custom.tsv".
         /// </summary>
         public const string LangCustom = "cccc4d111127e8d4f97e012f4510f48c";
         /// <summary>

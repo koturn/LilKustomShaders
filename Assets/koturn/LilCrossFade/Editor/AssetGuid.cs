@@ -6,7 +6,7 @@ namespace Koturn.LilCrossFade.Editor
     internal static class AssetGuid
     {
         /// <summary>
-        /// GUID of "Assets/koturn/LilCrossFade/Editor/lang_custom.txt".
+        /// GUID of "Assets/koturn/LilCrossFade/Editor/lang_custom.tsv".
         /// </summary>
         public const string LangCustom = "658b7435b2a4e214bae054d6092df565";
         /// <summary>

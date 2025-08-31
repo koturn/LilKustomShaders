@@ -6,7 +6,7 @@ namespace Koturn.LilTextOverlay.Editor
     internal static class AssetGuid
     {
         /// <summary>
-        /// GUID of "Assets/koturn/LilTextOverlay/Editor/lang_custom.txt".
+        /// GUID of "Assets/koturn/LilTextOverlay/Editor/lang_custom.tsv".
         /// </summary>
         public const string LangCustom = "1856a3bb6b48464458ac52d525e02701";
         /// <summary>

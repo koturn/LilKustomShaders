@@ -6,7 +6,7 @@ namespace Koturn.LilWireframe.Editor
     internal static class AssetGuid
     {
         /// <summary>
-        /// GUID of "Assets/koturn/LilWireframe/Editor/lang_custom.txt".
+        /// GUID of "Assets/koturn/LilWireframe/Editor/lang_custom.tsv".
         /// </summary>
         public const string LangCustom = "76f6256e035945f48b15dea9b3524f69";
         /// <summary>

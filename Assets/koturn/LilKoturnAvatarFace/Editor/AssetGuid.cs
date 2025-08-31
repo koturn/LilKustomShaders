@@ -6,7 +6,7 @@ namespace Koturn.LilKoturnAvatarFace.Editor
     internal static class AssetGuid
     {
         /// <summary>
-        /// GUID of "Assets/koturn/LilAvatarBody/Editor/lang_custom.txt".
+        /// GUID of "Assets/koturn/LilAvatarBody/Editor/lang_custom.tsv".
         /// </summary>
         public const string LangCustom = "3f9f8de419e5e8d45abb3ecf2d712412";
         /// <summary>

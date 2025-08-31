@@ -6,7 +6,7 @@ namespace Koturn.LilEmissionWave.Editor
     internal static class AssetGuid
     {
         /// <summary>
-        /// GUID of "Assets/koturn/LilEmissionWave/Editor/lang_custom.txt".
+        /// GUID of "Assets/koturn/LilEmissionWave/Editor/lang_custom.tsv".
         /// </summary>
         public const string LangCustom = "14a288e6eea913a4098bef443f2c7d81";
         /// <summary>
