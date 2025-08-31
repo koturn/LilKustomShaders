@@ -17,6 +17,19 @@ namespace Koturn.LilRefProbe.Editor
         public const string ShaderName = "koturn/LilRefProbe";
 
         /// <summary>
+        /// A flag whether to fold custom properties or not.
+        /// </summary>
+        private static bool isShowCustomProperties;
+        /// <summary>
+        /// A language name when the language file was last loaded.
+        /// </summary>
+        private static string prevLanguageName;
+
+        /// <summary>
+        /// A flag indicating whether the language file needs to be loaded.
+        /// </summary>
+        private bool _shouldLoadLanguage;
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_RefProbeMask".
         /// </summary>
         private MaterialProperty _refProbeMask;
@@ -25,10 +38,18 @@ namespace Koturn.LilRefProbe.Editor
         /// </summary>
         private MaterialProperty _refProbeBlendCoeff;
 
+
         /// <summary>
-        /// A flag whether to fold custom properties or not.
+        /// Draw property items.
         /// </summary>
-        private static bool isShowCustomProperties;
+        /// <param name="materialEditor">The <see cref="MaterialEditor"/> that are calling this <see cref="OnGUI(MaterialEditor, MaterialProperty[])"/> (the 'owner').</param>
+        /// <param name="props">Material properties of the current selected shader.</param>
+        public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] props)
+        {
+            _shouldLoadLanguage = lts == null || lts.name != ShaderName + "/lilToon" || prevLanguageName != lilLanguageManager.langSet.languageName;
+
+            base.OnGUI(materialEditor, props);
+        }
 
         /// <summary>
         /// Load custom language file and make cache of shader properties.
@@ -43,7 +64,11 @@ namespace Koturn.LilRefProbe.Editor
             ReplaceToCustomShaders();
             isShowRenderMode = !material.shader.name.Contains("/[Optional] ");
 
-            LoadCustomLanguage(AssetGuid.LangCustom);
+            if (_shouldLoadLanguage)
+            {
+                LoadCustomLanguage(AssetGuid.LangCustom);
+                prevLanguageName = lilLanguageManager.langSet.languageName;
+            }
 
             _refProbeMask = FindProperty("_RefProbeMask", props);
             _refProbeBlendCoeff = FindProperty("_RefProbeBlendCoeff", props);

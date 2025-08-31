@@ -20,7 +20,15 @@ namespace Koturn.LilKoturnAvatarFace.Editor
         /// A flag whether to fold custom properties or not.
         /// </summary>
         private bool isShowCustomProperties;
+        /// <summary>
+        /// A language name when the language file was last loaded.
+        /// </summary>
+        private static string prevLanguageName;
 
+        /// <summary>
+        /// A flag indicating whether the language file needs to be loaded.
+        /// </summary>
+        private bool _shouldLoadLanguage;
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_GraphKoturnColor".
         /// </summary>
@@ -74,6 +82,19 @@ namespace Koturn.LilKoturnAvatarFace.Editor
         /// </summary>
         private MaterialProperty _hueShiftEmission2nd;
 
+
+        /// <summary>
+        /// Draw property items.
+        /// </summary>
+        /// <param name="materialEditor">The <see cref="MaterialEditor"/> that are calling this <see cref="OnGUI(MaterialEditor, MaterialProperty[])"/> (the 'owner').</param>
+        /// <param name="props">Material properties of the current selected shader.</param>
+        public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] props)
+        {
+            _shouldLoadLanguage = lts == null || lts.name != ShaderName + "/lilToon" || prevLanguageName != lilLanguageManager.langSet.languageName;
+
+            base.OnGUI(materialEditor, props);
+        }
+
         /// <summary>
         /// Load custom language file and make cache of shader properties.
         /// </summary>
@@ -87,7 +108,11 @@ namespace Koturn.LilKoturnAvatarFace.Editor
             ReplaceToCustomShaders();
             isShowRenderMode = !material.shader.name.Contains("/[Optional] ");
 
-            LoadCustomLanguage(AssetGuid.LangCustom);
+            if (_shouldLoadLanguage)
+            {
+                LoadCustomLanguage(AssetGuid.LangCustom);
+                prevLanguageName = lilLanguageManager.langSet.languageName;
+            }
 
             _graphKoturnColor = FindProperty("_GraphKoturnColor", props);
             _graphKoturnOffsetScale = FindProperty("_GraphKoturnOffsetScale", props);
