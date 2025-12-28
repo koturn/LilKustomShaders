@@ -1,0 +1,18 @@
+Language	English	Japanese	Korean	Chinese Simplified	Chinese Traditional
+sCustomShaderTitle	Polygon Burst	ポリゴンバースト	폴리곤 버스트	多边形爆发	多邊形爆發
+sCustomPropertyCategory	Polygon Burst	ポリゴンバースト	폴리곤 버스트	多边形爆发	多邊形爆發
+sPolygonCrackWidth	Wireframe width	ワイヤフレーム幅	와이어프레임 너비	线框宽度	線框寬度
+sPolygonCrackColor	Wireframe color	ワイヤフレーム色	와이어프레임 색상	线框颜色	線框顏色
+sTimeSource	Time Source	時間ソース	시간 소스	时间来源	時間來源
+sTimeSourceElapsedTime	Elapsed Time	経過時間	경과 시간	已用时间	經過時間
+sTimeSourceFakeTime	Fake Time	疑似時間	가상 시간	模拟时间	虛擬時間
+sTimeSourceVRChatUTC	UTC (VRChat only)	UTC (VRChatのみ)	UTC (VRChat 전용)	UTC（仅限VRChat）	UTC（僅限 VRChat）
+sFakeTime	Fake Time	疑似時間	가상 시간	模拟时间	虛擬時間
+sPolygonRevivalTime	Polygon revival time	ポリゴン復元時間	폴리곤 재생성 시간	多边形复活时间	多邊形復活時間
+sPolygonRetentionTime	Polygon retention time	ポリゴン維持時間	폴리곤 유지 시간	多边形保留时间	多邊形保留時間
+sPolygonCrackTime	Polygon crack time	ポリゴンひび割れ時間	폴리곤 균열 시간	多边形裂开时间	多邊形裂開時間
+sPolygonFillTime	Polygon filling time	ポリゴン塗り潰し時間	폴리곤 채움 시간	多边形填充时间	多邊形填充時間
+sPolygonBurstTime	Polygon burst time	ポリゴンバースト時間	폴리곤 버스트 시간	多边形爆发时间	多邊形爆發時間
+sPolygonDisappearTime	Polygon disappear time	ポリゴン消失時間	폴리곤 소멸 시간	多边形消失时间	多邊形消失時間
+sPolygonMoveSpeed	Polygon move speed	ポリゴン移動速度	폴리곤 이동 속도	多边形移动速度	多邊形移動速度
+sPolygonRotSpeed	Polygon rotation speed	ポリゴン回転速度	폴리곤 회전 속도	多边形旋转速度	多邊形旋轉速度

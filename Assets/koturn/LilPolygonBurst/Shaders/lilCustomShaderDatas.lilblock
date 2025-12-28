@@ -1,0 +1,7 @@
+ShaderName "koturn/LilPolygonBurst"
+EditorName "Koturn.LilPolygonBurst.Editor.LilPolygonBurstInspector"
+Replace "\r\n" "\n"
+Replace "\r" "\n"
+Replace "// Build Option\n            #pragma vertex vert\n            #pragma fragment frag\n" "// Build Option\n            #pragma vertex vert\n            #pragma geometry geomCustom\n            #pragma fragment frag\n            #pragma require geometry\n            #define USE_CUSTOM_GEOMETRY\n"
+Replace "// Build Option\n            #pragma vertex vert\n            #pragma geometry geom\n            #pragma fragment frag\n" "// Build Option\n            #pragma vertex vert\n            #pragma geometry geomCustom\n            #pragma fragment frag\n            #pragma require geometry\n            #define USE_CUSTOM_GEOMETRY\n"
+Replace "#pragma vertex vertTess\n            #pragma fragment frag\n            #pragma hull hull\n            #pragma domain domain\n            #pragma require tesshw tessellation\n" "#pragma vertex vertTess\n            #pragma fragment frag\n            #pragma hull hullOpt\n            #pragma domain domainOpt\n            #pragma geometry geomCustom\n            #pragma require tesshw tessellation geometry\n            #define USE_CUSTOM_GEOMETRY\n"
