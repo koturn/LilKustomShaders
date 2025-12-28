@@ -1,0 +1,13 @@
+
+        //----------------------------------------------------------------------------------------------------------------------
+        // Custom Properties
+        _PolygonCrackWidth ("sPolygonCrackWidth", Range(0.0, 1.0)) = 0.05
+        [lilHDR] _PolygonCrackColor ("sPolygonCrackColor", Color) = (1.0, 1.0, 1.0, 1.0)
+        _PolygonRevivalTime ("sPolygonRevivalTime", Float) = 1.0
+        _PolygonRetentionTime ("sPolygonRetentionTime", Float) = 5.0
+        _PolygonCrackTime ("sPolygonCrackTime", Float) = 5.0
+        _PolygonFillTime ("sPolygonFillTime", Float) = 1.0
+        _PolygonBurstTime ("sPolygonBurstTime", Float) = 3.0
+        _PolygonDisappearTime ("sPolygonDisappearTime", Float) = 5.0
+        _PolygonMoveSpeed ("sPolygonMoveSpeed", Float) = 0.25
+        _PolygonRotSpeed ("sPolygonRotSpeed", Float) = 2.0

@@ -1,0 +1,16 @@
+{
+  "name": "jp.koturn.lilpolygonburst",
+  "version": "1.2.1",
+  "displayName": "LilPolygonBurst",
+  "description": "koturn's custom shaders of lilToon, LilPolygonBurst.",
+  "unity": "2022.3",
+  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v121",
+  "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.1/LICENSE",
+  "license": "MIT",
+  "keywords": ["Toon", "Shader", "lilToon"],
+  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.1/jp.koturn.lilpolygonburst-1.2.1.zip",
+  "legacyFolders" : {
+    "Assets\\koturn\\LilPolygonBurst" : "89e0d1d26d70bb049a4ea7fc4977df1d"
+  }
+}

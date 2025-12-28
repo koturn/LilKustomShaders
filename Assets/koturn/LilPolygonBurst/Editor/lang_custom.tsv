@@ -1,0 +1,13 @@
+Language	English	Japanese
+sCustomShaderTitle	Polygon Burst	ポリゴンバースト
+sCustomPropertyCategory	Polygon Burst	ポリゴンバースト
+sPolygonCrackWidth	Wireframe width	ワイヤフレーム幅
+sPolygonCrackColor	Wireframe color	ワイヤフレーム色
+sPolygonRevivalTime	Polygon revival time	ポリゴン復元時間
+sPolygonRetentionTime	Polygon retention time	ポリゴン維持時間
+sPolygonCrackTime	Polygon crack time	ポリゴンひび割れ時間
+sPolygonFillTime	Polygon filling time	ポリゴン塗り潰し時間
+sPolygonBurstTime	Polygon burst time	ポリゴンバースト時間
+sPolygonDisappearTime	Polygon disappear time	ポリゴン消失時間
+sPolygonMoveSpeed	Polygon move speed	ポリゴン移動速度
+sPolygonRotSpeed	Polygon rotation speed	ポリゴン回転速度

@@ -66,6 +66,15 @@
       ]
     },
     {
+      "UnityPackageName": "LilPolygonBurst.unitypackage",
+      "VpmName": "jp.koturn.lilpolygonburst",
+      "Assets": [
+        {
+          "BasePath": "Assets/koturn/LilPolygonBurst"
+        }
+      ]
+    },
+    {
       "UnityPackageName": "LilRefProbe.unitypackage",
       "VpmName": "jp.koturn.lilrefprobe",
       "Assets": [
