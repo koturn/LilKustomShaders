@@ -1,11 +1,11 @@
 {
   "Packages": [
     {
-      "UnityPackageName": "LilCrossfade.unitypackage",
+      "UnityPackageName": "LilCrossFade.unitypackage",
       "VpmName": "jp.koturn.lilcrossfade",
       "Assets": [
         {
-          "BasePath": "Assets/koturn/LilCrossfade"
+          "BasePath": "Assets/koturn/LilCrossFade"
         }
       ],
       "DependAssets": [
