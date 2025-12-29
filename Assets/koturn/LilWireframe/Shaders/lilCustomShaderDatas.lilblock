@@ -1,4 +1,6 @@
 ShaderName "koturn/LilWireframe"
 EditorName "Koturn.LilWireframe.Editor.LilWireframeInspector"
-Replace "// Build Option\r\n            #pragma vertex vert\r\n            #pragma fragment frag\r\n" "// Build Option\r\n            #pragma vertex vert\r\n            #pragma geometry geomCustom\r\n            #pragma fragment frag\r\n            #pragma require geometry\r\n            #define USE_CUSTOM_GEOMETRY\r\n"
-Replace "#pragma vertex vertTess\r\n            #pragma fragment frag\r\n            #pragma hull hull\r\n            #pragma domain domain\r\n            #pragma require tesshw tessellation\r\n" "#pragma vertex vertTess\r\n            #pragma fragment frag\r\n            #pragma hull hullOpt\r\n            #pragma domain domainOpt\r\n            #pragma geometry geomCustom\r\n            #pragma require tesshw tessellation geometry\r\n            #define USE_CUSTOM_GEOMETRY\r\n"
+Replace "\r\n" "\n"
+Replace "\r" "\n"
+Replace "// Build Option\n            #pragma vertex vert\n            #pragma fragment frag\n" "// Build Option\n            #pragma vertex vert\n            #pragma geometry geomCustom\n            #pragma fragment frag\n            #pragma require geometry\n            #define USE_CUSTOM_GEOMETRY\n"
+Replace "#pragma vertex vertTess\n            #pragma fragment frag\n            #pragma hull hull\n            #pragma domain domain\n            #pragma require tesshw tessellation\n" "#pragma vertex vertTess\n            #pragma fragment frag\n            #pragma hull hullOpt\n            #pragma domain domainOpt\n            #pragma geometry geomCustom\n            #pragma require tesshw tessellation geometry\n            #define USE_CUSTOM_GEOMETRY\n"
