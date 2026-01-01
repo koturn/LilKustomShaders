@@ -1,0 +1,6 @@
+
+        //----------------------------------------------------------------------------------------------------------------------
+        // Custom Properties
+        [lilEnum] _BillboardMode ("sBillboardMode|sBillboardModeOff|sBillboardModeAll|sBillboardModeY", Int) = 0
+        [lilVec3] _BillboardRotation ("sBillboardRotation", Vector) = (0.0, 0.0, 0.0, 0.0)
+        [lilVec3] _BillboardScale ("sBillboardScale", Vector) = (1.0, 1.0, 1.0, 0.0)

@@ -1,0 +1,9 @@
+Language	English	Japanese
+sCustomShaderTitle	Billboard	ビルボード
+sCustomPropertyCategory	Billboard	ビルボード
+sBillboardMode	Billboard mode	ビルボードモード
+sBillboardModeOff	Off	オフ
+sBillboardModeAll	Fix All Axes	全ての軸を固定
+sBillboardModeY	Fix Y Axis	Y軸を固定
+sBillboardRotation	Rotation (deg)	回転角
+sBillboardScale	Scale	スケール
