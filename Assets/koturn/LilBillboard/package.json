@@ -1,0 +1,16 @@
+{
+  "name": "jp.koturn.lilbillboard",
+  "version": "1.2.1",
+  "displayName": "LilBillboard",
+  "description": "koturn's custom shaders of lilToon, LilBillboard.",
+  "unity": "2022.3",
+  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v121",
+  "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.1/LICENSE",
+  "license": "MIT",
+  "keywords": ["Toon", "Shader", "lilToon"],
+  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.1/jp.koturn.lilbillboard-1.2.1.zip",
+  "legacyFolders" : {
+    "Assets\\koturn\\LilBillboard" : "5b42e4dbe2eeaee4681b31a308f132d6"
+  }
+}
