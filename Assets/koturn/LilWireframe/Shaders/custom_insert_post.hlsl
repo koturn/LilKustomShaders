@@ -9,6 +9,9 @@
 #    define BRANCH UNITY_BRANCH
 #endif  // defind(LIL_MULTI)
 
+#if LIL_CURRENT_VERSION_MAJOR >= 2
+static const uint _FurMeshType = 0;
+#endif  // LIL_CURRENT_VERSION_MAJOR >= 2
 
 #if defined(LIL_PASS_FORWARD_FUR_INCLUDED)
 #if defined(LIL_ONEPASS_FUR)
