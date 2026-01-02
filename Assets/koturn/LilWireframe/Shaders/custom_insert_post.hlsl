@@ -9,6 +9,17 @@
 #    define BRANCH UNITY_BRANCH
 #endif  // defind(LIL_MULTI)
 
+#if LIL_CURRENT_VERSION_MAJOR >= 2
+/*!
+ * @brief Mesh Type of fur.
+ *
+ * 0: Subdivision
+ * 1: Shrink
+ *
+ * Starting with version 2.0.0, the uniform variable _FurMeshType has been removed.
+ */
+static const uint _FurMeshType = 0;
+#endif  // LIL_CURRENT_VERSION_MAJOR >= 2
 
 #if defined(LIL_PASS_FORWARD_FUR_INCLUDED)
 #if defined(LIL_ONEPASS_FUR)
