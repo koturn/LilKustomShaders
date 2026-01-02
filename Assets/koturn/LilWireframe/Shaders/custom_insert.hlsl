@@ -21,7 +21,7 @@
 
 // Add vertex copy
 #    define LIL_CUSTOM_VERT_COPY \
-        LIL_V2F_OUT.baryCoord.x = (float)input.vertexID;
+        output.baryCoord.x = (float)input.vertexID;
 
 // Inserting a process into the vertex shader
 //#define LIL_CUSTOM_VERTEX_OS
