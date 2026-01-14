@@ -122,7 +122,7 @@ namespace Koturn.LilWireframe.Editor
                 {
                     var me = m_MaterialEditor;
                     lilEditorGUI.LocalizedProperty(me, _wireframeWidth);
-                    lilEditorGUI.TexturePropertySingleLine(me, new GUIContent(GetLoc("sWireframeMaskAndColor"), GetLoc("sTextureRGB")), _wireframeMask, _wireframeColor);
+                    LocalizedPropertyTexture(new GUIContent(GetLoc("sWireframeMaskAndColor"), GetLoc("sTextureRGB")), _wireframeMask, _wireframeColor);
                     lilEditorGUI.LocalizedProperty(me, _wireframeRandomizeColor);
 
                     lilEditorGUI.LocalizedProperty(me, _wireframeCycleTime);
