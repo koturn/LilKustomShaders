@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using lilToon;
@@ -29,6 +30,10 @@ namespace Koturn.LilRefProbe.Editor
         /// A flag indicating whether the language file needs to be loaded.
         /// </summary>
         private bool _shouldLoadLanguage;
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
+        /// </summary>
+        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_RefProbeMask".
         /// </summary>
@@ -72,6 +77,11 @@ namespace Koturn.LilRefProbe.Editor
 
             _refProbeMask = FindProperty("_RefProbeMask", props);
             _refProbeBlendCoeff = FindProperty("_RefProbeBlendCoeff", props);
+
+            var propertyList = _propertyList;
+            propertyList.Clear();
+            propertyList.Add(_refProbeBlendCoeff);
+            propertyList.Add(_refProbeBlendCoeff);
         }
 
         /// <summary>
@@ -87,6 +97,11 @@ namespace Koturn.LilRefProbe.Editor
             // boxInner         inner box without label
             // customBox        box (similar to unity default box)
             // customToggleFont label for box
+
+            if (!ShouldDrawBlock(_propertyList))
+            {
+                return;
+            }
 
             var titleLoc = GetLoc("sCustomShaderTitle");
             isShowCustomProperties = Foldout(titleLoc, titleLoc, isShowCustomProperties);
@@ -173,6 +188,24 @@ namespace Koturn.LilRefProbe.Editor
             ltsmref     = Shader.Find("Hidden/" + ShaderName + "/MultiRefraction");
             ltsmfur     = Shader.Find("Hidden/" + ShaderName + "/MultiFur");
             ltsmgem     = Shader.Find("Hidden/" + ShaderName + "/MultiGem");
+        }
+
+
+        /// <summary>
+        /// Identify whether the property block should be drawn or not.
+        /// </summary>
+        /// <param name="propertyList">Target property list.</param>
+        /// <returns>True when the property block should be drawn, otherwise false.</returns>
+        private static bool ShouldDrawBlock(List<MaterialProperty> propertyList)
+        {
+            foreach (var property in propertyList)
+            {
+                if (lilEditorGUI.CheckPropertyToDraw(property))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>

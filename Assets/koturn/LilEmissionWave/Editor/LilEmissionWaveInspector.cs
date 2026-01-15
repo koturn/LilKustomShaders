@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using lilToon;
@@ -29,6 +30,10 @@ namespace Koturn.LilEmissionWave.Editor
         /// A flag indicating whether the language file needs to be loaded.
         /// </summary>
         private bool _shouldLoadLanguage;
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
+        /// </summary>
+        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_DisplayTime".
         /// </summary>
@@ -148,6 +153,23 @@ namespace Koturn.LilEmissionWave.Editor
             _wavePosSpace = FindProperty("_WavePosSpace", props);
             _waveAxis = FindProperty("_WaveAxis", props);
             _waveAxisAngles = FindProperty("_WaveAxisAngles", props);
+
+            var propertyList = _propertyList;
+            propertyList.Clear();
+            propertyList.Add(_displayCycleTime);
+            propertyList.Add(_crossFadeTime);
+            propertyList.AddRange(_colors);
+            propertyList.Add(_emissionWaveMask);
+            propertyList.AddRange(_emissionWaveColors);
+            propertyList.Add(_emissionWaveNoiseAmp);
+            propertyList.Add(_emissionWaveSpeed);
+            propertyList.Add(_emissionWaveInitPhase);
+            propertyList.Add(_emissionWaveParam);
+            propertyList.Add(_emissionPosMin);
+            propertyList.Add(_emissionPosMax);
+            propertyList.Add(_wavePosSpace);
+            propertyList.Add(_waveAxis);
+            propertyList.Add(_waveAxisAngles);
         }
 
         /// <summary>
@@ -163,6 +185,11 @@ namespace Koturn.LilEmissionWave.Editor
             // boxInner         inner box without label
             // customBox        box (similar to unity default box)
             // customToggleFont label for box
+
+            if (!ShouldDrawBlock(_propertyList))
+            {
+                return;
+            }
 
             var titleLoc = GetLoc("sCustomShaderTitle");
             isShowCustomProperties = Foldout(titleLoc, titleLoc, isShowCustomProperties);
@@ -284,6 +311,24 @@ namespace Koturn.LilEmissionWave.Editor
             ltsmref     = Shader.Find("Hidden/" + ShaderName + "/MultiRefraction");
             ltsmfur     = Shader.Find("Hidden/" + ShaderName + "/MultiFur");
             ltsmgem     = Shader.Find("Hidden/" + ShaderName + "/MultiGem");
+        }
+
+
+        /// <summary>
+        /// Identify whether the property block should be drawn or not.
+        /// </summary>
+        /// <param name="propertyList">Target property list.</param>
+        /// <returns>True when the property block should be drawn, otherwise false.</returns>
+        private static bool ShouldDrawBlock(List<MaterialProperty> propertyList)
+        {
+            foreach (var property in propertyList)
+            {
+                if (lilEditorGUI.CheckPropertyToDraw(property))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>

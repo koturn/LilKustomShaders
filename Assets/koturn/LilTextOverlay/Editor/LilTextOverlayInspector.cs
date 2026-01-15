@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -37,6 +38,22 @@ namespace Koturn.LilTextOverlay.Editor
         /// A flag indicating whether the language file needs to be loaded.
         /// </summary>
         private bool _shouldLoadLanguage;
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about elapsed time.
+        /// </summary>
+        private readonly List<MaterialProperty> _elapsedTimePropertyList = new List<MaterialProperty>();
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about AudioLink time.
+        /// </summary>
+        private readonly List<MaterialProperty> _alTimePropertyList = new List<MaterialProperty>();
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about framerate.
+        /// </summary>
+        private readonly List<MaterialProperty> _frameratePropertyList = new List<MaterialProperty>();
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about world position.
+        /// </summary>
+        private readonly List<MaterialProperty> _worldPosPropertyList = new List<MaterialProperty>();
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_SpriteTex".
         /// </summary>
@@ -225,6 +242,48 @@ namespace Koturn.LilTextOverlay.Editor
             _worldPosRotAngle = FindProperty("_WorldPosRotAngle", props);
             _worldPosDisplayLength = FindProperty("_WorldPosDisplayLength", props);
             _worldPosAlign = FindProperty("_WorldPosAlign", props);
+
+            var elapsedTimePropertyList = _elapsedTimePropertyList;
+            elapsedTimePropertyList.Clear();
+            elapsedTimePropertyList.Add(_enableElapsedTime);
+            elapsedTimePropertyList.Add(_elapsedTimeColor);
+            elapsedTimePropertyList.Add(_elapsedTimeOffsetScale);
+            elapsedTimePropertyList.Add(_elapsedTimeRotAngle);
+            elapsedTimePropertyList.Add(_elapsedTimeDisplayLength);
+            elapsedTimePropertyList.Add(_elapsedTimeAlign);
+
+            var alTimePropertyList = _alTimePropertyList;
+            alTimePropertyList.Clear();
+            alTimePropertyList.Add(_enableALTimeOfDay);
+            alTimePropertyList.Add(_alTimeOfDayColor);
+            alTimePropertyList.Add(_alTimeOfDayOffsetScale);
+            alTimePropertyList.Add(_alTimeOfDayRotAngle);
+            alTimePropertyList.Add(_alTimeOfDayDisplayLength);
+            alTimePropertyList.Add(_alTimeOfDayAlign);
+            alTimePropertyList.Add(_alTimeOfDayKind);
+            alTimePropertyList.Add(_enableALTimeOfDayUtcFallback);
+            alTimePropertyList.Add(_alTimeOfDayLocalTimeOffsetSeconds);
+            alTimePropertyList.Add(_alTimeOfDayUtcOffsetSeconds);
+
+            var frameratePropertyList = _frameratePropertyList;
+            frameratePropertyList.Clear();
+            frameratePropertyList.Add(_enableFramerate);
+            frameratePropertyList.Add(_framerateColor);
+            frameratePropertyList.Add(_framerateOffsetScale);
+            frameratePropertyList.Add(_framerateRotAngle);
+            frameratePropertyList.Add(_framerateDisplayLength);
+            frameratePropertyList.Add(_framerateAlign);
+
+            var worldPosPropertyList = _worldPosPropertyList;
+            worldPosPropertyList.Clear();
+            worldPosPropertyList.Add(_enableWorldPos);
+            worldPosPropertyList.Add(_worldPosColorX);
+            worldPosPropertyList.Add(_worldPosColorY);
+            worldPosPropertyList.Add(_worldPosColorZ);
+            worldPosPropertyList.Add(_worldPosOffsetScale);
+            worldPosPropertyList.Add(_worldPosRotAngle);
+            worldPosPropertyList.Add(_worldPosDisplayLength);
+            worldPosPropertyList.Add(_worldPosAlign);
         }
 
         /// <summary>
@@ -241,6 +300,20 @@ namespace Koturn.LilTextOverlay.Editor
             // customBox        box (similar to unity default box)
             // customToggleFont label for box
 
+            var shouldDrawElapsedTimeProperties = ShouldDrawBlock(_elapsedTimePropertyList);
+            var shouldDrawAlTimeProperties = ShouldDrawBlock(_alTimePropertyList);
+            var shouldDrawFramerateProperties = ShouldDrawBlock(_frameratePropertyList);
+            var shouldDrawWorldPosProperties = ShouldDrawBlock(_worldPosPropertyList);
+
+            if (!lilEditorGUI.CheckPropertyToDraw(_spriteTex)
+                && !shouldDrawElapsedTimeProperties
+                && !shouldDrawAlTimeProperties
+                && !shouldDrawFramerateProperties
+                && !shouldDrawWorldPosProperties)
+            {
+                return;
+            }
+
             var titleLoc = GetLoc("sCustomShaderTitle");
             isShowCustomProperties = Foldout(titleLoc, titleLoc, isShowCustomProperties);
             if (!isShowCustomProperties)
@@ -256,82 +329,98 @@ namespace Koturn.LilTextOverlay.Editor
                     var me = m_MaterialEditor;
                     lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc(_spriteTex.displayName), GetLoc("sTextureRGBA")), _spriteTex);
 
-                    using (new EditorGUILayout.VerticalScope(boxOuter))
+                    if (shouldDrawElapsedTimeProperties)
                     {
-                        DrawToggleLeft(material, _enableElapsedTime, GetLoc("sEnableElapsedTime"));
-                        if (ToBool(_enableElapsedTime.floatValue))
+                        using (new EditorGUILayout.VerticalScope(boxOuter))
                         {
-                            using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                            DrawToggleLeft(material, _enableElapsedTime, GetLoc("sEnableElapsedTime"));
+                            if (ToBool(_enableElapsedTime.floatValue))
                             {
-                                lilEditorGUI.LocalizedProperty(me, _elapsedTimeColor);
-                                DrawVector4AsOffsetScale2x2(_elapsedTimeOffsetScale);
-                                lilEditorGUI.LocalizedProperty(me, _elapsedTimeRotAngle);
-                                lilEditorGUI.LocalizedProperty(me, _elapsedTimeDisplayLength);
-                                lilEditorGUI.LocalizedProperty(me, _elapsedTimeAlign);
+                                using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                                {
+                                    lilEditorGUI.LocalizedProperty(me, _elapsedTimeColor);
+                                    DrawVector4AsOffsetScale2x2(_elapsedTimeOffsetScale);
+                                    lilEditorGUI.LocalizedProperty(me, _elapsedTimeRotAngle);
+                                    lilEditorGUI.LocalizedProperty(me, _elapsedTimeDisplayLength);
+                                    lilEditorGUI.LocalizedProperty(me, _elapsedTimeAlign);
+                                }
                             }
                         }
                     }
 
-                    using (new EditorGUILayout.VerticalScope(boxOuter))
+                    if (shouldDrawAlTimeProperties)
                     {
-                        DrawToggleLeft(material, _enableALTimeOfDay, GetLoc("sEnableALTimeOfDay"));
-                        if (ToBool(_enableALTimeOfDay.floatValue))
+                        using (new EditorGUILayout.VerticalScope(boxOuter))
                         {
-                            using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                            DrawToggleLeft(material, _enableALTimeOfDay, GetLoc("sEnableALTimeOfDay"));
+                            if (ToBool(_enableALTimeOfDay.floatValue))
                             {
-                                lilEditorGUI.LocalizedProperty(me, _alTimeOfDayColor);
-                                DrawVector4AsOffsetScale2x2(_alTimeOfDayOffsetScale);
-                                lilEditorGUI.LocalizedProperty(me, _alTimeOfDayRotAngle);
-                                lilEditorGUI.LocalizedProperty(me, _alTimeOfDayDisplayLength);
-                                lilEditorGUI.LocalizedProperty(me, _alTimeOfDayAlign);
-                                lilEditorGUI.LocalizedProperty(me, _alTimeOfDayKind);
-                                var showFallback = false;
-                                if ((int)_alTimeOfDayKind.floatValue == 1) {
-                                    lilEditorGUI.LocalizedProperty(me, _enableALTimeOfDayUtcFallback);
-                                    if (ToBool(_enableALTimeOfDayUtcFallback.floatValue)) {
-                                        showFallback = true;
+                                using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                                {
+                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayColor);
+                                    DrawVector4AsOffsetScale2x2(_alTimeOfDayOffsetScale);
+                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayRotAngle);
+                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayDisplayLength);
+                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayAlign);
+                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayKind);
+                                    var showFallback = false;
+                                    if ((int)_alTimeOfDayKind.floatValue == 1)
+                                    {
+                                        lilEditorGUI.LocalizedProperty(me, _enableALTimeOfDayUtcFallback);
+                                        if (ToBool(_enableALTimeOfDayUtcFallback.floatValue))
+                                        {
+                                            showFallback = true;
+                                        }
+                                    }
+                                    if ((int)_alTimeOfDayKind.floatValue == 0 || showFallback)
+                                    {
+                                        lilEditorGUI.LocalizedProperty(me, _alTimeOfDayLocalTimeOffsetSeconds);
+                                    }
+                                    if ((int)_alTimeOfDayKind.floatValue == 1)
+                                    {
+                                        lilEditorGUI.LocalizedProperty(me, _alTimeOfDayUtcOffsetSeconds);
                                     }
                                 }
-                                if ((int)_alTimeOfDayKind.floatValue == 0 || showFallback) {
-                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayLocalTimeOffsetSeconds);
-                                }
-                                if ((int)_alTimeOfDayKind.floatValue == 1) {
-                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayUtcOffsetSeconds);
+                            }
+                        }
+                    }
+
+                    if (shouldDrawFramerateProperties)
+                    {
+                        using (new EditorGUILayout.VerticalScope(boxOuter))
+                        {
+                            DrawToggleLeft(material, _enableFramerate, GetLoc("sEnableFramerate"));
+                            if (ToBool(_enableFramerate.floatValue))
+                            {
+                                using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                                {
+                                    lilEditorGUI.LocalizedProperty(me, _framerateColor);
+                                    DrawVector4AsOffsetScale2x2(_framerateOffsetScale);
+                                    lilEditorGUI.LocalizedProperty(me, _framerateRotAngle);
+                                    lilEditorGUI.LocalizedProperty(me, _framerateDisplayLength);
+                                    lilEditorGUI.LocalizedProperty(me, _framerateAlign);
                                 }
                             }
                         }
                     }
 
-                    using (new EditorGUILayout.VerticalScope(boxOuter))
+                    if (shouldDrawWorldPosProperties)
                     {
-                        DrawToggleLeft(material, _enableFramerate, GetLoc("sEnableFramerate"));
-                        if (ToBool(_enableFramerate.floatValue))
+                        using (new EditorGUILayout.VerticalScope(boxOuter))
                         {
-                            using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                            DrawToggleLeft(material, _enableWorldPos, GetLoc("sEnableWorldPos"));
+                            if (ToBool(_enableWorldPos.floatValue))
                             {
-                                lilEditorGUI.LocalizedProperty(me, _framerateColor);
-                                DrawVector4AsOffsetScale2x2(_framerateOffsetScale);
-                                lilEditorGUI.LocalizedProperty(me, _framerateRotAngle);
-                                lilEditorGUI.LocalizedProperty(me, _framerateDisplayLength);
-                                lilEditorGUI.LocalizedProperty(me, _framerateAlign);
-                            }
-                        }
-                    }
-
-                    using (new EditorGUILayout.VerticalScope(boxOuter))
-                    {
-                        DrawToggleLeft(material, _enableWorldPos, GetLoc("sEnableWorldPos"));
-                        if (ToBool(_enableWorldPos.floatValue))
-                        {
-                            using (new EditorGUILayout.VerticalScope(boxInnerHalf))
-                            {
-                                lilEditorGUI.LocalizedProperty(me, _worldPosColorX);
-                                lilEditorGUI.LocalizedProperty(me, _worldPosColorY);
-                                lilEditorGUI.LocalizedProperty(me, _worldPosColorZ);
-                                DrawVector4AsOffsetScale2x2(_worldPosOffsetScale);
-                                lilEditorGUI.LocalizedProperty(me, _worldPosRotAngle);
-                                lilEditorGUI.LocalizedProperty(me, _worldPosDisplayLength);
-                                lilEditorGUI.LocalizedProperty(me, _worldPosAlign);
+                                using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                                {
+                                    lilEditorGUI.LocalizedProperty(me, _worldPosColorX);
+                                    lilEditorGUI.LocalizedProperty(me, _worldPosColorY);
+                                    lilEditorGUI.LocalizedProperty(me, _worldPosColorZ);
+                                    DrawVector4AsOffsetScale2x2(_worldPosOffsetScale);
+                                    lilEditorGUI.LocalizedProperty(me, _worldPosRotAngle);
+                                    lilEditorGUI.LocalizedProperty(me, _worldPosDisplayLength);
+                                    lilEditorGUI.LocalizedProperty(me, _worldPosAlign);
+                                }
                             }
                         }
                     }
@@ -405,6 +494,24 @@ namespace Koturn.LilTextOverlay.Editor
             ltsmref     = Shader.Find("Hidden/" + ShaderName + "/MultiRefraction");
             ltsmfur     = Shader.Find("Hidden/" + ShaderName + "/MultiFur");
             ltsmgem     = Shader.Find("Hidden/" + ShaderName + "/MultiGem");
+        }
+
+
+        /// <summary>
+        /// Identify whether the property block should be drawn or not.
+        /// </summary>
+        /// <param name="propertyList">Target property list.</param>
+        /// <returns>True when the property block should be drawn, otherwise false.</returns>
+        private static bool ShouldDrawBlock(List<MaterialProperty> propertyList)
+        {
+            foreach (var property in propertyList)
+            {
+                if (lilEditorGUI.CheckPropertyToDraw(property))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>

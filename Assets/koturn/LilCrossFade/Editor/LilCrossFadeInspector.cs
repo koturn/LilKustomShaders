@@ -31,6 +31,10 @@ namespace Koturn.LilCrossFade.Editor
         /// </summary>
         private bool _shouldLoadLanguage;
         /// <summary>
+        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
+        /// </summary>
+        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_DisplayTime".
         /// </summary>
         private MaterialProperty _displayCycleTime;
@@ -120,6 +124,17 @@ namespace Koturn.LilCrossFade.Editor
             };
             _atlasRows = FindProperty("_AtlasRows", props);
             _atlasCols = FindProperty("_AtlasCols", props);
+
+            var propertyList = _propertyList;
+            propertyList.Clear();
+            propertyList.Add(_displayCycleTime);
+            propertyList.Add(_crossFadeTime);
+            propertyList.Add(_texMode);
+            propertyList.Add(_numTextures);
+            propertyList.Add(_mainTexArray);
+            propertyList.AddRange(_mainTexes);
+            propertyList.Add(_atlasRows);
+            propertyList.Add(_atlasCols);
         }
 
         /// <summary>
@@ -135,6 +150,11 @@ namespace Koturn.LilCrossFade.Editor
             // boxInner         inner box without label
             // customBox        box (similar to unity default box)
             // customToggleFont label for box
+
+            if (!ShouldDrawBlock(_propertyList))
+            {
+                return;
+            }
 
             var titleLoc = GetLoc("sCustomShaderTitle");
             isShowCustomProperties = Foldout(titleLoc, titleLoc, isShowCustomProperties);
@@ -305,6 +325,24 @@ namespace Koturn.LilCrossFade.Editor
             ltsmref     = Shader.Find("Hidden/" + ShaderName + "/MultiRefraction");
             ltsmfur     = Shader.Find("Hidden/" + ShaderName + "/MultiFur");
             ltsmgem     = Shader.Find("Hidden/" + ShaderName + "/MultiGem");
+        }
+
+
+        /// <summary>
+        /// Identify whether the property block should be drawn or not.
+        /// </summary>
+        /// <param name="propertyList">Target property list.</param>
+        /// <returns>True when the property block should be drawn, otherwise false.</returns>
+        private static bool ShouldDrawBlock(List<MaterialProperty> propertyList)
+        {
+            foreach (var property in propertyList)
+            {
+                if (lilEditorGUI.CheckPropertyToDraw(property))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>
