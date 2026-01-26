@@ -22,7 +22,7 @@ using nadena.dev.ndmf;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5101fcab-47ec-2ab4-0a5d-3ad9a08e332f")]
+[assembly: Guid("e2d9d48e-cf4b-4574-3829-d146cc6f52ec")]
 
 // Version information for an assembly consists of the following four values:
 //
