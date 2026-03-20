@@ -3,6 +3,7 @@ namespace Koturn.LilHueShift.Editor
     /// <summary>
     /// Provides Asset GUIDs.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("3715160b-b1de-57a4-792a-e93f012044e0")]
     internal static class AssetGuid
     {
         /// <summary>

@@ -10,6 +10,7 @@ namespace Koturn.LilOptimized.NDMF.Editor
     /// <summary>
     /// Provides a NDMF plugin which replace lilToon shaders to optimized ones.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("97fb18d9-1981-82b4-f8fc-8d00cfaab5af")]
     public sealed class ShaderReplacePlugin : Plugin<ShaderReplacePlugin>
     {
         /// <summary>

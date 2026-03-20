@@ -9,6 +9,7 @@ namespace Koturn.LilWireframe.Editor
     /// <summary>
     /// Startup method provider.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("925b3d84-1511-5084-299d-aec3ca518837")]
     internal sealed class Startup : AssetPostprocessor
     {
 #if UNITY_2021_2_OR_NEWER

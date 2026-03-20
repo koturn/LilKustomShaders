@@ -10,6 +10,7 @@ namespace Koturn.LilEmissionWave.Editor
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilEmissionWave".
     /// </summary>
+    [System.Runtime.InteropServices.Guid("0c5024a2-4147-0d04-fbf2-c47e698cbdd1")]
     public sealed class LilEmissionWaveInspector : lilToonInspector
     {
         /// <summary>

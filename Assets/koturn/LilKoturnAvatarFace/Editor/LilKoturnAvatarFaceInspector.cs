@@ -10,6 +10,7 @@ namespace Koturn.LilKoturnAvatarFace.Editor
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilKoturnAvatarFace".
     /// </summary>
+    [System.Runtime.InteropServices.Guid("2880c67f-3d79-5714-28d0-2a48b4df986b")]
     public sealed class LilKoturnAvatarFaceInspector : lilToonInspector
     {
         /// <summary>

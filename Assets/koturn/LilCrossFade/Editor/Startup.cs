@@ -9,6 +9,7 @@ namespace Koturn.LilCrossFade.Editor
     /// <summary>
     /// Startup method provider.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("eab1b496-b908-2424-88ab-932f09ddacfa")]
     internal sealed class Startup : AssetPostprocessor
     {
 #if UNITY_2021_2_OR_NEWER

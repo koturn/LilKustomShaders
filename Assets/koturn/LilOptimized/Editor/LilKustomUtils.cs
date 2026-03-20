@@ -13,6 +13,7 @@ namespace Koturn.LilOptimized.Editor
     /// <summary>
     /// Utility class for LilKustomShaders.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("3f32ebb4-3479-a494-79ed-74876844961b")]
     public static class LilKustomUtils
     {
         /// <summary>

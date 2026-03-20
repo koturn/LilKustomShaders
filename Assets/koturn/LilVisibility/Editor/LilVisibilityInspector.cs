@@ -10,6 +10,7 @@ namespace Koturn.LilVisibility.Editor
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilVisibility".
     /// </summary>
+    [System.Runtime.InteropServices.Guid("5b6e8af1-6936-2cb4-181c-5ba81d4b8cdd")]
     public class LilVisibilityInspector : lilToonInspector
     {
         /// <summary>

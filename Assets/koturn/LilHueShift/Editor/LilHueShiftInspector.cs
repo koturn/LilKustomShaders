@@ -10,6 +10,7 @@ namespace Koturn.LilHueShift.Editor
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilHueShift".
     /// </summary>
+    [System.Runtime.InteropServices.Guid("0336b0bc-af1d-4094-e9f2-3e05d8763a59")]
     public sealed class LilHueShiftInspector : lilToonInspector
     {
         /// <summary>

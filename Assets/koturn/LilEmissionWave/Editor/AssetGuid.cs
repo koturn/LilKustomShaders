@@ -3,6 +3,7 @@ namespace Koturn.LilEmissionWave.Editor
     /// <summary>
     /// Provides Asset GUIDs.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("03a1c48b-b5e6-0034-9bfd-a829b392faa7")]
     internal static class AssetGuid
     {
         /// <summary>

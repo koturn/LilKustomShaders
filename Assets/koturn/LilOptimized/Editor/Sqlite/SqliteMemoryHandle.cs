@@ -7,6 +7,7 @@ namespace Koturn.LilOptimized.Editor.Sqlite
     /// <summary>
     /// Handle for memory allocated in SQLite3 functions.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("9e11b77d-e9b6-8094-4847-c5b50fb736e3")]
     internal sealed class SqliteMemoryHandle : SafeHandle
     {
         /// <summary>

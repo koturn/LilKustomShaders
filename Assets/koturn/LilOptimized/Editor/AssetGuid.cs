@@ -3,6 +3,7 @@ namespace Koturn.LilOptimized.Editor
     /// <summary>
     /// Provides Asset GUIDs.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("c4154cef-7e87-e1b4-f83f-eca5077b0b1e")]
     internal static class AssetGuid
     {
         /// <summary>

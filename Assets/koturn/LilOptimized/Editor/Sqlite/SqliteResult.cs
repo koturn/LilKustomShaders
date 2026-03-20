@@ -6,6 +6,7 @@ namespace Koturn.LilOptimized.Editor.Sqlite
     /// <remarks>
     /// <seealso href="https://www.sqlite.org/c3ref/c_abort.html"/>
     /// </remarks>
+    [System.Runtime.InteropServices.Guid("5656c383-f3e9-bbd4-0bda-43beb5a22386")]
     public enum SqliteResult : int
     {
         /// <summary>

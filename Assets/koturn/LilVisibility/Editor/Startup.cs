@@ -9,6 +9,7 @@ namespace Koturn.LilVisibility.Editor
     /// <summary>
     /// Startup method provider.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("b088e04b-f098-4454-988d-e128fffe7f23")]
     internal sealed class Startup : AssetPostprocessor
     {
 #if UNITY_2021_2_OR_NEWER

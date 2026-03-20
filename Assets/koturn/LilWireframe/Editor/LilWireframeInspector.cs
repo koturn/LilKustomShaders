@@ -10,6 +10,7 @@ namespace Koturn.LilWireframe.Editor
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilWireframe".
     /// </summary>
+    [System.Runtime.InteropServices.Guid("13f2e29f-5415-9db4-aa73-7c73c6aac594")]
     public sealed class LilWireframeInspector : lilToonInspector
     {
         /// <summary>

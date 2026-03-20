@@ -7,6 +7,7 @@ namespace Koturn.LilOptimized.Editor
     /// <summary>
     /// Shader manager of koturn/LilOptimized.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("bf155380-d64f-5714-984d-c94cb9087061")]
     public static class LilOptimizedShaderManager
     {
         /// <summary>

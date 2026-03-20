@@ -7,6 +7,7 @@ namespace Koturn.LilOptimized.Editor.Sqlite
     /// <summary>
     /// Handle for SQLite3 database.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("97bc67e8-78f2-ae24-1aa9-7bbd26892fdf")]
     public sealed class SqliteHandle : SafeHandle
     {
         /// <summary>

@@ -7,6 +7,7 @@ namespace Koturn.LilOptimized.Editor.Sqlite
     /// <summary>
     /// SQLite3 client.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("c7f6e85f-5d27-b754-fa59-353eeb8fadcc")]
     public class SqliteConnection : IDisposable
     {
         /// <summary>

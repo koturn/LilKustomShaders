@@ -3,6 +3,7 @@ namespace Koturn.LilWireframe.Editor
     /// <summary>
     /// Provides Asset GUIDs.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("5e108e0a-6323-bdf4-899d-1a274dcc294d")]
     internal static class AssetGuid
     {
         /// <summary>

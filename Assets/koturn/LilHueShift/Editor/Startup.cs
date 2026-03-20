@@ -9,6 +9,7 @@ namespace Koturn.LilHueShift.Editor
     /// <summary>
     /// Startup method provider.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("cd9cc531-c366-57d4-d92d-dfbb6e66dec7")]
     internal sealed class Startup : AssetPostprocessor
     {
 #if UNITY_2021_2_OR_NEWER

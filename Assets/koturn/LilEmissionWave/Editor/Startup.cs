@@ -9,6 +9,7 @@ namespace Koturn.LilEmissionWave.Editor
     /// <summary>
     /// Startup method provider.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("c02766cf-80c3-6bc4-2940-f6d31f9b1c76")]
     internal sealed class Startup : AssetPostprocessor
     {
 #if UNITY_2021_2_OR_NEWER

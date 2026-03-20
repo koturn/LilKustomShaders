@@ -3,6 +3,7 @@ namespace Koturn.LilVisibility.Editor
     /// <summary>
     /// Provides Asset GUIDs.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("995372c0-2e3e-f1a4-ab05-ca4190418f2e")]
     internal static class AssetGuid
     {
         /// <summary>

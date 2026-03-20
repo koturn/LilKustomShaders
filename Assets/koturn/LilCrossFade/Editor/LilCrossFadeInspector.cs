@@ -10,6 +10,7 @@ namespace Koturn.LilCrossFade.Editor
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilCrossFade".
     /// </summary>
+    [System.Runtime.InteropServices.Guid("179e700a-aadd-4be4-494b-d0af05bfa32a")]
     public sealed class LilCrossFadeInspector : lilToonInspector
     {
         /// <summary>

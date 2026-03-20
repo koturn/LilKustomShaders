@@ -9,6 +9,7 @@ namespace Koturn.LilTextOverlay.Editor
     /// <summary>
     /// Startup method provider.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("bcb5b7ec-0b9f-1ca4-7999-23bfb4ca7481")]
     internal sealed class Startup : AssetPostprocessor
     {
 #if UNITY_2021_2_OR_NEWER

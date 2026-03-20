@@ -8,6 +8,7 @@ namespace Koturn.LilOptimized.Editor.Sqlite
     /// Exception class for some failed P/Invoke of SQLite3 calls.
     /// </summary>
     [Serializable]
+    [System.Runtime.InteropServices.Guid("37655152-e71e-2cb4-3972-61bbd3b247e7")]
     public class SqliteException : Exception
     {
         /// <summary>

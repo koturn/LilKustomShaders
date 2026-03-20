@@ -10,6 +10,7 @@ namespace Koturn.LilRefProbe.Editor
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilRefProbe".
     /// </summary>
+    [System.Runtime.InteropServices.Guid("4137e938-a981-a324-9afd-4596c17a7a91")]
     public class LilRefProbeInspector : lilToonInspector
     {
         /// <summary>

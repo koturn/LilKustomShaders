@@ -8,6 +8,7 @@ namespace Koturn.LilOptimized.Editor.Sqlite
     /// <summary>
     /// Entry point class
     /// </summary>
+    [System.Runtime.InteropServices.Guid("cd0ff202-3036-2354-c9cf-2109c1d11473")]
     public static class SqliteLibrary
     {
         /// <summary>

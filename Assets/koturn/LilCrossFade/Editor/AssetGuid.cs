@@ -3,6 +3,7 @@ namespace Koturn.LilCrossFade.Editor
     /// <summary>
     /// Provides Asset GUIDs.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("d2880ef1-4da9-0ea4-6b6a-403581d31a11")]
     internal static class AssetGuid
     {
         /// <summary>

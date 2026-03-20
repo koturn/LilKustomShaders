@@ -3,6 +3,7 @@ namespace Koturn.LilKoturnAvatarFace.Editor
     /// <summary>
     /// Provides Asset GUIDs.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("0adb9130-463f-f854-3a69-1ce0dc609807")]
     internal static class AssetGuid
     {
         /// <summary>

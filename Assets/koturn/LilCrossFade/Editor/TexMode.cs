@@ -3,6 +3,7 @@ namespace Koturn.LilCrossFade.Editor
     /// <summary>
     /// Enum values for shader property, "_TexMode".
     /// </summary>
+    [System.Runtime.InteropServices.Guid("2dfdfdde-da34-fe14-19c7-a7400b30fed7")]
     public enum TexMode
     {
         /// <summary>

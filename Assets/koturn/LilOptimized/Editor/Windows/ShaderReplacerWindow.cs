@@ -8,6 +8,7 @@ namespace Koturn.LilOptimized.Editor.Windows
     /// <summary>
     /// A window class which replace lilToon shaders to optimized ones.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("dd78292d-6658-7c44-3b02-5f2051889210")]
     public sealed class ShaderReplacerWindow : EditorWindow
     {
         /// <summary>

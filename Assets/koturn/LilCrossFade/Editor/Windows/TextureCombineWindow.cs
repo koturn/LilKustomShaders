@@ -11,6 +11,7 @@ namespace Koturn.LilCrossFade.Editor.Windows
     /// <summary>
     /// A window class for creating Texture2DArray.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("760ca624-0fe4-9e34-2aed-e00e4719aa6e")]
     public sealed class TextureCombineWindow : EditorWindow
     {
         /// <summary>

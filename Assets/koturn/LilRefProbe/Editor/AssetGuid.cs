@@ -3,6 +3,7 @@ namespace Koturn.LilRefProbe.Editor
     /// <summary>
     /// Provides Asset GUIDs.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("41dd932c-3edd-0b44-b80d-490c18e0c9dd")]
     internal static class AssetGuid
     {
         /// <summary>

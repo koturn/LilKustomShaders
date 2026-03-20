@@ -8,6 +8,7 @@ namespace Koturn.LilOptimized.Editor
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of lilToon.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("3264191d-ade7-ac14-5b22-468bdb16da3e")]
     public sealed class LilOptimizedInspector : lilToonInspector
     {
         // Custom properties

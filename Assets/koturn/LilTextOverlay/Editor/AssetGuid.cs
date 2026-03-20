@@ -3,6 +3,7 @@ namespace Koturn.LilTextOverlay.Editor
     /// <summary>
     /// Provides Asset GUIDs.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("ecf0a5f1-6f96-6894-c84c-2fbf3b353200")]
     internal static class AssetGuid
     {
         /// <summary>

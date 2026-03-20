@@ -8,6 +8,7 @@ namespace Koturn.LilOptimized.Editor
     /// <summary>
     /// Startup method provider.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("1a2d269c-e873-3244-2bf1-5d45b10a7fd7")]
     internal sealed class Startup : AssetPostprocessor
     {
         /// <summary>

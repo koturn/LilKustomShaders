@@ -9,6 +9,7 @@ namespace Koturn.LilRefProbe.Editor
     /// <summary>
     /// Startup method provider.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("151a5e8f-646d-a3f4-a8db-2451deda2fa9")]
     internal sealed class Startup : AssetPostprocessor
     {
 #if UNITY_2021_2_OR_NEWER

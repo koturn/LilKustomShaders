@@ -13,6 +13,7 @@ namespace Koturn.LilTextOverlay.Editor
     /// <summary>
     /// <see cref="ShaderGUI"/> for the custom shader variations of "koturn/LilTextOverlay".
     /// </summary>
+    [System.Runtime.InteropServices.Guid("4ebcda7a-cd46-88d4-5a78-0286cc596d09")]
     public sealed class LilTextOverlayInspector : lilToonInspector
     {
         /// <summary>

@@ -9,6 +9,7 @@ namespace Koturn.LilKoturnAvatarFace.Editor
     /// <summary>
     /// Startup method provider.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("933c29f9-b318-8914-4907-e306fb0f5288")]
     internal sealed class Startup : AssetPostprocessor
     {
 #if UNITY_2021_2_OR_NEWER
