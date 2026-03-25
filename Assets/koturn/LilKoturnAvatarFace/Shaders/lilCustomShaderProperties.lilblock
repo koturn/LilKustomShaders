@@ -1,6 +1,9 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
+        [lilEnum] _TimeSource ("sTimeSource|sTimeSourceElapsedTime|sTimeSourceFakeTime|sTimeSourceVRChatUTC", Int) = 0
+        _FakeTime ("sFakeTime", Range(0.0, 86400.0)) = 0.0
+
         [lilHDR] _GraphKoturnColor ("sColorAlpha", Color) = (0.6333333, 0.6333333, 0.95, 1.0)
         _GraphKoturnOffsetScale ("sOffsetScale", Vector) = (0.0, 0.0, 1.0, 1.0)
         [lilAngle] _GraphKoturnRotAngle ("sGraphKoturnRotAngle", Float) = 0.0

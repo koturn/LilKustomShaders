@@ -52,6 +52,14 @@ namespace Koturn.LilWireframe.Editor
         /// </summary>
         private MaterialProperty _wireframeRandomizeColor;
         /// <summary>
+        /// <see cref="MaterialProperty"/> of "_TimeSource".
+        /// </summary>
+        private MaterialProperty _timeSource;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_FakeTime".
+        /// </summary>
+        private MaterialProperty _fakeTime;
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_WireframeCycleTime".
         /// </summary>
         private MaterialProperty _wireframeCycleTime;
@@ -96,6 +104,8 @@ namespace Koturn.LilWireframe.Editor
             _wireframeMask = FindProperty("_WireframeMask", props);
             _wireframeColor = FindProperty("_WireframeColor", props);
             _wireframeRandomizeColor = FindProperty("_WireframeRandomizeColor", props);
+            _timeSource = FindProperty("_TimeSource", props);
+            _fakeTime = FindProperty("_FakeTime", props);
             _wireframeCycleTime = FindProperty("_WireframeCycleTime", props);
             _wireframeDecayTime = FindProperty("_WireframeDecayTime", props);
 
@@ -105,6 +115,8 @@ namespace Koturn.LilWireframe.Editor
             propertyList.Add(_wireframeMask);
             propertyList.Add(_wireframeColor);
             propertyList.Add(_wireframeRandomizeColor);
+            propertyList.Add(_timeSource);
+            propertyList.Add(_fakeTime);
             propertyList.Add(_wireframeCycleTime);
             propertyList.Add(_wireframeDecayTime);
         }
@@ -145,6 +157,14 @@ namespace Koturn.LilWireframe.Editor
                     LocalizedPropertyTexture(new GUIContent(GetLoc("sWireframeMaskAndColor"), GetLoc("sTextureRGB")), _wireframeMask, _wireframeColor);
                     lilEditorGUI.LocalizedProperty(me, _wireframeRandomizeColor);
 
+                    lilEditorGUI.LocalizedProperty(me, _timeSource);
+                    if ((TimeSource)_timeSource.floatValue == TimeSource.FakeTime)
+                    {
+                        using (new EditorGUI.IndentLevelScope())
+                        {
+                            lilEditorGUI.LocalizedProperty(me, _fakeTime);
+                        }
+                    }
                     lilEditorGUI.LocalizedProperty(me, _wireframeCycleTime);
                     lilEditorGUI.LocalizedProperty(me, _wireframeDecayTime);
                 }

@@ -14,9 +14,13 @@
     float _StarRotAngle; \
     float _StarRotSpeed; \
     float _StarWidth; \
+    uint _TimeSource; \
+    float _FakeTime; \
     float _HueShiftSpeed; \
     lilBool _HueShiftEmission; \
-    lilBool _HueShiftEmission2nd;
+    lilBool _HueShiftEmission2nd; \
+    uint _VRChatTimeEncoded1; \
+    uint _VRChatTimeEncoded2;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES \

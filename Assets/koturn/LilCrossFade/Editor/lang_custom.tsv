@@ -1,6 +1,11 @@
 Language	English	Japanese
 sCustomShaderTitle	Cross Fade	クロスフェード
 sCustomPropertyCategory	Cross Fade	クロスフェード
+sTimeSource	Time Source	時間ソース
+sTimeSourceElapsedTime	Elapsed Time	経過時間
+sTimeSourceFakeTime	Fake Time	疑似時間
+sTimeSourceVRChatUTC	UTC (VRChat only)	UTC (VRChatのみ)
+sFakeTime	Fake Time	疑似時間
 sDisplayTime	Display time for one texture (seconds)	1テクスチャの周期時間（秒）
 sCrossFadeTime	Time to cross fade (seconds)	クロスフェード時間（秒）
 sNumTextures	Number of textures	テクスチャ数

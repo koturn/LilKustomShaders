@@ -1,6 +1,8 @@
 
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
+        [lilEnum] _TimeSource ("sTimeSource|sTimeSourceElapsedTime|sTimeSourceFakeTime|sTimeSourceVRChatUTC", Int) = 0
+        _FakeTime ("sFakeTime", Range(0.0, 86400.0)) = 0.0
         _DisplayTime ("sDisplayTime", Float) = 5.0
         _CrossFadeTime ("sCrossFadeTime", Float) = 1.0
 

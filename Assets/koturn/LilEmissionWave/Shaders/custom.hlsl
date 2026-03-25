@@ -6,6 +6,8 @@
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
 #define LIL_CUSTOM_PROPERTIES \
+    uint _TimeSource; \
+    float _FakeTime; \
     float _DisplayTime; \
     float _CrossFadeTime; \
     float _NumColors; \
@@ -24,7 +26,9 @@
     float _EmissionPosMax; \
     float3 _WaveAxisAngles; \
     int _WavePosSpace; \
-    int _WaveAxis;
+    int _WaveAxis; \
+    uint _VRChatTimeEncoded1; \
+    uint _VRChatTimeEncoded2;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES \
@@ -71,7 +75,7 @@
 // Add vertex copy
 #define LIL_CUSTOM_VERT_COPY \
     output.emissionWavePos = pickupPosition(getEmissionPos(input.positionOS)) \
-        + (2.0 * rand((float)input.vertexID, LIL_TIME) - 1.0) * _EmissionWaveNoiseAmp;
+        + (2.0 * rand((float)input.vertexID, getTime()) - 1.0) * _EmissionWaveNoiseAmp;
 
 // Inserting a process into the vertex shader
 //#define LIL_CUSTOM_VERTEX_OS
@@ -82,7 +86,7 @@
 //#define OVERRIDE_xx
 
 #define BEFORE_UNPACK_V2F \
-    const float baseTime = LIL_TIME * _EmissionWaveSpeed + _EmissionWaveInitPhase - remap01(input.emissionWavePos, _EmissionPosMin, _EmissionPosMax); \
+    const float baseTime = getTime() * _EmissionWaveSpeed + _EmissionWaveInitPhase - remap01(input.emissionWavePos, _EmissionPosMin, _EmissionPosMax); \
     const float crossFadeTime = max(1.0e-5, _CrossFadeTime); \
     const float oneCycleTime = _DisplayTime + crossFadeTime; \
     const float colorShiftTmpIdx1 = floor(fmodglsl(baseTime, oneCycleTime * _NumColors) / oneCycleTime); \

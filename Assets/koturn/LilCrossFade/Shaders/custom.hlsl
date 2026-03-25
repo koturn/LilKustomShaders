@@ -5,11 +5,15 @@
 //#define LIL_CUSTOM_PROPERTIES \
 //    float _CustomVariable;
 #define LIL_CUSTOM_PROPERTIES \
+    uint _TimeSource; \
+    float _FakeTime; \
     float _DisplayTime; \
     float _CrossFadeTime; \
     float _NumTextures; \
     float _AtlasRows; \
-    float _AtlasCols;
+    float _AtlasCols; \
+    uint _VRChatTimeEncoded1; \
+    uint _VRChatTimeEncoded2;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES \

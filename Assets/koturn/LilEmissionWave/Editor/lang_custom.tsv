@@ -1,6 +1,11 @@
 Language	English	Japanese
 sCustomShaderTitle	Emission Wave	エミッション波
 sCustomPropertyCategory	Emission Wave	エミッション波
+sTimeSource	Time Source	時間ソース
+sTimeSourceElapsedTime	Elapsed Time	経過時間
+sTimeSourceFakeTime	Fake Time	疑似時間
+sTimeSourceVRChatUTC	UTC (VRChat only)	UTC (VRChatのみ)
+sFakeTime	Fake Time	疑似時間
 sDisplayTime	Display time for one texture (seconds)	1テクスチャの周期時間（秒）
 sCrossFadeTime	Time to cross fade (seconds)	クロスフェード時間（秒）
 sNumColors	Number of colors	色数

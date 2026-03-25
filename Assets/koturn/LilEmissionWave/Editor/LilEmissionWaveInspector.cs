@@ -36,6 +36,14 @@ namespace Koturn.LilEmissionWave.Editor
         /// </summary>
         private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
         /// <summary>
+        /// <see cref="MaterialProperty"/> of "_TimeSource".
+        /// </summary>
+        private MaterialProperty _timeSource;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_FakeTime".
+        /// </summary>
+        private MaterialProperty _fakeTime;
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_DisplayTime".
         /// </summary>
         private MaterialProperty _displayCycleTime;
@@ -128,6 +136,8 @@ namespace Koturn.LilEmissionWave.Editor
                 prevLanguageName = lilLanguageManager.langSet.languageName;
             }
 
+            _timeSource = FindProperty("_TimeSource", props);
+            _fakeTime = FindProperty("_FakeTime", props);
             _displayCycleTime = FindProperty("_DisplayTime", props);
             _crossFadeTime = FindProperty("_CrossFadeTime", props); _numColors = FindProperty("_NumColors", props);
             _colors = new[]
@@ -157,6 +167,8 @@ namespace Koturn.LilEmissionWave.Editor
 
             var propertyList = _propertyList;
             propertyList.Clear();
+            propertyList.Add(_timeSource);
+            propertyList.Add(_fakeTime);
             propertyList.Add(_displayCycleTime);
             propertyList.Add(_crossFadeTime);
             propertyList.AddRange(_colors);
@@ -205,6 +217,14 @@ namespace Koturn.LilEmissionWave.Editor
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;
+                    lilEditorGUI.LocalizedProperty(me, _timeSource);
+                    if ((TimeSource)_timeSource.floatValue == TimeSource.FakeTime)
+                    {
+                        using (new EditorGUI.IndentLevelScope())
+                        {
+                            lilEditorGUI.LocalizedProperty(me, _fakeTime);
+                        }
+                    }
                     lilEditorGUI.LocalizedProperty(me, _displayCycleTime);
                     lilEditorGUI.LocalizedProperty(me, _crossFadeTime);
 

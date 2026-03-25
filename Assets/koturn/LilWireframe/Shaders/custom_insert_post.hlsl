@@ -21,6 +21,17 @@
 static const uint _FurMeshType = 0;
 #endif  // LIL_CURRENT_VERSION_MAJOR >= 2
 
+//! One of the `_TimeSource` value; means that time source is `LIL_TIME` (`_Time.y`).
+static const uint kTimeSourceElapsedTime = 0;
+//! One of the `_TimeSource` value; means that time source is `_FakeTime`.
+static const uint kTimeSourceFakeTime = 1;
+//! One of the `_TimeSource` value; means that time source is `_VRChatTimeEncoded1` and `_VRChatTimeEncoded2` (Use UTC).
+static const uint kTimeSourceVRChatUTC = 2;
+
+
+float getTime();
+
+
 #if defined(LIL_PASS_FORWARD_FUR_INCLUDED)
 #if defined(LIL_ONEPASS_FUR)
 [maxvertexcount(46)]
@@ -55,7 +66,7 @@ void geomCustom(triangle v2g input[3], inout TriangleStream<v2f> outStream)
         LIL_INITIALIZE_STRUCT(v2f, outputBase[2]);
 
         const float3 vertexIndices = float3(input[0].baryCoord.x, input[1].baryCoord.x, input[2].baryCoord.x);
-        const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
+        const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((getTime() / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
         float3 color0, color1, color2;
         BRANCH
@@ -202,7 +213,7 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     LIL_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input[0].base);
 
     const float3 vertexIndices = float3(input[0].baryCoord.x, input[1].baryCoord.x, input[2].baryCoord.x);
-    const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
+    const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((getTime() / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
     float3 color0, color1, color2;
     BRANCH
@@ -296,7 +307,7 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     // LIL_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input[0]);
 
     const float3 vertexIndices = float3(input[0].baryCoord.x, input[1].baryCoord.x, input[2].baryCoord.x);
-    const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((LIL_TIME / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
+    const float3 emissionWeights = saturate((1.0).xxx - _WireframeCycleTime * frac((getTime() / _WireframeCycleTime).xxx + rand(vertexIndices.yzx, vertexIndices.zxy)) / _WireframeDecayTime);
 
     float3 color0, color1, color2;
     BRANCH
@@ -326,6 +337,32 @@ void geomCustom(triangle v2f input[3], inout TriangleStream<v2f> outStream)
     outStream.RestartStrip();
 }
 #endif  // defined(LIL_PASS_FORWARD_FUR_INCLUDED)
+
+
+/*!
+ * @brief Get the current time in seconds, including milliseconds.
+ *
+ * The value of `_TimeSource` determines whether to return the time elapsed
+ * since entering the world, fake time or the time elapsed since midnight UTC.
+ *
+ * @return The current time.
+ */
+float getTime()
+{
+    float t;
+
+    if (_TimeSource == kTimeSourceFakeTime) {
+        t = _FakeTime;
+    } else if (_TimeSource == kTimeSourceVRChatUTC) {
+        t = dot(
+            (float4)(uint4(_VRChatTimeEncoded1, _VRChatTimeEncoded1 >> 5, _VRChatTimeEncoded1 >> 11, _VRChatTimeEncoded2) & uint4(0x1f, 0x3f, 0x3f, 0x3ff)),
+            float4(3600.0, 60.0, 1.0, 0.001));
+    } else {
+        t = LIL_TIME;
+    }
+
+    return t;
+}
 
 
 #include "lil_opt_vert.hlsl"

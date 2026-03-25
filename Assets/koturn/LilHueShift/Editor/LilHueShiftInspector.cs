@@ -40,6 +40,14 @@ namespace Koturn.LilHueShift.Editor
         /// </summary>
         private MaterialProperty _hueShiftMask;
         /// <summary>
+        /// <see cref="MaterialProperty"/> of "_TimeSource".
+        /// </summary>
+        private MaterialProperty _timeSource;
+        /// <summary>
+        /// <see cref="MaterialProperty"/> of "_FakeTime".
+        /// </summary>
+        private MaterialProperty _fakeTime;
+        /// <summary>
         /// <see cref="MaterialProperty"/> of "_HueShiftSpeed".
         /// </summary>
         private MaterialProperty _hueShiftSpeed;
@@ -85,6 +93,8 @@ namespace Koturn.LilHueShift.Editor
             }
 
             _hueShiftMask = FindProperty("_HueShiftMask", props);
+            _timeSource = FindProperty("_TimeSource", props);
+            _fakeTime = FindProperty("_FakeTime", props);
             _hueShiftSpeed = FindProperty("_HueShiftSpeed", props);
             _hueShiftEmission = FindProperty("_HueShiftEmission", props);
             _hueShiftEmission2nd = FindProperty("_HueShiftEmission2nd", props);
@@ -92,6 +102,8 @@ namespace Koturn.LilHueShift.Editor
             var propertyList = _propertyList;
             propertyList.Clear();
             propertyList.Add(_hueShiftMask);
+            propertyList.Add(_timeSource);
+            propertyList.Add(_fakeTime);
             propertyList.Add(_hueShiftSpeed);
             propertyList.Add(_hueShiftEmission);
             propertyList.Add(_hueShiftEmission2nd);
@@ -130,6 +142,14 @@ namespace Koturn.LilHueShift.Editor
                 {
                     var me = m_MaterialEditor;
                     lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMask"), GetLoc("sTextureRGB")), _hueShiftMask);
+                    lilEditorGUI.LocalizedProperty(me, _timeSource);
+                    if ((TimeSource)_timeSource.floatValue == TimeSource.FakeTime)
+                    {
+                        using (new EditorGUI.IndentLevelScope())
+                        {
+                            lilEditorGUI.LocalizedProperty(me, _fakeTime);
+                        }
+                    }
                     lilEditorGUI.LocalizedProperty(me, _hueShiftSpeed);
                     lilEditorGUI.LocalizedProperty(me, _hueShiftEmission);
                     lilEditorGUI.LocalizedProperty(me, _hueShiftEmission2nd);

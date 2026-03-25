@@ -2,6 +2,8 @@
         //----------------------------------------------------------------------------------------------------------------------
         // Custom Properties
         [NoScaleOffset] _HueShiftMask ("sHueShiftMask", 2D) = "white" {}
+        [lilEnum] _TimeSource ("sTimeSource|sTimeSourceElapsedTime|sTimeSourceFakeTime|sTimeSourceVRChatUTC", Int) = 0
+        _FakeTime ("sFakeTime", Range(0.0, 86400.0)) = 0.0
         _HueShiftSpeed ("sHueShiftSpeed", Float) = 0.1
         [lilToggle] _HueShiftEmission ("sHueShiftEmission", Int) = 1
         [lilToggle] _HueShiftEmission2nd ("sHueShiftEmission2nd", Int) = 1

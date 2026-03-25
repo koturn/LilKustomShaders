@@ -19,6 +19,12 @@
 #endif  // LIL_MULTI
 
 
+//! One of the `_TimeSource` value; means that time source is `LIL_TIME` (`_Time.y`).
+static const uint kTimeSourceElapsedTime = 0;
+//! One of the `_TimeSource` value; means that time source is `_FakeTime`.
+static const uint kTimeSourceFakeTime = 1;
+//! One of the `_TimeSource` value; means that time source is `_VRChatTimeEncoded1` and `_VRChatTimeEncoded2` (Use UTC).
+static const uint kTimeSourceVRChatUTC = 2;
 //! Enum value for _WavePosSpace, "Object".
 static const int kWavePosSpaceObject = 0;
 //! Enum value for _WavePosSpace, "World".
@@ -31,6 +37,15 @@ static const int kWaveAxisY = 1;
 static const int kWaveAxisZ = 2;
 //! Enum value for _WaveAxis, "Free".
 static const int kWaveAxisFree = 3;
+
+
+float3 getEmissionPos(float3 positionOS);
+float pickupPosition(float3 pos);
+float4 getTintColor(float colorIdx);
+float4 getEmissionWaveColor(float colorIdx);
+float4 colorShiftGetTint(float crossFadeIdx1, float crossFadeIdx2, float blendCoeff);
+float3 calcEmissionColor(float3 emissionColor, float alpha);
+float getTime();
 
 
 /*!
@@ -163,6 +178,32 @@ float3 calcEmissionColor(float3 emissionColor, float alpha)
 #else
     return emissionColor;
 #endif  // LIL_RENDER == 2 && !defined(LIL_REFRACTION)
+}
+
+
+/*!
+ * @brief Get the current time in seconds, including milliseconds.
+ *
+ * The value of `_TimeSource` determines whether to return the time elapsed
+ * since entering the world, fake time or the time elapsed since midnight UTC.
+ *
+ * @return The current time.
+ */
+float getTime()
+{
+    float t;
+
+    if (_TimeSource == kTimeSourceFakeTime) {
+        t = _FakeTime;
+    } else if (_TimeSource == kTimeSourceVRChatUTC) {
+        t = dot(
+            (float4)(uint4(_VRChatTimeEncoded1, _VRChatTimeEncoded1 >> 5, _VRChatTimeEncoded1 >> 11, _VRChatTimeEncoded2) & uint4(0x1f, 0x3f, 0x3f, 0x3ff)),
+            float4(3600.0, 60.0, 1.0, 0.001));
+    } else {
+        t = LIL_TIME;
+    }
+
+    return t;
 }
 
 

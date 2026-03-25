@@ -8,6 +8,11 @@ sStarRotAngle	Rotate angle (Degrees)	回転角（度）
 sStarRotSpeed	Rotate angle (deg/s)	回転角（度/秒）
 sStarWidth	Width	線の幅
 sHueShiftMask	Mask	マスク
+sTimeSource	Time Source	時間ソース
+sTimeSourceElapsedTime	Elapsed Time	経過時間
+sTimeSourceFakeTime	Fake Time	疑似時間
+sTimeSourceVRChatUTC	UTC (VRChat only)	UTC (VRChatのみ)
+sFakeTime	Fake Time	疑似時間
 sHueShiftSpeed	Hue shift speed	色相変化速度
 sHueShiftEmission	Enable Hue Shift on Emission 1st	発光テクスチャに対して適用
 sHueShiftEmission2nd	Enable Hue Shift on Emission 2nd	発光テクスチャ2ndに対して適用

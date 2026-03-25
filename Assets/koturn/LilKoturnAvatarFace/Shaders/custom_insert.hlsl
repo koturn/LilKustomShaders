@@ -1,3 +1,17 @@
+//! One of the `_TimeSource` value; means that time source is `LIL_TIME` (`_Time.y`).
+static const uint kTimeSourceElapsedTime = 0;
+//! One of the `_TimeSource` value; means that time source is `_FakeTime`.
+static const uint kTimeSourceFakeTime = 1;
+//! One of the `_TimeSource` value; means that time source is `_VRChatTimeEncoded1` and `_VRChatTimeEncoded2` (Use UTC).
+static const uint kTimeSourceVRChatUTC = 2;
+
+
+float mapAlbedo(float2 p);
+float mapEmission(float2 p);
+void starEmission(inout lilFragData fd, float hsValue);
+float getTime();
+
+
 /*!
  * @brief SDF (Signed Distance Function) of objects for albedo.
  * @param [in] p  Coordinate.
@@ -41,6 +55,32 @@ void starEmission(inout lilFragData fd, float hsValue)
     if (_StarBlendMode > 0) {
         fd.col.rgb = lilBlendColor(fd.col.rgb, starColor.rgb, emissionBlend, _StarBlendMode);
     }
+}
+
+
+/*!
+ * @brief Get the current time in seconds, including milliseconds.
+ *
+ * The value of `_TimeSource` determines whether to return the time elapsed
+ * since entering the world, fake time or the time elapsed since midnight UTC.
+ *
+ * @return The current time.
+ */
+float getTime()
+{
+    float t;
+
+    if (_TimeSource == kTimeSourceFakeTime) {
+        t = _FakeTime;
+    } else if (_TimeSource == kTimeSourceVRChatUTC) {
+        t = dot(
+            (float4)(uint4(_VRChatTimeEncoded1, _VRChatTimeEncoded1 >> 5, _VRChatTimeEncoded1 >> 11, _VRChatTimeEncoded2) & uint4(0x1f, 0x3f, 0x3f, 0x3ff)),
+            float4(3600.0, 60.0, 1.0, 0.001));
+    } else {
+        t = LIL_TIME;
+    }
+
+    return t;
 }
 
 

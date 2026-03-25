@@ -9,8 +9,12 @@
     float _WireframeWidth; \
     float4 _WireframeColor; \
     bool _WireframeRandomizeColor; \
+    uint _TimeSource; \
+    float _FakeTime; \
     float _WireframeCycleTime; \
-    float _WireframeDecayTime;
+    float _WireframeDecayTime; \
+    uint _VRChatTimeEncoded1; \
+    uint _VRChatTimeEncoded2;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES \
