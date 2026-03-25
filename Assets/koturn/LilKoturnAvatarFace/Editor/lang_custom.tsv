@@ -1,12 +1,12 @@
 Language	English	Japanese
 sCustomShaderTitle	koturn Avatar Face	Koturnアバター顔
 sCustomPropertyCategoryKoturnGraph	Graph of Koturn	Koturnマーク
-sGraphKoturnRotAngle	Rotate angle (Degrees)	回転角（度）
 sCustomPropertyCategoryStar	Star emission	星のエミッション
+sCustomPropertyCategoryHueShift	Hue Shift	色相シフト
+sGraphKoturnRotAngle	Rotate angle (Degrees)	回転角（度）
 sStarRotAngle	Rotate angle (Degrees)	回転角（度）
 sStarRotSpeed	Rotate angle (deg/s)	回転角（度/秒）
 sStarWidth	Width	線の幅
-sCustomShaderTitle	Hue Shift	色相シフト
 sHueShiftMask	Mask	マスク
 sHueShiftSpeed	Hue shift speed	色相変化速度
 sHueShiftEmission	Enable Hue Shift on Emission 1st	発光テクスチャに対して適用

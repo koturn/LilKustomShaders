@@ -200,7 +200,7 @@ namespace Koturn.LilKoturnAvatarFace.Editor
                     lilEditorGUI.LocalizedProperty(me, _starWidth);
                 }
 
-                EditorGUILayout.LabelField(GetLoc("sCustomShaderTitle"), customToggleFont);
+                EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryHueShift"), customToggleFont);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMask"), GetLoc("sTextureRGB")), _hueShiftMask);
