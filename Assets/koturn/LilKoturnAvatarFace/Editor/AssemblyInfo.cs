@@ -6,7 +6,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Koturn.LilKoturnAvatarFace.Editor")]
 [assembly: AssemblyDescription("Material inspector of koturn/LilKoturnAvatarFace.")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
 [assembly: AssemblyConfiguration("Release")]
+#endif  // DEBUG
 [assembly: AssemblyCompany("koturn")]
 [assembly: AssemblyProduct("Koturn.LilKoturnAvatarFace.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2023 koturn All Rights Reserverd.")]

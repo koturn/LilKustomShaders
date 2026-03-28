@@ -6,7 +6,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Koturn.LilOptimized.NDMF.Runtime")]
 [assembly: AssemblyDescription("NDMF component for koturn/LilOptimized.")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
 [assembly: AssemblyConfiguration("Release")]
+#endif  // DEBUG
 [assembly: AssemblyCompany("koturn")]
 [assembly: AssemblyProduct("Koturn.LilOptimized.NDMF.Runtime")]
 [assembly: AssemblyCopyright("Copyright (C) 2024 koturn All Rights Reserverd.")]

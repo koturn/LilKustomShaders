@@ -6,7 +6,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Koturn.LilEmissionWave.Editor")]
 [assembly: AssemblyDescription("Material inspector of koturn/LilEmissionWave.")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
 [assembly: AssemblyConfiguration("Release")]
+#endif  // DEBUG
 [assembly: AssemblyCompany("koturn")]
 [assembly: AssemblyProduct("Koturn.LilEmissionWave.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2022 koturn All Rights Reserverd.")]

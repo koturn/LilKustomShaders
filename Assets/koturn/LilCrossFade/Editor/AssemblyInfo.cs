@@ -6,7 +6,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Koturn.LilCrossFade.Editor")]
 [assembly: AssemblyDescription("Material inspector of koturn/LilCrossFade.")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
 [assembly: AssemblyConfiguration("Release")]
+#endif  // DEBUG
 [assembly: AssemblyCompany("koturn")]
 [assembly: AssemblyProduct("Koturn.LilCrossFade.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2023 koturn All Rights Reserverd.")]

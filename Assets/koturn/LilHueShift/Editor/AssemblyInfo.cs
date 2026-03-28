@@ -6,7 +6,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Koturn.LilHueShift.Editor")]
 [assembly: AssemblyDescription("Material inspector of koturn/LilHueShift.")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
 [assembly: AssemblyConfiguration("Release")]
+#endif  // DEBUG
 [assembly: AssemblyCompany("koturn")]
 [assembly: AssemblyProduct("Koturn.LilHueShift.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2022 koturn All Rights Reserverd.")]

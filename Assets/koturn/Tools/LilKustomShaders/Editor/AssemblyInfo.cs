@@ -6,7 +6,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Koturn.Tools.LilKustomShaders.Editor")]
 [assembly: AssemblyDescription("Utilities for koturn/LilKustomShaders.")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
 [assembly: AssemblyConfiguration("Release")]
+#endif  // DEBUG
 [assembly: AssemblyCompany("koturn")]
 [assembly: AssemblyProduct("Koturn.Tools.LilKustomShaders.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2023 koturn All Rights Reserverd.")]

@@ -6,7 +6,11 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyTitle("Koturn.LilPolygonBurst.Editor")]
 [assembly: AssemblyDescription("Material inspector of koturn/LilPolygonBurst.")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
 [assembly: AssemblyConfiguration("Release")]
+#endif  // DEBUG
 [assembly: AssemblyCompany("koturn")]
 [assembly: AssemblyProduct("Koturn.LilPolygonBurst.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2025 koturn All Rights Reserverd.")]

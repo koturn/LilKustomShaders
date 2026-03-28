@@ -9,7 +9,11 @@ using nadena.dev.ndmf;
 // associated with an assembly.
 [assembly: AssemblyTitle("Koturn.LilOptimized.NDMF.Editor")]
 [assembly: AssemblyDescription("NDMF plugin for koturn/LilOptimized.")]
+#if DEBUG
+[assembly: AssemblyConfiguration("Debug")]
+#else
 [assembly: AssemblyConfiguration("Release")]
+#endif  // DEBUG
 [assembly: AssemblyCompany("koturn")]
 [assembly: AssemblyProduct("Koturn.LilOptimized.NDMF.Editor")]
 [assembly: AssemblyCopyright("Copyright (C) 2024 koturn All Rights Reserverd.")]
