@@ -9,7 +9,7 @@ Shader "*LIL_SHADER_NAME*/lilToonMulti"
 
     HLSLINCLUDE
         #pragma shader_feature_local_fragment _ _ENABLEELAPSEDTIME_ON
-        #pragma shader_feature_local_fragment _ _ENABLEALTIMEOFDAY_ON
+        #pragma shader_feature_local_fragment _ _ENABLEVRCHATTIMEOFDAY_ON
         #pragma shader_feature_local_fragment _ _ENABLEFRAMERATE_ON
         #pragma shader_feature_local_fragment _ _ENABLEWORLDPOS_ON
         #include "custom.hlsl"

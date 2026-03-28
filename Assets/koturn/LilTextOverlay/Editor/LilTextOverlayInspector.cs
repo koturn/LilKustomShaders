@@ -44,9 +44,9 @@ namespace Koturn.LilTextOverlay.Editor
         /// </summary>
         private readonly List<MaterialProperty> _elapsedTimePropertyList = new List<MaterialProperty>();
         /// <summary>
-        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about AudioLink time.
+        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about VRChat time.
         /// </summary>
-        private readonly List<MaterialProperty> _alTimePropertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _vrchatTimePropertyList = new List<MaterialProperty>();
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about framerate.
         /// </summary>
@@ -84,45 +84,41 @@ namespace Koturn.LilTextOverlay.Editor
         /// </summary>
         private MaterialProperty _elapsedTimeAlign;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_EnableALTimeOfDay".
+        /// <see cref="MaterialProperty"/> of "_EnableVRChatTimeOfDay".
         /// </summary>
-        private MaterialProperty _enableALTimeOfDay;
+        private MaterialProperty _enableVRChatTimeOfDay;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayColor".
+        /// <see cref="MaterialProperty"/> of "_VRChatTimeOfDayColor".
         /// </summary>
-        private MaterialProperty _alTimeOfDayColor;
+        private MaterialProperty _vrchatTimeOfDayColor;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayOffsetScale".
+        /// <see cref="MaterialProperty"/> of "_VRChatTimeOfDayOffsetScale".
         /// </summary>
-        private MaterialProperty _alTimeOfDayOffsetScale;
+        private MaterialProperty _vrchatTimeOfDayOffsetScale;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayRotAngle".
+        /// <see cref="MaterialProperty"/> of "_VRChatTimeOfDayRotAngle".
         /// </summary>
-        private MaterialProperty _alTimeOfDayRotAngle;
+        private MaterialProperty _vrchatTimeOfDayRotAngle;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayDisplayLength".
+        /// <see cref="MaterialProperty"/> of "_VRChatTimeOfDayDisplayLength".
         /// </summary>
-        private MaterialProperty _alTimeOfDayDisplayLength;
+        private MaterialProperty _vrchatTimeOfDayDisplayLength;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayAlign".
+        /// <see cref="MaterialProperty"/> of "_VRChatTimeOfDayAlign".
         /// </summary>
-        private MaterialProperty _alTimeOfDayAlign;
+        private MaterialProperty _vrchatTimeOfDayAlign;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayKind".
+        /// <see cref="MaterialProperty"/> of "_VRChatTimeOfDayKind".
         /// </summary>
-        private MaterialProperty _alTimeOfDayKind;
+        private MaterialProperty _vrchatTimeOfDayKind;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_EnableALTimeOfDayUtcFallback".
+        /// <see cref="MaterialProperty"/> of "_VRChatTimeOfDayLocalTimeOffsetSeconds".
         /// </summary>
-        private MaterialProperty _enableALTimeOfDayUtcFallback;
+        private MaterialProperty _vrchatTimeOfDayLocalTimeOffsetSeconds;
         /// <summary>
-        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayLocalTimeOffsetSeconds".
+        /// <see cref="MaterialProperty"/> of "_VRChatTimeOfDayUtcOffsetSeconds".
         /// </summary>
-        private MaterialProperty _alTimeOfDayLocalTimeOffsetSeconds;
-        /// <summary>
-        /// <see cref="MaterialProperty"/> of "_AlTimeOfDayUtcOffsetSeconds".
-        /// </summary>
-        private MaterialProperty _alTimeOfDayUtcOffsetSeconds;
+        private MaterialProperty _vrchatTimeOfDayUtcOffsetSeconds;
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_EnableFramerate".
         /// </summary>
@@ -219,16 +215,15 @@ namespace Koturn.LilTextOverlay.Editor
             _elapsedTimeRotAngle = FindProperty("_ElapsedTimeRotAngle", props);
             _elapsedTimeDisplayLength = FindProperty("_ElapsedTimeDisplayLength", props);
             _elapsedTimeAlign = FindProperty("_ElapsedTimeAlign", props);
-            _enableALTimeOfDay = FindProperty("_EnableALTimeOfDay", props);
-            _alTimeOfDayColor = FindProperty("_ALTimeOfDayColor", props);
-            _alTimeOfDayOffsetScale = FindProperty("_ALTimeOfDayOffsetScale", props);
-            _alTimeOfDayRotAngle = FindProperty("_ALTimeOfDayRotAngle", props);
-            _alTimeOfDayDisplayLength = FindProperty("_ALTimeOfDayDisplayLength", props);
-            _alTimeOfDayAlign = FindProperty("_ALTimeOfDayAlign", props);
-            _alTimeOfDayKind = FindProperty("_ALTimeOfDayKind", props);
-            _enableALTimeOfDayUtcFallback = FindProperty("_EnableALTimeOfDayUtcFallback", props);
-            _alTimeOfDayLocalTimeOffsetSeconds = FindProperty("_ALTimeOfDayLocalTimeOffsetSeconds", props);
-            _alTimeOfDayUtcOffsetSeconds = FindProperty("_ALTimeOfDayUtcOffsetSeconds", props);
+            _enableVRChatTimeOfDay = FindProperty("_EnableVRChatTimeOfDay", props);
+            _vrchatTimeOfDayColor = FindProperty("_VRChatTimeOfDayColor", props);
+            _vrchatTimeOfDayOffsetScale = FindProperty("_VRChatTimeOfDayOffsetScale", props);
+            _vrchatTimeOfDayRotAngle = FindProperty("_VRChatTimeOfDayRotAngle", props);
+            _vrchatTimeOfDayDisplayLength = FindProperty("_VRChatTimeOfDayDisplayLength", props);
+            _vrchatTimeOfDayAlign = FindProperty("_VRChatTimeOfDayAlign", props);
+            _vrchatTimeOfDayKind = FindProperty("_VRChatTimeOfDayKind", props);
+            _vrchatTimeOfDayLocalTimeOffsetSeconds = FindProperty("_VRChatTimeOfDayLocalTimeOffsetSeconds", props);
+            _vrchatTimeOfDayUtcOffsetSeconds = FindProperty("_VRChatTimeOfDayUtcOffsetSeconds", props);
             _enableFramerate = FindProperty("_EnableFramerate", props);
             _framerateColor = FindProperty("_FramerateColor", props);
             _framerateOffsetScale = FindProperty("_FramerateOffsetScale", props);
@@ -253,18 +248,17 @@ namespace Koturn.LilTextOverlay.Editor
             elapsedTimePropertyList.Add(_elapsedTimeDisplayLength);
             elapsedTimePropertyList.Add(_elapsedTimeAlign);
 
-            var alTimePropertyList = _alTimePropertyList;
-            alTimePropertyList.Clear();
-            alTimePropertyList.Add(_enableALTimeOfDay);
-            alTimePropertyList.Add(_alTimeOfDayColor);
-            alTimePropertyList.Add(_alTimeOfDayOffsetScale);
-            alTimePropertyList.Add(_alTimeOfDayRotAngle);
-            alTimePropertyList.Add(_alTimeOfDayDisplayLength);
-            alTimePropertyList.Add(_alTimeOfDayAlign);
-            alTimePropertyList.Add(_alTimeOfDayKind);
-            alTimePropertyList.Add(_enableALTimeOfDayUtcFallback);
-            alTimePropertyList.Add(_alTimeOfDayLocalTimeOffsetSeconds);
-            alTimePropertyList.Add(_alTimeOfDayUtcOffsetSeconds);
+            var vrchatTimePropertyList = _vrchatTimePropertyList;
+            vrchatTimePropertyList.Clear();
+            vrchatTimePropertyList.Add(_enableVRChatTimeOfDay);
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayColor);
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayOffsetScale);
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayRotAngle);
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayDisplayLength);
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayAlign);
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayKind);
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayLocalTimeOffsetSeconds);
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayUtcOffsetSeconds);
 
             var frameratePropertyList = _frameratePropertyList;
             frameratePropertyList.Clear();
@@ -302,7 +296,7 @@ namespace Koturn.LilTextOverlay.Editor
             // customToggleFont label for box
 
             var shouldDrawElapsedTimeProperties = ShouldDrawBlock(_elapsedTimePropertyList);
-            var shouldDrawAlTimeProperties = ShouldDrawBlock(_alTimePropertyList);
+            var shouldDrawAlTimeProperties = ShouldDrawBlock(_vrchatTimePropertyList);
             var shouldDrawFramerateProperties = ShouldDrawBlock(_frameratePropertyList);
             var shouldDrawWorldPosProperties = ShouldDrawBlock(_worldPosPropertyList);
 
@@ -353,33 +347,24 @@ namespace Koturn.LilTextOverlay.Editor
                     {
                         using (new EditorGUILayout.VerticalScope(boxOuter))
                         {
-                            DrawToggleLeft(material, _enableALTimeOfDay, GetLoc("sEnableALTimeOfDay"));
-                            if (ToBool(_enableALTimeOfDay.floatValue))
+                            DrawToggleLeft(material, _enableVRChatTimeOfDay, GetLoc("sEnableVRChatTimeOfDay"));
+                            if (ToBool(_enableVRChatTimeOfDay.floatValue))
                             {
                                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                                 {
-                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayColor);
-                                    DrawVector4AsOffsetScale2x2(_alTimeOfDayOffsetScale);
-                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayRotAngle);
-                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayDisplayLength);
-                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayAlign);
-                                    lilEditorGUI.LocalizedProperty(me, _alTimeOfDayKind);
-                                    var showFallback = false;
-                                    if ((int)_alTimeOfDayKind.floatValue == 1)
+                                    lilEditorGUI.LocalizedProperty(me, _vrchatTimeOfDayColor);
+                                    DrawVector4AsOffsetScale2x2(_vrchatTimeOfDayOffsetScale);
+                                    lilEditorGUI.LocalizedProperty(me, _vrchatTimeOfDayRotAngle);
+                                    lilEditorGUI.LocalizedProperty(me, _vrchatTimeOfDayDisplayLength);
+                                    lilEditorGUI.LocalizedProperty(me, _vrchatTimeOfDayAlign);
+                                    lilEditorGUI.LocalizedProperty(me, _vrchatTimeOfDayKind);
+                                    if ((int)_vrchatTimeOfDayKind.floatValue == 0)
                                     {
-                                        lilEditorGUI.LocalizedProperty(me, _enableALTimeOfDayUtcFallback);
-                                        if (ToBool(_enableALTimeOfDayUtcFallback.floatValue))
-                                        {
-                                            showFallback = true;
-                                        }
+                                        lilEditorGUI.LocalizedProperty(me, _vrchatTimeOfDayLocalTimeOffsetSeconds);
                                     }
-                                    if ((int)_alTimeOfDayKind.floatValue == 0 || showFallback)
+                                    if ((int)_vrchatTimeOfDayKind.floatValue == 1)
                                     {
-                                        lilEditorGUI.LocalizedProperty(me, _alTimeOfDayLocalTimeOffsetSeconds);
-                                    }
-                                    if ((int)_alTimeOfDayKind.floatValue == 1)
-                                    {
-                                        lilEditorGUI.LocalizedProperty(me, _alTimeOfDayUtcOffsetSeconds);
+                                        lilEditorGUI.LocalizedProperty(me, _vrchatTimeOfDayUtcOffsetSeconds);
                                     }
                                 }
                             }

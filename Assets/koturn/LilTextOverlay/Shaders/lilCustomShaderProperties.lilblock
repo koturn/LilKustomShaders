@@ -11,16 +11,15 @@
         [IntRange] _ElapsedTimeDisplayLength ("sElapsedTimeDisplayLength", Range(2, 6)) = 6
         [lilEnum] _ElapsedTimeAlign ("sTextAlign|sZeroPadding|sAlignRight|sAlignLeft", Int) = 0
 
-        [Toggle] _EnableALTimeOfDay ("sEnableALTimeOfDay", Int) = 0
-        [lilHDR] _ALTimeOfDayColor ("sColor", Color) = (1.0, 0.0, 1.0, 1.0)
-        _ALTimeOfDayOffsetScale ("Offset and Scale", Vector) = (0.0, 0.0, 1.0, 1.0)
-        [lilAngle] _ALTimeOfDayRotAngle ("sAngle", Float) = 0.0
-        [IntRange] _ALTimeOfDayDisplayLength ("sALTimeOfDayDisplayLength", Range(2, 6)) = 6
-        [lilEnum] _ALTimeOfDayAlign ("sTextAlign|sZeroPadding|sAlignRight|sAlignLeft", Int) = 0
-        [lilEnum] _ALTimeOfDayKind ("sTimeOfDayKind|sLocalTime|sUTC", Int) = 0
-        [lilToggle] _EnableALTimeOfDayUtcFallback ("sEnableALTimeOfDayUtcFallback", Int) = 1
-        _ALTimeOfDayLocalTimeOffsetSeconds ("sALTimeOfDayLocalTimeOffsetSeconds", Float) = 0.0
-        _ALTimeOfDayUtcOffsetSeconds ("sALTimeOfDayUtcOffsetSeconds", Float) = 0.0
+        [Toggle] _EnableVRChatTimeOfDay ("sEnableVRChatTimeOfDay", Int) = 0
+        [lilHDR] _VRChatTimeOfDayColor ("sColor", Color) = (1.0, 0.0, 1.0, 1.0)
+        _VRChatTimeOfDayOffsetScale ("Offset and Scale", Vector) = (0.0, 0.0, 1.0, 1.0)
+        [lilAngle] _VRChatTimeOfDayRotAngle ("sAngle", Float) = 0.0
+        [IntRange] _VRChatTimeOfDayDisplayLength ("sVRChatTimeOfDayDisplayLength", Range(2, 6)) = 6
+        [lilEnum] _VRChatTimeOfDayAlign ("sTextAlign|sZeroPadding|sAlignRight|sAlignLeft", Int) = 0
+        [lilEnum] _VRChatTimeOfDayKind ("sTimeOfDayKind|sLocalTime|sUTC", Int) = 0
+        _VRChatTimeOfDayLocalTimeOffsetSeconds ("sVRChatTimeOfDayLocalTimeOffsetSeconds", Float) = 0.0
+        _VRChatTimeOfDayUtcOffsetSeconds ("sVRChatTimeOfDayUtcOffsetSeconds", Float) = 0.0
 
         [Toggle] _EnableFramerate ("sEnableFramerate", Int) = 0
         [lilHDR] _FramerateColor ("sColor", Color) = (1.0, 1.0, 0.0, 1.0)

@@ -11,16 +11,15 @@
     float _ElapsedTimeRotAngle; \
     float _ElapsedTimeDisplayLength; \
     float _ElapsedTimeAlign; \
-    bool _EnableALTimeOfDay; \
-    float4 _ALTimeOfDayColor; \
-    float4 _ALTimeOfDayOffsetScale; \
-    float _ALTimeOfDayRotAngle; \
-    float _ALTimeOfDayDisplayLength; \
-    float _ALTimeOfDayAlign; \
-    int _ALTimeOfDayKind; \
-    bool _EnableALTimeOfDayUtcFallback; \
-    float _ALTimeOfDayLocalTimeOffsetSeconds; \
-    float _ALTimeOfDayUtcOffsetSeconds; \
+    bool _EnableVRChatTimeOfDay; \
+    float4 _VRChatTimeOfDayColor; \
+    float4 _VRChatTimeOfDayOffsetScale; \
+    float _VRChatTimeOfDayRotAngle; \
+    float _VRChatTimeOfDayDisplayLength; \
+    float _VRChatTimeOfDayAlign; \
+    int _VRChatTimeOfDayKind; \
+    float _VRChatTimeOfDayLocalTimeOffsetSeconds; \
+    float _VRChatTimeOfDayUtcOffsetSeconds; \
     bool _EnableFramerate; \
     float4 _FramerateColor; \
     float4 _FramerateOffsetScale; \
@@ -34,7 +33,9 @@
     float4 _WorldPosOffsetScale; \
     float _WorldPosRotAngle; \
     float _WorldPosDisplayLength; \
-    float _WorldPosAlign;
+    float _WorldPosAlign; \
+    uint _VRChatTimeEncoded1; \
+    uint _VRChatTimeEncoded2;
 
 // Custom textures
 #define LIL_CUSTOM_TEXTURES \
@@ -90,13 +91,11 @@
         } \
     } \
     UNITY_BRANCH \
-    if (isALTimeOfDayEnabled()) { \
-        if (AudioLinkIsAvailable()) { \
-            const float2 uv2 = invAffineTransform(fd.uvMain, _ALTimeOfDayOffsetScale.xy, _ALTimeOfDayRotAngle, _ALTimeOfDayOffsetScale.zw); \
-            if (all(saturate(uv2) == uv2)) { \
-                const float hmsval = dot(AudioLinkGetTimeOfDay(), float3(10000.0, 100.0, 1.0)); \
-                fd.col.rgb += calcEmissionColor(sampleSplite(hmsval, uv2, _ALTimeOfDayDisplayLength, _ALTimeOfDayAlign) * _ALTimeOfDayColor.rgb, fd.col.a); \
-            } \
+    if (isVRChatTimeOfDayEnabled()) { \
+        const float2 uv2 = invAffineTransform(fd.uvMain, _VRChatTimeOfDayOffsetScale.xy, _VRChatTimeOfDayRotAngle, _VRChatTimeOfDayOffsetScale.zw); \
+        if (all(saturate(uv2) == uv2)) { \
+            const float hmsval = dot(VRChatGetTimeOfDay(), float3(10000.0, 100.0, 1.0)); \
+            fd.col.rgb += calcEmissionColor(sampleSplite(hmsval, uv2, _VRChatTimeOfDayDisplayLength, _VRChatTimeOfDayAlign) * _VRChatTimeOfDayColor.rgb, fd.col.a); \
         } \
     } \
     UNITY_BRANCH \

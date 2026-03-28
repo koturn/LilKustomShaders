@@ -11,11 +11,10 @@ sLocalTime	Local Time	ローカル時間
 sUTC	UTC	協定世界時
 sEnableElapsedTime	Elapsed time	経過時間
 sElapsedTimeDisplayLength	Display length	数字個数
-sEnableALTimeOfDay	Times of day of AudioLink	オーディオリンク時刻
-sALTimeOfDayDisplayLength	Display length	数字個数
-sEnableALTimeOfDayUtcFallback	Fallback to local time when UTC time is not supported	UTC非対応時のローカル時間へのフォールバック
-sALTimeOfDayLocalTimeOffsetSeconds	Offset seconds of local time	ローカル時間オフセット秒数
-sALTimeOfDayUtcOffsetSeconds	Offset seconds of UTC	UTCオフセット秒数
+sEnableVRChatTimeOfDay	Times of day (VRChat only)	時刻 (VRChatのみ)
+sVRChatTimeOfDayDisplayLength	Display length	数字個数
+sVRChatTimeOfDayLocalTimeOffsetSeconds	Offset seconds of local time	ローカル時間オフセット秒数
+sVRChatTimeOfDayUtcOffsetSeconds	Offset seconds of UTC	UTCオフセット秒数
 sEnableFramerate	Framerate	フレームレート
 sFramerateDisplayLength	Display length	数字個数
 sEnableWorldPos	World position	ワールド座標
