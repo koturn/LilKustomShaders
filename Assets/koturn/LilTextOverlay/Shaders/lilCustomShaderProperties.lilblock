@@ -4,14 +4,14 @@
         [NoScaleOffset]
         _SpriteTex ("sSpriteTex", 2D) = "black" {}
 
-        [Toggle] _EnableElapsedTime ("sEnableElapsedTime", Int) = 0
+        [Toggle(_ENABLEELAPSEDTIME_ON)] _EnableElapsedTime ("sEnableElapsedTime", Int) = 0
         [lilHDR] _ElapsedTimeColor ("sColor", Color) = (0.0, 1.0, 1.0, 1.0)
         _ElapsedTimeOffsetScale ("Offset and Scale", Vector) = (0.0, 0.0, 1.0, 1.0)
         [lilAngle] _ElapsedTimeRotAngle ("sAngle", Float) = 0.0
         [IntRange] _ElapsedTimeDisplayLength ("sElapsedTimeDisplayLength", Range(2, 6)) = 6
         [lilEnum] _ElapsedTimeAlign ("sTextAlign|sZeroPadding|sAlignRight|sAlignLeft", Int) = 0
 
-        [Toggle] _EnableVRChatTimeOfDay ("sEnableVRChatTimeOfDay", Int) = 0
+        [Toggle(_ENABLEVRCHATTIMEOFDAY_ON)] _EnableVRChatTimeOfDay ("sEnableVRChatTimeOfDay", Int) = 0
         [lilHDR] _VRChatTimeOfDayColor ("sColor", Color) = (1.0, 0.0, 1.0, 1.0)
         _VRChatTimeOfDayOffsetScale ("Offset and Scale", Vector) = (0.0, 0.0, 1.0, 1.0)
         [lilAngle] _VRChatTimeOfDayRotAngle ("sAngle", Float) = 0.0
@@ -21,14 +21,14 @@
         _VRChatTimeOfDayLocalTimeOffsetSeconds ("sVRChatTimeOfDayLocalTimeOffsetSeconds", Float) = 0.0
         _VRChatTimeOfDayUtcOffsetSeconds ("sVRChatTimeOfDayUtcOffsetSeconds", Float) = 0.0
 
-        [Toggle] _EnableFramerate ("sEnableFramerate", Int) = 0
+        [Toggle(_ENABLEFRAMERATE_ON)] _EnableFramerate ("sEnableFramerate", Int) = 0
         [lilHDR] _FramerateColor ("sColor", Color) = (1.0, 1.0, 0.0, 1.0)
         _FramerateOffsetScale ("Offset and Scale", Vector) = (0.0, 0.0, 1.0, 1.0)
         [lilAngle] _FramerateRotAngle ("sAngle", Float) = 0.0
         [IntRange] _FramerateDisplayLength ("sFramerateDisplayLength", Range(2, 3)) = 2
         [lilEnum] _FramerateAlign ("sTextAlign|sZeroPadding|sAlignRight|sAlignLeft", Int) = 0
 
-        [Toggle] _EnableWorldPos ("sEnableWorldPos", Int) = 0
+        [Toggle(_ENABLEWORLDPOS_ON)] _EnableWorldPos ("sEnableWorldPos", Int) = 0
         [lilHDR] _WorldPosColorX ("sWorldPosColorX", Color) = (1.0, 0.0, 0.0, 1.0)
         [lilHDR] _WorldPosColorY ("sWorldPosColorY", Color) = (0.0, 1.0, 0.0, 1.0)
         [lilHDR] _WorldPosColorZ ("sWorldPosColorZ", Color) = (0.0, 0.0, 1.0, 1.0)
