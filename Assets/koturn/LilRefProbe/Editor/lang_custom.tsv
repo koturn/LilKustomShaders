@@ -1,4 +1,4 @@
-Language	English	Japanese
-sCustomShaderTitle	Reflection probe	リフレクションプローブ
-sCustomPropertyCategory	Reflection probe	リフレクションプローブ
-sRefProbeBlendCoeff	Coefficient of blending	ブレンド率
+Language	English	Japanese	Korean	Chinese Simplified	Chinese Traditional
+sCustomShaderTitle	Reflection probe	リフレクションプローブ	반사 프로브	反射探头	反射探針
+sCustomPropertyCategory	Reflection probe	リフレクションプローブ	반사 프로브	反射探头	反射探針
+sRefProbeBlendCoeff	Coefficient of blending	ブレンド率	혼합 계수	混合系数	混合係數

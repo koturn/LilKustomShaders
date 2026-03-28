@@ -1,16 +1,16 @@
-Language	English	Japanese
-sCustomShaderTitle	Mirror/Camera Visibility	鏡/カメラでの可視性
-sGeneric	Generic	汎用
-sVRC	VRC	VRC
-sCustomPropertyCategory	Mirror/Camera Visibility	鏡/カメラでの可視性
-sVisibilityMode	Mode	モード
-sMirror	Mirror Visibility	鏡
-sShowBoth	Show In Both	ミラー内外どちらも可視
-sShowOnlyInMirror	Show Only In Mirror	ミラー内でのみ可視
-sDontShowInMirror	Don't Show In Mirror	ミラーでは不可視
-sVisibilityVRCRegular	Normal (Outside Mirror/Camera)	通常 (鏡・カメラ外)
-sVisibilityVRCMirrorVR	Mirror (VR)	鏡 (VR)
-sVisibilityVRCMirrorDesktop	"Mirror (Desktop)	鏡 (デスクトップ)
-sVisibilityVRCCameraVR	Camera (VR)	カメラ (VR)
-sVisibilityVRCCameraDesktop	Camera (Desktop)	カメラ (デスクトップ)
-sVisibilityVRCCameraScreenshot	Screenshot	スクリーンショット
+Language	English	Japanese	Korean	Chinese Simplified	Chinese Traditional
+sCustomShaderTitle	Mirror/Camera Visibility	鏡/カメラでの可視性	미러/카메라 표시 설정	后视镜/摄像头可见性	後視鏡/攝影機可見性
+sGeneric	Generic	汎用	일반	通用	通用
+sVRC	VRC	VRC	VRC	VRC	VRC
+sCustomPropertyCategory	Mirror/Camera Visibility	鏡/カメラでの可視性	미러/카메라 표시 설정	后视镜/摄像头可见性	後視鏡/攝影機可見性
+sVisibilityMode	Mode	モード	모드	模式	模式
+sMirror	Mirror Visibility	鏡	미러 표시 설정	后视镜可见性	後視鏡可見性
+sShowBoth	Show In Both	ミラー内外どちらも可視	양쪽 모두 표시	在两者中均显示	兩者皆顯示
+sShowOnlyInMirror	Show Only In Mirror	ミラー内でのみ可視	미러에만 표시	仅在后视镜中显示	僅在後視鏡中顯示
+sDontShowInMirror	Don't Show In Mirror	ミラーでは不可視	미러에 표시하지 않음	不在后视镜中显示	不在後視鏡中顯示
+sVisibilityVRCRegular	Normal (Outside Mirror/Camera)	通常 (鏡・カメラ外)	일반 (미러/카메라 외부)	正常（后视镜/摄像头外部）	正常（後視鏡/攝影機外部）
+sVisibilityVRCMirrorVR	Mirror (VR)	鏡 (VR)	미러 (VR)	后视镜（VR）	後視鏡（VR）
+sVisibilityVRCMirrorDesktop	Mirror (Desktop)	鏡 (デスクトップ)	미러 (데스크톱)	后视镜（桌面）	後視鏡（桌面版）
+sVisibilityVRCCameraVR	Camera (VR)	カメラ (VR)	카메라 (VR)	摄像头（VR）	攝影機（VR）
+sVisibilityVRCCameraDesktop	Camera (Desktop)	カメラ (デスクトップ)	카메라 (데스크톱)	摄像头（桌面）	攝影機（桌面版）
+sVisibilityVRCCameraScreenshot	Screenshot	スクリーンショット	스크린샷	截图	螢幕截圖

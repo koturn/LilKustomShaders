@@ -1,13 +1,13 @@
-Language	English	Japanese
-sCustomShaderTitle	Wireframe	ワイヤフレーム
-sCustomPropertyCategory	Wireframe	ワイヤフレーム
-sWireframeWidth	Width	幅
-sWireframeMaskAndColor	Color / Mask	色 / マスク
-sWireframeRandomizeColor	Randomize hue of color	色相のランダム化
-sTimeSource	Time Source	時間ソース
-sTimeSourceElapsedTime	Elapsed Time	経過時間
-sTimeSourceFakeTime	Fake Time	疑似時間
-sTimeSourceVRChatUTC	UTC (VRChat only)	UTC (VRChatのみ)
-sFakeTime	Fake Time	疑似時間
-sWireframeCycleTime	Animation cycle (seconds)	アニメーション周期（秒）
-sWireframeDecayTime	Emission decay time (seconds)	発光減衰時間（秒）
+Language	English	Japanese	Korean	Chinese Simplified	Chinese Traditional
+sCustomShaderTitle	Wireframe	ワイヤフレーム	와이어프레임	线框	線框
+sCustomPropertyCategory	Wireframe	ワイヤフレーム	와이어프레임	线框	線框
+sWireframeWidth	Width	幅	너비	宽度	寬度
+sWireframeMaskAndColor	Color / Mask	色 / マスク	색상 / 마스크	颜色 / 遮罩	顏色 / 遮罩
+sWireframeRandomizeColor	Randomize hue of color	色相のランダム化	색상 색조 무작위 설정	随机调整颜色色相	隨機化顏色色相
+sTimeSource	Time Source	時間ソース	시간 소스	时间来源	時間來源
+sTimeSourceElapsedTime	Elapsed Time	経過時間	경과 시간	已过时间	經過時間
+sTimeSourceFakeTime	Fake Time	疑似時間	가상 시간	模拟时间	虛擬時間
+sTimeSourceVRChatUTC	UTC (VRChat only)	UTC (VRChatのみ)	UTC (VRChat 전용)	UTC（仅限 VRChat）	UTC（僅限 VRChat）
+sFakeTime	Fake Time	疑似時間	가상 시간	模拟时间	虛擬時間
+sWireframeCycleTime	Animation cycle (seconds)	アニメーション周期（秒）	애니메이션 주기 (초)	动画循环（秒）	動畫循環（秒）
+sWireframeDecayTime	Emission decay time (seconds)	発光減衰時間（秒）	발광 감쇠 시간 (초)	发光衰减时间（秒）	發光衰減時間（秒）

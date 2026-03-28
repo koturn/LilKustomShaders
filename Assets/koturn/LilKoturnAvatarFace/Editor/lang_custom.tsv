@@ -1,18 +1,18 @@
-Language	English	Japanese
-sCustomShaderTitle	koturn Avatar Face	Koturnアバター顔
-sCustomPropertyCategoryKoturnGraph	Graph of Koturn	Koturnマーク
-sCustomPropertyCategoryStar	Star emission	星のエミッション
-sCustomPropertyCategoryHueShift	Hue Shift	色相シフト
-sGraphKoturnRotAngle	Rotate angle (Degrees)	回転角（度）
-sStarRotAngle	Rotate angle (Degrees)	回転角（度）
-sStarRotSpeed	Rotate angle (deg/s)	回転角（度/秒）
-sStarWidth	Width	線の幅
-sHueShiftMask	Mask	マスク
-sTimeSource	Time Source	時間ソース
-sTimeSourceElapsedTime	Elapsed Time	経過時間
-sTimeSourceFakeTime	Fake Time	疑似時間
-sTimeSourceVRChatUTC	UTC (VRChat only)	UTC (VRChatのみ)
-sFakeTime	Fake Time	疑似時間
-sHueShiftSpeed	Hue shift speed	色相変化速度
-sHueShiftEmission	Enable Hue Shift on Emission 1st	発光テクスチャに対して適用
-sHueShiftEmission2nd	Enable Hue Shift on Emission 2nd	発光テクスチャ2ndに対して適用
+Language	English	Japanese	Korean	Chinese Simplified	Chinese Traditional
+sCustomShaderTitle	koturn Avatar Face	Koturnアバター顔	koturn 아바타 얼굴	koturn 头像面部	koturn 虛擬形象臉部
+sCustomPropertyCategoryKoturnGraph	Graph of Koturn	Koturnマーク	Koturn 그래프	Koturn 图形	Koturn 圖形
+sCustomPropertyCategoryStar	Star emission	星のエミッション	별 빛	恒星辐射	星光發射
+sCustomPropertyCategoryHueShift	Hue Shift	色相シフト	색조 변화	色相偏移	色相偏移
+sGraphKoturnRotAngle	Rotate angle (Degrees)	回転角（度）	회전 각도 (도)	旋转角度（度）	旋轉角度（度）
+sStarRotAngle	Rotate angle (Degrees)	回転角（度）	회전 각도 (도)	旋转角度（度）	旋轉角度（度）
+sStarRotSpeed	Rotate angle (deg/s)	回転角（度/秒）	회전 각도 (도/초)	旋转角度（度/秒）	旋轉角度（度/秒）
+sStarWidth	Width	線の幅	너비	宽度	寬度
+sHueShiftMask	Mask	マスク	마스크	遮罩	遮罩
+sTimeSource	Time Source	時間ソース	시간 소스	时间源	時間來源
+sTimeSourceElapsedTime	Elapsed Time	経過時間	경과 시간	经过时间	經過時間
+sTimeSourceFakeTime	Fake Time	疑似時間	가상 시간	模拟时间	虛擬時間
+sTimeSourceVRChatUTC	UTC (VRChat only)	UTC (VRChatのみ)	UTC (VRChat 전용)	UTC（仅限 VRChat）	UTC（僅限 VRChat）
+sFakeTime	Fake Time	疑似時間	가상 시간	伪时间	虛擬時間
+sHueShiftSpeed	Hue shift speed	色相変化速度	색조 변화 속도	色相偏移速度	色相偏移速度
+sHueShiftEmission	Enable Hue Shift on Emission 1st	発光テクスチャに対して適用	1차 발광 시 색조 변화 활성화	在第一次光效中启用色相偏移	啟用光暈 1 的色相偏移
+sHueShiftEmission2nd	Enable Hue Shift on Emission 2nd	発光テクスチャ2ndに対して適用	2차 발광 시 색조 변화 활성화	在第二次光效中启用色相偏移	啟用光暈 2 的色相偏移

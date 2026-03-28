@@ -1,24 +1,24 @@
-Language	English	Japanese
-sCustomShaderTitle	Text Overlay	テキストオーバーレイ
-sCustomPropertyCategory	Text Overlay	テキストオーバーレイ
-sSpriteTex	Sprite Sheet Texture	スプライトシート
-sTextAlign	Align	アラインメント
-sZeroPadding	Zero padding	0埋め
-sAlignRight	Right aligned	右寄せ
-sAlignLeft	Left aligned	左寄せ
-sTimeOfDayKind	Kind of time of day	時間種別
-sLocalTime	Local Time	ローカル時間
-sUTC	UTC	協定世界時
-sEnableElapsedTime	Elapsed time	経過時間
-sElapsedTimeDisplayLength	Display length	数字個数
-sEnableVRChatTimeOfDay	Times of day (VRChat only)	時刻 (VRChatのみ)
-sVRChatTimeOfDayDisplayLength	Display length	数字個数
-sVRChatTimeOfDayLocalTimeOffsetSeconds	Offset seconds of local time	ローカル時間オフセット秒数
-sVRChatTimeOfDayUtcOffsetSeconds	Offset seconds of UTC	UTCオフセット秒数
-sEnableFramerate	Framerate	フレームレート
-sFramerateDisplayLength	Display length	数字個数
-sEnableWorldPos	World position	ワールド座標
-sWorldPosColorX	Color of X	X座標色
-sWorldPosColorY	Color of Y	Y座標色
-sWorldPosColorZ	Color of Z	Z座標色
-sWorldPosDisplayLength	Display length	数字個数
+Language	English	Japanese	Korean	Chinese Simplified	Chinese Traditional
+sCustomShaderTitle	Text Overlay	テキストオーバーレイ	텍스트 오버레이	文本叠加	文字疊加
+sCustomPropertyCategory	Text Overlay	テキストオーバーレイ	텍스트 오버레이	文本叠加	文字疊加
+sSpriteTex	Sprite Sheet Texture	スプライトシート	스프라이트 시트 텍스처	精灵图纹理	貼圖集紋理
+sTextAlign	Align	アラインメント	정렬	对齐方式	對齊方式
+sZeroPadding	Zero padding	0埋め	패딩 없음	零填充	零填充
+sAlignRight	Right aligned	右寄せ	오른쪽 정렬	右对齐	右對齊
+sAlignLeft	Left aligned	左寄せ	왼쪽 정렬	左对齐	左對齊
+sTimeOfDayKind	Kind of time of day	時間種別	시간대 유형	时间类型	時間類型
+sLocalTime	Local Time	ローカル時間	현지 시간	本地时间	當地時間
+sUTC	UTC	UTC	UTC	UTC	UTC
+sEnableElapsedTime	Elapsed time	経過時間	경과 시간	经过时间	經過時間
+sElapsedTimeDisplayLength	Display length	数字個数	표시 길이	显示长度	顯示長度
+sEnableVRChatTimeOfDay	Times of day (VRChat only)	時刻 (VRChatのみ)	시간대 (VRChat 전용)	时间段（仅限 VRChat）	時間段（僅限 VRChat）
+sVRChatTimeOfDayDisplayLength	Display length	数字個数	표시 길이	显示长度	顯示長度
+sVRChatTimeOfDayLocalTimeOffsetSeconds	Offset seconds of local time	ローカル時間オフセット秒数	현지 시간 오프셋 (초)	本地时间偏移秒数	當地時間偏移秒數
+sVRChatTimeOfDayUtcOffsetSeconds	Offset seconds of UTC	UTCオフセット秒数	UTC 오프셋 (초)	UTC 偏移秒数	UTC 偏移秒數
+sEnableFramerate	Framerate	フレームレート	프레임 속도	帧率	幀率
+sFramerateDisplayLength	Display length	数字個数	표시 길이	显示长度	顯示長度
+sEnableWorldPos	World position	ワールド座標	월드 위치	世界坐标	世界座標
+sWorldPosColorX	Color of X	X座標色	X 축 색상	X 轴颜色	X 軸顏色
+sWorldPosColorY	Color of Y	Y座標色	Y 축 색상	Y 轴颜色	Y 軸顏色
+sWorldPosColorZ	Color of Z	Z座標色	Z 축 색상	Z 轴颜色	Z 軸顏色
+sWorldPosDisplayLength	Display length	数字個数	표시 길이	显示长度	顯示長度

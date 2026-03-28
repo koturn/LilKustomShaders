@@ -1,29 +1,29 @@
-Language	English	Japanese
-sCustomShaderTitle	Emission Wave	エミッション波
-sCustomPropertyCategory	Emission Wave	エミッション波
-sTimeSource	Time Source	時間ソース
-sTimeSourceElapsedTime	Elapsed Time	経過時間
-sTimeSourceFakeTime	Fake Time	疑似時間
-sTimeSourceVRChatUTC	UTC (VRChat only)	UTC (VRChatのみ)
-sFakeTime	Fake Time	疑似時間
-sDisplayTime	Display time for one texture (seconds)	1テクスチャの周期時間（秒）
-sCrossFadeTime	Time to cross fade (seconds)	クロスフェード時間（秒）
-sNumColors	Number of colors	色数
-sEmissionWaveMask	Emission Wave Mask	エミッション波マスク
-sColor1	Color 1	色1
-sColor2	Color 2	色2
-sColor3	Color 3	色3
-sColor4	Color 4	色4
-sEmissionWaveColor1	Wave Color 1	波色1
-sEmissionWaveColor2	Wave Color 2	波色2
-sEmissionWaveColor3	Wave Color 3	波色3
-sEmissionWaveColor4	Wave Color 4	波色4
-sEmissionWaveNoiseAmp	Noise amplitude	ノイズ振幅
-sEmissionWaveSpeed	Wave speed	波の速度
-sEmissionWaveInitPhase	Initial phase	初期位相
-sEmissionWaveParam	Factor	係数
-sEmissionPosMin	Minimum position	位置の最小値
-sEmissionPosMax	Maximum position	位置の最大値
-sWavePosSpace	Position space	位置計算空間
-sWaveAxis	Wave direction axis	波方向軸
-sWaveAxisAngles	Wave direction angle (Degrees)	波方向角度（度）
+Language	English	Japanese	Korean	Chinese Simplified	Chinese Traditional
+sCustomShaderTitle	Emission Wave	エミッション波	방출 파동	发光波	發光波
+sCustomPropertyCategory	Emission Wave	エミッション波	방출 파동	发光波	發光波
+sTimeSource	Time Source	時間ソース	시간 소스	时间源	時間來源
+sTimeSourceElapsedTime	Elapsed Time	経過時間	경과 시간	经过时间	經過時間
+sTimeSourceFakeTime	Fake Time	疑似時間	가상 시간	模拟时间	虛擬時間
+sTimeSourceVRChatUTC	UTC (VRChat only)	UTC (VRChatのみ)	UTC (VRChat 전용)	UTC（仅限VRChat）	UTC（僅限 VRChat）
+sFakeTime	Fake Time	疑似時間	가상 시간	模拟时间	虛擬時間
+sDisplayTime	Display time for one texture (seconds)	1テクスチャの周期時間（秒）	텍스처 1개당 표시 시간 (초)	单张纹理显示时间（秒）	單一紋理顯示時間（秒）
+sCrossFadeTime	Time to cross fade (seconds)	クロスフェード時間（秒）	크로스 페이드 시간 (초)	淡入淡出时间（秒）	淡入淡出時間（秒）
+sNumColors	Number of colors	色数	색상 수	颜色数量	顏色數量
+sEmissionWaveMask	Emission Wave Mask	エミッション波マスク	방출 파동 마스크	发光波遮罩	發光波遮罩
+sColor1	Color 1	色1	색상 1	颜色 1	顏色 1
+sColor2	Color 2	色2	색상 2	颜色 2	顏色 2
+sColor3	Color 3	色3	색상 3	颜色 3	顏色 3
+sColor4	Color 4	色4	색상 4	颜色 4	顏色 4
+sEmissionWaveColor1	Wave Color 1	波色1	파동 색상 1	波形颜色 1	波形顏色 1
+sEmissionWaveColor2	Wave Color 2	波色2	파동 색상 2	波形颜色 2	波形顏色 2
+sEmissionWaveColor3	Wave Color 3	波色3	파동 색상 3	波形颜色 3	波形顏色 3
+sEmissionWaveColor4	Wave Color 4	波色4	파동 색상 4	波形颜色 4	波形顏色 4
+sEmissionWaveNoiseAmp	Noise amplitude	ノイズ振幅	노이즈 진폭	噪声振幅	噪聲振幅
+sEmissionWaveSpeed	Wave speed	波の速度	파동 속도	波速	波速
+sEmissionWaveInitPhase	Initial phase	初期位相	초기 위상	初始相位	初始相位
+sEmissionWaveParam	Factor	係数	계수	倍数	係數
+sEmissionPosMin	Minimum position	位置の最小値	최소 위치	最小位置	最小位置
+sEmissionPosMax	Maximum position	位置の最大値	최대 위치	最大位置	最大位置
+sWavePosSpace	Position space	位置計算空間	위치 간격	位置空间	位置空間
+sWaveAxis	Wave direction axis	波方向軸	파동 방향 축	波形方向轴	波形方向軸
+sWaveAxisAngles	Wave direction angle (Degrees)	波方向角度（度）	파동 방향 각도 (도)	波形方向角度（度）	波形方向角度（度）
