@@ -54,7 +54,7 @@
 //#define BEFORE_xx
 //#define OVERRIDE_xx
 #define BEFORE_SHADOW \
-    const float hueShiftValue = _Time.y * _HueShiftSpeed * LIL_SAMPLE_2D(_HueShiftMask, sampler_MainTex, fd.uvMain).r; \
+    const float hueShiftValue = getTime() * _HueShiftSpeed * LIL_SAMPLE_2D(_HueShiftMask, sampler_MainTex, fd.uvMain).r; \
     fd.col.rgb = rgbAddHue(fd.col.rgb, hueShiftValue); \
     fd.albedo = fd.col.rgb;
 
