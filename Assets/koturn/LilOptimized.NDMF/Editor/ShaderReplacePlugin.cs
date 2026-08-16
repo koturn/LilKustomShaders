@@ -35,17 +35,15 @@ namespace Koturn.LilOptimized.NDMF.Editor
                     var renderers = avatar.GetComponentsInChildren<Renderer>(true);
                     var shaderMaterialList = new List<Material>();
 
-                    foreach (var renderer in renderers)
+                    foreach (var renderer in avatar.GetComponentsInChildren<Renderer>(true))
                     {
-                        var materialIndex = -1;
-                        renderer.GetSharedMaterials(shaderMaterialList);
-                        foreach (var material in shaderMaterialList)
+                        var materials = renderer.sharedMaterials;
+                        for (int i = 0; i < materials.Length; i++)
                         {
-                            materialIndex++;
-                            var mat = material;
+                            var mat = materials[i];
                             if (mat == null)
                             {
-                                Debug.LogWarningFormat("Renderer=[{0}] Material[{1}] is null", renderer.name, materialIndex);
+                                Debug.LogWarningFormat("Renderer=[{0}] Material[{1}] is null", renderer.name, i);
                                 continue;
                             }
 #if UNITY_2022_1_OR_NEWER
@@ -53,11 +51,13 @@ namespace Koturn.LilOptimized.NDMF.Editor
                             // Therefore, material variants should not be detected.
                             if (mat.parent != null)
                             {
-                                Debug.LogWarningFormat("Renderer=[{0}] {1} is material variant", renderer.name, mat.name);
-                                for (; mat.parent != null; mat = mat.parent)
+                                var parentMat = mat;
+                                for (; parentMat.parent != null; parentMat = parentMat.parent)
                                 {
                                     // Do nothing
                                 }
+                                Debug.LogWarningFormat("Renderer=[{0}] {1} is material variant, parent material is {2}", renderer.name, mat.name, parentMat.name);
+                                mat = parentMat;
                             }
 #endif  // UNITY_2022_1_OR_NEWER
                             var shader = mat.shader;
@@ -72,10 +72,14 @@ namespace Koturn.LilOptimized.NDMF.Editor
                                 continue;
                             }
 
-                            mat.shader = newShader;
+                            materials[i] = new Material(mat)
+                            {
+                                shader = newShader
+                            };
 
                             Debug.LogFormat("Renderer=[{0}] Replaced shader of {1}: {2} -> {3}", renderer.name, mat.name, shader.name, newShader.name);
                         }
+                        renderer.sharedMaterials = materials;
                     }
                 });
         }
