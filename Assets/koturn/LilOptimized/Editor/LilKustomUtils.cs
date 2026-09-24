@@ -1,4 +1,7 @@
 using System;
+#if !UNITY_2020_3_OR_NEWER
+using System.Collections.Generic;
+#endif  // !UNITY_2020_3_OR_NEWER
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,11 +20,22 @@ namespace Koturn.LilOptimized.Editor
     public static class LilKustomUtils
     {
         /// <summary>
+        /// "VRCFallback" tag.
+        /// </summary>
+        private const string TagVRCFallback = "VRCFallback";
+
+        /// <summary>
         /// Try to replace the shader of the selected material to custom lilToon shader.
         /// </summary>
         /// <param name="customShaderCommonName">Common part of custom lilToon shader name.</param>
         public static void ConvertMaterialToCustomShader(string customShaderCommonName)
         {
+#if UNITY_2020_3_OR_NEWER
+#elif UNITY_2018_3_OR_NEWER
+            var materialTagvalTupleList = new List<(Material material, string tag)>();
+#else
+            var materialTagvalTupleList = new List<Tuple<Material, string>>();
+#endif  // UNITY_2020_3_OR_NEWER
             foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
             {
 #if UNITY_2022_1_OR_NEWER
@@ -41,10 +55,37 @@ namespace Koturn.LilOptimized.Editor
 
                 Undo.RecordObject(material, customShaderCommonName + "/Convert material to custom shader");
 
+                var tagval = material.GetTag(TagVRCFallback, false);
                 var renderQueue = lilMaterialUtils.GetTrueRenderQueue(material);
                 material.shader = shader;
                 material.renderQueue = renderQueue;
+
+                if (tagval.Length != 0)
+                {
+#if UNITY_2020_3_OR_NEWER
+                    AssetDatabase.SaveAssetIfDirty(material);
+                    material.SetOverrideTag(TagVRCFallback, tagval);
+#elif UNITY_2018_3_OR_NEWER
+                    materialTagvalTupleList.Add((material, tagval));
+#else
+                    materialTagvalTupleList.Add(Tuple.Create(material, tagval));
+#endif  // UNITY_2020_3_OR_NEWER
+                }
             }
+#if UNITY_2020_3_OR_NEWER
+#elif UNITY_2018_3_OR_NEWER
+            AssetDatabase.SaveAssets();
+            foreach (var (material, tagval) in materialTagvalTupleList)
+            {
+                material.SetOverrideTag(TagVRCFallback, tagval);
+            }
+#else
+            AssetDatabase.SaveAssets();
+            foreach (var tuple in materialTagvalTupleList)
+            {
+                tuple.Item1.SetOverrideTag(TagVRCFallback, tuple.Item2);
+            }
+#endif  // UNITY_2020_3_OR_NEWER
         }
 
         /// <summary>
@@ -78,6 +119,12 @@ namespace Koturn.LilOptimized.Editor
         /// <param name="customShaderCommonName">Common part of custom lilToon shader name.</param>
         public static void ConvertMaterialToOriginalShader(string customShaderCommonName)
         {
+#if UNITY_2020_3_OR_NEWER
+#elif UNITY_2018_3_OR_NEWER
+            var materialTagvalTupleList = new List<(Material material, string tag)>();
+#else
+            var materialTagvalTupleList = new List<Tuple<Material, string>>();
+#endif  // UNITY_2020_3_OR_NEWER
             foreach (var material in Selection.GetFiltered<Material>(SelectionMode.Assets))
             {
 #if UNITY_2022_1_OR_NEWER
@@ -97,10 +144,37 @@ namespace Koturn.LilOptimized.Editor
 
                 Undo.RecordObject(material, customShaderCommonName + "/Convert material to original shader");
 
+                var tagval = material.GetTag(TagVRCFallback, false);
                 var renderQueue = lilMaterialUtils.GetTrueRenderQueue(material);
                 material.shader = shader;
                 material.renderQueue = renderQueue;
+
+                if (tagval.Length != 0)
+                {
+#if UNITY_2020_3_OR_NEWER
+                    AssetDatabase.SaveAssetIfDirty(material);
+                    material.SetOverrideTag(TagVRCFallback, tagval);
+#elif UNITY_2018_3_OR_NEWER
+                    materialTagvalTupleList.Add((material, tagval));
+#else
+                    materialTagvalTupleList.Add(Tuple.Create(material, tagval));
+#endif  // UNITY_2020_3_OR_NEWER
+                }
             }
+#if UNITY_2020_3_OR_NEWER
+#elif UNITY_2018_3_OR_NEWER
+            AssetDatabase.SaveAssets();
+            foreach (var (material, tagval) in materialTagvalTupleList)
+            {
+                material.SetOverrideTag(TagVRCFallback, tagval);
+            }
+#else
+            AssetDatabase.SaveAssets();
+            foreach (var tuple in materialTagvalTupleList)
+            {
+                tuple.Item1.SetOverrideTag(TagVRCFallback, tuple.Item2);
+            }
+#endif  // UNITY_2020_3_OR_NEWER
         }
 
         /// <summary>
