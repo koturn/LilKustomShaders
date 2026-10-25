@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "jp.lilxyzw.liltoon": {
+      "version": "file:../ThirdParty/lilToon/Assets/lilToon",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    }
+  }
+}

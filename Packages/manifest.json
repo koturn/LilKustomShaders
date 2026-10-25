@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "jp.lilxyzw.liltoon": "file:../ThirdParty/lilToon/Assets/lilToon"
+  }
+}

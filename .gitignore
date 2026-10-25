@@ -35,3 +35,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Package list
+Packages/manifest.json
+Packages/packages-lock.json
