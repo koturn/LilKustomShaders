@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.koturn.exporttools": "file:../ThirdParty/UnityExportTools/Assets/koturn/ExportTools",
     "jp.lilxyzw.liltoon": "file:../ThirdParty/lilToon/Assets/lilToon"
   }
 }

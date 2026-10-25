@@ -1,3 +1,6 @@
 [submodule "ThirdParty/lilToon"]
 	path = ThirdParty/lilToon
 	url = https://github.com/lilxyzw/lilToon/
+[submodule "ThirdParty/UnityExportTools"]
+	path = ThirdParty/UnityExportTools
+	url = https://github.com/koturn/UnityExportTools.git

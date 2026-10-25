@@ -1,7 +1,8 @@
 {
   "packages": [
     {
-      "unityPackageName": "LilCrossFade.unitypackage",
+      "versionFrom": "4e6d67e8d74b75949bdbd52d706aeb80",
+      "unityPackageBaseName": "LilCrossFade.unitypackage",
       "packageName": "jp.koturn.lilcrossfade",
       "assets": [
         {
@@ -15,7 +16,8 @@
       ]
     },
     {
-      "unityPackageName": "LilEmissionWave.unitypackage",
+      "versionFrom": "7a573fe14b9eeb54c868d0eda05a25e5",
+      "unityPackageBaseName": "LilEmissionWave.unitypackage",
       "packageName": "jp.koturn.lilemissionwave",
       "assets": [
         {
@@ -29,7 +31,8 @@
       ]
     },
     {
-      "unityPackageName": "LilHueShift.unitypackage",
+      "versionFrom": "2e0801284df6c5742baba8e7d4e53891",
+      "unityPackageBaseName": "LilHueShift.unitypackage",
       "packageName": "jp.koturn.lilhueshift",
       "assets": [
         {
@@ -43,7 +46,23 @@
       ]
     },
     {
-      "unityPackageName": "LilOptimized.unitypackage",
+      "versionFrom": "37b2f71b090664b4e80ec4a8c2b8ea17",
+      "unityPackageBaseName": "LilKoturnAvatarFace.unitypackage",
+      "packageName": "jp.koturn.lilkoturnavatarface",
+      "assets": [
+        {
+          "basePath": "Assets/koturn/LilKoturnAvatarFace"
+        }
+      ],
+      "dependAssets": [
+        {
+          "basePath": "Assets/koturn/LilOptimized"
+        }
+      ]
+    },
+    {
+      "versionFrom": "47baa3e3c8103d64992b387ed71dc935",
+      "unityPackageBaseName": "LilOptimized.unitypackage",
       "packageName": "jp.koturn.liloptimized",
       "assets": [
         {
@@ -52,7 +71,8 @@
       ]
     },
     {
-      "unityPackageName": "LilOptimized.NDMF.unitypackage",
+      "versionFrom": "0ff0900de93a5054284e94c5b3021d32",
+      "unityPackageBaseName": "LilOptimized.NDMF.unitypackage",
       "packageName": "jp.koturn.liloptimized.ndmf",
       "assets": [
         {
@@ -66,7 +86,8 @@
       ]
     },
     {
-      "unityPackageName": "LilPolygonBurst.unitypackage",
+      "versionFrom": "312a69f6e3487264881dea2beac476bd",
+      "unityPackageBaseName": "LilPolygonBurst.unitypackage",
       "packageName": "jp.koturn.lilpolygonburst",
       "assets": [
         {
@@ -75,7 +96,8 @@
       ]
     },
     {
-      "unityPackageName": "LilRefProbe.unitypackage",
+      "versionFrom": "18048448aafd4e4479f34971d902f03a",
+      "unityPackageBaseName": "LilRefProbe.unitypackage",
       "packageName": "jp.koturn.lilrefprobe",
       "assets": [
         {
@@ -89,7 +111,8 @@
       ]
     },
     {
-      "unityPackageName": "LilTextOverlay.unitypackage",
+      "versionFrom": "6f166706a56211e4cbf7e1b4a6a2f976",
+      "unityPackageBaseName": "LilTextOverlay.unitypackage",
       "packageName": "jp.koturn.liltextoverlay",
       "assets": [
         {
@@ -103,7 +126,8 @@
       ]
     },
     {
-      "unityPackageName": "LilVisibility.unitypackage",
+      "versionFrom": "7ece61d477acfe24b98e8a3924c9dfae",
+      "unityPackageBaseName": "LilVisibility.unitypackage",
       "packageName": "jp.koturn.lilvisibility",
       "assets": [
         {
@@ -117,25 +141,12 @@
       ]
     },
     {
-      "unityPackageName": "LilWireframe.unitypackage",
+      "versionFrom": "90db65353692ef64abdb7a9bba7333db",
+      "unityPackageBaseName": "LilWireframe.unitypackage",
       "packageName": "jp.koturn.lilwireframe",
       "assets": [
         {
           "basePath": "Assets/koturn/LilWireframe"
-        }
-      ],
-      "dependAssets": [
-        {
-          "basePath": "Assets/koturn/LilOptimized"
-        }
-      ]
-    },
-    {
-      "unityPackageName": "LilKoturnAvatarFace.unitypackage",
-      "packageName": "jp.koturn.lilkoturnavatarface",
-      "assets": [
-        {
-          "basePath": "Assets/koturn/LilKoturnAvatarFace"
         }
       ],
       "dependAssets": [
