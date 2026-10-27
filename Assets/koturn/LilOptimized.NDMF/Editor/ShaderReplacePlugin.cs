@@ -38,6 +38,7 @@ namespace Koturn.LilOptimized.NDMF.Editor
                     foreach (var renderer in avatar.GetComponentsInChildren<Renderer>(true))
                     {
                         var materials = renderer.sharedMaterials;
+                        var shouldReplace = false;
                         for (int i = 0; i < materials.Length; i++)
                         {
                             var mat = materials[i];
@@ -78,8 +79,12 @@ namespace Koturn.LilOptimized.NDMF.Editor
                             };
 
                             Debug.LogFormat("Renderer=[{0}] Replaced shader of {1}: {2} -> {3}", renderer.name, mat.name, shader.name, newShader.name);
+                            shouldReplace = true;
                         }
-                        renderer.sharedMaterials = materials;
+                        if (shouldReplace)
+                        {
+                            renderer.sharedMaterials = materials;
+                        }
                     }
                 });
         }
