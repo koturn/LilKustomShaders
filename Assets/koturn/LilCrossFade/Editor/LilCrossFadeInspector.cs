@@ -77,9 +77,9 @@ namespace Koturn.LilCrossFade.Editor
         /// </summary>
         private MaterialProperty _atlasCols;
         /// <summary>
-        /// Keywords to preserve.
+        /// Shader Keywords to preserve.
         /// </summary>
-        private readonly List<string> _shaderKeywords = new List<string>();
+        private readonly List<string> _allowedKeywordList = new List<string>(1);
 
 
         /// <summary>
@@ -93,12 +93,19 @@ namespace Koturn.LilCrossFade.Editor
 
             base.OnGUI(materialEditor, props);
 
-            var material = (Material)materialEditor.target;
-            foreach (var keyword in _shaderKeywords)
+            foreach (var target in materialEditor.targets)
             {
-                material.EnableKeyword(keyword);
+                var material = target as Material;
+                if (material == null)
+                {
+                    continue;
+                }
+                foreach (var keyword in _allowedKeywordList)
+                {
+                    material.EnableKeyword(keyword);
+                }
             }
-            _shaderKeywords.Clear();
+            _allowedKeywordList.Clear();
         }
 
         /// <summary>
@@ -270,9 +277,9 @@ namespace Koturn.LilCrossFade.Editor
 
             foreach (var keyword in material.shaderKeywords)
             {
-                if (!IsMultiKeyword(keyword))
+                if (IsAllowedKeyword(keyword))
                 {
-                    _shaderKeywords.Add(keyword);
+                    _allowedKeywordList.Add(keyword);
                 }
             }
         }
@@ -364,44 +371,18 @@ namespace Koturn.LilCrossFade.Editor
         }
 
         /// <summary>
-        /// Check keyword is used in lilToonMulti or not.
+        /// Check whether the specified keyword is used in not only multi-shaders but also non-multi-shaders.
         /// </summary>
         /// <param name="keyword">Shader keyword.</param>
-        /// <returns>True if the keyword is used in lilToonMulti, otherwise false.</returns>
-        private static bool IsMultiKeyword(string keyword)
+        /// <returns>True if the keyword is used in all shader variations, otherwise false.</returns>
+        private static bool IsAllowedKeyword(string keyword)
         {
             switch (keyword)
             {
-                case "ANTI_FLICKER":
-                case "EFFECT_BUMP":
-                case "EFFECT_HUE_VARIATION":
-                case "ETC1_EXTERNAL_ALPHA":
-                case "GEOM_TYPE_BRANCH":
-                case "GEOM_TYPE_BRANCH_DETAIL":
-                case "GEOM_TYPE_FROND":
-                case "GEOM_TYPE_LEAF":
-                case "GEOM_TYPE_MESH":
-                case "PIXELSNAP_ON":
-                case "UNITY_UI_ALPHACLIP":
-                case "UNITY_UI_CLIP_RECT":
-                case "_COLORADDSUBDIFF_ON":
-                case "_COLORCOLOR_ON":
-                case "_COLOROVERLAY_ON":
-                case "_DETAIL_MULX2":
-                case "_EMISSION":
-                case "_FADING_ON":
-                case "_GLOSSYREFLECTIONS_OFF":
-                case "_MAPPING_6_FRAMES_LAYOUT":
-                case "_METALLICGLOSSMAP":
-                case "_NORMALMAP":
-                case "_PARALLAXMAP":
-                case "_REQUIRE_UV2":
-                case "_SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A":
-                case "_SPECGLOSSMAP":
-                case "_SPECULARHIGHLIGHTS_OFF":
-                case "_SUNDISK_HIGH_QUALITY":
-                case "_SUNDISK_NONE":
-                case "_SUNDISK_SIMPLE":
+                case "_TEXMODE_TEXTURES":
+                case "_TEXMODE_MAIN_TEXTURE_AS_ATLAS":
+                case "_TEXMODE_SECOND_TEXTURE_AS_ATLAS":
+                case "_TEXMODE_TEXTUR_EARRAY":
                     return true;
                 default:
                     return false;
