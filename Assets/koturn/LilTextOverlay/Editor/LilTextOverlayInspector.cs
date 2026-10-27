@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using UnityEditor;
@@ -204,8 +204,15 @@ namespace Koturn.LilTextOverlay.Editor
 
             if (_shouldLoadLanguage)
             {
-                LoadCustomLanguage(AssetGuid.LangCustom);
-                prevLanguageName = lilLanguageManager.langSet.languageName;
+                try
+                {
+                    LoadCustomLanguage(AssetGuid.LangCustom);
+                    prevLanguageName = lilLanguageManager.langSet.languageName;
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
             }
 
             _spriteTex = FindProperty("_SpriteTex", props);

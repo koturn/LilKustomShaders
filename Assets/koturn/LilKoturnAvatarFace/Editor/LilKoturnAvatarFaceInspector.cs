@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -124,8 +125,15 @@ namespace Koturn.LilKoturnAvatarFace.Editor
 
             if (_shouldLoadLanguage)
             {
-                LoadCustomLanguage(AssetGuid.LangCustom);
-                prevLanguageName = lilLanguageManager.langSet.languageName;
+                try
+                {
+                    LoadCustomLanguage(AssetGuid.LangCustom);
+                    prevLanguageName = lilLanguageManager.langSet.languageName;
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
             }
 
             var propertyList = _propertyList;
