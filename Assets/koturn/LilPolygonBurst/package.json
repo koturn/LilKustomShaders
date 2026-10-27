@@ -6,11 +6,27 @@
   "unity": "2022.3",
   "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v122",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.2/LICENSE",
   "license": "MIT",
-  "keywords": ["Toon", "Shader", "lilToon"],
-  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.2/jp.koturn.lilpolygonburst-1.2.2.zip",
-  "legacyFolders" : {
-    "Assets\\koturn\\LilPolygonBurst" : "9e18798d7df8eff448f5c203c8c019b3"
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.2/LICENSE",
+  "keywords": [
+    "Toon",
+    "Shader",
+    "lilToon"
+  ],
+  "dependencies": {
+    "jp.lilxyzw.liltoon": "1.4.0",
+    "jp.koturn.liloptimized": "1.2.2"
+  },
+  "author": {
+    "name": "koturn",
+    "url": "https://github.com/koturn"
+  },
+  "url": "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.2/jp.koturn.lilpolygonburst-1.2.2.zip",
+  "legacyFolders": {
+    "Assets\\koturn\\LilPolygonBurst": "9e18798d7df8eff448f5c203c8c019b3"
+  },
+  "vpmDependencies": {
+    "jp.lilxyzw.liltoon": ">=1.4.0",
+    "jp.koturn.liloptimized": ">=1.2.2"
   }
 }

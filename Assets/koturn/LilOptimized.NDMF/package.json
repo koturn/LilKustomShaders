@@ -6,11 +6,27 @@
   "unity": "2022.3",
   "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v122",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.2/LICENSE",
   "license": "MIT",
-  "keywords": ["NDMF plugin"],
-  "url" : "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.2/jp.koturn.liloptimized.ndmf-1.2.2.zip",
-  "legacyFolders" : {
-    "Assets\\koturn\\LilOptimized.NDMF" : "3f6b064b6cec8f944bd804c2eddc2715"
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.2/LICENSE",
+  "keywords": [
+    "Toon",
+    "Shader",
+    "lilToon"
+  ],
+  "dependencies": {
+    "jp.lilxyzw.liltoon": "1.4.0",
+    "jp.koturn.liloptimized": "1.2.2"
+  },
+  "author": {
+    "name": "koturn",
+    "url": "https://github.com/koturn"
+  },
+  "url": "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.2/jp.koturn.liloptimized.ndmf-1.2.2.zip",
+  "legacyFolders": {
+    "Assets\\koturn\\LilOptimized.NDMF": "3f6b064b6cec8f944bd804c2eddc2715"
+  },
+  "vpmDependencies": {
+    "jp.lilxyzw.liltoon": ">=1.4.0",
+    "jp.koturn.liloptimized": ">=1.2.2"
   }
 }
