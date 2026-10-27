@@ -1,13 +1,13 @@
 {
   "name": "jp.koturn.liloptimized",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "displayName": "LilOptimized",
   "description": "koturn's custom shaders of lilToon, LilOptimized.",
   "unity": "2022.3",
-  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v122",
+  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v123",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
   "license": "MIT",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.2/LICENSE",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.3/LICENSE",
   "keywords": [
     "Toon",
     "Shader",
@@ -20,7 +20,7 @@
     "name": "koturn",
     "url": "https://github.com/koturn"
   },
-  "url": "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.2/jp.koturn.liloptimized-1.2.2.zip",
+  "url": "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.3/jp.koturn.liloptimized-1.2.3.zip",
   "legacyFolders": {
     "Assets\\koturn\\LilOptimized": "2fee4b7f267d0af4b8959ebd6c9d30cb"
   },

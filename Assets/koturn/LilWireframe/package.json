@@ -1,13 +1,13 @@
 {
   "name": "jp.koturn.lilwireframe",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "displayName": "LilWireframe",
   "description": "koturn's custom shaders of lilToon, LilWireframe.",
   "unity": "2022.3",
-  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v122",
+  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v123",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
   "license": "MIT",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.2/LICENSE",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.3/LICENSE",
   "keywords": [
     "Toon",
     "Shader",
@@ -15,18 +15,18 @@
   ],
   "dependencies": {
     "jp.lilxyzw.liltoon": "1.4.0",
-    "jp.koturn.liloptimized": "1.2.2"
+    "jp.koturn.liloptimized": "1.2.3"
   },
   "author": {
     "name": "koturn",
     "url": "https://github.com/koturn"
   },
-  "url": "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.2/jp.koturn.lilwireframe-1.2.2.zip",
+  "url": "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.3/jp.koturn.lilwireframe-1.2.3.zip",
   "legacyFolders": {
     "Assets\\koturn\\LilWireframe": "89e0d1d26d70bb049a4ea7fc4977df1d"
   },
   "vpmDependencies": {
     "jp.lilxyzw.liltoon": ">=1.4.0",
-    "jp.koturn.liloptimized": ">=1.2.2"
+    "jp.koturn.liloptimized": ">=1.2.3"
   }
 }
