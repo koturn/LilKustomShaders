@@ -1,13 +1,13 @@
 {
   "name": "jp.koturn.lilemissionwave",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "displayName": "LilEmissionWave",
   "description": "koturn's custom shaders of lilToon, LilEmissionWave.",
   "unity": "2022.3",
-  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v122",
+  "changelogUrl": "https://github.com/koturn/LilKustomShaders/wiki/ChangeLog#v123",
   "documentationUrl": "https://github.com/koturn/LilKustomShaders/wiki",
   "license": "MIT",
-  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.2/LICENSE",
+  "licensesUrl": "https://github.com/koturn/LilKustomShaders/blob/v1.2.3/LICENSE",
   "keywords": [
     "Toon",
     "Shader",
@@ -15,18 +15,18 @@
   ],
   "dependencies": {
     "jp.lilxyzw.liltoon": "1.4.0",
-    "jp.koturn.liloptimized": "1.2.2"
+    "jp.koturn.liloptimized": "1.2.3"
   },
   "author": {
     "name": "koturn",
     "url": "https://github.com/koturn"
   },
-  "url": "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.2/jp.koturn.lilemissionwave-1.2.2.zip",
+  "url": "https://github.com/koturn/LilKustomShaders/releases/download/v1.2.3/jp.koturn.lilemissionwave-1.2.3.zip",
   "legacyFolders": {
     "Assets\\koturn\\LilEmissionWave": "eee965a7ab3157c479bb33ea01a05b68"
   },
   "vpmDependencies": {
     "jp.lilxyzw.liltoon": ">=1.4.0",
-    "jp.koturn.liloptimized": ">=1.2.2"
+    "jp.koturn.liloptimized": ">=1.2.3"
   }
 }
