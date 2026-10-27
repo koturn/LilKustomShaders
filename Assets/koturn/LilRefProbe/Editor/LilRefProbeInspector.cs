@@ -34,7 +34,7 @@ namespace Koturn.LilRefProbe.Editor
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
         /// </summary>
-        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>(2);
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_RefProbeMask".
         /// </summary>
@@ -76,13 +76,10 @@ namespace Koturn.LilRefProbe.Editor
                 prevLanguageName = lilLanguageManager.langSet.languageName;
             }
 
-            _refProbeMask = FindProperty("_RefProbeMask", props);
-            _refProbeBlendCoeff = FindProperty("_RefProbeBlendCoeff", props);
-
             var propertyList = _propertyList;
             propertyList.Clear();
-            propertyList.Add(_refProbeBlendCoeff);
-            propertyList.Add(_refProbeBlendCoeff);
+            propertyList.Add(_refProbeMask = FindProperty("_RefProbeMask", props));
+            propertyList.Add(_refProbeBlendCoeff = FindProperty("_RefProbeBlendCoeff", props));
         }
 
         /// <summary>

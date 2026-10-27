@@ -34,7 +34,7 @@ namespace Koturn.LilCrossFade.Editor
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
         /// </summary>
-        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>(13);
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_TimeSource".
         /// </summary>
@@ -119,35 +119,24 @@ namespace Koturn.LilCrossFade.Editor
                 prevLanguageName = lilLanguageManager.langSet.languageName;
             }
 
-            _timeSource = FindProperty("_TimeSource", props);
-            _fakeTime = FindProperty("_FakeTime", props);
-            _displayCycleTime = FindProperty("_DisplayTime", props);
-            _crossFadeTime = FindProperty("_CrossFadeTime", props);
-            _texMode = FindProperty("_TexMode", props);
-            _numTextures = FindProperty("_NumTextures", props);
-            _mainTexArray = FindProperty("_MainTexArray", props);
-            _mainTexes = new[]
+            var propertyList = _propertyList;
+            propertyList.Clear();
+            propertyList.Add(_timeSource = FindProperty("_TimeSource", props));
+            propertyList.Add(_fakeTime = FindProperty("_FakeTime", props));
+            propertyList.Add(_displayCycleTime = FindProperty("_DisplayTime", props));
+            propertyList.Add(_crossFadeTime = FindProperty("_CrossFadeTime", props));
+            propertyList.Add(_texMode = FindProperty("_TexMode", props));
+            propertyList.Add(_numTextures = FindProperty("_NumTextures", props));
+            propertyList.Add(_mainTexArray = FindProperty("_MainTexArray", props));
+            propertyList.AddRange(_mainTexes = new[]
             {
                 FindProperty("_MainTex", props),
                 FindProperty("_MainTex2", props),
                 FindProperty("_MainTex3", props),
                 FindProperty("_MainTex4", props)
-            };
-            _atlasRows = FindProperty("_AtlasRows", props);
-            _atlasCols = FindProperty("_AtlasCols", props);
-
-            var propertyList = _propertyList;
-            propertyList.Clear();
-            propertyList.Add(_timeSource);
-            propertyList.Add(_fakeTime);
-            propertyList.Add(_displayCycleTime);
-            propertyList.Add(_crossFadeTime);
-            propertyList.Add(_texMode);
-            propertyList.Add(_numTextures);
-            propertyList.Add(_mainTexArray);
-            propertyList.AddRange(_mainTexes);
-            propertyList.Add(_atlasRows);
-            propertyList.Add(_atlasCols);
+            });
+            propertyList.Add(_atlasRows = FindProperty("_AtlasRows", props));
+            propertyList.Add(_atlasCols = FindProperty("_AtlasCols", props));
         }
 
         /// <summary>

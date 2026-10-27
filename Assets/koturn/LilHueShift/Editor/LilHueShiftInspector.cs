@@ -34,7 +34,7 @@ namespace Koturn.LilHueShift.Editor
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
         /// </summary>
-        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>(6);
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_HueShiftMask".
         /// </summary>
@@ -92,21 +92,14 @@ namespace Koturn.LilHueShift.Editor
                 prevLanguageName = lilLanguageManager.langSet.languageName;
             }
 
-            _hueShiftMask = FindProperty("_HueShiftMask", props);
-            _timeSource = FindProperty("_TimeSource", props);
-            _fakeTime = FindProperty("_FakeTime", props);
-            _hueShiftSpeed = FindProperty("_HueShiftSpeed", props);
-            _hueShiftEmission = FindProperty("_HueShiftEmission", props);
-            _hueShiftEmission2nd = FindProperty("_HueShiftEmission2nd", props);
-
             var propertyList = _propertyList;
             propertyList.Clear();
-            propertyList.Add(_hueShiftMask);
-            propertyList.Add(_timeSource);
-            propertyList.Add(_fakeTime);
-            propertyList.Add(_hueShiftSpeed);
-            propertyList.Add(_hueShiftEmission);
-            propertyList.Add(_hueShiftEmission2nd);
+            propertyList.Add(_hueShiftMask = FindProperty("_HueShiftMask", props));
+            propertyList.Add(_timeSource = FindProperty("_TimeSource", props));
+            propertyList.Add(_fakeTime = FindProperty("_FakeTime", props));
+            propertyList.Add(_hueShiftSpeed = FindProperty("_HueShiftSpeed", props));
+            propertyList.Add(_hueShiftEmission = FindProperty("_HueShiftEmission", props));
+            propertyList.Add(_hueShiftEmission2nd = FindProperty("_HueShiftEmission2nd", props));
         }
 
         /// <summary>

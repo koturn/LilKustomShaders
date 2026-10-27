@@ -42,19 +42,19 @@ namespace Koturn.LilTextOverlay.Editor
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about elapsed time.
         /// </summary>
-        private readonly List<MaterialProperty> _elapsedTimePropertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _elapsedTimePropertyList = new List<MaterialProperty>(6);
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about VRChat time.
         /// </summary>
-        private readonly List<MaterialProperty> _vrchatTimePropertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _vrchatTimePropertyList = new List<MaterialProperty>(9);
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about framerate.
         /// </summary>
-        private readonly List<MaterialProperty> _frameratePropertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _frameratePropertyList = new List<MaterialProperty>(6);
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about world position.
         /// </summary>
-        private readonly List<MaterialProperty> _worldPosPropertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _worldPosPropertyList = new List<MaterialProperty>(8);
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_SpriteTex".
         /// </summary>
@@ -209,76 +209,47 @@ namespace Koturn.LilTextOverlay.Editor
             }
 
             _spriteTex = FindProperty("_SpriteTex", props);
-            _enableElapsedTime = FindProperty("_EnableElapsedTime", props);
-            _elapsedTimeColor = FindProperty("_ElapsedTimeColor", props);
-            _elapsedTimeOffsetScale = FindProperty("_ElapsedTimeOffsetScale", props);
-            _elapsedTimeRotAngle = FindProperty("_ElapsedTimeRotAngle", props);
-            _elapsedTimeDisplayLength = FindProperty("_ElapsedTimeDisplayLength", props);
-            _elapsedTimeAlign = FindProperty("_ElapsedTimeAlign", props);
-            _enableVRChatTimeOfDay = FindProperty("_EnableVRChatTimeOfDay", props);
-            _vrchatTimeOfDayColor = FindProperty("_VRChatTimeOfDayColor", props);
-            _vrchatTimeOfDayOffsetScale = FindProperty("_VRChatTimeOfDayOffsetScale", props);
-            _vrchatTimeOfDayRotAngle = FindProperty("_VRChatTimeOfDayRotAngle", props);
-            _vrchatTimeOfDayDisplayLength = FindProperty("_VRChatTimeOfDayDisplayLength", props);
-            _vrchatTimeOfDayAlign = FindProperty("_VRChatTimeOfDayAlign", props);
-            _vrchatTimeOfDayKind = FindProperty("_VRChatTimeOfDayKind", props);
-            _vrchatTimeOfDayLocalTimeOffsetSeconds = FindProperty("_VRChatTimeOfDayLocalTimeOffsetSeconds", props);
-            _vrchatTimeOfDayUtcOffsetSeconds = FindProperty("_VRChatTimeOfDayUtcOffsetSeconds", props);
-            _enableFramerate = FindProperty("_EnableFramerate", props);
-            _framerateColor = FindProperty("_FramerateColor", props);
-            _framerateOffsetScale = FindProperty("_FramerateOffsetScale", props);
-            _framerateRotAngle = FindProperty("_FramerateRotAngle", props);
-            _framerateDisplayLength = FindProperty("_FramerateDisplayLength", props);
-            _framerateAlign = FindProperty("_FramerateAlign", props);
-            _enableWorldPos = FindProperty("_EnableWorldPos", props);
-            _worldPosColorX = FindProperty("_WorldPosColorX", props);
-            _worldPosColorY = FindProperty("_WorldPosColorY", props);
-            _worldPosColorZ = FindProperty("_WorldPosColorZ", props);
-            _worldPosOffsetScale = FindProperty("_WorldPosOffsetScale", props);
-            _worldPosRotAngle = FindProperty("_WorldPosRotAngle", props);
-            _worldPosDisplayLength = FindProperty("_WorldPosDisplayLength", props);
-            _worldPosAlign = FindProperty("_WorldPosAlign", props);
 
             var elapsedTimePropertyList = _elapsedTimePropertyList;
             elapsedTimePropertyList.Clear();
-            elapsedTimePropertyList.Add(_enableElapsedTime);
-            elapsedTimePropertyList.Add(_elapsedTimeColor);
-            elapsedTimePropertyList.Add(_elapsedTimeOffsetScale);
-            elapsedTimePropertyList.Add(_elapsedTimeRotAngle);
-            elapsedTimePropertyList.Add(_elapsedTimeDisplayLength);
-            elapsedTimePropertyList.Add(_elapsedTimeAlign);
+            elapsedTimePropertyList.Add(_enableElapsedTime = FindProperty("_EnableElapsedTime", props));
+            elapsedTimePropertyList.Add(_elapsedTimeColor = FindProperty("_ElapsedTimeColor", props));
+            elapsedTimePropertyList.Add(_elapsedTimeOffsetScale = FindProperty("_ElapsedTimeOffsetScale", props));
+            elapsedTimePropertyList.Add(_elapsedTimeRotAngle = FindProperty("_ElapsedTimeRotAngle", props));
+            elapsedTimePropertyList.Add(_elapsedTimeDisplayLength = FindProperty("_ElapsedTimeDisplayLength", props));
+            elapsedTimePropertyList.Add(_elapsedTimeAlign = FindProperty("_ElapsedTimeAlign", props));
 
             var vrchatTimePropertyList = _vrchatTimePropertyList;
             vrchatTimePropertyList.Clear();
-            vrchatTimePropertyList.Add(_enableVRChatTimeOfDay);
-            vrchatTimePropertyList.Add(_vrchatTimeOfDayColor);
-            vrchatTimePropertyList.Add(_vrchatTimeOfDayOffsetScale);
-            vrchatTimePropertyList.Add(_vrchatTimeOfDayRotAngle);
-            vrchatTimePropertyList.Add(_vrchatTimeOfDayDisplayLength);
-            vrchatTimePropertyList.Add(_vrchatTimeOfDayAlign);
-            vrchatTimePropertyList.Add(_vrchatTimeOfDayKind);
-            vrchatTimePropertyList.Add(_vrchatTimeOfDayLocalTimeOffsetSeconds);
-            vrchatTimePropertyList.Add(_vrchatTimeOfDayUtcOffsetSeconds);
+            vrchatTimePropertyList.Add(_enableVRChatTimeOfDay = FindProperty("_EnableVRChatTimeOfDay", props));
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayColor = FindProperty("_VRChatTimeOfDayColor", props));
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayOffsetScale = FindProperty("_VRChatTimeOfDayOffsetScale", props));
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayRotAngle = FindProperty("_VRChatTimeOfDayRotAngle", props));
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayDisplayLength = FindProperty("_VRChatTimeOfDayDisplayLength", props));
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayAlign = FindProperty("_VRChatTimeOfDayAlign", props));
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayKind = FindProperty("_VRChatTimeOfDayKind", props));
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayLocalTimeOffsetSeconds = FindProperty("_VRChatTimeOfDayLocalTimeOffsetSeconds", props));
+            vrchatTimePropertyList.Add(_vrchatTimeOfDayUtcOffsetSeconds = FindProperty("_VRChatTimeOfDayUtcOffsetSeconds", props));
 
             var frameratePropertyList = _frameratePropertyList;
             frameratePropertyList.Clear();
-            frameratePropertyList.Add(_enableFramerate);
-            frameratePropertyList.Add(_framerateColor);
-            frameratePropertyList.Add(_framerateOffsetScale);
-            frameratePropertyList.Add(_framerateRotAngle);
-            frameratePropertyList.Add(_framerateDisplayLength);
-            frameratePropertyList.Add(_framerateAlign);
+            frameratePropertyList.Add(_enableFramerate = FindProperty("_EnableFramerate", props));
+            frameratePropertyList.Add(_framerateColor = FindProperty("_FramerateColor", props));
+            frameratePropertyList.Add(_framerateOffsetScale = FindProperty("_FramerateOffsetScale", props));
+            frameratePropertyList.Add(_framerateRotAngle = FindProperty("_FramerateRotAngle", props));
+            frameratePropertyList.Add(_framerateDisplayLength = FindProperty("_FramerateDisplayLength", props));
+            frameratePropertyList.Add(_framerateAlign = FindProperty("_FramerateAlign", props));
 
             var worldPosPropertyList = _worldPosPropertyList;
             worldPosPropertyList.Clear();
-            worldPosPropertyList.Add(_enableWorldPos);
-            worldPosPropertyList.Add(_worldPosColorX);
-            worldPosPropertyList.Add(_worldPosColorY);
-            worldPosPropertyList.Add(_worldPosColorZ);
-            worldPosPropertyList.Add(_worldPosOffsetScale);
-            worldPosPropertyList.Add(_worldPosRotAngle);
-            worldPosPropertyList.Add(_worldPosDisplayLength);
-            worldPosPropertyList.Add(_worldPosAlign);
+            worldPosPropertyList.Add(_enableWorldPos = FindProperty("_EnableWorldPos", props));
+            worldPosPropertyList.Add(_worldPosColorX = FindProperty("_WorldPosColorX", props));
+            worldPosPropertyList.Add(_worldPosColorY = FindProperty("_WorldPosColorY", props));
+            worldPosPropertyList.Add(_worldPosColorZ = FindProperty("_WorldPosColorZ", props));
+            worldPosPropertyList.Add(_worldPosOffsetScale = FindProperty("_WorldPosOffsetScale", props));
+            worldPosPropertyList.Add(_worldPosRotAngle = FindProperty("_WorldPosRotAngle", props));
+            worldPosPropertyList.Add(_worldPosDisplayLength = FindProperty("_WorldPosDisplayLength", props));
+            worldPosPropertyList.Add(_worldPosAlign = FindProperty("_WorldPosAlign", props));
         }
 
         /// <summary>

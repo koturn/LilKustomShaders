@@ -34,7 +34,7 @@ namespace Koturn.LilEmissionWave.Editor
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
         /// </summary>
-        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>(23);
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_TimeSource".
         /// </summary>
@@ -136,53 +136,37 @@ namespace Koturn.LilEmissionWave.Editor
                 prevLanguageName = lilLanguageManager.langSet.languageName;
             }
 
-            _timeSource = FindProperty("_TimeSource", props);
-            _fakeTime = FindProperty("_FakeTime", props);
-            _displayCycleTime = FindProperty("_DisplayTime", props);
-            _crossFadeTime = FindProperty("_CrossFadeTime", props); _numColors = FindProperty("_NumColors", props);
-            _colors = new[]
+            var propertyList = _propertyList;
+            propertyList.Clear();
+            propertyList.Add(_timeSource = FindProperty("_TimeSource", props));
+            propertyList.Add(_fakeTime = FindProperty("_FakeTime", props));
+            propertyList.Add(_displayCycleTime = FindProperty("_DisplayTime", props));
+            propertyList.Add(_crossFadeTime = FindProperty("_CrossFadeTime", props));
+            propertyList.Add(_numColors = FindProperty("_NumColors", props));
+            propertyList.AddRange(_colors = new[]
             {
                 FindProperty("_Color", props),
                 FindProperty("_Color2", props),
                 FindProperty("_Color3", props),
                 FindProperty("_Color4", props)
-            };
-            _emissionWaveMask = FindProperty("_EmissionWaveMask", props);
-            _emissionWaveColors = new[]
+            });
+            propertyList.Add(_emissionWaveMask = FindProperty("_EmissionWaveMask", props));
+            propertyList.AddRange(_emissionWaveColors = new[]
             {
                 FindProperty("_EmissionWaveColor1", props),
                 FindProperty("_EmissionWaveColor2", props),
                 FindProperty("_EmissionWaveColor3", props),
                 FindProperty("_EmissionWaveColor4", props)
-            };
-            _emissionWaveNoiseAmp = FindProperty("_EmissionWaveNoiseAmp", props);
-            _emissionWaveSpeed = FindProperty("_EmissionWaveSpeed", props);
-            _emissionWaveInitPhase = FindProperty("_EmissionWaveInitPhase", props);
-            _emissionWaveParam = FindProperty("_EmissionWaveParam", props);
-            _emissionPosMin = FindProperty("_EmissionPosMin", props);
-            _emissionPosMax = FindProperty("_EmissionPosMax", props);
-            _wavePosSpace = FindProperty("_WavePosSpace", props);
-            _waveAxis = FindProperty("_WaveAxis", props);
-            _waveAxisAngles = FindProperty("_WaveAxisAngles", props);
-
-            var propertyList = _propertyList;
-            propertyList.Clear();
-            propertyList.Add(_timeSource);
-            propertyList.Add(_fakeTime);
-            propertyList.Add(_displayCycleTime);
-            propertyList.Add(_crossFadeTime);
-            propertyList.AddRange(_colors);
-            propertyList.Add(_emissionWaveMask);
-            propertyList.AddRange(_emissionWaveColors);
-            propertyList.Add(_emissionWaveNoiseAmp);
-            propertyList.Add(_emissionWaveSpeed);
-            propertyList.Add(_emissionWaveInitPhase);
-            propertyList.Add(_emissionWaveParam);
-            propertyList.Add(_emissionPosMin);
-            propertyList.Add(_emissionPosMax);
-            propertyList.Add(_wavePosSpace);
-            propertyList.Add(_waveAxis);
-            propertyList.Add(_waveAxisAngles);
+            });
+            propertyList.Add(_emissionWaveNoiseAmp = FindProperty("_EmissionWaveNoiseAmp", props));
+            propertyList.Add(_emissionWaveSpeed = FindProperty("_EmissionWaveSpeed", props));
+            propertyList.Add(_emissionWaveInitPhase = FindProperty("_EmissionWaveInitPhase", props));
+            propertyList.Add(_emissionWaveParam = FindProperty("_EmissionWaveParam", props));
+            propertyList.Add(_emissionPosMin = FindProperty("_EmissionPosMin", props));
+            propertyList.Add(_emissionPosMax = FindProperty("_EmissionPosMax", props));
+            propertyList.Add(_wavePosSpace = FindProperty("_WavePosSpace", props));
+            propertyList.Add(_waveAxis = FindProperty("_WaveAxis", props));
+            propertyList.Add(_waveAxisAngles = FindProperty("_WaveAxisAngles", props));
         }
 
         /// <summary>

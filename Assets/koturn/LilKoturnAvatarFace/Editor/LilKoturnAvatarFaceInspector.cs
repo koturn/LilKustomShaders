@@ -34,7 +34,7 @@ namespace Koturn.LilKoturnAvatarFace.Editor
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
         /// </summary>
-        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>(15);
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_GraphKoturnColor".
         /// </summary>
@@ -128,39 +128,23 @@ namespace Koturn.LilKoturnAvatarFace.Editor
                 prevLanguageName = lilLanguageManager.langSet.languageName;
             }
 
-            _graphKoturnColor = FindProperty("_GraphKoturnColor", props);
-            _graphKoturnOffsetScale = FindProperty("_GraphKoturnOffsetScale", props);
-            _graphKoturnRotAngle = FindProperty("_GraphKoturnRotAngle", props);
-            _starBlendMode = FindProperty("_StarBlendMode", props);
-            _starColor = FindProperty("_StarColor", props);
-            _starOffsetScale = FindProperty("_StarOffsetScale", props);
-            _starRotAngle = FindProperty("_StarRotAngle", props);
-            _starRotSpeed = FindProperty("_StarRotSpeed", props);
-            _starWidth = FindProperty("_StarWidth", props);
-            _hueShiftMask = FindProperty("_HueShiftMask", props);
-            _timeSource = FindProperty("_TimeSource", props);
-            _fakeTime = FindProperty("_FakeTime", props);
-            _hueShiftSpeed = FindProperty("_HueShiftSpeed", props);
-            _hueShiftEmission = FindProperty("_HueShiftEmission", props);
-            _hueShiftEmission2nd = FindProperty("_HueShiftEmission2nd", props);
-
             var propertyList = _propertyList;
             propertyList.Clear();
-            propertyList.Add(_graphKoturnColor);
-            propertyList.Add(_graphKoturnOffsetScale);
-            propertyList.Add(_graphKoturnRotAngle);
-            propertyList.Add(_starBlendMode);
-            propertyList.Add(_starColor);
-            propertyList.Add(_starOffsetScale);
-            propertyList.Add(_starRotAngle);
-            propertyList.Add(_starRotSpeed);
-            propertyList.Add(_starWidth);
-            propertyList.Add(_hueShiftMask);
-            propertyList.Add(_timeSource);
-            propertyList.Add(_fakeTime);
-            propertyList.Add(_hueShiftSpeed);
-            propertyList.Add(_hueShiftEmission);
-            propertyList.Add(_hueShiftEmission2nd);
+            propertyList.Add(_graphKoturnColor = FindProperty("_GraphKoturnColor", props));
+            propertyList.Add(_graphKoturnOffsetScale = FindProperty("_GraphKoturnOffsetScale", props));
+            propertyList.Add(_graphKoturnRotAngle = FindProperty("_GraphKoturnRotAngle", props));
+            propertyList.Add(_starBlendMode = FindProperty("_StarBlendMode", props));
+            propertyList.Add(_starColor = FindProperty("_StarColor", props));
+            propertyList.Add(_starOffsetScale = FindProperty("_StarOffsetScale", props));
+            propertyList.Add(_starRotAngle = FindProperty("_StarRotAngle", props));
+            propertyList.Add(_starRotSpeed = FindProperty("_StarRotSpeed", props));
+            propertyList.Add(_starWidth = FindProperty("_StarWidth", props));
+            propertyList.Add(_hueShiftMask = FindProperty("_HueShiftMask", props));
+            propertyList.Add(_timeSource = FindProperty("_TimeSource", props));
+            propertyList.Add(_fakeTime = FindProperty("_FakeTime", props));
+            propertyList.Add(_hueShiftSpeed = FindProperty("_HueShiftSpeed", props));
+            propertyList.Add(_hueShiftEmission = FindProperty("_HueShiftEmission", props));
+            propertyList.Add(_hueShiftEmission2nd = FindProperty("_HueShiftEmission2nd", props));
         }
 
         /// <summary>

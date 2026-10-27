@@ -34,7 +34,7 @@ namespace Koturn.LilWireframe.Editor
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
         /// </summary>
-        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>(8);
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_WireframeWidth".
         /// </summary>
@@ -100,25 +100,16 @@ namespace Koturn.LilWireframe.Editor
                 prevLanguageName = lilLanguageManager.langSet.languageName;
             }
 
-            _wireframeWidth = FindProperty("_WireframeWidth", props);
-            _wireframeMask = FindProperty("_WireframeMask", props);
-            _wireframeColor = FindProperty("_WireframeColor", props);
-            _wireframeRandomizeColor = FindProperty("_WireframeRandomizeColor", props);
-            _timeSource = FindProperty("_TimeSource", props);
-            _fakeTime = FindProperty("_FakeTime", props);
-            _wireframeCycleTime = FindProperty("_WireframeCycleTime", props);
-            _wireframeDecayTime = FindProperty("_WireframeDecayTime", props);
-
             var propertyList = _propertyList;
             propertyList.Clear();
-            propertyList.Add(_wireframeWidth);
-            propertyList.Add(_wireframeMask);
-            propertyList.Add(_wireframeColor);
-            propertyList.Add(_wireframeRandomizeColor);
-            propertyList.Add(_timeSource);
-            propertyList.Add(_fakeTime);
-            propertyList.Add(_wireframeCycleTime);
-            propertyList.Add(_wireframeDecayTime);
+            propertyList.Add(_wireframeWidth = FindProperty("_WireframeWidth", props));
+            propertyList.Add(_wireframeMask = FindProperty("_WireframeMask", props));
+            propertyList.Add(_wireframeColor = FindProperty("_WireframeColor", props));
+            propertyList.Add(_wireframeRandomizeColor = FindProperty("_WireframeRandomizeColor", props));
+            propertyList.Add(_timeSource = FindProperty("_TimeSource", props));
+            propertyList.Add(_fakeTime = FindProperty("_FakeTime", props));
+            propertyList.Add(_wireframeCycleTime = FindProperty("_WireframeCycleTime", props));
+            propertyList.Add(_wireframeDecayTime = FindProperty("_WireframeDecayTime", props));
         }
 
         /// <summary>

@@ -34,7 +34,7 @@ namespace Koturn.LilVisibility.Editor
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
         /// </summary>
-        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>(8);
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_VisibilityMode".
         /// </summary>
@@ -100,25 +100,16 @@ namespace Koturn.LilVisibility.Editor
                 prevLanguageName = lilLanguageManager.langSet.languageName;
             }
 
-            _visibilityMode = FindProperty("_VisibilityMode", props);
-            _mirror = FindProperty("_Mirror", props);
-            _visibilityVRCRegular = FindProperty("_VisibilityVRCRegular", props);
-            _visibilityVRCMirrorVR = FindProperty("_VisibilityVRCMirrorVR", props);
-            _visibilityVRCMirrorDesktop = FindProperty("_VisibilityVRCMirrorDesktop", props);
-            _visibilityVRCCameraVR = FindProperty("_VisibilityVRCCameraVR", props);
-            _visibilityVRCCameraDesktop = FindProperty("_VisibilityVRCCameraDesktop", props);
-            _visibilityVRCCameraScreenshot = FindProperty("_VisibilityVRCCameraScreenshot", props);
-
             var propertyList = _propertyList;
             propertyList.Clear();
-            propertyList.Add(_visibilityMode);
-            propertyList.Add(_mirror);
-            propertyList.Add(_visibilityVRCRegular);
-            propertyList.Add(_visibilityVRCMirrorVR);
-            propertyList.Add(_visibilityVRCMirrorDesktop);
-            propertyList.Add(_visibilityVRCCameraVR);
-            propertyList.Add(_visibilityVRCCameraDesktop);
-            propertyList.Add(_visibilityVRCCameraScreenshot);
+            propertyList.Add(_visibilityMode = FindProperty("_VisibilityMode", props));
+            propertyList.Add(_mirror = FindProperty("_Mirror", props));
+            propertyList.Add(_visibilityVRCRegular = FindProperty("_VisibilityVRCRegular", props));
+            propertyList.Add(_visibilityVRCMirrorVR = FindProperty("_VisibilityVRCMirrorVR", props));
+            propertyList.Add(_visibilityVRCMirrorDesktop = FindProperty("_VisibilityVRCMirrorDesktop", props));
+            propertyList.Add(_visibilityVRCCameraVR = FindProperty("_VisibilityVRCCameraVR", props));
+            propertyList.Add(_visibilityVRCCameraDesktop = FindProperty("_VisibilityVRCCameraDesktop", props));
+            propertyList.Add(_visibilityVRCCameraScreenshot = FindProperty("_VisibilityVRCCameraScreenshot", props));
         }
 
         /// <summary>

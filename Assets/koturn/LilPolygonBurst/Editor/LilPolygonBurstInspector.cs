@@ -34,7 +34,7 @@ namespace Koturn.LilPolygonBurst.Editor
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
         /// </summary>
-        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>();
+        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>(12);
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_PolygonCrackWidth".
         /// </summary>
@@ -115,33 +115,20 @@ namespace Koturn.LilPolygonBurst.Editor
                 prevLanguageName = lilLanguageManager.langSet.languageName;
             }
 
-            _polygonCrackWidth = FindProperty("_PolygonCrackWidth", props);
-            _polygonCrackColor = FindProperty("_PolygonCrackColor", props);
-            _timeSource = FindProperty("_TimeSource", props);
-            _fakeTime = FindProperty("_FakeTime", props);
-            _polygonRevivalTime = FindProperty("_PolygonRevivalTime", props);
-            _polygonRetentionTime = FindProperty("_PolygonRetentionTime", props);
-            _polygonCrackTime = FindProperty("_PolygonCrackTime", props);
-            _polygonFillTime = FindProperty("_PolygonFillTime", props);
-            _polygonBurstTime = FindProperty("_PolygonBurstTime", props);
-            _polygonDisappearTime = FindProperty("_PolygonDisappearTime", props);
-            _polygonRotSpeed = FindProperty("_PolygonRotSpeed", props);
-            _polygonMoveSpeed = FindProperty("_PolygonMoveSpeed", props);
-
             var propertyList = _propertyList;
             propertyList.Clear();
-            propertyList.Add(_polygonCrackWidth);
-            propertyList.Add(_polygonCrackColor);
-            propertyList.Add(_timeSource);
-            propertyList.Add(_fakeTime);
-            propertyList.Add(_polygonRevivalTime);
-            propertyList.Add(_polygonRetentionTime);
-            propertyList.Add(_polygonCrackTime);
-            propertyList.Add(_polygonFillTime);
-            propertyList.Add(_polygonBurstTime);
-            propertyList.Add(_polygonDisappearTime);
-            propertyList.Add(_polygonRotSpeed);
-            propertyList.Add(_polygonMoveSpeed);
+            propertyList.Add(_polygonCrackWidth = FindProperty("_PolygonCrackWidth", props));
+            propertyList.Add(_polygonCrackColor = FindProperty("_PolygonCrackColor", props));
+            propertyList.Add(_timeSource = FindProperty("_TimeSource", props));
+            propertyList.Add(_fakeTime = FindProperty("_FakeTime", props));
+            propertyList.Add(_polygonRevivalTime = FindProperty("_PolygonRevivalTime", props));
+            propertyList.Add(_polygonRetentionTime = FindProperty("_PolygonRetentionTime", props));
+            propertyList.Add(_polygonCrackTime = FindProperty("_PolygonCrackTime", props));
+            propertyList.Add(_polygonFillTime = FindProperty("_PolygonFillTime", props));
+            propertyList.Add(_polygonBurstTime = FindProperty("_PolygonBurstTime", props));
+            propertyList.Add(_polygonDisappearTime = FindProperty("_PolygonDisappearTime", props));
+            propertyList.Add(_polygonRotSpeed = FindProperty("_PolygonRotSpeed", props));
+            propertyList.Add(_polygonMoveSpeed = FindProperty("_PolygonMoveSpeed", props));
         }
 
         /// <summary>
