@@ -18,6 +18,10 @@ namespace Koturn.LilKoturnAvatarFace.Editor
         /// Name of this custom shader.
         /// </summary>
         public const string ShaderName = "koturn/LilKoturnAvatarFace";
+        /// <summary>
+        /// Help page URL.
+        /// </summary>
+        private const string HelpUrl = "https://github.com/koturn/LilKustomShaders/wiki#lilkoturnavatarface";
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
@@ -35,7 +39,19 @@ namespace Koturn.LilKoturnAvatarFace.Editor
         /// <summary>
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
         /// </summary>
-        private readonly List<MaterialProperty> _propertyList = new List<MaterialProperty>(15);
+        private readonly List<MaterialProperty> _graphPropertyList = new List<MaterialProperty>(3);
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
+        /// </summary>
+        private readonly List<MaterialProperty> _starPropertyList = new List<MaterialProperty>(6);
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
+        /// </summary>
+        private readonly List<MaterialProperty> _hueShiftPropertyList = new List<MaterialProperty>(6);
+        /// <summary>
+        /// <see cref="List{T}"/> of <see cref="MaterialProperty"/>.
+        /// </summary>
+        private readonly List<MaterialProperty> _allPropertyList = new List<MaterialProperty>(15);
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_GraphKoturnColor".
         /// </summary>
@@ -136,23 +152,33 @@ namespace Koturn.LilKoturnAvatarFace.Editor
                 }
             }
 
-            var propertyList = _propertyList;
-            propertyList.Clear();
-            propertyList.Add(_graphKoturnColor = FindProperty("_GraphKoturnColor", props));
-            propertyList.Add(_graphKoturnOffsetScale = FindProperty("_GraphKoturnOffsetScale", props));
-            propertyList.Add(_graphKoturnRotAngle = FindProperty("_GraphKoturnRotAngle", props));
-            propertyList.Add(_starBlendMode = FindProperty("_StarBlendMode", props));
-            propertyList.Add(_starColor = FindProperty("_StarColor", props));
-            propertyList.Add(_starOffsetScale = FindProperty("_StarOffsetScale", props));
-            propertyList.Add(_starRotAngle = FindProperty("_StarRotAngle", props));
-            propertyList.Add(_starRotSpeed = FindProperty("_StarRotSpeed", props));
-            propertyList.Add(_starWidth = FindProperty("_StarWidth", props));
-            propertyList.Add(_hueShiftMask = FindProperty("_HueShiftMask", props));
-            propertyList.Add(_timeSource = FindProperty("_TimeSource", props));
-            propertyList.Add(_fakeTime = FindProperty("_FakeTime", props));
-            propertyList.Add(_hueShiftSpeed = FindProperty("_HueShiftSpeed", props));
-            propertyList.Add(_hueShiftEmission = FindProperty("_HueShiftEmission", props));
-            propertyList.Add(_hueShiftEmission2nd = FindProperty("_HueShiftEmission2nd", props));
+            var allPropertyList = _allPropertyList;
+            allPropertyList.Clear();
+
+            var graphPropertyList = _graphPropertyList;
+            graphPropertyList.Clear();
+            graphPropertyList.Add(_graphKoturnColor = FindProperty("_GraphKoturnColor", props));
+            graphPropertyList.Add(_graphKoturnOffsetScale = FindProperty("_GraphKoturnOffsetScale", props));
+            graphPropertyList.Add(_graphKoturnRotAngle = FindProperty("_GraphKoturnRotAngle", props));
+            allPropertyList.AddRange(graphPropertyList);
+
+            var starPropertyList = _starPropertyList;
+            starPropertyList.Add(_starBlendMode = FindProperty("_StarBlendMode", props));
+            starPropertyList.Add(_starColor = FindProperty("_StarColor", props));
+            starPropertyList.Add(_starOffsetScale = FindProperty("_StarOffsetScale", props));
+            starPropertyList.Add(_starRotAngle = FindProperty("_StarRotAngle", props));
+            starPropertyList.Add(_starRotSpeed = FindProperty("_StarRotSpeed", props));
+            starPropertyList.Add(_starWidth = FindProperty("_StarWidth", props));
+            allPropertyList.AddRange(starPropertyList);
+
+            var hueShiftPropertyList = _hueShiftPropertyList;
+            hueShiftPropertyList.Add(_hueShiftMask = FindProperty("_HueShiftMask", props));
+            hueShiftPropertyList.Add(_timeSource = FindProperty("_TimeSource", props));
+            hueShiftPropertyList.Add(_fakeTime = FindProperty("_FakeTime", props));
+            hueShiftPropertyList.Add(_hueShiftSpeed = FindProperty("_HueShiftSpeed", props));
+            hueShiftPropertyList.Add(_hueShiftEmission = FindProperty("_HueShiftEmission", props));
+            hueShiftPropertyList.Add(_hueShiftEmission2nd = FindProperty("_HueShiftEmission2nd", props));
+            allPropertyList.AddRange(hueShiftPropertyList);
         }
 
         /// <summary>
@@ -169,13 +195,14 @@ namespace Koturn.LilKoturnAvatarFace.Editor
             // customBox        box (similar to unity default box)
             // customToggleFont label for box
 
-            if (!ShouldDrawBlock(_propertyList))
+            if (!ShouldDrawBlock(_allPropertyList))
             {
                 return;
             }
 
             var titleLoc = GetLoc("sCustomShaderTitle");
             isShowCustomProperties = Foldout(titleLoc, titleLoc, isShowCustomProperties);
+            LilKustomUtils.DrawMenuButton(_allPropertyList, HelpUrl);
             if (!isShowCustomProperties)
             {
                 return;
@@ -185,40 +212,52 @@ namespace Koturn.LilKoturnAvatarFace.Editor
             {
                 var me = m_MaterialEditor;
 
-                EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryKoturnGraph"), customToggleFont);
-                using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                if (ShouldDrawBlock(_graphPropertyList))
                 {
-                    lilEditorGUI.LocalizedProperty(me, _graphKoturnColor);
-                    DrawVector4AsOffsetScale2x2(_graphKoturnOffsetScale);
-                    lilEditorGUI.LocalizedProperty(me, _graphKoturnRotAngle);
-                }
-
-                EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryStar"), customToggleFont);
-                using (new EditorGUILayout.VerticalScope(boxInnerHalf))
-                {
-                    lilEditorGUI.LocalizedProperty(me, _starBlendMode);
-                    lilEditorGUI.LocalizedProperty(me, _starColor);
-                    DrawVector4AsOffsetScale2x2(_starOffsetScale);
-                    lilEditorGUI.LocalizedProperty(me, _starRotAngle);
-                    lilEditorGUI.LocalizedProperty(me, _starRotSpeed);
-                    lilEditorGUI.LocalizedProperty(me, _starWidth);
-                }
-
-                EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryHueShift"), customToggleFont);
-                using (new EditorGUILayout.VerticalScope(boxInnerHalf))
-                {
-                    lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMask"), GetLoc("sTextureRGB")), _hueShiftMask);
-                    lilEditorGUI.LocalizedProperty(me, _timeSource);
-                    if ((TimeSource)_timeSource.floatValue == TimeSource.FakeTime)
+                    EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryKoturnGraph"), customToggleFont);
+                    LilKustomUtils.DrawMenuButton(_graphPropertyList, HelpUrl);
+                    using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                     {
-                        using (new EditorGUI.IndentLevelScope())
-                        {
-                            lilEditorGUI.LocalizedProperty(me, _fakeTime);
-                        }
+                        lilEditorGUI.LocalizedProperty(me, _graphKoturnColor);
+                        DrawVector4AsOffsetScale2x2(_graphKoturnOffsetScale);
+                        lilEditorGUI.LocalizedProperty(me, _graphKoturnRotAngle);
                     }
-                    lilEditorGUI.LocalizedProperty(me, _hueShiftSpeed);
-                    lilEditorGUI.LocalizedProperty(me, _hueShiftEmission);
-                    lilEditorGUI.LocalizedProperty(me, _hueShiftEmission2nd);
+                }
+
+                if (ShouldDrawBlock(_starPropertyList))
+                {
+                    EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryStar"), customToggleFont);
+                    LilKustomUtils.DrawMenuButton(_starPropertyList, HelpUrl);
+                    using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                    {
+                        lilEditorGUI.LocalizedProperty(me, _starBlendMode);
+                        lilEditorGUI.LocalizedProperty(me, _starColor);
+                        DrawVector4AsOffsetScale2x2(_starOffsetScale);
+                        lilEditorGUI.LocalizedProperty(me, _starRotAngle);
+                        lilEditorGUI.LocalizedProperty(me, _starRotSpeed);
+                        lilEditorGUI.LocalizedProperty(me, _starWidth);
+                    }
+                }
+
+                if (ShouldDrawBlock(_hueShiftPropertyList))
+                {
+                    EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryHueShift"), customToggleFont);
+                    LilKustomUtils.DrawMenuButton(_hueShiftPropertyList, HelpUrl);
+                    using (new EditorGUILayout.VerticalScope(boxInnerHalf))
+                    {
+                        lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMask"), GetLoc("sTextureRGB")), _hueShiftMask);
+                        lilEditorGUI.LocalizedProperty(me, _timeSource);
+                        if ((TimeSource)_timeSource.floatValue == TimeSource.FakeTime)
+                        {
+                            using (new EditorGUI.IndentLevelScope())
+                            {
+                                lilEditorGUI.LocalizedProperty(me, _fakeTime);
+                            }
+                        }
+                        lilEditorGUI.LocalizedProperty(me, _hueShiftSpeed);
+                        lilEditorGUI.LocalizedProperty(me, _hueShiftEmission);
+                        lilEditorGUI.LocalizedProperty(me, _hueShiftEmission2nd);
+                    }
                 }
             }
         }

@@ -1,7 +1,5 @@
 using System;
-#if !UNITY_2020_3_OR_NEWER
 using System.Collections.Generic;
-#endif  // !UNITY_2020_3_OR_NEWER
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,6 +21,155 @@ namespace Koturn.LilOptimized.Editor
         /// "VRCFallback" tag.
         /// </summary>
         private const string TagVRCFallback = "VRCFallback";
+
+        /// <summary>
+        /// Copy target material property dictionary.
+        /// </summary>
+        private static readonly Dictionary<string, MaterialProperty> _copySourcePropertyDict = new Dictionary<string, MaterialProperty>();
+
+
+        /// <summary>
+        /// Draw menu button.
+        /// </summary>
+        /// <param name="propertyList">Property list.</param>
+        /// <param name="helpUrl">URL</param>
+        public static void DrawMenuButton(List<MaterialProperty> propertyList, string helpUrl = null)
+        {
+            var position = GUILayoutUtility.GetLastRect();
+            position.x += position.width - 24.0f;
+            position.width = 24.0f;
+
+            if (!GUI.Button(position, EditorGUIUtility.IconContent("_Popup"), lilEditorGUI.middleButton))
+            {
+                return;
+            }
+
+            var menu = new GenericMenu();
+            menu.AddItem(new GUIContent(lilLanguageManager.GetLoc("sCopy")), false, userData => CopyProperties((List<MaterialProperty>)userData), propertyList);
+            menu.AddItem(new GUIContent(lilLanguageManager.GetLoc("sPaste")), false, userData => PasteProperties((List<MaterialProperty>)userData, false), propertyList);
+            menu.AddItem(new GUIContent(lilLanguageManager.GetLoc("sPasteWithTexture")), false, userData => PasteProperties((List<MaterialProperty>)userData, true), propertyList);
+#if UNITY_2019_3_OR_NEWER
+            menu.AddItem(new GUIContent(lilLanguageManager.GetLoc("sReset")), false, userData => ResetProperties((List<MaterialProperty>)userData), propertyList);
+#endif  // UNITY_2019_3_OR_NEWER
+            if (!string.IsNullOrEmpty(helpUrl))
+            {
+                menu.AddItem(new GUIContent(lilLanguageManager.GetLoc("sOpenManual")), false, userData => OpenHelpPage((string)userData), helpUrl);
+            }
+            menu.ShowAsContext();
+        }
+
+        /// <summary>
+        /// <para>Copy specified property list to <see cref="_copySourcePropertyDict"/>.</para>
+        /// <para>This method is the callback method specified as the third argument of <see cref="GenericMenu.AddItem(GUIContent, bool, GenericMenu.MenuFunction2, object)"/>.</para>
+        /// </summary>
+        /// <param name="userData">Property list as <see cref="object"/>.</param>
+        /// <summary>
+        /// Copy specified property list to <see cref="_copySourcePropertyDict"/>.
+        /// </summary>
+        /// <param name="propertyList">Property list.</param>
+        public static void CopyProperties(List<MaterialProperty> propertyList)
+        {
+            _copySourcePropertyDict.Clear();
+            foreach (var prop in propertyList)
+            {
+                _copySourcePropertyDict[prop.name] = prop;
+            }
+        }
+
+        /// <summary>
+        /// Paste specified property list to <see cref="_copySourcePropertyDict"/>.
+        /// </summary>
+        /// <param name="propertyList">The property list paste.</param>
+        /// <param name="shouldCopyTex">True to copy texture properties; false otherwise.</param>
+        public static void PasteProperties(List<MaterialProperty> propertyList, bool shouldCopyTex)
+        {
+            foreach (var prop in propertyList)
+            {
+                if (!_copySourcePropertyDict.TryGetValue(prop.name, out var sourceProp))
+                {
+                    continue;
+                }
+
+                switch (prop.type)
+                {
+                    case MaterialProperty.PropType.Color:
+                        prop.colorValue = sourceProp.colorValue;
+                        break;
+                    case MaterialProperty.PropType.Vector:
+                        prop.vectorValue = sourceProp.vectorValue;
+                        break;
+                    case MaterialProperty.PropType.Float:
+                    case MaterialProperty.PropType.Range:
+                        prop.floatValue = sourceProp.floatValue;
+                        break;
+                    case MaterialProperty.PropType.Texture:
+                        if (shouldCopyTex)
+                        {
+                            prop.textureValue = sourceProp.textureValue;
+                            prop.textureScaleAndOffset = sourceProp.textureScaleAndOffset;
+                        }
+                        break;
+                    case MaterialProperty.PropType.Int:
+                        prop.intValue = sourceProp.intValue;
+                        break;
+                }
+            }
+        }
+
+#if UNITY_2019_3_OR_NEWER
+        /// <summary>
+        /// Reset sepecifield properties to its default values.
+        /// </summary>
+        /// <param name="propertyList">Property list to reset the values.</param>
+        public static void ResetProperties(List<MaterialProperty> propertyList)
+        {
+            foreach (var prop in propertyList)
+            {
+                var shader = (prop.targets[0] as Material)?.shader;
+                if (shader == null)
+                {
+                    continue;
+                }
+
+                var propID = shader.FindPropertyIndex(prop.name);
+                if (propID == -1)
+                {
+                    continue;
+                }
+
+                switch (prop.type)
+                {
+                    case MaterialProperty.PropType.Color:
+                        prop.colorValue = shader.GetPropertyDefaultVectorValue(propID);
+                        break;
+                    case MaterialProperty.PropType.Vector:
+                        prop.vectorValue = shader.GetPropertyDefaultVectorValue(propID);
+                        break;
+                    case MaterialProperty.PropType.Float:
+                    case MaterialProperty.PropType.Range:
+                        prop.floatValue = shader.GetPropertyDefaultFloatValue(propID);
+                        break;
+                    case MaterialProperty.PropType.Texture:
+                        prop.textureValue = null;
+                        prop.textureScaleAndOffset = new Vector4(1.0f, 1.0f, 0.0f, 0.0f);
+                        break;
+                    case MaterialProperty.PropType.Int:
+                        prop.intValue = shader.GetPropertyDefaultIntValue(propID);
+                        break;
+                }
+            }
+        }
+#endif  // UNITY_2019_3_OR_NEWER
+
+        /// <summary>
+        /// <para>Open help page.</para>
+        /// <para>This method is the callback method specified as the third argument of <see cref="GenericMenu.AddItem(GUIContent, bool, GenericMenu.MenuFunction2, object)"/>.</para>
+        /// </summary>
+        /// <param name="url">URL string of help page.</param>
+        public static void OpenHelpPage(string url)
+        {
+            Application.OpenURL(url);
+        }
 
         /// <summary>
         /// Try to replace the shader of the selected material to custom lilToon shader.

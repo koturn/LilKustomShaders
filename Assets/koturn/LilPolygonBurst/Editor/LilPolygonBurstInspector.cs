@@ -18,6 +18,10 @@ namespace Koturn.LilPolygonBurst.Editor
         /// Name of this custom shader.
         /// </summary>
         public const string ShaderName = "koturn/LilPolygonBurst";
+        /// <summary>
+        /// Help page URL.
+        /// </summary>
+        private const string HelpUrl = "https://github.com/koturn/LilKustomShaders/wiki#lilpolygonburst";
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
@@ -160,6 +164,7 @@ namespace Koturn.LilPolygonBurst.Editor
 
             var titleLoc = GetLoc("sCustomShaderTitle");
             isShowCustomProperties = Foldout(titleLoc, titleLoc, isShowCustomProperties);
+            LilKustomUtils.DrawMenuButton(_propertyList, HelpUrl);
             if (!isShowCustomProperties)
             {
                 return;
@@ -168,6 +173,7 @@ namespace Koturn.LilPolygonBurst.Editor
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
                 EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategory"), customToggleFont);
+                LilKustomUtils.DrawMenuButton(_propertyList, HelpUrl);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;

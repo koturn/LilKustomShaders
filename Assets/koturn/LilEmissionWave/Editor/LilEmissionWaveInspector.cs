@@ -18,6 +18,10 @@ namespace Koturn.LilEmissionWave.Editor
         /// Name of this custom shader.
         /// </summary>
         public const string ShaderName = "koturn/LilEmissionWave";
+        /// <summary>
+        /// Help page URL.
+        /// </summary>
+        private const string HelpUrl = "https://github.com/koturn/LilKustomShaders/wiki#lilemissionwave";
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
@@ -198,6 +202,7 @@ namespace Koturn.LilEmissionWave.Editor
 
             var titleLoc = GetLoc("sCustomShaderTitle");
             isShowCustomProperties = Foldout(titleLoc, titleLoc, isShowCustomProperties);
+            LilKustomUtils.DrawMenuButton(_propertyList, HelpUrl);
             if (!isShowCustomProperties)
             {
                 return;
@@ -206,6 +211,7 @@ namespace Koturn.LilEmissionWave.Editor
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
                 EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategory"), customToggleFont);
+                LilKustomUtils.DrawMenuButton(_propertyList, HelpUrl);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;

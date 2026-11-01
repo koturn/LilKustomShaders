@@ -18,6 +18,10 @@ namespace Koturn.LilVisibility.Editor
         /// Name of this custom shader.
         /// </summary>
         public const string ShaderName = "koturn/LilVisibility";
+        /// <summary>
+        /// Help page URL.
+        /// </summary>
+        private const string HelpUrl = "https://github.com/koturn/LilKustomShaders/wiki#lilvisibility";
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
@@ -141,6 +145,7 @@ namespace Koturn.LilVisibility.Editor
 
             var titleLoc = GetLoc("sCustomShaderTitle");
             isShowCustomProperties = Foldout(titleLoc, titleLoc, isShowCustomProperties);
+            LilKustomUtils.DrawMenuButton(_propertyList, HelpUrl);
             if (!isShowCustomProperties)
             {
                 return;
@@ -149,6 +154,7 @@ namespace Koturn.LilVisibility.Editor
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
                 EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategory"), customToggleFont);
+                LilKustomUtils.DrawMenuButton(_propertyList, HelpUrl);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;

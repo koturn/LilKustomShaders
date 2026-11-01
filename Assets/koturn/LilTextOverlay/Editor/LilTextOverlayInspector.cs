@@ -20,6 +20,10 @@ namespace Koturn.LilTextOverlay.Editor
         /// Name of this custom shader.
         /// </summary>
         public const string ShaderName = "koturn/LilTextOverlay";
+        /// <summary>
+        /// Help page URL.
+        /// </summary>
+        private const string HelpUrl = "https://github.com/koturn/LilKustomShaders/wiki#liltextoverlay";
 
         /// <summary>
         /// A flag whether to fold custom properties or not.
@@ -55,6 +59,10 @@ namespace Koturn.LilTextOverlay.Editor
         /// <see cref="List{T}"/> of <see cref="MaterialProperty"/> about world position.
         /// </summary>
         private readonly List<MaterialProperty> _worldPosPropertyList = new List<MaterialProperty>(8);
+        /// <summary>
+        /// <see cref="List{T}"/> of all custom <see cref="MaterialProperty"/>.
+        /// </summary>
+        private readonly List<MaterialProperty> _allPropertyList = new List<MaterialProperty>(29);
         /// <summary>
         /// <see cref="MaterialProperty"/> of "_SpriteTex".
         /// </summary>
@@ -215,7 +223,11 @@ namespace Koturn.LilTextOverlay.Editor
                 }
             }
 
+            var allPropertyList = _allPropertyList;
+            allPropertyList.Clear();
+
             _spriteTex = FindProperty("_SpriteTex", props);
+            allPropertyList.Add(_spriteTex);
 
             var elapsedTimePropertyList = _elapsedTimePropertyList;
             elapsedTimePropertyList.Clear();
@@ -225,6 +237,7 @@ namespace Koturn.LilTextOverlay.Editor
             elapsedTimePropertyList.Add(_elapsedTimeRotAngle = FindProperty("_ElapsedTimeRotAngle", props));
             elapsedTimePropertyList.Add(_elapsedTimeDisplayLength = FindProperty("_ElapsedTimeDisplayLength", props));
             elapsedTimePropertyList.Add(_elapsedTimeAlign = FindProperty("_ElapsedTimeAlign", props));
+            allPropertyList.AddRange(elapsedTimePropertyList);
 
             var vrchatTimePropertyList = _vrchatTimePropertyList;
             vrchatTimePropertyList.Clear();
@@ -237,6 +250,7 @@ namespace Koturn.LilTextOverlay.Editor
             vrchatTimePropertyList.Add(_vrchatTimeOfDayKind = FindProperty("_VRChatTimeOfDayKind", props));
             vrchatTimePropertyList.Add(_vrchatTimeOfDayLocalTimeOffsetSeconds = FindProperty("_VRChatTimeOfDayLocalTimeOffsetSeconds", props));
             vrchatTimePropertyList.Add(_vrchatTimeOfDayUtcOffsetSeconds = FindProperty("_VRChatTimeOfDayUtcOffsetSeconds", props));
+            allPropertyList.AddRange(vrchatTimePropertyList);
 
             var frameratePropertyList = _frameratePropertyList;
             frameratePropertyList.Clear();
@@ -246,6 +260,7 @@ namespace Koturn.LilTextOverlay.Editor
             frameratePropertyList.Add(_framerateRotAngle = FindProperty("_FramerateRotAngle", props));
             frameratePropertyList.Add(_framerateDisplayLength = FindProperty("_FramerateDisplayLength", props));
             frameratePropertyList.Add(_framerateAlign = FindProperty("_FramerateAlign", props));
+            allPropertyList.AddRange(frameratePropertyList);
 
             var worldPosPropertyList = _worldPosPropertyList;
             worldPosPropertyList.Clear();
@@ -257,6 +272,7 @@ namespace Koturn.LilTextOverlay.Editor
             worldPosPropertyList.Add(_worldPosRotAngle = FindProperty("_WorldPosRotAngle", props));
             worldPosPropertyList.Add(_worldPosDisplayLength = FindProperty("_WorldPosDisplayLength", props));
             worldPosPropertyList.Add(_worldPosAlign = FindProperty("_WorldPosAlign", props));
+            allPropertyList.AddRange(worldPosPropertyList);
         }
 
         /// <summary>
@@ -278,17 +294,14 @@ namespace Koturn.LilTextOverlay.Editor
             var shouldDrawFramerateProperties = ShouldDrawBlock(_frameratePropertyList);
             var shouldDrawWorldPosProperties = ShouldDrawBlock(_worldPosPropertyList);
 
-            if (!lilEditorGUI.CheckPropertyToDraw(_spriteTex)
-                && !shouldDrawElapsedTimeProperties
-                && !shouldDrawAlTimeProperties
-                && !shouldDrawFramerateProperties
-                && !shouldDrawWorldPosProperties)
+            if (!ShouldDrawBlock(_allPropertyList))
             {
                 return;
             }
 
             var titleLoc = GetLoc("sCustomShaderTitle");
             isShowCustomProperties = Foldout(titleLoc, titleLoc, isShowCustomProperties);
+            LilKustomUtils.DrawMenuButton(_allPropertyList, HelpUrl);
             if (!isShowCustomProperties)
             {
                 return;
@@ -297,6 +310,7 @@ namespace Koturn.LilTextOverlay.Editor
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
                 EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategory"), customToggleFont);
+                LilKustomUtils.DrawMenuButton(_allPropertyList, HelpUrl);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
                     var me = m_MaterialEditor;
@@ -306,7 +320,7 @@ namespace Koturn.LilTextOverlay.Editor
                     {
                         using (new EditorGUILayout.VerticalScope(boxOuter))
                         {
-                            DrawToggleLeft(material, _enableElapsedTime, GetLoc("sEnableElapsedTime"));
+                            DrawToggleLeft(material, _enableElapsedTime, GetLoc("sEnableElapsedTime"), _elapsedTimePropertyList);
                             if (ToBool(_enableElapsedTime.floatValue))
                             {
                                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
@@ -325,7 +339,7 @@ namespace Koturn.LilTextOverlay.Editor
                     {
                         using (new EditorGUILayout.VerticalScope(boxOuter))
                         {
-                            DrawToggleLeft(material, _enableVRChatTimeOfDay, GetLoc("sEnableVRChatTimeOfDay"));
+                            DrawToggleLeft(material, _enableVRChatTimeOfDay, GetLoc("sEnableVRChatTimeOfDay"), _vrchatTimePropertyList);
                             if (ToBool(_enableVRChatTimeOfDay.floatValue))
                             {
                                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
@@ -353,7 +367,7 @@ namespace Koturn.LilTextOverlay.Editor
                     {
                         using (new EditorGUILayout.VerticalScope(boxOuter))
                         {
-                            DrawToggleLeft(material, _enableFramerate, GetLoc("sEnableFramerate"));
+                            DrawToggleLeft(material, _enableFramerate, GetLoc("sEnableFramerate"), _frameratePropertyList);
                             if (ToBool(_enableFramerate.floatValue))
                             {
                                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
@@ -372,7 +386,7 @@ namespace Koturn.LilTextOverlay.Editor
                     {
                         using (new EditorGUILayout.VerticalScope(boxOuter))
                         {
-                            DrawToggleLeft(material, _enableWorldPos, GetLoc("sEnableWorldPos"));
+                            DrawToggleLeft(material, _enableWorldPos, GetLoc("sEnableWorldPos"), _worldPosPropertyList);
                             if (ToBool(_enableWorldPos.floatValue))
                             {
                                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
@@ -529,17 +543,22 @@ namespace Koturn.LilTextOverlay.Editor
         /// <param name="material">Target <see cref="Material"/>.</param>
         /// <param name="prop">Target <see cref="MaterialProperty"/>.</param>
         /// <param name="label">Label for this toggle button.</param>
-        private static void DrawToggleLeft(Material material, MaterialProperty prop, string label)
+        /// <param name="propertyList">Material property list.</param>
+        private static void DrawToggleLeft(Material material, MaterialProperty prop, string label, List<MaterialProperty> propertyList)
         {
             using (var ccScope = new EditorGUI.ChangeCheckScope())
             {
+                var rect = EditorGUILayout.GetControlRect();
+                rect.width -= 24.0f;
+
                 EditorGUI.showMixedValue = prop.hasMixedValue;
                 var isChecked = EditorGUI.ToggleLeft(
-                    EditorGUILayout.GetControlRect(),
+                    rect,
                     label,
                     ToBool(prop.floatValue),
                     customToggleFont);
                 EditorGUI.showMixedValue = false;
+
                 if (ccScope.changed)
                 {
                     prop.floatValue = ToFloat(isChecked);
@@ -549,6 +568,8 @@ namespace Koturn.LilTextOverlay.Editor
                     }
                 }
             }
+
+            LilKustomUtils.DrawMenuButton(propertyList, HelpUrl);
         }
 
         /// <summary>
