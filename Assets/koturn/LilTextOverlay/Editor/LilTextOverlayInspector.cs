@@ -289,11 +289,6 @@ namespace Koturn.LilTextOverlay.Editor
             // customBox        box (similar to unity default box)
             // customToggleFont label for box
 
-            var shouldDrawElapsedTimeProperties = ShouldDrawBlock(_elapsedTimePropertyList);
-            var shouldDrawAlTimeProperties = ShouldDrawBlock(_vrchatTimePropertyList);
-            var shouldDrawFramerateProperties = ShouldDrawBlock(_frameratePropertyList);
-            var shouldDrawWorldPosProperties = ShouldDrawBlock(_worldPosPropertyList);
-
             if (!ShouldDrawBlock(_allPropertyList))
             {
                 return;
@@ -316,7 +311,7 @@ namespace Koturn.LilTextOverlay.Editor
                     var me = m_MaterialEditor;
                     lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc(_spriteTex.displayName), GetLoc("sTextureRGBA")), _spriteTex);
 
-                    if (shouldDrawElapsedTimeProperties)
+                    if (ShouldDrawBlock(_elapsedTimePropertyList))
                     {
                         using (new EditorGUILayout.VerticalScope(boxOuter))
                         {
@@ -335,7 +330,7 @@ namespace Koturn.LilTextOverlay.Editor
                         }
                     }
 
-                    if (shouldDrawAlTimeProperties)
+                    if (ShouldDrawBlock(_vrchatTimePropertyList))
                     {
                         using (new EditorGUILayout.VerticalScope(boxOuter))
                         {
@@ -363,7 +358,7 @@ namespace Koturn.LilTextOverlay.Editor
                         }
                     }
 
-                    if (shouldDrawFramerateProperties)
+                    if (ShouldDrawBlock(_frameratePropertyList))
                     {
                         using (new EditorGUILayout.VerticalScope(boxOuter))
                         {
@@ -382,7 +377,7 @@ namespace Koturn.LilTextOverlay.Editor
                         }
                     }
 
-                    if (shouldDrawWorldPosProperties)
+                    if (ShouldDrawBlock(_worldPosPropertyList))
                     {
                         using (new EditorGUILayout.VerticalScope(boxOuter))
                         {

@@ -104,12 +104,8 @@ namespace Koturn.LilCrossFade.Editor
                 {
                     continue;
                 }
-                foreach (var keyword in _allowedKeywordList)
-                {
-                    material.EnableKeyword(keyword);
-                }
+                RestoreAllowedKeywords(material);
             }
-            _allowedKeywordList.Clear();
         }
 
         /// <summary>
@@ -174,6 +170,7 @@ namespace Koturn.LilCrossFade.Editor
 
             if (!ShouldDrawBlock(_propertyList))
             {
+                SaveAllowedKeywords(material);
                 return;
             }
 
@@ -182,6 +179,7 @@ namespace Koturn.LilCrossFade.Editor
             LilKustomUtils.DrawMenuButton(_propertyList, HelpUrl);
             if (!isShowCustomProperties)
             {
+                SaveAllowedKeywords(material);
                 return;
             }
 
@@ -281,13 +279,7 @@ namespace Koturn.LilCrossFade.Editor
                 }
             }
 
-            foreach (var keyword in material.shaderKeywords)
-            {
-                if (IsAllowedKeyword(keyword))
-                {
-                    _allowedKeywordList.Add(keyword);
-                }
-            }
+            SaveAllowedKeywords(material);
         }
 
         /// <summary>
@@ -356,6 +348,36 @@ namespace Koturn.LilCrossFade.Editor
             ltsmref     = Shader.Find("Hidden/" + ShaderName + "/MultiRefraction");
             ltsmfur     = Shader.Find("Hidden/" + ShaderName + "/MultiFur");
             ltsmgem     = Shader.Find("Hidden/" + ShaderName + "/MultiGem");
+        }
+
+        /// <summary>
+        /// Save allowed keywords from specified material to <see cref="_allowedKeywordList"/>.
+        /// </summary>
+        /// <param name="material">The material from which the keyword to be obtained.</param>
+        private void SaveAllowedKeywords(Material material)
+        {
+            var allowedKeywordList = _allowedKeywordList;
+
+            allowedKeywordList.Clear();
+            foreach (var keyword in material.shaderKeywords)
+            {
+                if (IsAllowedKeyword(keyword))
+                {
+                    allowedKeywordList.Add(keyword);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Restore allowed keywords from <see cref="_allowedKeywordList"/> to specified material.
+        /// </summary>
+        /// <param name="material">The material to which the keyword is restored.</param>
+        private void RestoreAllowedKeywords(Material material)
+        {
+            foreach (var keyword in _allowedKeywordList)
+            {
+                material.EnableKeyword(keyword);
+            }
         }
 
 
