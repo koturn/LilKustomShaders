@@ -170,13 +170,14 @@ namespace Koturn.LilPolygonBurst.Editor
                 return;
             }
 
+            var me = m_MaterialEditor;
+
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
                 EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategory"), customToggleFont);
                 LilKustomUtils.DrawMenuButton(_propertyList, HelpUrl);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    var me = m_MaterialEditor;
                     lilEditorGUI.LocalizedProperty(me, _polygonCrackWidth);
                     lilEditorGUI.LocalizedProperty(me, _polygonCrackColor);
                     lilEditorGUI.LocalizedProperty(me, _timeSource);

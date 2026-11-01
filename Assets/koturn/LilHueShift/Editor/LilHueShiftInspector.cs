@@ -141,13 +141,14 @@ namespace Koturn.LilHueShift.Editor
                 return;
             }
 
+            var me = m_MaterialEditor;
+
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
                 EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategory"), customToggleFont);
                 LilKustomUtils.DrawMenuButton(_propertyList, HelpUrl);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    var me = m_MaterialEditor;
                     lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc("sMask"), GetLoc("sTextureRGB")), _hueShiftMask);
                     lilEditorGUI.LocalizedProperty(me, _timeSource);
                     if ((TimeSource)_timeSource.floatValue == TimeSource.FakeTime)

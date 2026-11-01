@@ -151,13 +151,14 @@ namespace Koturn.LilWireframe.Editor
                 return;
             }
 
+            var me = m_MaterialEditor;
+
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
                 EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategory"), customToggleFont);
                 LilKustomUtils.DrawMenuButton(_propertyList, HelpUrl);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    var me = m_MaterialEditor;
                     lilEditorGUI.LocalizedProperty(me, _wireframeWidth);
                     LocalizedPropertyTexture(new GUIContent(GetLoc("sWireframeMaskAndColor"), GetLoc("sTextureRGB")), _wireframeMask, _wireframeColor);
                     lilEditorGUI.LocalizedProperty(me, _wireframeRandomizeColor);

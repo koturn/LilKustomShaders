@@ -302,13 +302,14 @@ namespace Koturn.LilTextOverlay.Editor
                 return;
             }
 
+            var me = m_MaterialEditor;
+
             using (new EditorGUILayout.VerticalScope(boxOuter))
             {
                 EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategory"), customToggleFont);
                 LilKustomUtils.DrawMenuButton(_allPropertyList, HelpUrl);
                 using (new EditorGUILayout.VerticalScope(boxInnerHalf))
                 {
-                    var me = m_MaterialEditor;
                     lilEditorGUI.LocalizedPropertyTexture(me, new GUIContent(GetLoc(_spriteTex.displayName), GetLoc("sTextureRGBA")), _spriteTex);
 
                     if (ShouldDrawBlock(_elapsedTimePropertyList))

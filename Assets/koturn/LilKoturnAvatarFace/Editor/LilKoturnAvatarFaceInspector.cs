@@ -208,11 +208,11 @@ namespace Koturn.LilKoturnAvatarFace.Editor
                 return;
             }
 
-            using (new EditorGUILayout.VerticalScope(boxOuter))
-            {
-                var me = m_MaterialEditor;
+            var me = m_MaterialEditor;
 
-                if (ShouldDrawBlock(_graphPropertyList))
+            if (ShouldDrawBlock(_graphPropertyList))
+            {
+                using (new EditorGUILayout.VerticalScope(boxOuter))
                 {
                     EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryKoturnGraph"), customToggleFont);
                     LilKustomUtils.DrawMenuButton(_graphPropertyList, HelpUrl);
@@ -223,8 +223,11 @@ namespace Koturn.LilKoturnAvatarFace.Editor
                         lilEditorGUI.LocalizedProperty(me, _graphKoturnRotAngle);
                     }
                 }
+            }
 
-                if (ShouldDrawBlock(_starPropertyList))
+            if (ShouldDrawBlock(_starPropertyList))
+            {
+                using (new EditorGUILayout.VerticalScope(boxOuter))
                 {
                     EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryStar"), customToggleFont);
                     LilKustomUtils.DrawMenuButton(_starPropertyList, HelpUrl);
@@ -238,8 +241,11 @@ namespace Koturn.LilKoturnAvatarFace.Editor
                         lilEditorGUI.LocalizedProperty(me, _starWidth);
                     }
                 }
+            }
 
-                if (ShouldDrawBlock(_hueShiftPropertyList))
+            if (ShouldDrawBlock(_hueShiftPropertyList))
+            {
+                using (new EditorGUILayout.VerticalScope(boxOuter))
                 {
                     EditorGUILayout.LabelField(GetLoc("sCustomPropertyCategoryHueShift"), customToggleFont);
                     LilKustomUtils.DrawMenuButton(_hueShiftPropertyList, HelpUrl);
