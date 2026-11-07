@@ -2,7 +2,7 @@
   "packages": [
     {
       "versionFrom": "4e6d67e8d74b75949bdbd52d706aeb80",
-      "unityPackageBaseName": "LilCrossFade.unitypackage",
+      "unityPackageBaseName": "LilCrossFade",
       "packageName": "jp.koturn.lilcrossfade",
       "assets": [
         {
@@ -17,7 +17,7 @@
     },
     {
       "versionFrom": "7a573fe14b9eeb54c868d0eda05a25e5",
-      "unityPackageBaseName": "LilEmissionWave.unitypackage",
+      "unityPackageBaseName": "LilEmissionWave",
       "packageName": "jp.koturn.lilemissionwave",
       "assets": [
         {
@@ -32,7 +32,7 @@
     },
     {
       "versionFrom": "2e0801284df6c5742baba8e7d4e53891",
-      "unityPackageBaseName": "LilHueShift.unitypackage",
+      "unityPackageBaseName": "LilHueShift",
       "packageName": "jp.koturn.lilhueshift",
       "assets": [
         {
@@ -47,7 +47,7 @@
     },
     {
       "versionFrom": "37b2f71b090664b4e80ec4a8c2b8ea17",
-      "unityPackageBaseName": "LilKoturnAvatarFace.unitypackage",
+      "unityPackageBaseName": "LilKoturnAvatarFace",
       "packageName": "jp.koturn.lilkoturnavatarface",
       "assets": [
         {
@@ -62,7 +62,7 @@
     },
     {
       "versionFrom": "47baa3e3c8103d64992b387ed71dc935",
-      "unityPackageBaseName": "LilOptimized.unitypackage",
+      "unityPackageBaseName": "LilOptimized",
       "packageName": "jp.koturn.liloptimized",
       "assets": [
         {
@@ -72,7 +72,7 @@
     },
     {
       "versionFrom": "0ff0900de93a5054284e94c5b3021d32",
-      "unityPackageBaseName": "LilOptimized.NDMF.unitypackage",
+      "unityPackageBaseName": "LilOptimized.NDMF",
       "packageName": "jp.koturn.liloptimized.ndmf",
       "assets": [
         {
@@ -87,7 +87,7 @@
     },
     {
       "versionFrom": "312a69f6e3487264881dea2beac476bd",
-      "unityPackageBaseName": "LilPolygonBurst.unitypackage",
+      "unityPackageBaseName": "LilPolygonBurst",
       "packageName": "jp.koturn.lilpolygonburst",
       "assets": [
         {
@@ -97,7 +97,7 @@
     },
     {
       "versionFrom": "18048448aafd4e4479f34971d902f03a",
-      "unityPackageBaseName": "LilRefProbe.unitypackage",
+      "unityPackageBaseName": "LilRefProbe",
       "packageName": "jp.koturn.lilrefprobe",
       "assets": [
         {
@@ -112,7 +112,7 @@
     },
     {
       "versionFrom": "6f166706a56211e4cbf7e1b4a6a2f976",
-      "unityPackageBaseName": "LilTextOverlay.unitypackage",
+      "unityPackageBaseName": "LilTextOverlay",
       "packageName": "jp.koturn.liltextoverlay",
       "assets": [
         {
@@ -127,7 +127,7 @@
     },
     {
       "versionFrom": "7ece61d477acfe24b98e8a3924c9dfae",
-      "unityPackageBaseName": "LilVisibility.unitypackage",
+      "unityPackageBaseName": "LilVisibility",
       "packageName": "jp.koturn.lilvisibility",
       "assets": [
         {
@@ -142,7 +142,7 @@
     },
     {
       "versionFrom": "90db65353692ef64abdb7a9bba7333db",
-      "unityPackageBaseName": "LilWireframe.unitypackage",
+      "unityPackageBaseName": "LilWireframe",
       "packageName": "jp.koturn.lilwireframe",
       "assets": [
         {
